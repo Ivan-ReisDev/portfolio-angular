@@ -1,0 +1,38 @@
+@use 'app.scss' as *;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 600px;
+  margin: 0 100px;
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+  width: auto;
+  list-style: none;
+}
+
+.navbar li {
+  padding: 15px;
+}
+
+.navbar a {
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+
+  &.active {
+    color: $secondary-blue;
+  }
+
+  &:hover {
+    color: $secondary-blue;
+    transition: 0.5s;
+  }
+}

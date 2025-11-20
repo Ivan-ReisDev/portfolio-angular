@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "0a81e135-6d62-4c2e-90d2-8163aea3e3c3"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -20,6 +21,9 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app"]
+            },
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
