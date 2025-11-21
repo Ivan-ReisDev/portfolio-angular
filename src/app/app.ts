@@ -1,4 +1,4 @@
-import { Component, signal, HostListener } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './core/components/header/header';
 import { About } from './core/components/about/about';
@@ -11,22 +11,40 @@ import { Footer } from './core/components/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
+export class App implements AfterViewInit {
   protected readonly title = signal('portfolio');
   activeSection = signal('inicio');
 
-  @HostListener('window:scroll', [])
-  onScroll() {
-    const sections = ['inicio', 'sobre', 'educacao', 'projetos', 'blog', 'contato'];
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
-    sections.forEach((section) => {
+  ngAfterViewInit() {
+    this.scrollContainer.nativeElement.addEventListener('scroll', () => {
+      this.onScroll();
+    });
+  }
+
+  onScroll() {
+    const sections = ['inicio', 'sobre', 'projetos', 'educacao', 'blog', 'contato'];
+    const containerRect = this.scrollContainer.nativeElement.getBoundingClientRect();
+    const scrollTop = this.scrollContainer.nativeElement.scrollTop;
+
+    let currentSection = 'inicio';
+    let minDistance = Infinity;
+
+    for (const section of sections) {
       const element = document.getElementById(section);
       if (element) {
         const rect = element.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top <= 150) {
-          this.activeSection.set(section);
+        const relativeTop = rect.top - containerRect.top + scrollTop;
+        const distance = Math.abs(scrollTop - relativeTop);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentSection = section;
         }
       }
-    });
+    }
+
+    this.activeSection.set(currentSection);
   }
 }

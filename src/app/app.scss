@@ -1,5 +1,6 @@
 $primary-black: #161616;
 $secondary-blue: #43a3be;
+$gray: #8b8b8b;
 
 * {
   margin: 0;
@@ -7,8 +8,23 @@ $secondary-blue: #43a3be;
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
+}
+
+.snap-section {
+  height: 100vh;
+  scroll-snap-align: start;
 }
 
 .center {
@@ -27,7 +43,7 @@ html {
   z-index: 100;
 
   a {
-    color:#a5a5a5;
+    color: #a5a5a5;
     font-size: 30px;
     transition: 0.3s;
     text-decoration: none;
@@ -43,7 +59,7 @@ html {
     content: '';
     position: absolute;
     left: 50%;
-    transform: translateX(-5  0%);
+    transform: translateX(-5 0%);
     width: 1px;
     background-color: #a5a5a5;
   }

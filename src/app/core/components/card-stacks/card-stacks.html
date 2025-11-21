@@ -1,0 +1,10 @@
+<section class="stacks">
+  <div>
+    @for (stack of stacks; track stack.name) {
+    <div class="card">
+      <i [class]="stack.icon"></i>
+      <span>{{ stack.name }}</span>
+    </div>
+    }
+  </div>
+</section>

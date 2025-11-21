@@ -1,11 +1,15 @@
 <app-header [activeSection]="activeSection()" />
-<app-home />
-<app-about />
-<section id="projetos" style="height: 100vh; background: #f0f0f0">Projetos</section>
-<section id="educacao" style="height: 100vh; background: #e0e0e0">Educação</section>
-<section id="blog" style="height: 100vh; background: #d0d0d0">Blog</section>
-<section id="contato" style="height: 100vh; background: #c0c0c0">Contato</section>
-<app-footer />
+
+<div class="scroll-container" #scrollContainer>
+  <app-home />
+  <app-about />
+  <section id="projetos" class="snap-section" style="background: #f0f0f0">Projetos</section>
+  <section id="educacao" class="snap-section" style="background: #e0e0e0">Educação</section>
+  <section id="blog" class="snap-section" style="background: #d0d0d0">Blog</section>
+  <section id="contato" class="snap-section" style="background: #c0c0c0">Contato</section>
+  <app-footer />
+</div>
+
 <aside class="social-sidebar">
   <a href="https://github.com/seu-usuario" target="_blank">
     <i class="fab fa-github"></i>
