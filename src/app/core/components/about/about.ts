@@ -1,10 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CardStacks } from '../card-stacks/card-stacks';
+import { Title } from "../typography/title/title";
 
 @Component({
   selector: 'app-about',
-  imports: [CardStacks],
+  imports: [CardStacks, Title],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
-export class About {}
+export class About implements AfterViewInit, OnDestroy {
+  private observer?: IntersectionObserver;
+
+  constructor(
+    private elementRef: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      const section = this.elementRef.nativeElement.querySelector('#sobre');
+      const cardsContainer = this.elementRef.nativeElement.querySelector('.stacks > div');
+      const containt = this.elementRef.nativeElement.querySelector('.containt');
+
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Anima os cards (da direita)
+              if (cardsContainer) cardsContainer.classList.add('active');
+              // Anima o texto (da esquerda)
+              if (containt) containt.classList.add('active');
+            } else {
+              // Remove animações ao sair
+              if (cardsContainer) cardsContainer.classList.remove('active');
+              if (containt) containt.classList.remove('active');
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+        }
+      );
+
+      if (section) {
+        this.observer.observe(section);
+      }
+    }
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
+  }
+}

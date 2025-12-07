@@ -1,13 +1,44 @@
 @use 'app.scss' as *;
 
+// Animação da esquerda para direita (texto)
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .about {
   width: 100vw;
   height: 100vh;
+  position: sticky;
+  top: 0;
   scroll-snap-align: start;
   background-color: $primary-black;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+  overflow: hidden;
+
+  // Triângulo grande decorativo
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 100vh 0 0 50vw;
+    border-color: transparent transparent transparent #161616;
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 .containt {
@@ -18,21 +49,26 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px 0;
+  position: relative;
+  z-index: 1;
 
   > * {
     flex: 1 1 calc(50% - 10px);
   }
+
   & main {
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    opacity: 0;
+    transform: translateX(-60px);
+
   }
-  & h2 {
-    color: #fff;
-    font-size: 30px;
-    padding-right: 60px;
-    border-bottom: solid 2px $secondary-blue;
+
+  // Quando a seção estiver ativa, anima o main
+  &.active main {
+    animation: slideFromLeft 1s ease-out forwards;
   }
 
   & p {
@@ -46,6 +82,6 @@
 
   & strong {
     color: $secondary-blue;
-    font-weight: normal;
+    font-weight: 600;
   }
 }

@@ -26,13 +26,14 @@
   text-decoration: none;
   text-transform: uppercase;
   transition: 0.5s;
-
-  &.active {
-    color: $secondary-blue;
-  }
+  font-weight: 500;
 
   &:hover {
     color: $secondary-blue;
     transition: 0.5s;
+  }
+
+  &.active {
+    color: $secondary-blue !important;
   }
 }

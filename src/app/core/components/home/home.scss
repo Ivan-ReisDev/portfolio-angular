@@ -23,12 +23,14 @@
 .home {
   width: 100vw;
   height: 100vh;
-  position: relative;
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   scroll-snap-align: start;
+  z-index: 1;
 
   &::before {
     content: '';
@@ -40,11 +42,20 @@
     background-image: url(/images/background.png);
     background-size: cover;
     background-position: center;
-    animation: zoomOut 2s ease-out forwards;
+    transform: scale(1.3);
     z-index: 0;
   }
 
-  &::after {  
+  &.active::before {
+    animation: zoomOut 2s ease-out forwards;
+  }
+
+  &.reset::before {
+    animation: none;
+    transform: scale(1.3);
+  }
+
+  &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -61,13 +72,27 @@
     color: #fff;
     width: 100%;
     max-width: 1440px;
-    animation: opacit 2s ease-out forwards;
+    opacity: 0;
+    bottom: -60px;
 
     & h2 {
       font-size: 70px;
       display: flex;
       flex-direction: column;
     }
+
+
+  }
+
+
+  &.active .content {
+    animation: opacit 2s ease-out forwards;
+  }
+
+  &.reset .content {
+    animation: none;
+    opacity: 0;
+    bottom: -60px;
   }
 
   .greeting {

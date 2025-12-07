@@ -1,9 +1,12 @@
 <section class="stacks">
-  <div>
+  <div class="active">
     @for (stack of stacks; track stack.name) {
-    <div class="card">
+    <div class="card" [class.has-tooltip]="stack.description">
       <i [class]="stack.icon"></i>
       <span>{{ stack.name }}</span>
+      @if (stack.description) {
+        <div class="tooltip">{{ stack.description }}</div>
+      }
     </div>
     }
   </div>

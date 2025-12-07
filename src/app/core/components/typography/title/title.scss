@@ -1,0 +1,8 @@
+@use 'app.scss' as *;
+
+.title {
+  color: #fff;
+  font-size: 30px;
+  padding-right: 60px;
+  border-bottom: solid 2px $secondary-blue;
+}
