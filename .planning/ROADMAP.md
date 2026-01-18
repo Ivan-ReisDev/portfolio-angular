@@ -27,9 +27,14 @@ Build a project showcase section with carousel and individual project pages for 
 
 **Dependencies:** None (foundation phase)
 
+**Plans:** 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — Create Project model, JSON data file, and ProjectService with TransferState
+
 **Key files:**
 - `src/app/core/models/project.model.ts` (new)
-- `src/assets/data/projects.json` (new)
+- `public/data/projects.json` (new)
 - `src/app/core/services/project.service.ts` (new)
 
 **Success criteria:**
@@ -135,7 +140,7 @@ Build a project showcase section with carousel and individual project pages for 
 
 | Phase | Goal | Requirements | Status |
 |-------|------|--------------|--------|
-| 1 | Data Foundation | 4 | Pending |
+| 1 | Data Foundation | 4 | Planned |
 | 2 | Carousel Components | 11 | Pending |
 | 3 | Routing and Detail Pages | 8 | Pending |
 | 4 | Polish and Accessibility | 5 | Pending |
@@ -152,3 +157,4 @@ Build a project showcase section with carousel and individual project pages for 
 
 ---
 *Roadmap created: 2026-01-18*
+*Phase 1 planned: 2026-01-18*
