@@ -80,6 +80,24 @@ export class CardStacks {
         '.NET é uma plataforma de aplicativos segura, confiável e de alto desempenho. C# é a linguagem de programação para o .NET. É fortemente tipado e tem simultaneidade integrada e gerenciamento automático de memória.',
     },
     {
+      icon: 'devicon-php-plain',
+      name: 'PHP',
+      description:
+        'PHP é uma linguagem de programação de script server-side amplamente utilizada para desenvolvimento web, especialmente para criar páginas dinâmicas e interativas.',
+    },
+    {
+      icon: 'devicon-symfony-original',
+      name: 'Symfony',
+      description:
+        'Symfony é um conjunto de componentes PHP reutilizáveis e um framework PHP para projetos web.',
+    },
+    {
+      icon: 'devicon-laravel-original',
+      name: 'Laravel',
+      description:
+        'Laravel é um framework PHP gratuito e de código aberto, usado no desenvolvimento de sistemas para web de médio e grande porte.',
+    },
+    {
       icon: 'devicon-tailwindcss-original',
       name: 'Tailwind.CSS',
       description:

@@ -2,10 +2,8 @@ import {
   Component,
   inject,
   signal,
-  computed,
-  PLATFORM_ID
+  computed
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -26,7 +24,6 @@ type ViewportMode = 'desktop' | 'tablet' | 'mobile';
 export class ProjectCarousel {
   private readonly projectService = inject(ProjectService);
   private readonly breakpointObserver = inject(BreakpointObserver);
-  private readonly platformId = inject(PLATFORM_ID);
 
   // Projects from service
   readonly projects = this.projectService.projects;
@@ -51,50 +48,69 @@ export class ProjectCarousel {
     { initialValue: 'desktop' as ViewportMode }
   );
 
-  // Navigation state
-  readonly canGoNext = computed(() =>
-    this.currentIndex() < this.projects().length - 1
-  );
-
-  readonly canGoPrev = computed(() =>
-    this.currentIndex() > 0
-  );
+  // Navigation state - always enabled for infinite loop
+  readonly canGoNext = computed(() => this.projects().length > 1);
+  readonly canGoPrev = computed(() => this.projects().length > 1);
 
   // Whether to show carousel mode (desktop/tablet) or stacked mode (mobile)
   readonly isCarouselMode = computed(() =>
     this.viewportMode() !== 'mobile'
   );
 
-  // Get position class for each card index relative to current
+  // Get position class for each card index relative to current (with infinite loop)
   getCardPosition(index: number): string {
     const current = this.currentIndex();
-    const diff = index - current;
+    const total = this.projects().length;
+
+    if (total === 0) return 'far-left';
+
+    // Calculate the shortest distance considering loop
+    let diff = index - current;
+
+    // Normalize for circular navigation
+    if (diff > total / 2) {
+      diff -= total;
+    } else if (diff < -total / 2) {
+      diff += total;
+    }
 
     if (diff === 0) return 'center';
-    if (diff === -1) return 'left';
-    if (diff === 1) return 'right';
+    if (diff === -1 || (current === 0 && index === total - 1)) return 'left';
+    if (diff === 1 || (current === total - 1 && index === 0)) return 'right';
     if (diff < -1) return 'far-left';
     return 'far-right';
   }
 
-  // Check if card should be visible in carousel mode
+  // Check if card should be visible in carousel mode (with infinite loop)
   isCardVisible(index: number): boolean {
     const current = this.currentIndex();
-    const diff = Math.abs(index - current);
+    const total = this.projects().length;
+
+    if (total <= 3) return true; // Show all if 3 or fewer
+
+    // Calculate circular distance
+    let diff = Math.abs(index - current);
+
+    // Consider the wrap-around distance
+    const wrapDiff = total - diff;
+    const minDiff = Math.min(diff, wrapDiff);
+
     // Show center + 1 on each side = 3 cards max
-    return diff <= 1;
+    return minDiff <= 1;
   }
 
-  // Navigation methods
+  // Navigation methods (infinite loop)
   next(): void {
     if (this.canGoNext()) {
-      this.currentIndex.update(i => i + 1);
+      const total = this.projects().length;
+      this.currentIndex.update(i => (i + 1) % total);
     }
   }
 
   prev(): void {
     if (this.canGoPrev()) {
-      this.currentIndex.update(i => i - 1);
+      const total = this.projects().length;
+      this.currentIndex.update(i => (i - 1 + total) % total);
     }
   }
 

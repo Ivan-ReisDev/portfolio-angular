@@ -1,19 +1,67 @@
+@use 'app.scss' as *;
+
 .footer {
-  position: fixed;
   width: 100vw;
-  height: 6vh;
-  z-index: 10;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
+  background: rgba(6, 6, 8, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative; // Not fixed, sits at bottom of flow if needed, or fixed if global
+  z-index: 10;
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
 
-  & p {
-    margin: 0 0 0;
+  .footer-content {
     width: 100%;
-    margin-left: 60px;
+    max-width: 1440px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+      height: auto;
+    }
+  }
+
+  .copyright {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 20px;
+
+    a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 20px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+
+      &:hover {
+        background: $secondary-blue;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(67, 163, 190, 0.4);
+      }
+    }
   }
 }

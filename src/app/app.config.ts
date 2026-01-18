@@ -1,4 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+
 import {
   provideRouter,
   withComponentInputBinding,

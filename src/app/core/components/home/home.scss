@@ -21,6 +21,8 @@
 }
 
 .home {
+  @include premium-background;
+
   width: 100vw;
   height: 100vh;
   position: sticky;
@@ -28,60 +30,124 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  // overflow: hidden; // handled by mixin
   scroll-snap-align: start;
   z-index: 1;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(/images/background.png);
-    background-size: cover;
-    background-position: center;
-    transform: scale(1.3);
-    z-index: 0;
-  }
+  // Removed old image background and overlays since mixin handles it
 
-  &.active::before {
-    animation: zoomOut 2s ease-out forwards;
-  }
 
-  &.reset::before {
-    animation: none;
-    transform: scale(1.3);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.80);
-    z-index: 1;
-  }
-
-  .content {
+    .content {
     position: relative;
     z-index: 2;
     color: #fff;
     width: 100%;
     max-width: 1440px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     bottom: -60px;
+    padding-bottom: 60px;
 
-    & h2 {
-      font-size: 70px;
-      display: flex;
-      flex-direction: column;
+    // 1. Name (Top, Small)
+    .greeting {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 20px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: inline-block;
     }
 
+    // 2. Role (Massive)
+    .main-title {
+      display: flex;
+      flex-direction: column; // Stack them
+      align-items: center;
+      line-height: 0.9;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 50px;
+      
+      // "DESENVOLVEDOR"
+      span:first-child {
+        font-size: clamp(1.5rem, 4vw, 3rem); // Reduced from 2rem/4rem
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5); // Outline effect
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+      }
 
+      // "FULLSTACK"
+      .highlight {
+        font-size: clamp(3.5rem, 10vw, 7rem); // Reduced from 4rem/10rem
+        background: linear-gradient(90deg, #43a3be, #6432c8);
+        -webkit-background-clip: text;
+        background-clip: text; // Standard property
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 30px rgba(67, 163, 190, 0.3)); // Glow
+      }
+
+      @media (max-width: 768px) {
+        margin-bottom: 30px;
+        span:first-child {
+          font-size: clamp(1.2rem, 5vw, 2rem); // Adjusted for mobile
+        }
+      }
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 24px;
+      margin-top: 10px;
+
+      .btn {
+        text-decoration: none;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        text-align: center;
+        min-width: 180px;
+        
+        &.btn-primary {
+          background: #fff; // High contrast white button
+          color: #000;
+          box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(67, 163, 190, 0.4); // Blue glow on hover
+          }
+        }
+
+        &.btn-secondary {
+          background: transparent;
+          color: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-color: #fff;
+            transform: translateY(-3px);
+          }
+        }
+      }
+    }
   }
 
 
@@ -95,11 +161,62 @@
     bottom: -60px;
   }
 
-  .greeting {
-    font-size: 30px;
-  }
-
-  .highlight {
-    color: $secondary-blue;
+  // Scroll Indicator Styles
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    
+    .mouse {
+      width: 30px;
+      height: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      
+      .wheel {
+        width: 4px;
+        height: 8px;
+        background-color: #fff;
+        border-radius: 2px;
+        margin-top: 10px;
+        animation: scrollWheel 1.5s infinite;
+      }
+    }
+    
+    .arrow {
+      span {
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        border-right: 2px solid rgba(255, 255, 255, 0.5);
+        transform: rotate(45deg);
+        margin: -5px;
+        animation: scrollArrow 2s infinite;
+        
+        &:nth-child(2) { animation-delay: -0.2s; }
+        &:nth-child(3) { animation-delay: -0.4s; }
+      }
+    }
   }
 }
+
+@keyframes scrollWheel {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+@keyframes scrollArrow {
+  0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+}
+

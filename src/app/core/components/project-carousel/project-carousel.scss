@@ -20,8 +20,15 @@
   position: relative;
   perspective: 1000px;
   overflow: visible;
-  padding: 40px 80px;
-  touch-action: pan-y; // Allow vertical scroll, capture horizontal
+  padding: 40px 0;
+  touch-action: pan-y;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 .carousel-track {
@@ -29,35 +36,54 @@
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
-  min-height: 450px;
+  min-height: 500px;
+  min-width: 800px;
   position: relative;
+  flex: 1;
+  max-width: 1000px;
 }
 
 .carousel-item {
   position: absolute;
-  width: 360px;
-  transition: transform 400ms ease-out, opacity 400ms ease-out;
+  width: 360px; // Reduced from 400px to prevent overlap
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 600ms ease;
   transform-origin: center center;
 
   // Center (active) card
   &.center {
-    transform: translateZ(50px) scale(1.05);
-    z-index: 3;
+    transform: translateZ(0) scale(1);
+    z-index: 10;
     opacity: 1;
   }
 
   // Left neighbor
   &.left {
-    transform: translateX(-120%) translateZ(-50px) rotateY(15deg);
-    z-index: 2;
-    opacity: 0.7;
+    transform: translateX(-85%) scale(0.8) translateZ(-100px) rotateY(15deg);
+    z-index: 5;
+    opacity: 0.7; // Much more visible "mais vivo"
+    filter: blur(1px) grayscale(0.4); // Reduced grayscale too
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.9;
+      filter: blur(0) grayscale(0);
+      transform: translateX(-80%) scale(0.82) translateZ(-80px) rotateY(15deg);
+    }
   }
 
   // Right neighbor
   &.right {
-    transform: translateX(120%) translateZ(-50px) rotateY(-15deg);
-    z-index: 2;
-    opacity: 0.7;
+    transform: translateX(85%) scale(0.8) translateZ(-100px) rotateY(-15deg);
+    z-index: 5;
+    opacity: 0.7; // Much more visible
+    filter: blur(1px) grayscale(0.4);
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+      filter: blur(0) grayscale(0);
+      transform: translateX(80%) scale(0.82) translateZ(-80px) rotateY(-15deg);
+    }
   }
 
   // Hidden cards
@@ -69,49 +95,40 @@
   }
 
   &.far-left {
-    transform: translateX(-200%) translateZ(-100px) rotateY(30deg);
+    transform: translateX(-200%) scale(0.7);
   }
 
   &.far-right {
-    transform: translateX(200%) translateZ(-100px) rotateY(-30deg);
+    transform: translateX(200%) scale(0.7);
   }
 }
 
-// Navigation arrows
+// Navigation arrows - flex items beside carousel track
 .nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 50px;
-  height: 50px;
-  border: none;
+  position: relative;
+  flex-shrink: 0;
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  background: rgba(30, 30, 30, 0.8);
-  color: #fff;
-  font-size: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
   cursor: pointer;
   transition: all 300ms ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
-  &:hover:not(:disabled) {
-    background: $secondary-blue;
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  &.left {
-    left: 20px;
-  }
-
-  &.right {
-    right: 20px;
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -119,29 +136,28 @@
 .dots-container {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 12px;
+  margin-top: 40px;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(67, 163, 190, 0.5);
-  background: transparent;
+  width: 10px;
+  height: 10px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: all 300ms ease;
+  transition: all 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
   padding: 0;
 
   &:hover {
-    border-color: $secondary-blue;
-    background: rgba(67, 163, 190, 0.3);
+    background: rgba(255, 255, 255, 0.5);
   }
 
   &.active {
+    width: 32px;
     background: $secondary-blue;
-    border-color: $secondary-blue;
-    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(67, 163, 190, 0.5);
   }
 }
 
@@ -172,21 +188,66 @@
   }
 }
 
+// Large desktop - more space for side cards
+@media (min-width: 1200px) {
+  .carousel-container {
+    padding: 40px 40px;
+  }
+
+  .carousel-track {
+    min-width: 900px;
+  }
+
+  .nav-arrow {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+}
+
+// Desktop adjustments
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .carousel-container {
+    padding: 30px 20px;
+  }
+
+  .carousel-track {
+    min-width: 750px;
+  }
+
+  .carousel-item {
+    width: 360px;
+  }
+}
+
 // Tablet adjustments
 @media (min-width: 768px) and (max-width: 1023px) {
+  .carousel-container {
+    padding: 30px 16px;
+  }
+
+  .carousel-track {
+    min-width: 500px;
+    min-height: 450px;
+  }
+
   .carousel-item {
-    width: 320px;
+    width: 300px;
 
     &.left {
-      transform: translateX(-110%) translateZ(-30px) rotateY(10deg);
+      transform: translateX(-105%) scale(0.8) translateZ(-40px) rotateY(8deg);
+      opacity: 0.3;
     }
 
     &.right {
-      transform: translateX(110%) translateZ(-30px) rotateY(-10deg);
+      transform: translateX(105%) scale(0.8) translateZ(-40px) rotateY(-8deg);
+      opacity: 0.3;
     }
   }
 
-  .carousel-container {
-    padding: 30px 60px;
+  .nav-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
   }
 }

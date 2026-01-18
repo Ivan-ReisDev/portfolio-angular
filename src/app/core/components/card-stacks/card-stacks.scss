@@ -13,19 +13,19 @@
 
 .stacks {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
-
+  
   > div {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px; // More spacing between icons
+    max-width: 1000px; // Limit width to keep them clustered
   }
 }
 

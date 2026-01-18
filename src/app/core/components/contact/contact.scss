@@ -1,0 +1,199 @@
+@use 'app.scss' as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+// Contact Section - Uses same premium background as other sections
+.contact-section {
+  @include premium-background; // Same as Education, Projects, etc.
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10; // Higher than Education (4) for parallax stacking
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // Title Area - Match Projects Style
+  app-title {
+    margin-bottom: 40px;
+    align-self: center;
+    
+    // Override default component styles
+    ::ng-deep h2 {
+      font-size: 56px;
+      border-bottom: none !important; // Remove default underline
+      padding-right: 0 !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      
+      @media (max-width: 768px) {
+        font-size: 40px;
+      }
+    }
+  }
+}
+
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: center; // Center vertically relative to each other
+    justify-content: space-between;
+    padding: 0 40px; // Add inner padding
+  }
+}
+
+// Emblematic Phrase
+.emblematic-phrase {
+  flex: 1;
+  font-size: 48px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  text-align: center;
+  // Animation initial state
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  @media (min-width: 900px) {
+    text-align: left;
+    max-width: 45%;
+    font-size: 64px;
+  }
+
+  // Animation trigger
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .highlight {
+    background: linear-gradient(90deg, $secondary-blue, #6432c8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+// Form Styling
+.contact-form {
+  @include section-content-glass;
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  // Animation initial state
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s; // Stagger delay
+
+  // Animation trigger
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input, textarea {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 18px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      outline: none;
+
+      &:focus {
+        border-color: $secondary-blue;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 20px rgba(67, 163, 190, 0.15);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .submit-btn {
+    margin-top: 10px;
+    background: linear-gradient(90deg, $secondary-blue, #2a6f85);
+    color: #fff;
+    border: none;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    i {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(67, 163, 190, 0.4);
+      
+      i {
+        transform: translate(4px, -4px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+@keyframes bgShift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-2%, -2%) scale(1.05); }
+}

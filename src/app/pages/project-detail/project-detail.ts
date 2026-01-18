@@ -3,6 +3,7 @@ import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { ImageGallery } from '../../core/components/image-gallery/image-gallery';
+import { getTechIconClass } from '../../core/utils/tech-icons';
 
 @Component({
   selector: 'app-project-detail',
@@ -79,4 +80,6 @@ export class ProjectDetail {
       document.body.style.overflow = '';
     }
   }
+
+  getTechIconClass = getTechIconClass;
 }

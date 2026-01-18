@@ -1,1 +1,29 @@
-<section id="educacao" class="snap-section" style="background: #e0e0e0">Educação</section>
+<section id="progresso" class="progresso">
+  <div class="container">
+    <main>
+      <app-title title="Progresso" />
+      <p class="subtitle">
+       Minha evolução profissional ao longo do tempo, reunindo experiências, cargos e formações que marcaram minha trajetória na área de tecnologia.
+      </p>
+    </main>
+
+    <div class="timeline">
+      @for (item of visibleItems; track item.title) {
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">{{ item.date }}</span>
+            <h3 class="timeline-title">{{ item.title }}</h3>
+            <p class="timeline-description">{{ item.description }}</p>
+          </div>
+        </div>
+      }
+
+      @if (timeline.length > initialItemsCount) {
+        <button class="show-more-btn" (click)="toggleShowMore()">
+          {{ showAll ? 'mostrar menos' : 'mostrar mais' }}
+          <span class="arrow" [class.rotated]="showAll">&#8964;</span>
+        </button>
+      }
+    </div>
+  </div>
+</section>

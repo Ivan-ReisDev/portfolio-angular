@@ -3,22 +3,79 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
+import { NgxParticlesModule } from "@tsparticles/angular"; 
+import { MoveDirection, OutMode, Container, Engine, IOptions, RecursivePartial } from "@tsparticles/engine"; 
+import { loadSlim } from "@tsparticles/slim"; // Import loadSlim here
+
 import { Header } from './core/components/header/header';
 import { About } from './core/components/about/about';
 import { Home } from './core/components/home/home';
 import { Footer } from './core/components/footer/footer';
 import { Projects } from "./core/components/projects/projects";
 import { Education } from "./core/components/education/education";
+import { Contact } from "./core/components/contact/contact";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education],
+  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App implements AfterViewInit {
   protected readonly title = signal('portfolio');
   activeSection = signal('inicio');
+
+  // Init function for particles
+  async particlesInit(engine: Engine): Promise<void> {
+    await loadSlim(engine);
+  }
+
+  // Particles Options
+  particlesOptions: RecursivePartial<IOptions> = {
+    fpsLimit: 120,
+    fullScreen: { enable: true, zIndex: 50 }, // Above content but with pointer-events: none
+    interactivity: {
+      detectsOn: "window",
+      events: {
+        onHover: { enable: true, mode: "repulse" },
+        resize: { enable: true }
+      },
+      modes: {
+        repulse: { distance: 100, duration: 0.4 }
+      }
+    },
+    particles: {
+      color: { value: "#ffffff" },
+      links: {
+        color: "#ffffff",
+        distance: 150,
+        enable: false,
+        opacity: 0.5,
+        width: 1,
+      },
+      move: {
+        direction: "none",
+        enable: true,
+        outModes: "out",
+        random: true,
+        speed: 0.8,
+        straight: false,
+      },
+      number: { density: { enable: true, width: 800 }, value: 80 },
+      opacity: { value: 0.5 },
+      shape: { type: "circle" },
+      size: { value: { min: 1, max: 3 } },
+    },
+    detectRetina: true,
+    style: {
+      pointerEvents: 'none',
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      height: '100%',
+      width: '100%'
+    }
+  };
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);

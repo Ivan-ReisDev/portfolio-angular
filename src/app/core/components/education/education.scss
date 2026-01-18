@@ -1,10 +1,243 @@
 @use 'app.scss' as *;
 
-.snap-section {
-  height: 100vh;
-  scroll-snap-align: start;
-  background-color: $primary-black !important;
-  position: sticky;
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(67, 163, 190, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(67, 163, 190, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(67, 163, 190, 0); }
+}
+
+.progresso {
+  @include premium-background;
+  width: 100vw;
+  min-height: 100vh;
+  position: sticky; // Sticky for parallax stacking effect
   top: 0;
-  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4; // Contact section (z-index: 10) will slide over this
+  padding: 100px 20px;
+  scroll-snap-align: start;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px; // Slightly narrower for better reading focus
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center align header
+  text-align: center;
+  gap: 16px;
+
+  // Match Project Section Title Style
+  app-title {
+    display: inline-block;
+    
+    ::ng-deep h2 {
+      font-size: 56px; 
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -2px;
+      border-bottom: none !important; 
+      padding-right: 0 !important;
+      margin: 0;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      
+      @media (max-width: 768px) {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 40px; // Space for the line
+
+  // Continuous Glowing Line
+  &::before {
+    content: '';
+    position: absolute;
+    left: 11px; // Align center of line
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: linear-gradient(to bottom, $secondary-blue, rgba(100, 50, 200, 0.5), transparent);
+    box-shadow: 0 0 10px rgba(67, 163, 190, 0.3);
+  }
+}
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0; // Start hidden for animation
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.15}s;
+    }
+  }
+
+  // Glowing Node
+  &::before {
+    content: '';
+    position: absolute;
+    left: -33px; // Center on line
+    top: 24px; // Align with card top
+    width: 12px;
+    height: 12px;
+    background-color: $secondary-blue;
+    border-radius: 50%;
+    border: 2px solid rgba(66, 66, 66, 1); // Dark border to separate from line
+    box-shadow: 0 0 10px $secondary-blue;
+    z-index: 2;
+    animation: pulseGlow 3s infinite;
+  }
+}
+
+.timeline-date {
+  // Mobile/Default: Date above card
+  color: $secondary-blue;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: inline-block;
+  
+  @media (min-width: 768px) {
+    // Desktop: Date absolute to the left of the card title inside the card? 
+    // Or keep distinct. Let's put it top-right of the card structure or keep strict styling.
+  }
+}
+
+.timeline-content {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 24px 30px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  // Hover Effect
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(67, 163, 190, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+
+    // Shine effect
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+      pointer-events: none;
+    }
+  }
+}
+
+.timeline-title {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.timeline-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.show-more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto 0;
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+
+  &:hover {
+    background: $secondary-blue;
+    border-color: $secondary-blue;
+    box-shadow: 0 0 20px rgba(67, 163, 190, 0.3);
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 16px;
+
+    &.rotated {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// Responsiveness
+@media (max-width: 768px) {
+  .progresso {
+     padding: 80px 20px;
+  }
+  
+  .timeline {
+    padding-left: 30px;
+  }
+  
+  .timeline-item::before {
+    left: -35px; // Adjust for padding
+  }
+  
+  .timeline-content {
+    padding: 20px;
+  }
+  
+  .timeline-title {
+    font-size: 18px;
+  }
 }

@@ -1,4 +1,5 @@
 @if (isHomePage()) {
+  <ngx-particles [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit" />
   <app-header [activeSection]="activeSection()" />
 
   <div class="scroll-container" #scrollContainer tabindex="0">
@@ -6,8 +7,7 @@
     <app-about />
     <app-projects />
     <app-education />
-    <section id="blog" class="snap-section" style="background: #d0d0d0">Blog</section>
-    <section id="contato" class="snap-section" style="background: #c0c0c0">Contato</section>
+    <app-contact />
     <app-footer />
   </div>
 

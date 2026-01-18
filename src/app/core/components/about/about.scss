@@ -18,66 +18,83 @@
   position: sticky;
   top: 0;
   scroll-snap-align: start;
-  background-color: $primary-black;
+  @include premium-background;
+  
+  width: 100vw;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  scroll-snap-align: start;
+  // background-color: $primary-black; // Replaced by mixin
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
-  overflow: hidden;
+  // overflow: hidden; // Handled by mixin
 
-  // Triângulo grande decorativo
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 100vh 0 0 50vw;
-    border-color: transparent transparent transparent #161616;
-    pointer-events: none;
-    z-index: 0;
-  }
+  // Removed legacy triangle decoration
+
 }
 
 .containt {
-  width: 1440px;
-  max-width: 1440px;
-  height: 85vh;
+  width: 100%;
+  max-width: 1200px;
+  height: auto; // Allow content to dictate height
+  min-height: 80vh;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px 0;
+  flex-direction: column; // Stack vertically
+  align-items: center;
+  justify-content: center;
+  gap: 60px; // Spacing between Text and Icons
+  padding: 40px 20px;
   position: relative;
   z-index: 1;
-
-  > * {
-    flex: 1 1 calc(50% - 10px);
-  }
 
   & main {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center; // Center text
     justify-content: center;
     opacity: 0;
-    transform: translateX(-60px);
-
+    transform: translateY(30px); // Slide up animation
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    
+    // Target the title component similar to Projects
+    app-title {
+      ::ng-deep h2 {
+        font-size: 56px;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: -2px;
+        border-bottom: none !important;
+        padding-right: 0 !important;
+        margin-bottom: 20px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        
+        @media (max-width: 768px) {
+          font-size: 40px;
+        }
+      }
+    }
+    
+    // REMOVED: Heavy glass box mixin
+    // @include section-content-glass; 
   }
 
   // Quando a seção estiver ativa, anima o main
   &.active main {
-    animation: slideFromLeft 1s ease-out forwards;
+    animation: fadeInUp 1s ease-out forwards;
   }
 
   & p {
-    color: $gray;
-    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px; // Slightly larger text
+    font-weight: 300;
+    line-height: 1.9;
     width: 100%;
-    max-width: 500px;
-    margin-top: 1em;
-    line-height: 25px;
+    margin-top: 20px;
   }
 
   & strong {
@@ -85,3 +102,16 @@
     font-weight: 600;
   }
 }
+
+// Reuse generic fade in up animation or define it
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -1,20 +1,87 @@
 {
   "projects": [
     {
-      "id": "sistema-gestao",
-      "title": "Sistema de Gestao Empresarial",
-      "description": "Sistema completo para gerenciamento de empresas com controle de estoque, vendas e relatorios.",
-      "fullDescription": "Um sistema de gestao empresarial desenvolvido para pequenas e medias empresas. O sistema oferece controle completo de estoque com alertas de reposicao, modulo de vendas com emissao de notas fiscais, dashboard com metricas em tempo real e relatorios detalhados para tomada de decisao. A arquitetura foi pensada para escalabilidade, permitindo adicao de novos modulos conforme necessidade.",
-      "technologies": ["Angular", "Node.js", "PostgreSQL", "TypeScript", "RxJS"],
-      "images": ["/images/projects/sistema-gestao/thumb.png", "/images/projects/sistema-gestao/dashboard.png", "/images/projects/sistema-gestao/estoque.png"],
-      "demoUrl": "https://demo.sistema-gestao.com",
-      "githubUrl": "https://github.com/deeivan/sistema-gestao",
+      "id": "provei-ai",
+      "title": "Provei.ai – Provador Virtual",
+      "description": "Plataforma de provador virtual para e-commerces, permitindo que clientes visualizem produtos em seu próprio ambiente ou corpo antes da compra.",
+      "fullDescription": "O Provei.ai é uma plataforma inovadora que oferece uma experiência de provador virtual para lojas online, permitindo que clientes vejam produtos em seu próprio ambiente ou corpo usando apenas uma foto. O sistema aumenta a taxa de conversão, reduz devoluções e melhora o engajamento dos usuários. A integração com e-commerces é simples e rápida, compatível com plataformas como Shopify, WordPress, VTEX e WooCommerce, via script leve. A aplicação foi desenvolvida priorizando performance, experiência do usuário e escalabilidade, tornando-se uma solução moderna e confiável para lojas digitais que desejam melhorar a experiência de compra.",
+      "technologies": [
+        "NestJS",
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Python",
+        "OpenAI API",
+        "Docker"
+      ],
+      "images": [
+        "/images/provei-ai/provei-ai.png",
+        "/images/provei-ai/dashboard.png",
+        "/images/provei-ai/furniture.png"
+      ],
+      "demoUrl": "https://provei.ai",
+      "githubUrl": null,
       "features": [
-        "Controle de estoque com alertas automaticos",
-        "Modulo de vendas e faturamento",
-        "Dashboard com metricas em tempo real",
-        "Relatorios exportaveis em PDF e Excel",
-        "Gestao de usuarios com niveis de acesso"
+        "Provador virtual em tempo real usando fotos do cliente",
+        "Aumento da conversão e engajamento em e-commerces",
+        "Redução de devoluções por visualização realista do produto",
+        "Compatível com Shopify, WooCommerce, WordPress e VTEX",
+        "Integração simples via script plug-and-play",
+        "Interface responsiva e amigável"
+      ]
+    },
+    {
+      "id": "construtiva-landing-page",
+      "title": "Landing Page Construtiva Projetos e Reformas",
+      "description": "Landing page institucional desenvolvida para apresentação de serviços e captação de leads no segmento de construção e reformas.",
+      "fullDescription": "Landing page institucional criada para a Construtiva Projetos e Reformas, com foco em conversão, presença digital e fortalecimento da marca. O projeto foi estruturado para apresentar de forma clara os serviços oferecidos pela empresa, transmitir confiança ao usuário e facilitar o contato direto via WhatsApp. A página foi desenvolvida com atenção à performance, responsividade e boas práticas de SEO, garantindo carregamento rápido, boa indexação em mecanismos de busca e uma experiência fluida em dispositivos móveis e desktops.",
+      "technologies": ["PHP", "CSS", "HTML", "SEO On-page"],
+      "images": [
+        "/images/construtiva/construtiva.png",
+        "/images/projects/construtiva/hero.png",
+        "/images/projects/construtiva/cta.png"
+      ],
+      "demoUrl": "https://construtivaprojetos.com.br",
+      "githubUrl": null,
+      "features": [
+        "Layout responsivo focado em conversão",
+        "Estrutura otimizada para SEO local",
+        "Chamadas estratégicas para ação (CTA)",
+        "Integração com WhatsApp para contato rápido",
+        "Boa performance e carregamento otimizado"
+      ]
+    },
+    {
+      "id": "everyfans-platform",
+      "title": "EveryFans – Plataforma de Gestão para Criadores",
+      "description": "Sistema completo para gestão de conteúdo e automação para criadores, reunindo ferramentas de organização, edição e publicação em um único painel.",
+      "fullDescription": "O EveryFans é uma plataforma desenvolvida para criadores de conteúdo que desejam automatizar sua rotina de produção digital. O sistema reúne gestão de elenco, auto‑edição de vídeos e fotos, agendamento e publicação automática em redes sociais, além de ferramentas de analytics e armazenamento seguro. Com foco em experiência do usuário e eficiência, a plataforma simplifica a rotina de criadores, reduz custos e aumenta a produtividade por meio de automação inteligente e recursos integrados.",
+      "technologies": [
+        "NestJS",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "Tailwind CSS"
+      ],
+      "images": [
+        "/images/everyfans/everyfans.png",
+        "/images/projects/everyfans/dashboard.png",
+        "/images/projects/everyfans/auto‑edicao.png",
+        "/images/projects/everyfans/publicacao‑automatica.png"
+      ],
+      "demoUrl": "https://www.everyfans.com.br/",
+      "githubUrl": null,
+      "features": [
+        "Gestão de elenco e colaboradores em um painel central",
+        "Auto‑edição de vídeos e fotos com personalização e cortes automáticos",
+        "Agendamento e publicação automática em múltiplas plataformas",
+        "Armazenamento seguro de mídias e assets",
+        "Analytics integrado para acompanhamento de desempenho",
+        "Fluxo inteligente de publicação para maior engajamento"
       ]
     },
     {
@@ -23,7 +90,11 @@
       "description": "Loja virtual moderna com carrinho de compras, pagamentos integrados e painel administrativo.",
       "fullDescription": "Plataforma de e-commerce completa desenvolvida com foco em performance e experiencia do usuario. Inclui catalogo de produtos com filtros avancados, carrinho de compras persistente, integracao com gateways de pagamento (Stripe, PagSeguro), sistema de cupons de desconto e painel administrativo para gestao de pedidos e produtos. O frontend utiliza Server-Side Rendering para otimizacao de SEO.",
       "technologies": ["Angular", "NestJS", "MongoDB", "Stripe", "Docker"],
-      "images": ["/images/projects/ecommerce-platform/thumb.png", "/images/projects/ecommerce-platform/catalog.png", "/images/projects/ecommerce-platform/checkout.png"],
+      "images": [
+        "/images/projects/ecommerce-platform/thumb.png",
+        "/images/projects/ecommerce-platform/catalog.png",
+        "/images/projects/ecommerce-platform/checkout.png"
+      ],
       "demoUrl": "https://demo.ecommerce-platform.com",
       "githubUrl": "https://github.com/deeivan/ecommerce-platform",
       "features": [
@@ -40,7 +111,11 @@
       "description": "Arquitetura de microservicos com autenticacao JWT, cache Redis e documentacao OpenAPI.",
       "fullDescription": "API backend construida seguindo principios REST e arquitetura de microservicos. Implementa autenticacao e autorizacao com JWT, cache distribuido com Redis para alta performance, rate limiting para protecao contra abusos e documentacao automatica com OpenAPI/Swagger. A comunicacao entre servicos utiliza mensageria assincrona para maior resiliencia.",
       "technologies": ["Node.js", "Express", "Redis", "RabbitMQ", "Swagger", "Jest"],
-      "images": ["/images/projects/api-restful/thumb.png", "/images/projects/api-restful/swagger.png", "/images/projects/api-restful/architecture.png"],
+      "images": [
+        "/images/projects/api-restful/thumb.png",
+        "/images/projects/api-restful/swagger.png",
+        "/images/projects/api-restful/architecture.png"
+      ],
       "githubUrl": "https://github.com/deeivan/api-microservices",
       "features": [
         "Autenticacao JWT com refresh tokens",
@@ -56,7 +131,11 @@
       "description": "Painel interativo com visualizacao de dados em tempo real, graficos dinamicos e exportacao de relatorios.",
       "fullDescription": "Dashboard de analytics desenvolvido para visualizacao e analise de grandes volumes de dados. Apresenta graficos interativos com atualizacao em tempo real via WebSockets, filtros avancados por periodo e categorias, widgets customizaveis com drag-and-drop e exportacao de relatorios em multiplos formatos. O design responsivo garante boa experiencia em dispositivos moveis.",
       "technologies": ["Angular", "D3.js", "Chart.js", "WebSocket", "SCSS"],
-      "images": ["/images/projects/dashboard-analytics/thumb.png", "/images/projects/dashboard-analytics/charts.png", "/images/projects/dashboard-analytics/mobile.png"],
+      "images": [
+        "https://ivanreis.vercel.app/assets/NewsMaster-51d5db30.png",
+        "/images/projects/dashboard-analytics/charts.png",
+        "/images/projects/dashboard-analytics/mobile.png"
+      ],
       "demoUrl": "https://demo.dashboard-analytics.com",
       "features": [
         "Graficos interativos com D3.js",
@@ -72,7 +151,11 @@
       "description": "App mobile para acompanhamento de treinos, nutricao e progresso fisico com sincronizacao na nuvem.",
       "fullDescription": "Aplicativo mobile cross-platform para acompanhamento de rotinas de exercicios e alimentacao. Oferece biblioteca de exercicios com videos demonstrativos, criacao de planos de treino personalizados, tracking de calorias e macronutrientes, graficos de evolucao corporal e sincronizacao automatica entre dispositivos. Integracao com wearables para monitoramento de atividade fisica.",
       "technologies": ["Ionic", "Angular", "Firebase", "TypeScript", "Capacitor"],
-      "images": ["/images/projects/mobile-app-fitness/thumb.png", "/images/projects/mobile-app-fitness/workout.png", "/images/projects/mobile-app-fitness/progress.png"],
+      "images": [
+        "/images/projects/mobile-app-fitness/thumb.png",
+        "/images/projects/mobile-app-fitness/workout.png",
+        "/images/projects/mobile-app-fitness/progress.png"
+      ],
       "demoUrl": "https://play.google.com/store/apps/fitness-app",
       "githubUrl": "https://github.com/deeivan/fitness-app",
       "features": [
@@ -89,7 +172,11 @@
       "description": "Assistente virtual inteligente com processamento de linguagem natural e integracao com APIs externas.",
       "fullDescription": "Chatbot inteligente desenvolvido com modelos de linguagem natural para atendimento automatizado. Capaz de entender intencoes do usuario, responder perguntas frequentes, realizar agendamentos e integrar-se com sistemas externos via APIs. Inclui painel de treinamento para refinamento das respostas e analytics de conversas para melhoria continua do atendimento.",
       "technologies": ["Python", "FastAPI", "LangChain", "OpenAI", "PostgreSQL"],
-      "images": ["/images/projects/chatbot-ai/thumb.png", "/images/projects/chatbot-ai/conversation.png", "/images/projects/chatbot-ai/training.png"],
+      "images": [
+        "/images/projects/chatbot-ai/thumb.png",
+        "/images/projects/chatbot-ai/conversation.png",
+        "/images/projects/chatbot-ai/training.png"
+      ],
       "iframe": "https://chatbot-demo.com/embed",
       "features": [
         "Processamento de linguagem natural",
@@ -105,7 +192,11 @@
       "description": "Site portfolio responsivo com animacoes suaves, modo escuro e formulario de contato integrado.",
       "fullDescription": "Portfolio pessoal desenvolvido para showcasing de projetos e habilidades profissionais. Apresenta design moderno com animacoes CSS suaves, tema claro/escuro com persistencia de preferencia, carrossel interativo de projetos, secao de habilidades com visualizacao de nivel de proficiencia e formulario de contato integrado com validacao. Otimizado para SEO e performance com Lighthouse score 95+.",
       "technologies": ["Angular", "TypeScript", "SCSS", "Angular SSR", "Vercel"],
-      "images": ["/images/projects/portfolio-site/thumb.png", "/images/projects/portfolio-site/projects.png", "/images/projects/portfolio-site/contact.png"],
+      "images": [
+        "/images/projects/portfolio-site/thumb.png",
+        "/images/projects/portfolio-site/projects.png",
+        "/images/projects/portfolio-site/contact.png"
+      ],
       "demoUrl": "https://portfolio.dev",
       "githubUrl": "https://github.com/deeivan/portfolio",
       "features": [

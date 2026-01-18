@@ -2,6 +2,53 @@ $primary-black: #000000;
 $secondary-blue: #43a3be;
 $gray: #686868;
 
+// Global Mixins
+@mixin premium-background {
+  background-color: #060608;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle at 50% 50%, rgba(67, 163, 190, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(100, 50, 200, 0.05) 0%, transparent 30%),
+      radial-gradient(circle at 20% 80%, rgba(67, 163, 190, 0.05) 0%, transparent 30%);
+    z-index: 0;
+    animation: bgShift 20s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+@mixin section-content-glass {
+  background: rgba(25, 25, 35, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes bgShift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-2%, -2%) scale(1.05); }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,10 +65,31 @@ body {
 
 .scroll-container {
   height: 100vh;
+  width: 100%; // Ensure it doesn't overflow viewport width
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  overflow-x: hidden; // Prevent lateral scroll
+  scroll-snap-type: y proximity; // Less aggressive snapping to prevent "locking"
   scroll-behavior: smooth;
   outline: none;
+  position: relative;
+  z-index: 1;
+}
+
+// Particles canvas styling - on top of content but non-interactive
+#tsparticles {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50 !important; // Above content sections
+  pointer-events: none !important; // Allow clicks to pass through
+
+  canvas {
+    position: fixed !important;
+    z-index: 50 !important;
+    pointer-events: none !important;
+  }
 }
 
 .snap-section {
@@ -37,44 +105,45 @@ body {
 
 .social-sidebar {
   position: fixed;
-  font-size: 19px;
-  left: 50px;
+  left: 40px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px; // Increased gap for airy feel
   z-index: 100;
+  
+  // Ghost Style: No Container
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 
   a {
-    color: #a5a5a5;
-    font-size: 30px;
-    transition: 0.3s;
-    text-decoration: none;
-
+    color: rgba(255, 255, 255, 0.4); // Very subtle by default
+    font-size: 24px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); // Bouncy transition
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    
+    // Hover: High Impact
     &:hover {
-      transform: scale(1.2);
-      color: $secondary-blue;
+      color: #fff;
+      transform: scale(1.1) translateX(5px); // Slight move to right
+      background: transparent; // Still no background? Or maybe a glow.
+      // Let's do a text-shadow glow
+      text-shadow: 0 0 20px $secondary-blue;
     }
   }
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translateX(-5 0%);
-    width: 1px;
-    background-color: #a5a5a5;
-  }
-
-  &::before {
-    bottom: 110%;
-    height: calc(50vh - 50% - 12vh);
-  }
-
-  &::after {
-    top: 110%;
-    height: calc(50vh - 50% - 9vh);
+  // Remove old lines
+  &::before, &::after {
+    display: none;
   }
 }

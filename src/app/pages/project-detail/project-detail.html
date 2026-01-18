@@ -38,7 +38,7 @@
             <div class="tech-tags">
               @for (tech of proj.technologies; track tech) {
                 <span class="tech-tag">
-                  <i [class]="'devicon-' + tech.toLowerCase().replace('.', '').replace(' ', '') + '-plain'"></i>
+                  <i [class]="getTechIconClass(tech)"></i>
                   {{ tech }}
                 </span>
               }
@@ -58,7 +58,7 @@
             @if (proj.demoUrl) {
               <a [href]="proj.demoUrl" target="_blank" rel="noopener" class="link-btn demo">
                 <i class="fa-solid fa-external-link-alt"></i>
-                Ver Demo
+                Ver Site
               </a>
             }
             @if (proj.githubUrl) {

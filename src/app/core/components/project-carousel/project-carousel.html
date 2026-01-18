@@ -14,7 +14,6 @@
         <button
           class="nav-arrow left"
           (click)="prev()"
-          [disabled]="!canGoPrev()"
           aria-label="Projeto anterior"
         >
           <i class="fa-solid fa-chevron-left"></i>
@@ -38,8 +37,7 @@
         <button
           class="nav-arrow right"
           (click)="next()"
-          [disabled]="!canGoNext()"
-          aria-label="Proximo projeto"
+          aria-label="Próximo projeto"
         >
           <i class="fa-solid fa-chevron-right"></i>
         </button>

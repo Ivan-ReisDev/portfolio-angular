@@ -14,7 +14,7 @@
     <div class="card-tags">
       @for (tech of project().technologies.slice(0, 3); track tech) {
         <span class="tech-tag">
-          <i [class]="'devicon-' + tech.toLowerCase().replace('.', '').replace(' ', '') + '-plain'"></i>
+          <i [class]="getTechIconClass(tech)"></i>
           {{ tech }}
         </span>
       }
@@ -29,7 +29,7 @@
       @if (project().demoUrl) {
         <a [href]="project().demoUrl" target="_blank" rel="noopener" class="link-btn demo" aria-label="Ver demonstracao">
           <i class="fa-solid fa-external-link-alt"></i>
-          Demo
+          Visitar Site
         </a>
       }
     </div>

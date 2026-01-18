@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 600px;
-  margin: 0 100px;
+  min-width: auto; // Allow to shrink in floating header
+  margin: 0 20px; // Reduced margin
 }
 
 .navbar ul {
@@ -20,20 +20,48 @@
 }
 
 .navbar a {
-  color: #fff;
-  font-size: 14px;
-  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7); // Slightly dimmed by default
+  font-size: 13px;
+  letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
-  transition: 0.5s;
+  transition: all 0.3s ease;
   font-weight: 500;
+  position: relative;
+  padding-bottom: 5px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: $secondary-blue;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px $secondary-blue;
+  }
 
   &:hover {
-    color: $secondary-blue;
-    transition: 0.5s;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    
+    &::after {
+      width: 100%;
+    }
   }
 
   &.active {
-    color: $secondary-blue !important;
+    color: #fff !important;
+    text-shadow: 0 0 15px rgba(67, 163, 190, 0.6); // Stronger glow
+
+    &::after {
+      width: 100%;
+      height: 2px;
+      // Premium gradient underline
+      background: linear-gradient(90deg, transparent, $secondary-blue, #6432c8, transparent);
+      box-shadow: 0 0 8px $secondary-blue;
+    }
   }
 }
