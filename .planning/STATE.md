@@ -8,22 +8,22 @@
 
 **Phase:** 2 - Carousel Components
 **Status:** Complete
-**Plan:** 2 of 2 complete
-**Last Activity:** Completed 02-02-PLAN (ProjectCarousel component)
+**Plan:** 3 of 3 complete
+**Last Activity:** Completed 02-03-PLAN (Projects Integration)
 
 ## Progress
 
 | Phase | Status | Progress |
 |-------|--------|----------|
 | 1. Data Foundation | Complete | 1/1 plans, 4/4 reqs |
-| 2. Carousel Components | Complete | 2/2 plans |
+| 2. Carousel Components | Complete | 3/3 plans, 11/11 reqs verified |
 | 3. Routing and Detail Pages | Ready | Depends on Phase 2 |
 | 4. Polish and Accessibility | Blocked | Depends on Phase 3 |
 
-**Overall:** ~13/27 requirements complete (48%)
+**Overall:** ~15/27 requirements complete (56%)
 
 ```
-Progress: █████░░░░░ 50%
+Progress: ██████░░░░ 60%
 ```
 
 ## Accumulated Decisions
@@ -40,6 +40,9 @@ Progress: █████░░░░░ 50%
 | PointerEvents over HammerJS | Native API, no dependency, mouse + touch | 02-02 |
 | toSignal() for breakpoints | Reactive integration with signal-based components | 02-02 |
 | Direct jump on dot click | Direct navigation vs scroll-through | 02-02 |
+| 30% intersection threshold | Natural animation trigger timing | 02-03 |
+| 600ms ease-out entry animation | Smooth reveal without being too slow | 02-03 |
+| Full removal of old carousel | No usages, cleaner codebase | 02-03 |
 
 ## Key Patterns Established
 
@@ -52,12 +55,13 @@ Progress: █████░░░░░ 50%
 - **Swipe detection:** PointerEvents with isPlatformBrowser SSR guard
 - **Responsive signals:** toSignal(breakpointObserver.observe()) for reactive breakpoints
 - **3D carousel:** CSS preserve-3d with perspective for coverflow effect
+- **Scroll animations:** IntersectionObserver with signal for visibility-triggered animations
 
 ## Next Actions
 
-1. Integrate ProjectCarousel into Projects section (if needed)
-2. Begin Phase 3: Routing and Detail Pages
-3. Create project detail routes with slug-based navigation
+1. Begin Phase 3: Routing and Detail Pages
+2. Create project detail routes with slug-based navigation
+3. Add click handlers to carousel cards for navigation
 
 ## Blockers
 
@@ -72,7 +76,8 @@ None currently.
 | 2026-01-18 | Phase 1 Complete | All must-haves verified, ready for Phase 2 |
 | 2026-01-18 | Completed 02-01-PLAN | ProjectCard component with glassmorphism, @angular/cdk installed |
 | 2026-01-18 | Completed 02-02-PLAN | ProjectCarousel with 3D perspective, SwipeDirective |
-| 2026-01-18 | Phase 2 Complete | Carousel components ready for integration |
+| 2026-01-18 | Completed 02-03-PLAN | Projects integration, entry animation, old carousel removed |
+| 2026-01-18 | Phase 2 Complete | All carousel requirements verified, ready for Phase 3 |
 
 ---
 *State updated: 2026-01-18*
