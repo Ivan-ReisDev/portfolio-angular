@@ -1,0 +1,120 @@
+{
+  "projects": [
+    {
+      "id": "sistema-gestao",
+      "title": "Sistema de Gestao Empresarial",
+      "description": "Sistema completo para gerenciamento de empresas com controle de estoque, vendas e relatorios.",
+      "fullDescription": "Um sistema de gestao empresarial desenvolvido para pequenas e medias empresas. O sistema oferece controle completo de estoque com alertas de reposicao, modulo de vendas com emissao de notas fiscais, dashboard com metricas em tempo real e relatorios detalhados para tomada de decisao. A arquitetura foi pensada para escalabilidade, permitindo adicao de novos modulos conforme necessidade.",
+      "technologies": ["Angular", "Node.js", "PostgreSQL", "TypeScript", "RxJS"],
+      "images": ["/images/projects/sistema-gestao/thumb.png", "/images/projects/sistema-gestao/dashboard.png", "/images/projects/sistema-gestao/estoque.png"],
+      "demoUrl": "https://demo.sistema-gestao.com",
+      "githubUrl": "https://github.com/deeivan/sistema-gestao",
+      "features": [
+        "Controle de estoque com alertas automaticos",
+        "Modulo de vendas e faturamento",
+        "Dashboard com metricas em tempo real",
+        "Relatorios exportaveis em PDF e Excel",
+        "Gestao de usuarios com niveis de acesso"
+      ]
+    },
+    {
+      "id": "ecommerce-platform",
+      "title": "Plataforma E-commerce",
+      "description": "Loja virtual moderna com carrinho de compras, pagamentos integrados e painel administrativo.",
+      "fullDescription": "Plataforma de e-commerce completa desenvolvida com foco em performance e experiencia do usuario. Inclui catalogo de produtos com filtros avancados, carrinho de compras persistente, integracao com gateways de pagamento (Stripe, PagSeguro), sistema de cupons de desconto e painel administrativo para gestao de pedidos e produtos. O frontend utiliza Server-Side Rendering para otimizacao de SEO.",
+      "technologies": ["Angular", "NestJS", "MongoDB", "Stripe", "Docker"],
+      "images": ["/images/projects/ecommerce-platform/thumb.png", "/images/projects/ecommerce-platform/catalog.png", "/images/projects/ecommerce-platform/checkout.png"],
+      "demoUrl": "https://demo.ecommerce-platform.com",
+      "githubUrl": "https://github.com/deeivan/ecommerce-platform",
+      "features": [
+        "Catalogo com filtros e busca avancada",
+        "Carrinho de compras persistente",
+        "Integracao com multiplos gateways de pagamento",
+        "Sistema de cupons e promocoes",
+        "Painel administrativo completo"
+      ]
+    },
+    {
+      "id": "api-restful",
+      "title": "API RESTful de Microservicos",
+      "description": "Arquitetura de microservicos com autenticacao JWT, cache Redis e documentacao OpenAPI.",
+      "fullDescription": "API backend construida seguindo principios REST e arquitetura de microservicos. Implementa autenticacao e autorizacao com JWT, cache distribuido com Redis para alta performance, rate limiting para protecao contra abusos e documentacao automatica com OpenAPI/Swagger. A comunicacao entre servicos utiliza mensageria assincrona para maior resiliencia.",
+      "technologies": ["Node.js", "Express", "Redis", "RabbitMQ", "Swagger", "Jest"],
+      "images": ["/images/projects/api-restful/thumb.png", "/images/projects/api-restful/swagger.png", "/images/projects/api-restful/architecture.png"],
+      "githubUrl": "https://github.com/deeivan/api-microservices",
+      "features": [
+        "Autenticacao JWT com refresh tokens",
+        "Cache distribuido com Redis",
+        "Rate limiting configuravel",
+        "Documentacao OpenAPI automatica",
+        "Testes unitarios e de integracao"
+      ]
+    },
+    {
+      "id": "dashboard-analytics",
+      "title": "Dashboard de Analytics",
+      "description": "Painel interativo com visualizacao de dados em tempo real, graficos dinamicos e exportacao de relatorios.",
+      "fullDescription": "Dashboard de analytics desenvolvido para visualizacao e analise de grandes volumes de dados. Apresenta graficos interativos com atualizacao em tempo real via WebSockets, filtros avancados por periodo e categorias, widgets customizaveis com drag-and-drop e exportacao de relatorios em multiplos formatos. O design responsivo garante boa experiencia em dispositivos moveis.",
+      "technologies": ["Angular", "D3.js", "Chart.js", "WebSocket", "SCSS"],
+      "images": ["/images/projects/dashboard-analytics/thumb.png", "/images/projects/dashboard-analytics/charts.png", "/images/projects/dashboard-analytics/mobile.png"],
+      "demoUrl": "https://demo.dashboard-analytics.com",
+      "features": [
+        "Graficos interativos com D3.js",
+        "Atualizacao em tempo real via WebSocket",
+        "Widgets customizaveis com drag-and-drop",
+        "Filtros avancados por periodo e categoria",
+        "Exportacao em PDF, Excel e CSV"
+      ]
+    },
+    {
+      "id": "mobile-app-fitness",
+      "title": "Aplicativo Fitness",
+      "description": "App mobile para acompanhamento de treinos, nutricao e progresso fisico com sincronizacao na nuvem.",
+      "fullDescription": "Aplicativo mobile cross-platform para acompanhamento de rotinas de exercicios e alimentacao. Oferece biblioteca de exercicios com videos demonstrativos, criacao de planos de treino personalizados, tracking de calorias e macronutrientes, graficos de evolucao corporal e sincronizacao automatica entre dispositivos. Integracao com wearables para monitoramento de atividade fisica.",
+      "technologies": ["Ionic", "Angular", "Firebase", "TypeScript", "Capacitor"],
+      "images": ["/images/projects/mobile-app-fitness/thumb.png", "/images/projects/mobile-app-fitness/workout.png", "/images/projects/mobile-app-fitness/progress.png"],
+      "demoUrl": "https://play.google.com/store/apps/fitness-app",
+      "githubUrl": "https://github.com/deeivan/fitness-app",
+      "features": [
+        "Biblioteca de exercicios com videos",
+        "Planos de treino personalizados",
+        "Tracking de calorias e macros",
+        "Graficos de evolucao corporal",
+        "Sincronizacao entre dispositivos"
+      ]
+    },
+    {
+      "id": "chatbot-ai",
+      "title": "Chatbot com Inteligencia Artificial",
+      "description": "Assistente virtual inteligente com processamento de linguagem natural e integracao com APIs externas.",
+      "fullDescription": "Chatbot inteligente desenvolvido com modelos de linguagem natural para atendimento automatizado. Capaz de entender intencoes do usuario, responder perguntas frequentes, realizar agendamentos e integrar-se com sistemas externos via APIs. Inclui painel de treinamento para refinamento das respostas e analytics de conversas para melhoria continua do atendimento.",
+      "technologies": ["Python", "FastAPI", "LangChain", "OpenAI", "PostgreSQL"],
+      "images": ["/images/projects/chatbot-ai/thumb.png", "/images/projects/chatbot-ai/conversation.png", "/images/projects/chatbot-ai/training.png"],
+      "iframe": "https://chatbot-demo.com/embed",
+      "features": [
+        "Processamento de linguagem natural",
+        "Integracao com APIs externas",
+        "Painel de treinamento de respostas",
+        "Analytics de conversas",
+        "Atendimento multicanal (web, WhatsApp)"
+      ]
+    },
+    {
+      "id": "portfolio-site",
+      "title": "Portfolio Pessoal",
+      "description": "Site portfolio responsivo com animacoes suaves, modo escuro e formulario de contato integrado.",
+      "fullDescription": "Portfolio pessoal desenvolvido para showcasing de projetos e habilidades profissionais. Apresenta design moderno com animacoes CSS suaves, tema claro/escuro com persistencia de preferencia, carrossel interativo de projetos, secao de habilidades com visualizacao de nivel de proficiencia e formulario de contato integrado com validacao. Otimizado para SEO e performance com Lighthouse score 95+.",
+      "technologies": ["Angular", "TypeScript", "SCSS", "Angular SSR", "Vercel"],
+      "images": ["/images/projects/portfolio-site/thumb.png", "/images/projects/portfolio-site/projects.png", "/images/projects/portfolio-site/contact.png"],
+      "demoUrl": "https://portfolio.dev",
+      "githubUrl": "https://github.com/deeivan/portfolio",
+      "features": [
+        "Design responsivo e moderno",
+        "Tema claro/escuro com persistencia",
+        "Carrossel interativo de projetos",
+        "Formulario de contato com validacao",
+        "Otimizado para SEO (Lighthouse 95+)"
+      ]
+    }
+  ]
+}
