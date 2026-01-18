@@ -30,7 +30,7 @@ Build a project showcase section with carousel and individual project pages for 
 **Plans:** 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Create Project model, JSON data file, and ProjectService with TransferState
+- [x] 01-01-PLAN.md — Create Project model, JSON data file, and ProjectService with TransferState
 
 **Key files:**
 - `src/app/core/models/project.model.ts` (new)
@@ -38,10 +38,12 @@ Plans:
 - `src/app/core/services/project.service.ts` (new)
 
 **Success criteria:**
-- [ ] ProjectService returns projects as signal
-- [ ] Data loads correctly on SSR and client
-- [ ] No hydration mismatch errors
-- [ ] JSON structure supports all required fields
+- [x] ProjectService returns projects as signal
+- [x] Data loads correctly on SSR and client
+- [x] No hydration mismatch errors
+- [x] JSON structure supports all required fields
+
+**Completed:** 2026-01-18
 
 ---
 
@@ -140,8 +142,8 @@ Plans:
 
 | Phase | Goal | Requirements | Status |
 |-------|------|--------------|--------|
-| 1 | Data Foundation | 4 | Planned |
-| 2 | Carousel Components | 11 | Pending |
+| 1 | Data Foundation | 4 | ✓ Complete |
+| 2 | Carousel Components | 11 | Ready |
 | 3 | Routing and Detail Pages | 8 | Pending |
 | 4 | Polish and Accessibility | 5 | Pending |
 
@@ -158,3 +160,4 @@ Plans:
 ---
 *Roadmap created: 2026-01-18*
 *Phase 1 planned: 2026-01-18*
+*Phase 1 completed: 2026-01-18*
