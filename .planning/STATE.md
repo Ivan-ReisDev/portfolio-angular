@@ -45,6 +45,8 @@ Progress: ███████░░░ 70%
 | Full removal of old carousel | No usages, cleaner codebase | 02-03 |
 | Simple conditional rendering for lightbox | No CDK Overlay needed, simpler implementation | 03-02 |
 | Horizontal scroll for thumbnails | Handles many images without layout issues | 03-02 |
+| node:fs in getPrerenderParams | Build-time runs in Node, not browser | 03-01 |
+| PrerenderFallback.Server for unknown slugs | SSR fallback instead of 404 for unknown projects | 03-01 |
 
 ## Key Patterns Established
 
@@ -59,6 +61,8 @@ Progress: ███████░░░ 70%
 - **3D carousel:** CSS preserve-3d with perspective for coverflow effect
 - **Scroll animations:** IntersectionObserver with signal for visibility-triggered animations
 - **Lightbox pattern:** HostListener for keyboard, conditional render with body scroll lock
+- **Route input binding:** withComponentInputBinding + input.required<string>() for slug
+- **Dynamic prerendering:** getPrerenderParams reads JSON at build time for static routes
 
 ## Next Actions
 
@@ -82,6 +86,7 @@ None currently.
 | 2026-01-18 | Completed 02-03-PLAN | Projects integration, entry animation, old carousel removed |
 | 2026-01-18 | Phase 2 Complete | All carousel requirements verified, ready for Phase 3 |
 | 2026-01-18 | Completed 03-02-PLAN | ImageGallery + Lightbox components, SSR fix in App |
+| 2026-01-18 | Completed 03-01-PLAN | Routing config, view transitions, SSR prerendering |
 
 ---
 *State updated: 2026-01-18*
