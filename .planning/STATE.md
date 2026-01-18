@@ -6,10 +6,10 @@
 
 ## Current Phase
 
-**Phase:** 2 - Carousel Components
-**Status:** Complete
-**Plan:** 3 of 3 complete
-**Last Activity:** Completed 02-03-PLAN (Projects Integration)
+**Phase:** 3 - Routing and Detail Pages
+**Status:** In Progress
+**Plan:** 2 of 4 complete
+**Last Activity:** Completed 03-02-PLAN (Image Gallery Components)
 
 ## Progress
 
@@ -17,13 +17,13 @@
 |-------|--------|----------|
 | 1. Data Foundation | Complete | 1/1 plans, 4/4 reqs |
 | 2. Carousel Components | Complete | 3/3 plans, 11/11 reqs verified |
-| 3. Routing and Detail Pages | Ready | Depends on Phase 2 |
+| 3. Routing and Detail Pages | In Progress | 2/4 plans complete |
 | 4. Polish and Accessibility | Blocked | Depends on Phase 3 |
 
-**Overall:** ~15/27 requirements complete (56%)
+**Overall:** ~18/27 requirements complete (67%)
 
 ```
-Progress: ██████░░░░ 60%
+Progress: ███████░░░ 70%
 ```
 
 ## Accumulated Decisions
@@ -43,6 +43,8 @@ Progress: ██████░░░░ 60%
 | 30% intersection threshold | Natural animation trigger timing | 02-03 |
 | 600ms ease-out entry animation | Smooth reveal without being too slow | 02-03 |
 | Full removal of old carousel | No usages, cleaner codebase | 02-03 |
+| Simple conditional rendering for lightbox | No CDK Overlay needed, simpler implementation | 03-02 |
+| Horizontal scroll for thumbnails | Handles many images without layout issues | 03-02 |
 
 ## Key Patterns Established
 
@@ -56,12 +58,13 @@ Progress: ██████░░░░ 60%
 - **Responsive signals:** toSignal(breakpointObserver.observe()) for reactive breakpoints
 - **3D carousel:** CSS preserve-3d with perspective for coverflow effect
 - **Scroll animations:** IntersectionObserver with signal for visibility-triggered animations
+- **Lightbox pattern:** HostListener for keyboard, conditional render with body scroll lock
 
 ## Next Actions
 
-1. Begin Phase 3: Routing and Detail Pages
-2. Create project detail routes with slug-based navigation
-3. Add click handlers to carousel cards for navigation
+1. Continue Phase 3: Plan 03-03 (Project Detail Page)
+2. Build full project detail page layout with ImageGallery
+3. Implement prev/next project navigation
 
 ## Blockers
 
@@ -78,6 +81,7 @@ None currently.
 | 2026-01-18 | Completed 02-02-PLAN | ProjectCarousel with 3D perspective, SwipeDirective |
 | 2026-01-18 | Completed 02-03-PLAN | Projects integration, entry animation, old carousel removed |
 | 2026-01-18 | Phase 2 Complete | All carousel requirements verified, ready for Phase 3 |
+| 2026-01-18 | Completed 03-02-PLAN | ImageGallery + Lightbox components, SSR fix in App |
 
 ---
 *State updated: 2026-01-18*
