@@ -1,4 +1,5 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './core/components/header/header';
 import { About } from './core/components/about/about';
@@ -17,9 +18,14 @@ export class App implements AfterViewInit {
   protected readonly title = signal('portfolio');
   activeSection = signal('inicio');
 
+  private readonly platformId = inject(PLATFORM_ID);
+
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
+    // Skip browser-only initialization during SSR
+    if (!isPlatformBrowser(this.platformId)) return;
+
     // Adicionar listener de scroll
     this.scrollContainer.nativeElement.addEventListener('scroll', () => {
       this.onScroll();

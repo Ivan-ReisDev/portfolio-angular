@@ -1,0 +1,45 @@
+<div
+  class="lightbox-backdrop"
+  (click)="onBackdropClick($event)"
+  appSwipe
+  (swipeLeft)="next()"
+  (swipeRight)="prev()">
+
+  <!-- Close button -->
+  <button
+    class="close-btn"
+    (click)="close()"
+    aria-label="Fechar lightbox">
+    <i class="fas fa-times"></i>
+  </button>
+
+  <!-- Navigation: Previous -->
+  @if (hasPrev()) {
+    <button
+      class="nav-btn nav-prev"
+      (click)="prev(); $event.stopPropagation()"
+      aria-label="Imagem anterior">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  }
+
+  <!-- Main image -->
+  <img
+    class="lightbox-image"
+    [src]="currentImage()"
+    [alt]="alt()"
+    (click)="$event.stopPropagation()" />
+
+  <!-- Navigation: Next -->
+  @if (hasNext()) {
+    <button
+      class="nav-btn nav-next"
+      (click)="next(); $event.stopPropagation()"
+      aria-label="Proxima imagem">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  }
+
+  <!-- Counter -->
+  <span class="lightbox-counter">{{ counter() }}</span>
+</div>
