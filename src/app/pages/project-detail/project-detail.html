@@ -1,0 +1,124 @@
+@if (project(); as proj) {
+  <main class="project-detail">
+    <header class="detail-header">
+      <button class="back-btn" (click)="goBack()">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar aos Projetos
+      </button>
+      <h1 class="title">{{ proj.title }}</h1>
+    </header>
+
+    <div class="detail-content">
+      <!-- Left column: Gallery -->
+      <section class="gallery-column">
+        <app-image-gallery
+          [images]="proj.images"
+          [alt]="proj.title" />
+
+        @if (proj.iframe) {
+          <div class="demo-section">
+            <button class="demo-btn" (click)="openDemo()">
+              <i class="fa-solid fa-play"></i>
+              Ver Demo Interativa
+            </button>
+          </div>
+        }
+      </section>
+
+      <!-- Right column: Info -->
+      <section class="info-column">
+        <div class="info-card">
+          <div class="description">
+            <h2>Sobre o Projeto</h2>
+            <p>{{ proj.fullDescription }}</p>
+          </div>
+
+          <div class="technologies">
+            <h2>Tecnologias</h2>
+            <div class="tech-tags">
+              @for (tech of proj.technologies; track tech) {
+                <span class="tech-tag">
+                  <i [class]="'devicon-' + tech.toLowerCase().replace('.', '').replace(' ', '') + '-plain'"></i>
+                  {{ tech }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <div class="features">
+            <h2>Funcionalidades</h2>
+            <ul>
+              @for (feature of proj.features; track feature) {
+                <li>{{ feature }}</li>
+              }
+            </ul>
+          </div>
+
+          <div class="links">
+            @if (proj.demoUrl) {
+              <a [href]="proj.demoUrl" target="_blank" rel="noopener" class="link-btn demo">
+                <i class="fa-solid fa-external-link-alt"></i>
+                Ver Demo
+              </a>
+            }
+            @if (proj.githubUrl) {
+              <a [href]="proj.githubUrl" target="_blank" rel="noopener" class="link-btn github">
+                <i class="fa-brands fa-github"></i>
+                Ver Codigo
+              </a>
+            }
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Prev/Next navigation -->
+    <nav class="project-nav">
+      @if (prevProject(); as prev) {
+        <a [routerLink]="['/projeto', prev.id]" class="nav-link prev">
+          <i class="fa-solid fa-chevron-left"></i>
+          <div class="nav-content">
+            <span class="nav-label">Anterior</span>
+            <span class="nav-title">{{ prev.title }}</span>
+          </div>
+          <img [src]="prev.images[0]" [alt]="prev.title" class="nav-thumb" />
+        </a>
+      }
+      @if (nextProject(); as next) {
+        <a [routerLink]="['/projeto', next.id]" class="nav-link next">
+          <img [src]="next.images[0]" [alt]="next.title" class="nav-thumb" />
+          <div class="nav-content">
+            <span class="nav-label">Proximo</span>
+            <span class="nav-title">{{ next.title }}</span>
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      }
+    </nav>
+  </main>
+} @else {
+  <div class="not-found">
+    <h1>Projeto nao encontrado</h1>
+    <p>O projeto que voce procura nao existe ou foi removido.</p>
+    <button class="back-btn" (click)="goBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Voltar aos Projetos
+    </button>
+  </div>
+}
+
+<!-- Demo modal (for projects with iframe) -->
+@if (demoOpen() && project()?.iframe) {
+  <div class="demo-modal" (click)="closeDemo()">
+    <div class="demo-container" (click)="$event.stopPropagation()">
+      <button class="close-demo" (click)="closeDemo()" aria-label="Fechar demo">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <iframe
+        [src]="project()!.iframe"
+        title="Demo interativa"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+}
