@@ -22,13 +22,13 @@ Build a project showcase feature for Angular 21 portfolio with carousel navigati
 
 | ID | Requirement | Priority | Phase | Status |
 |----|-------------|----------|-------|--------|
-| REQ-005 | Project cards display image, title, short description | Must | 2 | Pending |
-| REQ-006 | Technology tags with Devicon icons on cards | Must | 2 | Pending |
-| REQ-007 | GitHub and demo links on cards | Must | 2 | Pending |
-| REQ-008 | Carousel with left/right arrow navigation | Must | 2 | Pending |
-| REQ-009 | Animated transitions between carousel slides | Should | 2 | Pending |
-| REQ-010 | Touch/swipe support for mobile | Should | 2 | Pending |
-| REQ-011 | Dots/indicators for carousel position | Should | 2 | Pending |
+| REQ-005 | Project cards display image, title, short description | Must | 2 | ✓ Complete |
+| REQ-006 | Technology tags with Devicon icons on cards | Must | 2 | ✓ Complete |
+| REQ-007 | GitHub and demo links on cards | Must | 2 | ✓ Complete |
+| REQ-008 | Carousel with left/right arrow navigation | Must | 2 | ✓ Complete |
+| REQ-009 | Animated transitions between carousel slides | Should | 2 | ✓ Complete |
+| REQ-010 | Touch/swipe support for mobile | Should | 2 | ✓ Complete |
+| REQ-011 | Dots/indicators for carousel position | Should | 2 | ✓ Complete |
 
 ### Project Detail Pages
 
@@ -51,15 +51,15 @@ Build a project showcase feature for Angular 21 portfolio with carousel navigati
 | REQ-021 | ARIA labels and roles for carousel | Should | 4 | Pending |
 | REQ-022 | Lightbox for gallery images with zoom | Could | 4 | Pending |
 | REQ-023 | SEO metadata (title, description) per project | Should | 4 | Pending |
-| REQ-024 | Responsive design mobile-first | Must | 2,4 | Pending |
+| REQ-024 | Responsive design mobile-first | Must | 2,4 | ✓ Complete (Phase 2) |
 
 ### Visual Style
 
 | ID | Requirement | Priority | Phase | Status |
 |----|-------------|----------|-------|--------|
-| REQ-025 | Follow existing dark theme ($primary-black, $secondary-blue, $gray) | Must | 2 | Pending |
-| REQ-026 | Consistent animations with rest of site | Must | 2 | Pending |
-| REQ-027 | Hover effects on cards | Should | 2 | Pending |
+| REQ-025 | Follow existing dark theme ($primary-black, $secondary-blue, $gray) | Must | 2 | ✓ Complete |
+| REQ-026 | Consistent animations with rest of site | Must | 2 | ✓ Complete |
+| REQ-027 | Hover effects on cards | Should | 2 | ✓ Complete |
 
 ## Out of Scope
 

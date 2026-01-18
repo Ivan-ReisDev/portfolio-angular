@@ -64,9 +64,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Install @angular/cdk and create ProjectCard component with glassmorphism
-- [ ] 02-02-PLAN.md — Create SwipeDirective and ProjectCarousel with 3D perspective
-- [ ] 02-03-PLAN.md — Integrate carousel into Projects section
+- [x] 02-01-PLAN.md — Install @angular/cdk and create ProjectCard component with glassmorphism
+- [x] 02-02-PLAN.md — Create SwipeDirective and ProjectCarousel with 3D perspective
+- [x] 02-03-PLAN.md — Integrate carousel into Projects section
 
 **Key files:**
 - `src/app/core/components/project-card/` (new)
@@ -75,11 +75,13 @@ Plans:
 - `src/app/core/components/projects/projects.ts` (update)
 
 **Success criteria:**
-- [ ] Carousel displays project cards
-- [ ] Arrow navigation works
-- [ ] Cards show all required information
-- [ ] Responsive on mobile
-- [ ] Animations smooth and consistent
+- [x] Carousel displays project cards
+- [x] Arrow navigation works
+- [x] Cards show all required information
+- [x] Responsive on mobile
+- [x] Animations smooth and consistent
+
+**Completed:** 2026-01-18
 
 ---
 
@@ -149,8 +151,8 @@ Plans:
 | Phase | Goal | Requirements | Status |
 |-------|------|--------------|--------|
 | 1 | Data Foundation | 4 | Complete |
-| 2 | Carousel Components | 11 | Planned |
-| 3 | Routing and Detail Pages | 8 | Pending |
+| 2 | Carousel Components | 11 | Complete |
+| 3 | Routing and Detail Pages | 8 | Ready |
 | 4 | Polish and Accessibility | 5 | Pending |
 
 **Total:** 27 requirements across 4 phases
@@ -168,3 +170,4 @@ Plans:
 *Phase 1 planned: 2026-01-18*
 *Phase 1 completed: 2026-01-18*
 *Phase 2 planned: 2026-01-18*
+*Phase 2 completed: 2026-01-18*
