@@ -1,0 +1,141 @@
+@use 'sass:color';
+
+$secondary-blue: #43a3be;
+$gray: #686868;
+
+.image-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.main-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba($secondary-blue, 0.2);
+  background: rgba(30, 30, 30, 0.6);
+  padding: 0;
+  transition: border-color 300ms ease;
+
+  &:hover {
+    border-color: rgba($secondary-blue, 0.5);
+
+    .main-image {
+      transform: scale(1.02);
+    }
+
+    .zoom-overlay {
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $secondary-blue;
+    outline-offset: 2px;
+  }
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+.zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 300ms ease;
+
+  i {
+    color: #fff;
+    font-size: 32px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.thumbnails-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($secondary-blue, 0.3) transparent;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($secondary-blue, 0.3);
+    border-radius: 3px;
+  }
+}
+
+.thumbnail {
+  flex-shrink: 0;
+  width: 80px;
+  height: 50px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 0;
+  background: rgba(30, 30, 30, 0.6);
+  transition: all 200ms ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 200ms ease;
+  }
+
+  &:hover {
+    border-color: rgba($secondary-blue, 0.5);
+
+    img {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    border-color: $secondary-blue;
+    box-shadow: 0 0 12px rgba($secondary-blue, 0.3);
+
+    img {
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $secondary-blue;
+    outline-offset: 2px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .thumbnail {
+    width: 64px;
+    height: 40px;
+  }
+
+  .zoom-overlay i {
+    font-size: 24px;
+  }
+}

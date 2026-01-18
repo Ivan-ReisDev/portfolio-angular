@@ -1,0 +1,41 @@
+<div class="image-gallery">
+  <!-- Main image (clickable to open lightbox) -->
+  <button
+    class="main-image-container"
+    (click)="openLightbox()"
+    type="button"
+    aria-label="Abrir visualizacao em tela cheia">
+    <img
+      class="main-image"
+      [src]="currentImage()"
+      [alt]="alt()" />
+    <div class="zoom-overlay">
+      <i class="fas fa-search-plus"></i>
+    </div>
+  </button>
+
+  <!-- Thumbnails (shown if more than 1 image) -->
+  @if (hasMultipleImages()) {
+    <div class="thumbnails-container">
+      @for (img of images(); track img; let i = $index) {
+        <button
+          class="thumbnail"
+          [class.active]="i === currentIndex()"
+          (click)="selectImage(i)"
+          type="button"
+          [attr.aria-label]="'Selecionar imagem ' + (i + 1)">
+          <img [src]="img" [alt]="alt() + ' thumbnail ' + (i + 1)" />
+        </button>
+      }
+    </div>
+  }
+</div>
+
+<!-- Lightbox (conditionally rendered) -->
+@if (lightboxOpen()) {
+  <app-lightbox
+    [images]="images()"
+    [initialIndex]="currentIndex()"
+    [alt]="alt()"
+    (closed)="closeLightbox()" />
+}
