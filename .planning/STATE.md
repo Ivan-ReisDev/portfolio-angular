@@ -8,8 +8,8 @@
 
 **Phase:** 3 - Routing and Detail Pages
 **Status:** In Progress
-**Plan:** 2 of 4 complete
-**Last Activity:** Completed 03-02-PLAN (Image Gallery Components)
+**Plan:** 3 of 4 complete
+**Last Activity:** Completed 03-03-PLAN (Project Detail Page)
 
 ## Progress
 
@@ -17,13 +17,13 @@
 |-------|--------|----------|
 | 1. Data Foundation | Complete | 1/1 plans, 4/4 reqs |
 | 2. Carousel Components | Complete | 3/3 plans, 11/11 reqs verified |
-| 3. Routing and Detail Pages | In Progress | 2/4 plans complete |
+| 3. Routing and Detail Pages | In Progress | 3/4 plans complete |
 | 4. Polish and Accessibility | Blocked | Depends on Phase 3 |
 
-**Overall:** ~18/27 requirements complete (67%)
+**Overall:** ~21/27 requirements complete (78%)
 
 ```
-Progress: ███████░░░ 70%
+Progress: ████████░░ 80%
 ```
 
 ## Accumulated Decisions
@@ -47,6 +47,10 @@ Progress: ███████░░░ 70%
 | Horizontal scroll for thumbnails | Handles many images without layout issues | 03-02 |
 | node:fs in getPrerenderParams | Build-time runs in Node, not browser | 03-01 |
 | PrerenderFallback.Server for unknown slugs | SSR fallback instead of 404 for unknown projects | 03-01 |
+| Circular navigation for prev/next | Seamless browsing, last goes to first | 03-03 |
+| Info column first on mobile | Immediate content access on small screens | 03-03 |
+| effectiveSlug computed fallback | Route input binding + snapshot fallback for deep links | 03-03 |
+| HostListener for ESC key | Standard UX pattern for modal close | 03-03 |
 
 ## Key Patterns Established
 
@@ -63,12 +67,14 @@ Progress: ███████░░░ 70%
 - **Lightbox pattern:** HostListener for keyboard, conditional render with body scroll lock
 - **Route input binding:** withComponentInputBinding + input.required<string>() for slug
 - **Dynamic prerendering:** getPrerenderParams reads JSON at build time for static routes
+- **Circular navigation:** Computed signal with modulo wrap-around for prev/next
+- **Modal with SSR guard:** isPlatformBrowser check for body.style modifications
 
 ## Next Actions
 
-1. Continue Phase 3: Plan 03-03 (Project Detail Page)
-2. Build full project detail page layout with ImageGallery
-3. Implement prev/next project navigation
+1. Continue Phase 3: Plan 03-04 (Fragment Navigation)
+2. Implement smooth scroll to sections from project detail back button
+3. Complete Phase 3, unlock Phase 4
 
 ## Blockers
 
@@ -87,6 +93,7 @@ None currently.
 | 2026-01-18 | Phase 2 Complete | All carousel requirements verified, ready for Phase 3 |
 | 2026-01-18 | Completed 03-02-PLAN | ImageGallery + Lightbox components, SSR fix in App |
 | 2026-01-18 | Completed 03-01-PLAN | Routing config, view transitions, SSR prerendering |
+| 2026-01-18 | Completed 03-03-PLAN | ProjectDetail page, prev/next nav, demo modal, card links |
 
 ---
 *State updated: 2026-01-18*
