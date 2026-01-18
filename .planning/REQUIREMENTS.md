@@ -13,7 +13,7 @@ Build a project showcase feature for Angular 21 portfolio with carousel navigati
 
 | ID | Requirement | Priority | Phase |
 |----|-------------|----------|-------|
-| REQ-001 | Project data stored in JSON file (`src/assets/data/projects.json`) | Must | 1 |
+| REQ-001 | Project data stored in JSON file (`public/data/projects.json`) | Must | 1 |
 | REQ-002 | Project model with id, title, description, fullDescription, technologies, images, demoUrl, githubUrl, features, iframe fields | Must | 1 |
 | REQ-003 | ProjectService using Angular signals for state | Must | 1 |
 | REQ-004 | TransferState integration for SSR hydration | Must | 1 |
