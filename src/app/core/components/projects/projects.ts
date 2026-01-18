@@ -5,21 +5,29 @@ import {
   OnDestroy,
   PLATFORM_ID,
   Inject,
+  signal
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Carousel } from '../carousel/carousel';
-import { Title } from "../typography/title/title";
+import { ProjectCarousel } from '../project-carousel/project-carousel';
+import { Title } from '../typography/title/title';
 
 @Component({
   selector: 'app-projects',
-  imports: [Carousel, Title],
+  standalone: true,
+  imports: [ProjectCarousel, Title],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
 export class Projects implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
 
-  constructor(private elementRef: ElementRef, @Inject(PLATFORM_ID) private platformId: Object) {}
+  // Signal to track when section is visible (for entry animation)
+  readonly isVisible = signal(false);
+
+  constructor(
+    private elementRef: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -30,6 +38,7 @@ export class Projects implements AfterViewInit, OnDestroy {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('active');
+              this.isVisible.set(true);
             }
           });
         },

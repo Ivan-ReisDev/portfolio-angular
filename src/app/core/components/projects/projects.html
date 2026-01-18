@@ -2,8 +2,11 @@
   <div class="content">
     <div class="title">
       <app-title title="Projetos" />
-
       <p class="subtitle">Alguns dos meus trabalhos recentes</p>
+    </div>
+
+    <div class="carousel-area" [class.visible]="isVisible()">
+      <app-project-carousel />
     </div>
   </div>
 </section>
