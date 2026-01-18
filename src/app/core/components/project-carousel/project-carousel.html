@@ -1,0 +1,71 @@
+<div class="carousel-wrapper" [class.mobile]="!isCarouselMode()">
+
+  @if (loading()) {
+    <div class="loading">
+      <p>Carregando projetos...</p>
+    </div>
+  } @else {
+
+    <!-- Carousel mode (desktop/tablet) -->
+    @if (isCarouselMode()) {
+      <div class="carousel-container" appSwipe (swipeLeft)="onSwipeLeft()" (swipeRight)="onSwipeRight()">
+
+        <!-- Left arrow -->
+        <button
+          class="nav-arrow left"
+          (click)="prev()"
+          [disabled]="!canGoPrev()"
+          aria-label="Projeto anterior"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- Carousel track -->
+        <div class="carousel-track">
+          @for (project of projects(); track project.id; let i = $index) {
+            @if (isCardVisible(i)) {
+              <div class="carousel-item" [class]="getCardPosition(i)">
+                <app-project-card
+                  [project]="project"
+                  [isActive]="i === currentIndex()"
+                />
+              </div>
+            }
+          }
+        </div>
+
+        <!-- Right arrow -->
+        <button
+          class="nav-arrow right"
+          (click)="next()"
+          [disabled]="!canGoNext()"
+          aria-label="Proximo projeto"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Dots indicator -->
+      <div class="dots-container">
+        @for (project of projects(); track project.id; let i = $index) {
+          <button
+            class="dot"
+            [class.active]="i === currentIndex()"
+            (click)="goToIndex(i)"
+            [attr.aria-label]="'Ir para projeto ' + (i + 1)"
+          ></button>
+        }
+      </div>
+    }
+
+    <!-- Mobile stacked mode -->
+    @if (!isCarouselMode()) {
+      <div class="cards-stack">
+        @for (project of projects(); track project.id) {
+          <app-project-card [project]="project" />
+        }
+      </div>
+    }
+
+  }
+</div>
