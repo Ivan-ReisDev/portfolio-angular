@@ -2,143 +2,171 @@
 @use 'sass:color';
 
 .project-card {
-  background: rgba(30, 30, 30, 0.6);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(67, 163, 190, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  background: rgba(25, 25, 35, 0.4); // Much lighter/subtle glass
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05); // Very subtle border
+  border-radius: 24px; // Softer corners
   overflow: hidden;
-  transition: transform 300ms ease, box-shadow 300ms ease;
-  cursor: pointer;
+  transition: all 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-  // Hover lift effect (REQ-027)
+  // Hover state - sleek lift
   &:hover {
-    transform: translateY(-8px);
-    box-shadow:
-      0 12px 40px rgba(67, 163, 190, 0.25),
-      0 4px 12px rgba(0, 0, 0, 0.2);
-  }
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(30, 30, 45, 0.5);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
 
-  // Active state for carousel center card
-  &.active {
-    border-color: $secondary-blue;
+    .card-image img {
+      transform: scale(1.05);
+    }
   }
 }
 
-// Fallback for browsers without backdrop-filter
-@supports not (backdrop-filter: blur(10px)) {
-  .project-card {
-    background: rgba(30, 30, 30, 0.95);
-  }
+.card-image-link {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border-radius: 24px 24px 0 0;
 }
 
 .card-image {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
+  position: relative;
   overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 400ms ease;
-  }
-
-  .project-card:hover & img {
-    transform: scale(1.05);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 }
 
 .card-content {
-  padding: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title-link {
+  text-decoration: none;
+  margin-bottom: 12px;
+  display: block;
 }
 
 .card-title {
   color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 500; // Cleaner weight
+  letter-spacing: -0.5px;
+  margin: 0;
+  transition: color 300ms ease;
+
+  &:hover {
+    color: $secondary-blue;
+  }
 }
 
 .card-description {
-  color: $gray;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 16px;
-  // Limit to 2-3 lines
+  color: rgba(255, 255, 255, 0.6); // Lighter text
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .tech-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(67, 163, 190, 0.1);
-  border: 1px solid rgba(67, 163, 190, 0.3);
-  color: $secondary-blue;
-  padding: 4px 10px;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 6px 14px;
+  border-radius: 100px; // Pill shape
   font-size: 12px;
-  transition: background 300ms ease;
+  font-weight: 500;
+  transition: all 300ms ease;
 
   i {
     font-size: 14px;
+    opacity: 0.7;
+    color: inherit;
   }
 
   &:hover {
-    background: rgba(67, 163, 190, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: $secondary-blue;
+    
+    i {
+      opacity: 1;
+      color: $secondary-blue;
+    }
   }
 }
 
 .card-links {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  margin-top: auto;
+  align-items: center;
+  justify-content: flex-end; // Align to right for modern feel
 }
 
 .link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 100px;
   font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
-  transition: all 300ms ease;
+  transition: all 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
   &.github {
+    color: rgba(255, 255, 255, 0.5);
     background: transparent;
-    border: 1px solid $gray;
-    color: $gray;
-
-    i {
-      font-size: 18px;
-    }
 
     &:hover {
-      border-color: #fff;
       color: #fff;
+      background: rgba(255, 255, 255, 0.05);
     }
   }
 
   &.demo {
-    background: $secondary-blue;
-    color: #fff;
-    border: none;
+    background: #fff;
+    color: #000;
+    padding: 8px 20px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 
     &:hover {
-      background: color.adjust($secondary-blue, $lightness: 10%);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
     }
   }
+
+  i {
+    font-size: 16px;
+  }
 }
+

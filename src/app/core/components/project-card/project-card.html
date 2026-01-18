@@ -1,10 +1,14 @@
 <article class="project-card" [class.active]="isActive()">
-  <div class="card-image">
-    <img [src]="project().images[0]" [alt]="project().title" loading="lazy" />
-  </div>
+  <a [routerLink]="['/projeto', project().id]" class="card-image-link" aria-label="Ver detalhes do projeto {{ project().title }}">
+    <div class="card-image">
+      <img [src]="project().images[0]" [alt]="project().title" loading="lazy" />
+    </div>
+  </a>
 
   <div class="card-content">
-    <h3 class="card-title">{{ project().title }}</h3>
+    <a [routerLink]="['/projeto', project().id]" class="card-title-link">
+      <h3 class="card-title">{{ project().title }}</h3>
+    </a>
     <p class="card-description">{{ project().description }}</p>
 
     <div class="card-tags">
