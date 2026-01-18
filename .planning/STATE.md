@@ -7,23 +7,23 @@
 ## Current Phase
 
 **Phase:** 2 - Carousel Components
-**Status:** In Progress
-**Plan:** 1 of 2 complete
-**Last Activity:** Completed 02-01-PLAN (ProjectCard component)
+**Status:** Complete
+**Plan:** 2 of 2 complete
+**Last Activity:** Completed 02-02-PLAN (ProjectCarousel component)
 
 ## Progress
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| 1. Data Foundation | ✓ Complete | 1/1 plans, 4/4 reqs |
-| 2. Carousel Components | In Progress | 1/2 plans |
-| 3. Routing and Detail Pages | Blocked | Depends on Phase 2 |
+| 1. Data Foundation | Complete | 1/1 plans, 4/4 reqs |
+| 2. Carousel Components | Complete | 2/2 plans |
+| 3. Routing and Detail Pages | Ready | Depends on Phase 2 |
 | 4. Polish and Accessibility | Blocked | Depends on Phase 3 |
 
-**Overall:** ~7/27 requirements complete (26%)
+**Overall:** ~13/27 requirements complete (48%)
 
 ```
-Progress: ███░░░░░░░ 30%
+Progress: █████░░░░░ 50%
 ```
 
 ## Accumulated Decisions
@@ -37,6 +37,9 @@ Progress: ███░░░░░░░ 30%
 | color.adjust() over lighten() | SASS 3.0 compatibility, modern syntax | 02-01 |
 | 16:10 image aspect ratio | Better fit for project screenshots | 02-01 |
 | Max 3 tech tags per card | Clean layout, prevent overflow | 02-01 |
+| PointerEvents over HammerJS | Native API, no dependency, mouse + touch | 02-02 |
+| toSignal() for breakpoints | Reactive integration with signal-based components | 02-02 |
+| Direct jump on dot click | Direct navigation vs scroll-through | 02-02 |
 
 ## Key Patterns Established
 
@@ -46,12 +49,15 @@ Progress: ███░░░░░░░ 30%
 - **Signal inputs:** `input.required<T>()` for required, `input<T>(default)` for optional
 - **Glassmorphism:** rgba background + backdrop-filter blur + subtle border
 - **Modern SASS:** `@use 'sass:color'` for color manipulation
+- **Swipe detection:** PointerEvents with isPlatformBrowser SSR guard
+- **Responsive signals:** toSignal(breakpointObserver.observe()) for reactive breakpoints
+- **3D carousel:** CSS preserve-3d with perspective for coverflow effect
 
 ## Next Actions
 
-1. Execute 02-02-PLAN for ProjectCarousel component
-2. Integrate carousel with existing Projects section
-3. Add responsive breakpoints via CDK BreakpointObserver
+1. Integrate ProjectCarousel into Projects section (if needed)
+2. Begin Phase 3: Routing and Detail Pages
+3. Create project detail routes with slug-based navigation
 
 ## Blockers
 
@@ -65,6 +71,8 @@ None currently.
 | 2026-01-18 | Completed 01-01-PLAN | Data foundation: Project model, JSON data, ProjectService |
 | 2026-01-18 | Phase 1 Complete | All must-haves verified, ready for Phase 2 |
 | 2026-01-18 | Completed 02-01-PLAN | ProjectCard component with glassmorphism, @angular/cdk installed |
+| 2026-01-18 | Completed 02-02-PLAN | ProjectCarousel with 3D perspective, SwipeDirective |
+| 2026-01-18 | Phase 2 Complete | Carousel components ready for integration |
 
 ---
 *State updated: 2026-01-18*
