@@ -1,25 +1,27 @@
-<app-header [activeSection]="activeSection()" />
+@if (isHomePage()) {
+  <app-header [activeSection]="activeSection()" />
 
-<div class="scroll-container" #scrollContainer tabindex="0">
-  <app-home />
-  <app-about />
-  <app-projects />
-  <app-education />
-  <section id="blog" class="snap-section" style="background: #d0d0d0">Blog</section>
-  <section id="contato" class="snap-section" style="background: #c0c0c0">Contato</section>
-  <app-footer />
-</div>
+  <div class="scroll-container" #scrollContainer tabindex="0">
+    <app-home />
+    <app-about />
+    <app-projects />
+    <app-education />
+    <section id="blog" class="snap-section" style="background: #d0d0d0">Blog</section>
+    <section id="contato" class="snap-section" style="background: #c0c0c0">Contato</section>
+    <app-footer />
+  </div>
 
-<aside class="social-sidebar">
-  <a href="https://github.com/seu-usuario" target="_blank">
-    <i class="fab fa-github"></i>
-  </a>
-  <a href="https://linkedin.com/in/seu-usuario" target="_blank">
-    <i class="fab fa-linkedin"></i>
-  </a>
-  <a href="https://instagram.com/seu-usuario" target="_blank">
-    <i class="fab fa-instagram"></i>
-  </a>
-</aside>
+  <aside class="social-sidebar">
+    <a href="https://github.com/seu-usuario" target="_blank">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://linkedin.com/in/seu-usuario" target="_blank">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="https://instagram.com/seu-usuario" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </aside>
+}
 
 <router-outlet />

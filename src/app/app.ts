@@ -1,6 +1,8 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, computed } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map, startWith } from 'rxjs';
 import { Header } from './core/components/header/header';
 import { About } from './core/components/about/about';
 import { Home } from './core/components/home/home';
@@ -19,12 +21,31 @@ export class App implements AfterViewInit {
   activeSection = signal('inicio');
 
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
+
+  // Track if we're on the home page
+  private readonly currentUrl = toSignal(
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(event => event.urlAfterRedirects),
+      startWith(this.router.url)
+    ),
+    { initialValue: '/' }
+  );
+
+  isHomePage = computed(() => {
+    const url = this.currentUrl();
+    return url === '/' || url === '' || url.startsWith('/#');
+  });
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
   ngAfterViewInit(): void {
     // Skip browser-only initialization during SSR
     if (!isPlatformBrowser(this.platformId)) return;
+
+    // Only setup scroll handling when on home page
+    if (!this.scrollContainer?.nativeElement) return;
 
     // Adicionar listener de scroll
     this.scrollContainer.nativeElement.addEventListener('scroll', () => {
