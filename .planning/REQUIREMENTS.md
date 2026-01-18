@@ -34,14 +34,14 @@ Build a project showcase feature for Angular 21 portfolio with carousel navigati
 
 | ID | Requirement | Priority | Phase | Status |
 |----|-------------|----------|-------|--------|
-| REQ-012 | Dynamic route `/projeto/:id` for each project | Must | 3 | Pending |
-| REQ-013 | Full project description on detail page | Must | 3 | Pending |
-| REQ-014 | Image gallery with multiple screenshots | Must | 3 | Pending |
-| REQ-015 | Live demo iframe (optional per project) | Should | 3 | Pending |
-| REQ-016 | Features list on detail page | Must | 3 | Pending |
-| REQ-017 | Previous/next project navigation | Should | 3 | Pending |
-| REQ-018 | SSR prerendering for all project pages | Must | 3 | Pending |
-| REQ-019 | Overlay pattern preserving scroll-snap | Must | 3 | Pending |
+| REQ-012 | Dynamic route `/projeto/:id` for each project | Must | 3 | ✓ Complete |
+| REQ-013 | Full project description on detail page | Must | 3 | ✓ Complete |
+| REQ-014 | Image gallery with multiple screenshots | Must | 3 | ✓ Complete |
+| REQ-015 | Live demo iframe (optional per project) | Should | 3 | ✓ Complete |
+| REQ-016 | Features list on detail page | Must | 3 | ✓ Complete |
+| REQ-017 | Previous/next project navigation | Should | 3 | ✓ Complete |
+| REQ-018 | SSR prerendering for all project pages | Must | 3 | ✓ Complete |
+| REQ-019 | Overlay pattern preserving scroll-snap | Must | 3 | ✓ Complete |
 
 ### Accessibility & Polish
 

@@ -103,9 +103,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Configurar roteamento com prerendering SSR e features do router
-- [ ] 03-02-PLAN.md — Criar componentes ImageGallery e Lightbox
-- [ ] 03-03-PLAN.md — Criar pagina ProjectDetail e conectar navegacao do carousel
+- [x] 03-01-PLAN.md — Configurar roteamento com prerendering SSR e features do router
+- [x] 03-02-PLAN.md — Criar componentes ImageGallery e Lightbox
+- [x] 03-03-PLAN.md — Criar pagina ProjectDetail e conectar navegacao do carousel
 
 **Key files:**
 - `src/app/pages/project-detail/` (new)
@@ -116,11 +116,13 @@ Plans:
 - `src/app/core/components/lightbox/` (new)
 
 **Success criteria:**
-- [ ] Each project has dedicated URL
-- [ ] SSR prerenders all project pages
-- [ ] Gallery displays multiple images
-- [ ] Optional iframe works when configured
-- [ ] Scroll-snap not broken by routing
+- [x] Each project has dedicated URL
+- [x] SSR prerenders all project pages
+- [x] Gallery displays multiple images
+- [x] Optional iframe works when configured
+- [x] Scroll-snap not broken by routing
+
+**Completed:** 2026-01-18
 
 ---
 
@@ -159,7 +161,7 @@ Plans:
 |-------|------|--------------|--------|
 | 1 | Data Foundation | 4 | Complete |
 | 2 | Carousel Components | 11 | Complete |
-| 3 | Routing and Detail Pages | 8 | Planned |
+| 3 | Routing and Detail Pages | 8 | Complete |
 | 4 | Polish and Accessibility | 5 | Pending |
 
 **Total:** 27 requirements across 4 phases
@@ -179,3 +181,4 @@ Plans:
 *Phase 2 planned: 2026-01-18*
 *Phase 2 completed: 2026-01-18*
 *Phase 3 planned: 2026-01-18*
+*Phase 3 completed: 2026-01-18*
