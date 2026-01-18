@@ -61,11 +61,17 @@ Plans:
 
 **Dependencies:** Phase 1 (needs ProjectService)
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Install @angular/cdk and create ProjectCard component with glassmorphism
+- [ ] 02-02-PLAN.md — Create SwipeDirective and ProjectCarousel with 3D perspective
+- [ ] 02-03-PLAN.md — Integrate carousel into Projects section
+
 **Key files:**
-- `src/app/core/components/carousel/carousel.ts` (update existing empty)
-- `src/app/core/components/carousel/carousel.html` (update)
-- `src/app/core/components/carousel/carousel.scss` (update)
 - `src/app/core/components/project-card/` (new)
+- `src/app/core/components/project-carousel/` (new)
+- `src/app/core/directives/swipe.directive.ts` (new)
 - `src/app/core/components/projects/projects.ts` (update)
 
 **Success criteria:**
@@ -125,7 +131,7 @@ Plans:
 **Dependencies:** Phase 2 (carousel), Phase 3 (detail pages)
 
 **Key files:**
-- `src/app/core/components/carousel/carousel.ts` (update)
+- `src/app/core/components/project-carousel/project-carousel.ts` (update)
 - `src/app/core/components/lightbox/` (new)
 - `src/app/pages/project-detail/project-detail.ts` (update)
 
@@ -142,8 +148,8 @@ Plans:
 
 | Phase | Goal | Requirements | Status |
 |-------|------|--------------|--------|
-| 1 | Data Foundation | 4 | ✓ Complete |
-| 2 | Carousel Components | 11 | Ready |
+| 1 | Data Foundation | 4 | Complete |
+| 2 | Carousel Components | 11 | Planned |
 | 3 | Routing and Detail Pages | 8 | Pending |
 | 4 | Polish and Accessibility | 5 | Pending |
 
@@ -161,3 +167,4 @@ Plans:
 *Roadmap created: 2026-01-18*
 *Phase 1 planned: 2026-01-18*
 *Phase 1 completed: 2026-01-18*
+*Phase 2 planned: 2026-01-18*
