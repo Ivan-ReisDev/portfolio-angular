@@ -1,0 +1,144 @@
+@use 'app.scss' as *;
+@use 'sass:color';
+
+.project-card {
+  background: rgba(30, 30, 30, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(67, 163, 190, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  cursor: pointer;
+
+  // Hover lift effect (REQ-027)
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 12px 40px rgba(67, 163, 190, 0.25),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  // Active state for carousel center card
+  &.active {
+    border-color: $secondary-blue;
+  }
+}
+
+// Fallback for browsers without backdrop-filter
+@supports not (backdrop-filter: blur(10px)) {
+  .project-card {
+    background: rgba(30, 30, 30, 0.95);
+  }
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+  }
+
+  .project-card:hover & img {
+    transform: scale(1.05);
+  }
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-description {
+  color: $gray;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  // Limit to 2-3 lines
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(67, 163, 190, 0.1);
+  border: 1px solid rgba(67, 163, 190, 0.3);
+  color: $secondary-blue;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  transition: background 300ms ease;
+
+  i {
+    font-size: 14px;
+  }
+
+  &:hover {
+    background: rgba(67, 163, 190, 0.2);
+  }
+}
+
+.card-links {
+  display: flex;
+  gap: 12px;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 300ms ease;
+
+  &.github {
+    background: transparent;
+    border: 1px solid $gray;
+    color: $gray;
+
+    i {
+      font-size: 18px;
+    }
+
+    &:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+  }
+
+  &.demo {
+    background: $secondary-blue;
+    color: #fff;
+    border: none;
+
+    &:hover {
+      background: color.adjust($secondary-blue, $lightness: 10%);
+      transform: translateY(-2px);
+    }
+  }
+}

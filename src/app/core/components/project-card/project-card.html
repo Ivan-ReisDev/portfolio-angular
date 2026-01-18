@@ -1,0 +1,33 @@
+<article class="project-card" [class.active]="isActive()">
+  <div class="card-image">
+    <img [src]="project().images[0]" [alt]="project().title" loading="lazy" />
+  </div>
+
+  <div class="card-content">
+    <h3 class="card-title">{{ project().title }}</h3>
+    <p class="card-description">{{ project().description }}</p>
+
+    <div class="card-tags">
+      @for (tech of project().technologies.slice(0, 3); track tech) {
+        <span class="tech-tag">
+          <i [class]="'devicon-' + tech.toLowerCase().replace('.', '').replace(' ', '') + '-plain'"></i>
+          {{ tech }}
+        </span>
+      }
+    </div>
+
+    <div class="card-links">
+      @if (project().githubUrl) {
+        <a [href]="project().githubUrl" target="_blank" rel="noopener" class="link-btn github" aria-label="Ver codigo no GitHub">
+          <i class="devicon-github-original"></i>
+        </a>
+      }
+      @if (project().demoUrl) {
+        <a [href]="project().demoUrl" target="_blank" rel="noopener" class="link-btn demo" aria-label="Ver demonstracao">
+          <i class="fa-solid fa-external-link-alt"></i>
+          Demo
+        </a>
+      }
+    </div>
+  </div>
+</article>
