@@ -87,26 +87,33 @@ Plans:
 
 ## Phase 3: Routing and Detail Pages
 
-**Goal:** Create individual project pages with full details
+**Goal:** Criar paginas individuais de projeto com URL propria, galeria de imagens e navegacao entre projetos
 
 **Delivers:**
 - ProjectDetail page component
-- Dynamic route `/projeto/:id`
+- Dynamic route `/projeto/:slug`
 - SSR prerendering configuration
-- Overlay pattern in App component
-- Image gallery component
+- Image gallery component with lightbox
 - Previous/next navigation
 
 **Requirements:** REQ-012, REQ-013, REQ-014, REQ-015, REQ-016, REQ-017, REQ-018, REQ-019
 
 **Dependencies:** Phase 1 (data), Phase 2 (navigation from cards)
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Configurar roteamento com prerendering SSR e features do router
+- [ ] 03-02-PLAN.md — Criar componentes ImageGallery e Lightbox
+- [ ] 03-03-PLAN.md — Criar pagina ProjectDetail e conectar navegacao do carousel
+
 **Key files:**
 - `src/app/pages/project-detail/` (new)
 - `src/app/app.routes.ts` (update)
-- `src/app/app.routes.server.ts` (new for prerender params)
-- `src/app/app.ts` (update for overlay pattern)
+- `src/app/app.routes.server.ts` (update)
+- `src/app/app.config.ts` (update)
 - `src/app/core/components/image-gallery/` (new)
+- `src/app/core/components/lightbox/` (new)
 
 **Success criteria:**
 - [ ] Each project has dedicated URL
@@ -152,7 +159,7 @@ Plans:
 |-------|------|--------------|--------|
 | 1 | Data Foundation | 4 | Complete |
 | 2 | Carousel Components | 11 | Complete |
-| 3 | Routing and Detail Pages | 8 | Ready |
+| 3 | Routing and Detail Pages | 8 | Planned |
 | 4 | Polish and Accessibility | 5 | Pending |
 
 **Total:** 27 requirements across 4 phases
@@ -171,3 +178,4 @@ Plans:
 *Phase 1 completed: 2026-01-18*
 *Phase 2 planned: 2026-01-18*
 *Phase 2 completed: 2026-01-18*
+*Phase 3 planned: 2026-01-18*
