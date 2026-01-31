@@ -1,7 +1,9 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, DestroyRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
-import { NgxParticlesModule } from "@tsparticles/angular"; 
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
+import { NgxParticlesModule } from "@tsparticles/angular";
 import { Engine, IOptions, RecursivePartial } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 
@@ -79,51 +81,43 @@ export class App implements AfterViewInit {
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
-  // Check if running in browser
   protected readonly isBrowser = isPlatformBrowser(this.platformId);
-
-  isHomePage() {
-    return this.router.url === '/' || this.router.url === '' || this.router.url.startsWith('/#');
-  }
+  readonly isHomePage = signal(true);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
   ngAfterViewInit(): void {
-    // Skip browser-only initialization during SSR
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Set SEO for home page
-    if (this.isHomePage()) {
-      this.seoService.setBasicSEO({
-        title: 'Ivan Reis - Desenvolvedor Full Stack',
-        description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Portfolio com projetos inovadores como Provei.ai, sistemas para e-commerce e aplicações web modernas.',
-        keywords: ['desenvolvedor full stack', 'programador angular', 'web developer brasil', 'freelancer ti', 'typescript', 'nestjs'],
-        type: 'website',
-        url: 'https://ivanreis.com.br',
-        locale: 'pt_BR'
-      });
-      
-      this.seoService.setPersonSEO();
-    }
+    this.updateIsHomePage();
 
-    // Only setup scroll handling when on home page
-    if (!this.scrollContainer?.nativeElement) return;
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((event) => {
+      const urlWithoutFragment = event.urlAfterRedirects.split('#')[0];
+      const isHome = urlWithoutFragment === '/' || urlWithoutFragment === '';
+      this.isHomePage.set(isHome);
 
-    this.scrollContainer.nativeElement.addEventListener('scroll', () => {
-      this.onScroll();
-    });
+      if (isHome) {
+        this.setHomeSEO();
+        setTimeout(() => {
+          this.initializeScrollHandling();
 
-    setTimeout(() => {
-      this.onScroll();
-      this.scrollContainer.nativeElement.focus();
-    }, 100);
-    this.scrollContainer.nativeElement.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        this.navigateToSection(e.key === 'ArrowDown' ? 'next' : 'prev');
+          const fragment = event.urlAfterRedirects.split('#')[1];
+          if (fragment) {
+            this.scrollToSection(fragment);
+          }
+        }, 50);
       }
     });
+
+    if (this.isHomePage()) {
+      this.setHomeSEO();
+      this.initializeScrollHandling();
+    }
 
     if (typeof document !== 'undefined') {
       document.addEventListener('click', (e: MouseEvent) => {
@@ -137,6 +131,45 @@ export class App implements AfterViewInit {
         }
       });
     }
+  }
+
+  private updateIsHomePage(): void {
+    const urlWithoutFragment = this.router.url.split('#')[0];
+    this.isHomePage.set(urlWithoutFragment === '/' || urlWithoutFragment === '');
+  }
+
+  private setHomeSEO(): void {
+    this.seoService.setBasicSEO({
+      title: 'Ivan Reis - Desenvolvedor Full Stack',
+      description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Portfolio com projetos inovadores como Provei.ai, sistemas para e-commerce e aplicações web modernas.',
+      keywords: ['desenvolvedor full stack', 'programador angular', 'web developer brasil', 'freelancer ti', 'typescript', 'nestjs'],
+      type: 'website',
+      url: 'https://ivanreis.com.br',
+      locale: 'pt_BR'
+    });
+    this.seoService.setPersonSEO();
+  }
+
+  private initializeScrollHandling(): void {
+    if (!this.scrollContainer?.nativeElement) return;
+
+    this.scrollContainer.nativeElement.addEventListener('scroll', () => {
+      this.onScroll();
+    });
+
+    setTimeout(() => {
+      this.onScroll();
+      if (this.scrollContainer?.nativeElement) {
+        this.scrollContainer.nativeElement.focus();
+      }
+    }, 100);
+
+    this.scrollContainer.nativeElement.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        this.navigateToSection(e.key === 'ArrowDown' ? 'next' : 'prev');
+      }
+    });
   }
 
   scrollToSection(sectionId: string) {

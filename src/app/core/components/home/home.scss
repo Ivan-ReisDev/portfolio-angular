@@ -37,6 +37,12 @@
   scroll-snap-align: start;
   z-index: 1;
 
+  @media (max-width: 767px) {
+    position: relative;
+    height: auto;
+    scroll-snap-align: none;
+  }
+
   // Removed old image background and overlays since mixin handles it
 
 

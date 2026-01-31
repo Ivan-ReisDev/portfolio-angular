@@ -11,14 +11,16 @@
         "TypeScript",
         "React",
         "Tailwind CSS",
-        "Python",
         "OpenAI API",
         "Docker"
       ],
       "images": [
         "/images/provei-ai/provei-ai.png",
-        "/images/provei-ai/dashboard.png",
-        "/images/provei-ai/furniture.png"
+        "/images/provei-ai/provei.png",
+        "/images/provei-ai/provei-2.png",
+        "/images/provei-ai/provei-3.png",
+        "/images/provei-ai/provei-4.png",
+        "/images/provei-ai/provei-5.png"
       ],
       "demoUrl": "https://provei.ai",
       "githubUrl": null,
@@ -39,8 +41,11 @@
       "technologies": ["PHP", "CSS", "HTML", "SEO On-page"],
       "images": [
         "/images/construtiva/construtiva.png",
-        "/images/projects/construtiva/hero.png",
-        "/images/projects/construtiva/cta.png"
+        "/images/construtiva/construtiva-2.png",
+        "/images/construtiva/construtiva-3.png",
+        "/images/construtiva/construtiva-4.png",
+        "/images/construtiva/construtiva-5.png",
+        "/images/construtiva/construtiva-6.png"
       ],
       "demoUrl": "https://construtivaprojetos.com.br",
       "githubUrl": null,
@@ -55,8 +60,8 @@
     {
       "id": "everyfans-platform",
       "title": "EveryFans – Plataforma de Gestão para Criadores",
-      "description": "Sistema completo para gestão de conteúdo e automação para criadores, reunindo ferramentas de organização, edição e publicação em um único painel.",
-      "fullDescription": "O EveryFans é uma plataforma desenvolvida para criadores de conteúdo que desejam automatizar sua rotina de produção digital. O sistema reúne gestão de elenco, auto‑edição de vídeos e fotos, agendamento e publicação automática em redes sociais, além de ferramentas de analytics e armazenamento seguro. Com foco em experiência do usuário e eficiência, a plataforma simplifica a rotina de criadores, reduz custos e aumenta a produtividade por meio de automação inteligente e recursos integrados.",
+      "description": "Plataforma SaaS com arquitetura de micro‑serviços para gestão, automação e processamento de conteúdo para criadores, com filas assíncronas, pagamentos via Stripe e edição de vídeo com IA.",
+      "fullDescription": "O EveryFans é uma plataforma SaaS desenvolvida em arquitetura de micro‑serviços para criadores de conteúdo que desejam automatizar toda a sua rotina de produção digital. O backend em NestJS é dividido em serviços independentes que se comunicam por filas Redis (BullMQ), garantindo processamento assíncrono e escalável de tarefas pesadas como edição e transcodificação de vídeos. O processamento de vídeo utiliza integração com GPT para geração automática de cortes, legendas e thumbnails inteligentes. O sistema de pagamentos e assinaturas é gerenciado via Stripe, com webhooks para controle de planos e cobranças recorrentes. A plataforma reúne gestão de elenco, auto‑edição de vídeos e fotos, agendamento e publicação automática em redes sociais, analytics e armazenamento seguro, tudo orquestrado por containers Docker em ambiente de produção.",
       "technologies": [
         "NestJS",
         "TypeScript",
@@ -65,125 +70,160 @@
         "PostgreSQL",
         "Redis",
         "Docker",
+        "Stripe",
+        "OpenAI API",
+        "BullMQ",
         "Tailwind CSS"
       ],
       "images": [
         "/images/everyfans/everyfans.png",
-        "/images/projects/everyfans/dashboard.png",
-        "/images/projects/everyfans/auto‑edicao.png",
-        "/images/projects/everyfans/publicacao‑automatica.png"
+        "/images/everyfans/everyfans-2.png",
+        "/images/everyfans/everyfans-3.png",
+        "/images/everyfans/everyfans-4.png",
+        "/images/everyfans/everyfans-5.png"
+
       ],
       "demoUrl": "https://www.everyfans.com.br/",
       "githubUrl": null,
       "features": [
+        "Arquitetura de micro‑serviços com comunicação via filas Redis (BullMQ)",
+        "Processamento de vídeo com IA (GPT) para cortes, legendas e thumbnails automáticos",
+        "Pagamentos e assinaturas recorrentes integrados com Stripe",
         "Gestão de elenco e colaboradores em um painel central",
-        "Auto‑edição de vídeos e fotos com personalização e cortes automáticos",
         "Agendamento e publicação automática em múltiplas plataformas",
-        "Armazenamento seguro de mídias e assets",
-        "Analytics integrado para acompanhamento de desempenho",
-        "Fluxo inteligente de publicação para maior engajamento"
+        "Analytics integrado e armazenamento seguro de mídias"
       ]
     },
     {
-      "id": "ecommerce-platform",
-      "title": "Plataforma E-commerce",
-      "description": "Loja virtual moderna com carrinho de compras, pagamentos integrados e painel administrativo.",
-      "fullDescription": "Plataforma de e-commerce completa desenvolvida com foco em performance e experiencia do usuario. Inclui catalogo de produtos com filtros avancados, carrinho de compras persistente, integracao com gateways de pagamento (Stripe, PagSeguro), sistema de cupons de desconto e painel administrativo para gestao de pedidos e produtos. O frontend utiliza Server-Side Rendering para otimizacao de SEO.",
-      "technologies": ["Angular", "NestJS", "MongoDB", "Stripe", "Docker"],
-      "images": [
-        "/images/projects/ecommerce-platform/thumb.png",
-        "/images/projects/ecommerce-platform/catalog.png",
-        "/images/projects/ecommerce-platform/checkout.png"
+      "id": "echo-ai",
+      "title": "Echo AI – Plataforma de Agentes Inteligentes",
+      "description": "Plataforma de inteligência artificial que permite criar e conversar com agentes personalizados, integrando modelos GPT e Gemini com memória vetorial e processamento assíncrono.",
+      "fullDescription": "O Echo AI foi uma plataforma de inteligência artificial desenvolvida para permitir que usuários criassem seus próprios agentes conversacionais personalizados. O sistema integrava modelos da OpenAI (GPT) e do Google (Gemini), oferecendo flexibilidade na escolha do modelo por agente. Cada agente contava com memória vetorial persistente via Supabase, permitindo conversas contextuais e recuperação inteligente de informações anteriores. A arquitetura foi construída com NestJS no backend, utilizando filas com Redis (BullMQ) para processamento assíncrono de mensagens e tarefas pesadas, garantindo escalabilidade e responsividade mesmo sob alta demanda. O frontend em React oferecia uma interface intuitiva para criação, configuração e interação com os agentes.",
+      "technologies": [
+        "NestJS",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Supabase",
+        "Redis",
+        "OpenAI API",
+        "Gemini API",
+        "Docker"
       ],
-      "demoUrl": "https://demo.ecommerce-platform.com",
-      "githubUrl": "https://github.com/deeivan/ecommerce-platform",
+      "images": [
+        "/images/echo/echo-1.png",
+        "/images/echo/echo-2.png",
+        "/images/echo/echo-3.png",
+        "/images/echo/echo-4.png",
+        "/images/echo/echo-5.png",
+        "/images/echo/echo-6.png",
+        "/images/echo/echo-7.png"
+      ],
+      "demoUrl": null,
+      "githubUrl": null,
       "features": [
-        "Catalogo com filtros e busca avancada",
-        "Carrinho de compras persistente",
-        "Integracao com multiplos gateways de pagamento",
-        "Sistema de cupons e promocoes",
-        "Painel administrativo completo"
+        "Criação de agentes conversacionais personalizados pelo usuário",
+        "Integração com modelos GPT (OpenAI) e Gemini (Google)",
+        "Memória vetorial persistente com Supabase para contexto de conversas",
+        "Processamento assíncrono de mensagens com filas Redis (BullMQ)",
+        "Interface intuitiva para configuração e gerenciamento de agentes",
+        "Arquitetura escalável preparada para alta demanda"
+      ]
+    },
+
+    {
+      "id": "blog-sexshop-atacadao",
+      "title": "Blog Sex Shop Atacadão",
+      "description": "Blog institucional e educativo desenvolvido em WordPress para o maior sex shop atacadista do Brasil, com foco em conteúdo informativo, SEO e conversão.",
+      "fullDescription": "Blog desenvolvido em WordPress para a Sex Shop Atacadão, o maior sex shop atacadista do Brasil. A plataforma funciona como hub de conteúdo educativo e informativo sobre bem-estar íntimo, saúde sexual e guias de produtos. O projeto foi estruturado com foco em SEO, performance e conversão, integrando o blog à loja virtual para impulsionar vendas orgânicas. O site conta com categorias organizadas, design responsivo, carregamento otimizado de imagens e integração com redes sociais, oferecendo uma experiência fluida tanto em desktop quanto em dispositivos móveis.",
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "MySQL",
+        "CSS",
+        "HTML",
+        "SEO On-page",
+        "Google Analytics"
+      ],
+      "images": [
+        "/images/atacadao/atacadao-1.png",
+        "/images/atacadao/atacadao-2.png",
+        "/images/atacadao/atacadao-3.png",
+        "/images/atacadao/atacadao-4.png"
+      ],
+      "demoUrl": "https://blog.sexshopatacadao.com.br/",
+      "githubUrl": null,
+      "features": [
+        "Blog com conteúdo educativo e informativo sobre saúde e bem-estar íntimo",
+        "Estrutura de categorias organizada para navegação intuitiva",
+        "Otimização SEO para ranqueamento orgânico em mecanismos de busca",
+        "Design responsivo adaptado para mobile e desktop",
+        "Integração com loja virtual para direcionamento de vendas",
+        "Performance otimizada com carregamento rápido de imagens e páginas"
       ]
     },
     {
-      "id": "api-restful",
-      "title": "API RESTful de Microservicos",
-      "description": "Arquitetura de microservicos com autenticacao JWT, cache Redis e documentacao OpenAPI.",
-      "fullDescription": "API backend construida seguindo principios REST e arquitetura de microservicos. Implementa autenticacao e autorizacao com JWT, cache distribuido com Redis para alta performance, rate limiting para protecao contra abusos e documentacao automatica com OpenAPI/Swagger. A comunicacao entre servicos utiliza mensageria assincrona para maior resiliencia.",
-      "technologies": ["Node.js", "Express", "Redis", "RabbitMQ", "Swagger", "Jest"],
-      "images": [
-        "/images/projects/api-restful/thumb.png",
-        "/images/projects/api-restful/swagger.png",
-        "/images/projects/api-restful/architecture.png"
+      "id": "blog-sigilo-sexshop",
+      "title": "Blog Sigilo Sex Shop",
+      "description": "Blog institucional e educativo desenvolvido em WordPress para a Sigilo Sex Shop de Curitiba, com foco em conteúdo informativo, SEO e conversão de vendas com entrega discreta.",
+      "fullDescription": "Blog desenvolvido em WordPress para a Sigilo Sex Shop, loja de Curitiba especializada em produtos íntimos com foco em discrição e privacidade. A plataforma serve como canal de conteúdo educativo e informativo, abordando temas como saúde sexual, guias de compra, dicas de uso, comparativos de produtos, mitos e verdades, e tendências do mercado. O projeto foi estruturado com SEO On-page para ranqueamento orgânico, design responsivo, categorias bem definidas e integração com a loja virtual para impulsionar conversões. O blog reforça o posicionamento da marca e gera tráfego qualificado para o e-commerce principal.",
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "MySQL",
+        "CSS",
+        "HTML",
+        "SEO On-page",
+        "Google Analytics"
       ],
-      "githubUrl": "https://github.com/deeivan/api-microservices",
+      "images": [
+        "/images/sigilo/sigilo-1.png",
+        "/images/sigilo/sigilo-2.png",
+        "/images/sigilo/sigilo-3.png",
+        "/images/sigilo/sigilo-4.png",
+        "/images/sigilo/sigilo-5.png"
+      ],
+      "demoUrl": "https://blog.sigilosexshop.com.br/",
+      "githubUrl": null,
       "features": [
-        "Autenticacao JWT com refresh tokens",
-        "Cache distribuido com Redis",
-        "Rate limiting configuravel",
-        "Documentacao OpenAPI automatica",
-        "Testes unitarios e de integracao"
+        "Blog com conteúdo educativo sobre saúde sexual e bem-estar íntimo",
+        "Estrutura de nove categorias temáticas para navegação organizada",
+        "Otimização SEO para ranqueamento orgânico em mecanismos de busca",
+        "Design responsivo adaptado para mobile e desktop",
+        "Integração com loja virtual e direcionamento de vendas",
+        "Performance otimizada com carregamento rápido de páginas"
       ]
     },
     {
-      "id": "dashboard-analytics",
-      "title": "Dashboard de Analytics",
-      "description": "Painel interativo com visualizacao de dados em tempo real, graficos dinamicos e exportacao de relatorios.",
-      "fullDescription": "Dashboard de analytics desenvolvido para visualizacao e analise de grandes volumes de dados. Apresenta graficos interativos com atualizacao em tempo real via WebSockets, filtros avancados por periodo e categorias, widgets customizaveis com drag-and-drop e exportacao de relatorios em multiplos formatos. O design responsivo garante boa experiencia em dispositivos moveis.",
-      "technologies": ["Angular", "D3.js", "Chart.js", "WebSocket", "SCSS"],
-      "images": [
-        "https://ivanreis.vercel.app/assets/NewsMaster-51d5db30.png",
-        "/images/projects/dashboard-analytics/charts.png",
-        "/images/projects/dashboard-analytics/mobile.png"
+      "id": "system-rhc",
+      "title": "System RHC – Sistema Policial para Habbo Hotel",
+      "description": "Plataforma web completa para gestão de uma organização policial no Habbo Hotel, com controle de alistamento, patentes, departamentos, relatórios e painel administrativo.",
+      "fullDescription": "O System RHC é uma plataforma web desenvolvida para a RHC Corporation, voltada à gestão completa de uma polícia dentro do Habbo Hotel. No universo Habbo, organizações policiais funcionam como comunidades de role-play com hierarquia militar, e o system é a ferramenta central para administrar toda essa estrutura fora do jogo. A plataforma oferece sistema de alistamento para novos recrutas, gerenciamento de patentes e promoções com histórico completo, controle de departamentos e companhias, geração de relatórios de atividade, consulta de membros com status e dados atualizados, além de um painel administrativo com permissões por cargo. O projeto foi construído com foco em usabilidade, segurança dos dados e escalabilidade para suportar o crescimento da organização.",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "NestJS",
+        "Node.js",
+        "MongoDB",
+        "Tailwind CSS",
+        "Docker"
       ],
-      "demoUrl": "https://demo.dashboard-analytics.com",
-      "features": [
-        "Graficos interativos com D3.js",
-        "Atualizacao em tempo real via WebSocket",
-        "Widgets customizaveis com drag-and-drop",
-        "Filtros avancados por periodo e categoria",
-        "Exportacao em PDF, Excel e CSV"
-      ]
-    },
-    {
-      "id": "mobile-app-fitness",
-      "title": "Aplicativo Fitness",
-      "description": "App mobile para acompanhamento de treinos, nutricao e progresso fisico com sincronizacao na nuvem.",
-      "fullDescription": "Aplicativo mobile cross-platform para acompanhamento de rotinas de exercicios e alimentacao. Oferece biblioteca de exercicios com videos demonstrativos, criacao de planos de treino personalizados, tracking de calorias e macronutrientes, graficos de evolucao corporal e sincronizacao automatica entre dispositivos. Integracao com wearables para monitoramento de atividade fisica.",
-      "technologies": ["Ionic", "Angular", "Firebase", "TypeScript", "Capacitor"],
       "images": [
-        "/images/projects/mobile-app-fitness/thumb.png",
-        "/images/projects/mobile-app-fitness/workout.png",
-        "/images/projects/mobile-app-fitness/progress.png"
+        "/images/system/system-1.png",
+        "/images/system/system-2.png",
+        "/images/system/system-3.png",
+        "/images/system/system-4.png",
+        "/images/system/system-5.png"
       ],
-      "demoUrl": "https://play.google.com/store/apps/fitness-app",
-      "githubUrl": "https://github.com/deeivan/fitness-app",
+      "demoUrl": "https://www.systemrhc.org/",
+      "githubUrl": null,
       "features": [
-        "Biblioteca de exercicios com videos",
-        "Planos de treino personalizados",
-        "Tracking de calorias e macros",
-        "Graficos de evolucao corporal",
-        "Sincronizacao entre dispositivos"
-      ]
-    },
-    {
-      "id": "chatbot-ai",
-      "title": "Chatbot com Inteligencia Artificial",
-      "description": "Assistente virtual inteligente com processamento de linguagem natural e integracao com APIs externas.",
-      "fullDescription": "Chatbot inteligente desenvolvido com modelos de linguagem natural para atendimento automatizado. Capaz de entender intencoes do usuario, responder perguntas frequentes, realizar agendamentos e integrar-se com sistemas externos via APIs. Inclui painel de treinamento para refinamento das respostas e analytics de conversas para melhoria continua do atendimento.",
-      "technologies": ["Python", "FastAPI", "LangChain", "OpenAI", "PostgreSQL"],
-      "images": [
-        "/images/projects/chatbot-ai/thumb.png",
-        "/images/projects/chatbot-ai/conversation.png",
-        "/images/projects/chatbot-ai/training.png"
-      ],
-      "iframe": "https://chatbot-demo.com/embed",
-      "features": [
-        "Processamento de linguagem natural",
-        "Integracao com APIs externas",
-        "Painel de treinamento de respostas",
-        "Analytics de conversas",
-        "Atendimento multicanal (web, WhatsApp)"
+        "Sistema de alistamento e registro de novos recrutas",
+        "Gerenciamento de patentes e promoções com histórico completo",
+        "Controle de departamentos e companhias da organização",
+        "Painel administrativo com permissões baseadas em cargo",
+        "Consulta de membros com status, patente e dados atualizados",
+        "Geração de relatórios de atividade e operações"
       ]
     },
     {
@@ -200,7 +240,12 @@
         "Cron Job",
         "Vercel"
       ],
-      "images": ["/images/flamengo/inicio.png", "/images/flamengo/inicio-news.png", "/images/flamengo/portal.png", "/images/flamengo/noticia.png"],
+      "images": [
+        "/images/flamengo/inicio.png",
+        "/images/flamengo/inicio-news.png",
+        "/images/flamengo/portal.png",
+        "/images/flamengo/noticia.png"
+      ],
       "demoUrl": "https://www.vozrubronegra.com.br",
       "githubUrl": null,
       "features": [

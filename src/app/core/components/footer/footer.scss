@@ -1,6 +1,7 @@
 @use 'app.scss' as *;
 
 .footer {
+  @include premium-background;
   width: 100%;
   min-height: 80px;
   height: auto;
@@ -8,10 +9,9 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  background: rgba(6, 6, 8, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  // backdrop-filter: blur(16px);
+  // -webkit-backdrop-filter: blur(16px);
+  border-top: none;
   position: relative;
   z-index: 10;
   box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);

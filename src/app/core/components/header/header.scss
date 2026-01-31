@@ -1,34 +1,30 @@
 @use 'app.scss' as *;
 
-// Modern Floating Header
 .header {
   color: #fff;
-  background: rgba(6, 6, 8, 0.5); // increased transparency
-  backdrop-filter: blur(20px); // heavier blur
+  background: rgba(6, 6, 8, 0.5);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08); // full border
-  
-  // Floating properties
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
   position: fixed;
   top: max(20px, env(safe-area-inset-top, 20px));
   left: 0;
   right: 0;
-  margin: 0 auto; // Center without transform
-  // transform: translateX(-50%); // Removed to prevent creating a containing block for fixed sidebar
+  margin: 0 auto;
   width: 90%;
-  max-width: 1200px; // Limit width for "island" look
+  max-width: 1200px;
   height: 80px;
-  border-radius: 20px; // Pill shape
-  
+  border-radius: 20px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); // stronger shadow for float
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  // Gradient Border Glow (Optional subtle effect)
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
@@ -37,7 +33,6 @@
     color: #fff;
   }
 
-  // Logo Styles
   .logo-container {
     display: flex;
     align-items: center;
@@ -56,23 +51,21 @@
     filter: drop-shadow(0 0 8px rgba(67, 163, 190, 0.3));
   }
 
-  & h1 {
+  & div {
     font-weight: 300;
-    font-size: 22px; // Slightly refined size
+    font-size: 22px;
     letter-spacing: 1px;
-    margin: 0; // Reset margin
+    margin: 0;
     display: flex;
     align-items: center;
-    
+
     span {
       color: $secondary-blue;
       font-weight: 700;
-      // Glowing text effect
       text-shadow: 0 0 15px rgba(67, 163, 190, 0.4);
     }
   }
 
-  // Download CV Button
   .btn-cv {
     color: #fff;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
@@ -96,7 +89,7 @@
       transform: translateY(-2px);
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -113,9 +106,7 @@
   justify-content: space-between;
 }
 
-// ===== RESPONSIVE DESIGN =====
 
-// Large tablets and small desktops (< 1200px)
 @media (max-width: 1199px) {
   .header {
     width: 95%;
@@ -137,7 +128,6 @@
   }
 }
 
-// Tablets (< 992px)
 @media (max-width: 991px) {
   .header {
     width: 95%;
@@ -154,7 +144,7 @@
     }
 
     .btn-cv {
-      display: none; // Hidden on tablet/mobile, CV available in mobile nav menu
+      display: none;
     }
   }
 
@@ -163,7 +153,6 @@
   }
 }
 
-// Small tablets and large phones (< 768px)
 @media (max-width: 767px) {
   .header {
     width: 95%;
@@ -182,7 +171,6 @@
   }
 }
 
-// Mobile devices (< 576px)
 @media (max-width: 575px) {
   .header {
     width: 96%;

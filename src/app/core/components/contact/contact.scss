@@ -19,6 +19,12 @@
   height: auto;
   padding: 80px 0; // Ensure vertical padding
   scroll-snap-align: start;
+
+  @media (max-width: 767px) {
+    position: relative;
+    height: auto;
+    scroll-snap-align: none;
+  }
 }
 
 .content {

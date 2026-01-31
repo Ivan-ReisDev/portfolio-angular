@@ -12,6 +12,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 767px) {
+    height: auto;
+    min-height: 100vh;
+    position: relative;
+    align-items: flex-start;
+  }
   // Use overflow: clip instead of hidden — clips visual overflow without creating a scroll container
   // This prevents clipping 3D carousel transforms
   overflow: clip;

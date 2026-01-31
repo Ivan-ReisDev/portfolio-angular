@@ -25,6 +25,14 @@
   padding: 80px 20px;
   scroll-snap-align: start;
 
+  @media (max-width: 767px) {
+    height: auto;
+    position: relative;
+    top: auto;
+    scroll-snap-align: none;
+    align-items: flex-start;
+  }
+
   // When expanded, break out of sticky to allow full content to scroll
   &.expanded {
     position: relative;

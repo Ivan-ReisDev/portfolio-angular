@@ -266,6 +266,78 @@
   }
 }
 
+// Social Share Buttons
+.social-share-buttons {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 575px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+
+  i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    color: #fff;
+    i {
+      transform: scale(1.1);
+    }
+  }
+
+  &.whatsapp {
+    &:hover {
+      background: rgba(37, 211, 102, 0.15); // WhatsApp Green tint
+      border-color: #25D366;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+      color: #25D366; // Text color match
+      
+      i { color: #25D366; }
+    }
+  }
+
+  &.linkedin {
+    &:hover {
+      background: rgba(10, 102, 194, 0.15); // LinkedIn Blue tint
+      border-color: #0A66C2;
+      box-shadow: 0 4px 15px rgba(10, 102, 194, 0.2);
+      color: #0A66C2; // Text color match
+
+      i { color: #0A66C2; }
+    }
+  }
+}
+
+
 // Prev/Next navigation
 .project-nav {
   display: grid;

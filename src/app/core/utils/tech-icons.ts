@@ -29,6 +29,7 @@ const TECH_ICON_MAP: Record<string, string> = {
   'Swagger': 'fa-solid fa-file-code',
   'OpenAPI': 'fa-solid fa-file-code',
   'RabbitMQ': 'devicon-rabbitmq-original',
+  'BullMQ': 'fas fa-layer-group',
   'D3.js': 'devicon-d3js-plain',
   'Chart.js': 'fa-solid fa-chart-line',
   'WebSocket': 'fa-solid fa-plug',

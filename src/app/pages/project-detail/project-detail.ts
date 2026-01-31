@@ -74,7 +74,15 @@ export class ProjectDetail implements AfterViewInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/'], { fragment: 'projetos' });
+    this.router.navigate(['/'], { fragment: 'projetos' }).then(() => {
+      // Ensure scroll to projects section after navigation
+      setTimeout(() => {
+        const projectsElement = document.getElementById('projetos');
+        if (projectsElement) {
+          projectsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    });
   }
 
   openDemo(): void {

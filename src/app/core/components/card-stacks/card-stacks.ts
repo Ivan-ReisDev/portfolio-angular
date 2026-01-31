@@ -122,6 +122,12 @@ export class CardStacks {
         'Redis (REmote DIctionary Server) é um armazenamento de chave/valor NoSQL de código aberto, em memória, utilizado principalmente como cache de aplicação ou banco de dados de resposta rápida.',
     },
     {
+      icon: 'fas fa-layer-group',
+      name: 'BullMQ',
+      description:
+        'BullMQ é uma biblioteca para gerenciamento de filas e jobs em Node.js, construída sobre Redis, que permite processamento assíncrono de tarefas com recursos avançados de monitoramento, repetição e escalabilidade.',
+    },
+    {
       icon: 'devicon-jest-plain',
       name: 'Jest',
       description:

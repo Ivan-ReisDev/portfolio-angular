@@ -23,6 +23,14 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+
+  @media (max-width: 767px) {
+    height: auto;
+    min-height: 100vh;
+    position: relative;
+    scroll-snap-align: none;
+    align-items: flex-start;
+  }
 }
 
 .content {
