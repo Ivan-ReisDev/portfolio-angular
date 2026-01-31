@@ -13,7 +13,6 @@ import { Title } from '../typography/title/title';
 
 @Component({
   selector: 'app-projects',
-  standalone: true,
   imports: [ProjectCarousel, Title],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',

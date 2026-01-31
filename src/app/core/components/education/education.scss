@@ -16,22 +16,32 @@
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  position: sticky; // Sticky for parallax stacking effect
+  position: sticky;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 4; // Contact section (z-index: 10) will slide over this
-  padding: 100px 20px;
+  z-index: 4;
+  padding: 80px 20px;
   scroll-snap-align: start;
+
+  // When expanded, break out of sticky to allow full content to scroll
+  &.expanded {
+    position: relative;
+    min-height: auto;
+    height: auto;
+    scroll-snap-align: none;
+    align-items: flex-start; // Align content to top when expanded
+    padding-top: 100px;
+  }
 }
 
 .container {
   width: 100%;
-  max-width: 1000px; // Slightly narrower for better reading focus
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 30px;
 }
 
 main {
@@ -41,24 +51,17 @@ main {
   text-align: center;
   gap: 16px;
 
-  // Match Project Section Title Style
   app-title {
     display: inline-block;
-    
-    ::ng-deep h2 {
-      font-size: 56px; 
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: -2px;
-      border-bottom: none !important; 
-      padding-right: 0 !important;
-      margin: 0;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      
-      @media (max-width: 768px) {
-        font-size: 40px;
-      }
-    }
+    --title-font-size: 56px;
+    --title-color: #fff;
+    --title-font-weight: 700;
+    --title-letter-spacing: -2px;
+    --title-border-bottom: none;
+    --title-padding-right: 0;
+    --title-margin: 0;
+    --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --title-font-size-md: 40px;
   }
 
   .subtitle {
@@ -92,27 +95,19 @@ main {
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 40px;
-  animation: fadeInUp 0.5s ease-out forwards;
-  opacity: 0; // Start hidden for animation
-
-  @for $i from 1 through 10 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.15}s;
-    }
-  }
+  margin-bottom: 24px;
 
   // Glowing Node
   &::before {
     content: '';
     position: absolute;
-    left: -33px; // Center on line
-    top: 24px; // Align with card top
+    left: -33px;
+    top: 20px;
     width: 12px;
     height: 12px;
     background-color: $secondary-blue;
     border-radius: 50%;
-    border: 2px solid rgba(66, 66, 66, 1); // Dark border to separate from line
+    border: 2px solid rgba(66, 66, 66, 1);
     box-shadow: 0 0 10px $secondary-blue;
     z-index: 2;
     animation: pulseGlow 3s infinite;
@@ -120,30 +115,24 @@ main {
 }
 
 .timeline-date {
-  // Mobile/Default: Date above card
   color: $secondary-blue;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   display: inline-block;
-  
-  @media (min-width: 768px) {
-    // Desktop: Date absolute to the left of the card title inside the card? 
-    // Or keep distinct. Let's put it top-right of the card structure or keep strict styling.
-  }
 }
 
 .timeline-content {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  padding: 24px 30px;
+  padding: 20px 24px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -171,7 +160,7 @@ main {
 
 .timeline-title {
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   margin: 0;
   line-height: 1.2;
@@ -179,9 +168,25 @@ main {
 
 .timeline-description {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   margin: 0;
+  // Clamp to 3 lines when collapsed to guarantee fitting in viewport
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  // Smooth max-height transition as fallback for line-clamp change
+  max-height: 4.8em; // 3 lines * 1.6 line-height = 4.8em
+  transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  // When section is expanded, show full descriptions
+  .expanded & {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    max-height: 50em; // Large enough for any description
+  }
 }
 
 .show-more-btn {
@@ -189,7 +194,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   padding: 12px 30px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -212,7 +217,7 @@ main {
   .arrow {
     display: inline-block;
     transition: transform 0.3s ease;
-    font-size: 16px;
+    font-size: 14px;
 
     &.rotated {
       transform: rotate(180deg);
@@ -224,53 +229,51 @@ main {
 @media (max-width: 767px) {
   .progresso {
     padding: 60px 16px;
+
+    // On mobile, sticky is already removed via app.scss, but ensure expanded also works
+    &.expanded {
+      position: relative;
+    }
   }
 
   .container {
-    gap: 40px;
+    gap: 24px;
   }
 
   .timeline {
     padding-left: 30px;
 
-    // Align timeline line with node center on mobile
     &::before {
-      left: 0px; // Aligned: node center = 30px + (-24px) + 6px = 12px... let's use 5px
+      left: 10px;
     }
   }
 
   .timeline-item {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     &::before {
-      left: -24px; // Node center at: 30-24 = 6px from edge, + 6px (half of 12px width) = 12px center
+      left: -24px;
+      top: 18px;
       width: 10px;
       height: 10px;
     }
   }
 
-  // Re-align line to match: line center should be at ~6px + 5px = 11px... Keep line at 5px
-  // Actually let's just make them consistent: padding-left: 30px, node at left: -24px
-  // Node left edge = 30 - 24 = 6px. Node center = 6 + 5 = 11px. Line should be at 10px.
-  .timeline::before {
-    left: 10px;
-  }
-
   .timeline-content {
-    padding: 20px 16px;
+    padding: 16px 14px;
   }
 
   .timeline-title {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .timeline-description {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   main {
     .subtitle {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 }

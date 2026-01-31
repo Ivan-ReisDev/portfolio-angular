@@ -7,7 +7,6 @@ import { getTechIconClass } from '../../core/utils/tech-icons';
 
 @Component({
   selector: 'app-project-detail',
-  standalone: true,
   imports: [RouterLink, ImageGallery],
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.scss'

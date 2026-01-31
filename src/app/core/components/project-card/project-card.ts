@@ -5,7 +5,6 @@ import { getTechIconClass } from '../../utils/tech-icons';
 
 @Component({
   selector: 'app-project-card',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './project-card.html',
   styleUrl: './project-card.scss',

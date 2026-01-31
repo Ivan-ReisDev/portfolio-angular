@@ -21,7 +21,7 @@ export class About implements AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       const section = this.elementRef.nativeElement.querySelector('#sobre');
       const cardsContainer = this.elementRef.nativeElement.querySelector('.stacks > div');
-      const containt = this.elementRef.nativeElement.querySelector('.containt');
+      const containt = this.elementRef.nativeElement.querySelector('.content');
 
       this.observer = new IntersectionObserver(
         (entries) => {

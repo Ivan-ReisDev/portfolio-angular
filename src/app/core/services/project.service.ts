@@ -1,4 +1,4 @@
-import { Injectable, inject, signal, computed, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, signal, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { makeStateKey, TransferState } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
@@ -59,11 +59,4 @@ export class ProjectService {
       .subscribe();
   }
 
-  getProjectById(id: string): Project | undefined {
-    return this._projects().find(p => p.id === id);
-  }
-
-  projectById = (id: string) => computed(() =>
-    this._projects().find(p => p.id === id)
-  );
 }

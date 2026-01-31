@@ -68,27 +68,18 @@
       flex-direction: column;
       align-items: center;
 
-      // Target the app-title component's inner h2 if needed, 
-      // or assume app-title projects an h2. 
-      // Based on previous file knowledge, app-title likely contains the h2.
       app-title {
         display: inline-block;
         margin-bottom: 8px;
-        
-        ::ng-deep h2 {
-          font-size: 56px; // Slightly smaller for better fit
-          color: #fff;
-          font-weight: 700;
-          letter-spacing: -2px;
-          border-bottom: none !important; // Override component style if present
-          padding-right: 0 !important;
-          margin: 0;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-          
-          @media (max-width: 768px) {
-            font-size: 40px;
-          }
-        }
+        --title-font-size: 56px;
+        --title-color: #fff;
+        --title-font-weight: 700;
+        --title-letter-spacing: -2px;
+        --title-border-bottom: none;
+        --title-padding-right: 0;
+        --title-margin: 0;
+        --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        --title-font-size-md: 40px;
       }
 
       .subtitle {

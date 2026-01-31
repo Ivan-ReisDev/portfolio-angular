@@ -1,10 +1,67 @@
+@use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+$_scrollbar-thumb: #43a3be;
+$_scrollbar-track: rgba(6, 6, 8, 0.9);
+$_scrollbar-thumb-hover: #6432c8;
 
 * {
   font-family: 'Montserrat', sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+// ===== Custom Scrollbar =====
+
+// Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(67, 163, 190, 0.4) transparent;
+}
+
+// Webkit (Chrome, Safari, Edge)
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $_scrollbar-track;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, $_scrollbar-thumb, $_scrollbar-thumb-hover);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(180deg, color.adjust($_scrollbar-thumb, $lightness: 10%), color.adjust($_scrollbar-thumb-hover, $lightness: 10%));
+    background-clip: padding-box;
+  }
+
+  &:active {
+    background: $_scrollbar-thumb;
+    background-clip: padding-box;
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background: $_scrollbar-track;
+}
+
+// Thinner scrollbar on mobile
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  * {
+    scrollbar-width: thin;
+  }
 }
 
 // Accessibility: Respect user preference for reduced motion

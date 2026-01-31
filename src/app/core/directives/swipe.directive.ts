@@ -11,8 +11,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
-  selector: '[appSwipe]',
-  standalone: true
+  selector: '[appSwipe]'
 })
 export class SwipeDirective implements OnInit, OnDestroy {
   @Output() swipeLeft = new EventEmitter<void>();

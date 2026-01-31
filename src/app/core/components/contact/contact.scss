@@ -40,22 +40,14 @@
     padding: 30px 16px;
   }
 
-  // Title Area - Match Projects Style
   app-title {
     margin-bottom: 40px;
     align-self: center;
-    
-    // Override default component styles
-    ::ng-deep h2 {
-      font-size: 56px;
-      border-bottom: none !important; // Remove default underline
-      padding-right: 0 !important;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      
-      @media (max-width: 768px) {
-        font-size: 40px;
-      }
-    }
+    --title-font-size: 56px;
+    --title-border-bottom: none;
+    --title-padding-right: 0;
+    --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --title-font-size-md: 40px;
   }
 }
 

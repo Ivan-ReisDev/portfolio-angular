@@ -143,28 +143,21 @@ export class App implements AfterViewInit {
   }
 
   scrollToSection(sectionId: string) {
-    const sections = ['inicio', 'sobre', 'projetos', 'educacao', 'blog', 'contato'];
-    const sectionIndex = sections.indexOf(sectionId);
-
-    if (sectionIndex === -1) return;
+    const element = document.getElementById(sectionId);
+    if (!element) return;
 
     const container = this.scrollContainer.nativeElement;
-    const viewportHeight = container.clientHeight;
-
-    // Cada seção tem altura de 100vh
-    const targetScrollPosition = sectionIndex * viewportHeight;
 
     container.scrollTo({
-      top: targetScrollPosition,
+      top: element.offsetTop,
       behavior: 'smooth'
     });
 
-    // Atualizar activeSection imediatamente
     this.activeSection.set(sectionId);
   }
 
   navigateToSection(direction: 'next' | 'prev') {
-    const sections = ['inicio', 'sobre', 'projetos', 'educacao', 'blog', 'contato'];
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
     const currentIndex = sections.indexOf(this.activeSection());
 
     let targetIndex: number;
@@ -178,7 +171,7 @@ export class App implements AfterViewInit {
   }
 
   onScroll() {
-    const sections = ['inicio', 'sobre', 'projetos', 'educacao', 'blog', 'contato'];
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
     const container = this.scrollContainer.nativeElement;
     const scrollPosition = container.scrollTop;
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Title } from '../typography/title/title';
 
 type TimelineItem = {
@@ -12,6 +13,17 @@ type TimelineItem = {
   imports: [Title],
   templateUrl: './education.html',
   styleUrl: './education.scss',
+  animations: [
+    trigger('timelineItemAnim', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(30px)', maxHeight: '0px' }),
+        animate('600ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({ opacity: 1, transform: 'translateY(0)', maxHeight: '500px' })),
+      ]),
+      transition(':leave', [
+        animate('400ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({ opacity: 0, transform: 'translateY(-15px)', maxHeight: '0px' })),
+      ]),
+    ]),
+  ],
 })
 export class Education {
   showAll = false;

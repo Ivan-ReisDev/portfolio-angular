@@ -1,10 +1,9 @@
 import { Component, Input, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })

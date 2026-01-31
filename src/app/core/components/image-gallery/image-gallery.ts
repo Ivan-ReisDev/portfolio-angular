@@ -3,7 +3,6 @@ import { Lightbox } from '../lightbox/lightbox';
 
 @Component({
   selector: 'app-image-gallery',
-  standalone: true,
   imports: [Lightbox],
   templateUrl: './image-gallery.html',
   styleUrl: './image-gallery.scss'

@@ -3,7 +3,6 @@ import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [Navbar],
   templateUrl: './header.html',
   styleUrl: './header.scss',

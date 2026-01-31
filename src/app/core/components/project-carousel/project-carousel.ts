@@ -16,7 +16,6 @@ type ViewportMode = 'desktop' | 'tablet' | 'mobile';
 
 @Component({
   selector: 'app-project-carousel',
-  standalone: true,
   imports: [ProjectCard, SwipeDirective],
   templateUrl: './project-carousel.html',
   styleUrl: './project-carousel.scss'

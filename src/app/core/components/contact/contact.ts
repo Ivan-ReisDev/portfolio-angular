@@ -1,11 +1,10 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common'; // Import CommonModule for ngClass if needed, though we manipulate DOM/classes
+import { isPlatformBrowser } from '@angular/common';
 import { Title } from "../typography/title/title";
 
 @Component({
   selector: 'app-contact',
-  standalone: true,
-  imports: [Title, CommonModule],
+  imports: [Title],
   templateUrl: './contact.html',
   styleUrl: './contact.scss'
 })

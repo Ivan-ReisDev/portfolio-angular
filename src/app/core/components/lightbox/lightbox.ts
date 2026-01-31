@@ -15,7 +15,6 @@ import { SwipeDirective } from '../../directives/swipe.directive';
 
 @Component({
   selector: 'app-lightbox',
-  standalone: true,
   imports: [SwipeDirective],
   templateUrl: './lightbox.html',
   styleUrl: './lightbox.scss'
