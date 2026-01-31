@@ -129,13 +129,20 @@ $gray: #686868;
 }
 
 // Responsive adjustments
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .thumbnail {
     width: 64px;
-    height: 40px;
+    height: 44px; // Minimum touch target height
   }
 
   .zoom-overlay i {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 575px) {
+  .thumbnail {
+    width: 56px;
+    height: 44px;
   }
 }

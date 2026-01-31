@@ -21,6 +21,15 @@ $gray: #686868;
       radial-gradient(circle at 20% 80%, rgba(67, 163, 190, 0.05) 0%, transparent 30%);
     z-index: 0;
     animation: bgShift 20s ease-in-out infinite alternate;
+
+    // Disable animation on mobile for better performance
+    @media (max-width: 767px) {
+      animation: none;
+      width: 150%; // Smaller pseudo-element on mobile
+      height: 150%;
+      top: -25%;
+      left: -25%;
+    }
   }
 
   &::after {
@@ -49,6 +58,8 @@ $gray: #686868;
   100% { transform: translate(-2%, -2%) scale(1.05); }
 }
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -61,14 +72,19 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+
+  @media (max-width: 767px) {
+    overflow: auto; // Allow native scrolling on mobile
+  }
 }
 
 .scroll-container {
   height: 100vh;
-  width: 100%; // Ensure it doesn't overflow viewport width
+  height: 100dvh; // Dynamic viewport height — accounts for mobile browser chrome
+  width: 100%;
   overflow-y: scroll;
-  overflow-x: hidden; // Prevent lateral scroll
-  scroll-snap-type: y proximity; // Less aggressive snapping to prevent "locking"
+  overflow-x: hidden;
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
   outline: none;
   position: relative;
@@ -94,6 +110,7 @@ body {
 
 .snap-section {
   height: 100vh;
+  height: 100dvh;
   scroll-snap-align: start;
   position: sticky;
   top: 0;
@@ -110,10 +127,9 @@ body {
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 25px; // Increased gap for airy feel
-  z-index: 100;
-  
-  // Ghost Style: No Container
+  gap: 25px;
+  z-index: 1000; // Increased to ensure visibility above all elements
+
   padding: 0;
   background: transparent;
   backdrop-filter: none;
@@ -121,9 +137,9 @@ body {
   box-shadow: none;
 
   a {
-    color: rgba(255, 255, 255, 0.4); // Very subtle by default
+    color: rgba(255, 255, 255, 0.7); // More visible by default
     font-size: 24px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); // Bouncy transition
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,19 +147,50 @@ body {
     height: 50px;
     border-radius: 50%;
     position: relative;
-    
-    // Hover: High Impact
+
     &:hover {
       color: #fff;
-      transform: scale(1.1) translateX(5px); // Slight move to right
-      background: transparent; // Still no background? Or maybe a glow.
-      // Let's do a text-shadow glow
+      transform: scale(1.2) translateX(5px);
       text-shadow: 0 0 20px $secondary-blue;
     }
   }
 
-  // Remove old lines
   &::before, &::after {
     display: none;
+  }
+}
+
+// ===== RESPONSIVE DESIGN =====
+
+// Large tablets (< 992px) - Adjust sidebar position
+@media (max-width: 991px) {
+  .social-sidebar {
+    left: 20px;
+    gap: 20px;
+
+    a {
+      font-size: 22px;
+      width: 45px;
+      height: 45px;
+    }
+  }
+}
+
+// Small tablets and below (< 768px) - Hide sidebar, use footer social links instead
+@media (max-width: 767px) {
+  .social-sidebar {
+    display: none;
+  }
+
+  .scroll-container {
+    scroll-snap-type: none; // Disable snap on mobile for natural scrolling
+  }
+
+  .snap-section {
+    scroll-snap-align: none;
+    position: relative; // Remove sticky on mobile to avoid stacking issues
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 }

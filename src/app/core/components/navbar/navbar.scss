@@ -6,6 +6,76 @@
   justify-content: center;
   min-width: auto; // Allow to shrink in floating header
   margin: 0 20px; // Reduced margin
+  
+  // Mobile styles
+  &.open {
+    .hamburger span {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -5px);
+      }
+    }
+
+    .nav-links {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .sidebar-backdrop {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+  }
+}
+
+// Hamburger Menu
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 44px; // Minimum touch target
+  height: 44px; // Minimum touch target
+  z-index: 1002;
+  position: relative;
+  padding: 10px 7px; // Visual hamburger is 30x21 within 44x44 tap area
+  
+  span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  // Hover effect for hamburger
+  &:hover span {
+    background-color: $secondary-blue;
+    box-shadow: 0 0 5px $secondary-blue;
+  }
+}
+
+// Backdrop
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .navbar ul {
@@ -15,8 +85,18 @@
   list-style: none;
 }
 
+// Rename to match HTML class
+.nav-links {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .navbar li {
   padding: 15px;
+}
+
+// Hide mobile-only CV button on desktop
+.mobile-cv-item {
+  display: none;
 }
 
 .navbar a {
@@ -63,5 +143,133 @@
       background: linear-gradient(90deg, transparent, $secondary-blue, #6432c8, transparent);
       box-shadow: 0 0 8px $secondary-blue;
     }
+  }
+}
+
+// ===== RESPONSIVE NAVBAR =====
+
+// Large tablets (< 1200px)
+@media (max-width: 1199px) {
+  .navbar li {
+    padding: 12px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+}
+
+// Tablets (< 992px)
+@media (max-width: 991px) {
+  .navbar {
+    margin: 0 10px;
+    justify-content: space-between; // Space between logo (if exists, or left side) and hamburger
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: flex;
+    position: fixed;
+    inset: 0; // Full coverage without 100vw/100vh issues
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    background: rgba(8, 8, 12, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    transform: translateX(100%);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    padding: 0;
+    gap: 10px;
+    margin: 0; // Reset any margin
+    list-style: none; // Ensure no bullets
+  }
+
+  .navbar li {
+    padding: 10px 0; // Reduced padding
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.4s ease;
+    
+    // Staggered animation for links
+    @for $i from 1 through 7 {
+      &:nth-child(#{$i}) {
+        transition-delay: 0.15s + ($i * 0.06s);
+      }
+    }
+  }
+  
+  // When menu is open, animate links in
+  .navbar.open .nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .navbar a {
+    font-size: clamp(20px, 4vw, 26px); // Scales down on small screens
+    font-weight: 300;
+    letter-spacing: clamp(2px, 0.5vw, 5px);
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    
+    // Enhance active state
+    &.active {
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+
+  // Mobile CV Button Styles
+  .mobile-cv-item {
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-btn-cv {
+    width: 60%; // Smaller width
+    padding: 10px 0;
+    background: linear-gradient(135deg, $secondary-blue, #6432c8);
+    border: none;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(67, 163, 190, 0.3);
+    transition: all 0.3s ease;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// Small tablets and large phones (< 768px)
+@media (max-width: 767px) {
+  .navbar {
+    margin: 0 15px;
+  }
+}
+
+// Mobile devices (< 576px)
+@media (max-width: 575px) {
+  .nav-links {
+    width: 100%; // Full screen on small mobiles
   }
 }

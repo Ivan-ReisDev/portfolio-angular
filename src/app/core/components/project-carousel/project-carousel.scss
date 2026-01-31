@@ -37,7 +37,8 @@
   align-items: center;
   transform-style: preserve-3d;
   min-height: 500px;
-  min-width: 800px;
+  min-width: 0; // Reset — let breakpoints set specific values
+  width: 100%;
   position: relative;
   flex: 1;
   max-width: 1000px;
@@ -148,43 +149,38 @@
   background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: all 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  padding: 0;
+  padding: 10px; // Expand touch target to ~30px while visual remains 10px
+  background-clip: content-box; // Keep visual size small
+  position: relative;
+
+  // Invisible expanded touch area
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -7px; // Expand to 44px total (10+7+7 = ~44px radius)
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.5);
+    background-clip: content-box;
   }
 
   &.active {
     width: 32px;
     background: $secondary-blue;
+    background-clip: content-box;
     box-shadow: 0 0 10px rgba(67, 163, 190, 0.5);
   }
 }
 
-// Mobile stacked mode
+// Mobile stacked mode — no nested scroll, cards stack naturally
 .carousel-wrapper.mobile {
   .cards-stack {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding: 0 20px;
-    max-height: 60vh;
-    overflow-y: auto;
-
-    // Scrollbar styling
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: $secondary-blue;
-      border-radius: 10px;
-    }
+    padding: 0 16px;
+    // Removed max-height and overflow-y to prevent nested scrolling issues
   }
 }
 
@@ -212,7 +208,7 @@
   }
 
   .carousel-track {
-    min-width: 750px;
+    min-width: 800px;
   }
 
   .carousel-item {
@@ -228,11 +224,11 @@
 
   .carousel-track {
     min-width: 500px;
-    min-height: 450px;
+    min-height: 400px;
   }
 
   .carousel-item {
-    width: 300px;
+    width: clamp(260px, 35vw, 300px); // Responsive card width on tablets
 
     &.left {
       transform: translateX(-105%) scale(0.8) translateZ(-40px) rotateY(8deg);

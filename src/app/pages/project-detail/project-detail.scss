@@ -121,11 +121,21 @@
 
 .info-card {
   @include section-content-glass;
-  background: rgba(255, 255, 255, 0.03); // Lighter glass
+  background: rgba(255, 255, 255, 0.03);
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding: 40px;
+
+  @media (max-width: 767px) {
+    padding: 28px 20px;
+    gap: 24px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 24px 16px;
+    gap: 20px;
+  }
 }
 
 .description, .technologies, .features {
@@ -194,13 +204,17 @@
     padding: 12px 0;
     padding-left: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative; // Required for absolute positioning of ::before
 
     &::before {
+      content: ''; // Required for pseudo-element to render
+      position: absolute; // Required for left/top to work
       left: 0;
+      top: 22px;
       width: 6px;
       height: 6px;
       background: $secondary-blue;
-      top: 22px; // approx center vertically including padding
+      border-radius: 50%;
     }
   }
 }
@@ -334,6 +348,10 @@
   flex-shrink: 0;
   transition: transform 0.5s ease;
   filter: brightness(0.8);
+
+  @media (max-width: 575px) {
+    display: none; // Hide thumbnails on small mobile to save space
+  }
 }
 
 // Not found & Modals
@@ -356,7 +374,7 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(20px);
-  z-index: 1000;
+  z-index: 1100; // Above social sidebar and header
   display: flex;
   align-items: center;
   justify-content: center;
@@ -368,17 +386,25 @@
 .demo-container {
   width: 90vw;
   height: 85vh;
+  height: 85dvh;
   background: #000;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
   iframe { width: 100%; height: 100%; border: none; }
+
+  @media (max-width: 767px) {
+    width: 95vw;
+    height: 80vh;
+    height: 80dvh;
+    border-radius: 12px;
+  }
 }
 
 .close-demo {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: env(safe-area-inset-top, 20px);
+  right: env(safe-area-inset-right, 20px);
   width: 50px;
   height: 50px;
   background: rgba(255,255,255,0.1);

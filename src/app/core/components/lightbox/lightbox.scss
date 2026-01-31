@@ -6,7 +6,7 @@ $secondary-blue: #43a3be;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.92);
-  z-index: 1000;
+  z-index: 1100; // Above social sidebar (1000) and header (999)
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,7 @@ $secondary-blue: #43a3be;
   justify-content: center;
   font-size: 18px;
   transition: all 200ms ease;
-  z-index: 1001;
+  z-index: 1101;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
@@ -88,7 +88,7 @@ $secondary-blue: #43a3be;
   justify-content: center;
   font-size: 20px;
   transition: all 200ms ease;
-  z-index: 1001;
+  z-index: 1101;
 
   &:hover {
     background: rgba($secondary-blue, 0.3);
@@ -125,30 +125,31 @@ $secondary-blue: #43a3be;
 }
 
 // Responsive adjustments
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .lightbox-image {
     max-width: 95vw;
     max-height: 80vh;
+    max-height: 80dvh;
   }
 
   .nav-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px; // Maintain minimum touch target
+    height: 44px;
     font-size: 16px;
 
     &.nav-prev {
-      left: 10px;
+      left: 8px;
     }
 
     &.nav-next {
-      right: 10px;
+      right: 8px;
     }
   }
 
   .close-btn {
-    top: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
+    top: env(safe-area-inset-top, 15px);
+    right: env(safe-area-inset-right, 15px);
+    width: 44px; // Maintain minimum touch target
+    height: 44px;
   }
 }

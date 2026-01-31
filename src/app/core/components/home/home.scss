@@ -12,25 +12,28 @@
 @keyframes opacit {
   0% {
     opacity: 0;
-    bottom: -60px;
+    transform: translateY(60px);
   }
   100% {
     opacity: 1;
-    bottom: 0;
+    transform: translateY(0);
   }
 }
 
 .home {
   @include premium-background;
 
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
   position: sticky;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   // overflow: hidden; // handled by mixin
+  padding: 20px 0; // Add safe padding
   scroll-snap-align: start;
   z-index: 1;
 
@@ -49,7 +52,7 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    bottom: -60px;
+    transform: translateY(60px); // Use transform for better performance
     padding-bottom: 60px;
 
     // 1. Name (Top, Small)
@@ -108,8 +111,14 @@
 
     .cta-buttons {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 24px;
       margin-top: 10px;
+
+      @media (max-width: 575px) {
+        gap: 16px;
+      }
 
       .btn {
         text-decoration: none;
@@ -122,6 +131,18 @@
         transition: all 0.3s ease;
         text-align: center;
         min-width: 180px;
+
+        @media (max-width: 575px) {
+          min-width: 140px;
+          padding: 14px 28px;
+          font-size: 13px;
+        }
+
+        @media (max-width: 399px) {
+          min-width: 120px;
+          padding: 12px 24px;
+          font-size: 12px;
+        }
         
         &.btn-primary {
           background: #fff; // High contrast white button
@@ -158,7 +179,7 @@
   &.reset .content {
     animation: none;
     opacity: 0;
-    bottom: -60px;
+    transform: translateY(60px);
   }
 
   // Scroll Indicator Styles
@@ -171,6 +192,10 @@
     flex-direction: column;
     align-items: center;
     opacity: 0.7;
+
+    @media (max-width: 767px) {
+      display: none; // Hide on mobile to avoid overlap with social sidebar
+    }
     
     .mouse {
       width: 30px;

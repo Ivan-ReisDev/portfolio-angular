@@ -13,8 +13,9 @@
 
 .progresso {
   @include premium-background;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   position: sticky; // Sticky for parallax stacking effect
   top: 0;
   display: flex;
@@ -220,24 +221,80 @@ main {
 }
 
 // Responsiveness
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .progresso {
-     padding: 80px 20px;
+    padding: 60px 16px;
   }
-  
+
+  .container {
+    gap: 40px;
+  }
+
   .timeline {
     padding-left: 30px;
+
+    // Align timeline line with node center on mobile
+    &::before {
+      left: 0px; // Aligned: node center = 30px + (-24px) + 6px = 12px... let's use 5px
+    }
   }
-  
-  .timeline-item::before {
-    left: -35px; // Adjust for padding
+
+  .timeline-item {
+    margin-bottom: 30px;
+
+    &::before {
+      left: -24px; // Node center at: 30-24 = 6px from edge, + 6px (half of 12px width) = 12px center
+      width: 10px;
+      height: 10px;
+    }
   }
-  
+
+  // Re-align line to match: line center should be at ~6px + 5px = 11px... Keep line at 5px
+  // Actually let's just make them consistent: padding-left: 30px, node at left: -24px
+  // Node left edge = 30 - 24 = 6px. Node center = 6 + 5 = 11px. Line should be at 10px.
+  .timeline::before {
+    left: 10px;
+  }
+
   .timeline-content {
-    padding: 20px;
+    padding: 20px 16px;
   }
-  
+
   .timeline-title {
     font-size: 18px;
+  }
+
+  .timeline-description {
+    font-size: 14px;
+  }
+
+  main {
+    .subtitle {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .progresso {
+    padding: 50px 12px;
+  }
+
+  .timeline {
+    padding-left: 24px;
+  }
+
+  .timeline-item::before {
+    left: -19px;
+    width: 8px;
+    height: 8px;
+  }
+
+  .timeline::before {
+    left: 8px;
+  }
+
+  .timeline-title {
+    font-size: 16px;
   }
 }

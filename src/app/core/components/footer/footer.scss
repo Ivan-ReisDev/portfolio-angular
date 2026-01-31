@@ -1,8 +1,9 @@
 @use 'app.scss' as *;
 
 .footer {
-  width: 100vw;
-  height: 80px;
+  width: 100%;
+  min-height: 80px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,9 +12,15 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative; // Not fixed, sits at bottom of flow if needed, or fixed if global
+  position: relative;
   z-index: 10;
   box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+
+  @media (max-width: 767px) {
+    padding: 24px 0;
+    padding-bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  }
 
   .footer-content {
     width: 100%;
@@ -51,8 +58,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.05);
 

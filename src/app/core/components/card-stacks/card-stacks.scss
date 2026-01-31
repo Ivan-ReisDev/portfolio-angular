@@ -3,11 +3,11 @@
 @keyframes opacit {
   0% {
     opacity: 0;
-    right: -60px;
+    transform: translateX(60px); // Use transform for better GPU performance
   }
   100% {
     opacity: 1;
-    right: 0;
+    transform: translateX(0);
   }
 }
 
@@ -26,6 +26,10 @@
     flex-wrap: wrap;
     gap: 40px; // More spacing between icons
     max-width: 1000px; // Limit width to keep them clustered
+    
+    @media (max-width: 576px) {
+      gap: 20px; // Reduce gap on mobile
+    }
   }
 }
 
@@ -67,6 +71,7 @@
 
 .tooltip {
   width: 150px;
+  max-width: calc(100vw - 40px); // Prevent overflow on screen edges
   height: auto;
   background-color: #161616;
   border-radius: 8px;
@@ -116,11 +121,26 @@
 // Estado inicial dos cards (antes da animação)
 .stacks > div {
   opacity: 0;
-  position: relative;
-  right: -60px;
+  transform: translateX(60px); // Matches animation start state
 }
 
 // Animação quando a seção fica ativa
 .stacks > div.active {
   animation: opacit 2s ease-out forwards;
+}
+
+// Responsive: smaller cards on very small screens
+@media (max-width: 399px) {
+  .card {
+    width: 70px;
+    height: 70px;
+
+    i {
+      font-size: 35px;
+    }
+
+    span {
+      font-size: 10px;
+    }
+  }
 }

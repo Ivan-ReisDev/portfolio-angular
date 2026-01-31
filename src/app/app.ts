@@ -4,8 +4,8 @@ import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
 import { NgxParticlesModule } from "@tsparticles/angular"; 
-import { MoveDirection, OutMode, Container, Engine, IOptions, RecursivePartial } from "@tsparticles/engine"; 
-import { loadSlim } from "@tsparticles/slim"; // Import loadSlim here
+import { Engine, IOptions, RecursivePartial } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim";
 
 import { Header } from './core/components/header/header';
 import { About } from './core/components/about/about';
@@ -61,7 +61,7 @@ export class App implements AfterViewInit {
         speed: 0.8,
         straight: false,
       },
-      number: { density: { enable: true, width: 800 }, value: 80 },
+      number: { density: { enable: true, width: 800 }, value: 50 }, // Reduced from 80 for better mobile performance
       opacity: { value: 0.5 },
       shape: { type: "circle" },
       size: { value: { min: 1, max: 3 } },
@@ -79,6 +79,9 @@ export class App implements AfterViewInit {
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
+
+  // Check if running in browser
+  protected readonly isBrowser = isPlatformBrowser(this.platformId);
 
   // Track if we're on the home page
   private readonly currentUrl = toSignal(
@@ -124,17 +127,19 @@ export class App implements AfterViewInit {
       }
     });
 
-    // Interceptar cliques nos links da navbar
-    document.addEventListener('click', (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
-        e.preventDefault();
-        const sectionId = target.getAttribute('href')?.substring(1);
-        if (sectionId) {
-          this.scrollToSection(sectionId);
+    // Interceptar cliques nos links da navbar (only in browser)
+    if (typeof document !== 'undefined') {
+      document.addEventListener('click', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+          e.preventDefault();
+          const sectionId = target.getAttribute('href')?.substring(1);
+          if (sectionId) {
+            this.scrollToSection(sectionId);
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   scrollToSection(sectionId: string) {

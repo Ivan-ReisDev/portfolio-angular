@@ -14,7 +14,10 @@
   align-items: center;
   justify-content: center;
   z-index: 10; // Higher than Education (4) for parallax stacking
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  padding: 80px 0; // Ensure vertical padding
   scroll-snap-align: start;
 }
 
@@ -28,6 +31,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 767px) {
+    padding: 40px 20px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 30px 16px;
+  }
 
   // Title Area - Match Projects Style
   app-title {
@@ -66,7 +77,7 @@
 // Emblematic Phrase
 .emblematic-phrase {
   flex: 1;
-  font-size: 48px;
+  font-size: clamp(28px, 6vw, 48px); // Responsive font-size that scales with viewport
   font-weight: 800;
   color: #fff;
   line-height: 1.1;
@@ -79,7 +90,7 @@
   @media (min-width: 900px) {
     text-align: left;
     max-width: 45%;
-    font-size: 64px;
+    font-size: clamp(40px, 5vw, 64px); // Scales on desktop range too
   }
 
   // Animation trigger
@@ -111,6 +122,11 @@
   // Animation initial state
   opacity: 0;
   transform: translateY(40px);
+
+  @media (max-width: 576px) {
+    padding: 25px 20px; // Reduced padding for mobile
+    gap: 16px;
+  }
   transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s; // Stagger delay
 
   // Animation trigger

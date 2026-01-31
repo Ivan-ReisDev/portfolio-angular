@@ -10,9 +10,11 @@
   
   // Floating properties
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: max(20px, env(safe-area-inset-top, 20px));
+  left: 0;
+  right: 0;
+  margin: 0 auto; // Center without transform
+  // transform: translateX(-50%); // Removed to prevent creating a containing block for fixed sidebar
   width: 90%;
   max-width: 1200px; // Limit width for "island" look
   height: 80px;
@@ -92,16 +94,95 @@
   max-width: 100%;
   width: 100%;
   height: 100%;
-  padding: 0 30px; // Internal padding for the floating container
+  padding: 0 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.body {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: flex-start; // Align logo to the left
-  gap: 20px; // Gap between logo and navbar
+// ===== RESPONSIVE DESIGN =====
+
+// Large tablets and small desktops (< 1200px)
+@media (max-width: 1199px) {
+  .header {
+    width: 95%;
+    height: 70px;
+
+    h1 {
+      font-size: 20px;
+      margin-right: 20px;
+    }
+
+    .btn-cv {
+      padding: 10px 20px;
+      font-size: 11px;
+    }
+  }
+
+  .main {
+    padding: 0 20px;
+  }
+}
+
+// Tablets (< 992px)
+@media (max-width: 991px) {
+  .header {
+    width: 95%;
+    height: 65px;
+    top: 15px;
+    border-radius: 16px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(6, 6, 8, 0.9);
+
+    h1 {
+      font-size: 20px;
+      margin-right: 0;
+    }
+
+    .btn-cv {
+      display: none; // Hidden on tablet/mobile, CV available in mobile nav menu
+    }
+  }
+
+  .main {
+    padding: 0 15px;
+  }
+}
+
+// Small tablets and large phones (< 768px)
+@media (max-width: 767px) {
+  .header {
+    width: 95%;
+    height: 60px;
+    top: 10px;
+    border-radius: 12px;
+
+    h1 {
+      font-size: 20px;
+      margin-right: 0;
+    }
+  }
+
+  .main {
+    padding: 0 12px;
+  }
+}
+
+// Mobile devices (< 576px)
+@media (max-width: 575px) {
+  .header {
+    width: 96%;
+    height: 55px;
+    top: 10px;
+
+    h1 {
+      font-size: 18px;
+      margin-right: 0;
+    }
+  }
+
+  .main {
+    padding: 0 10px;
+  }
 }
