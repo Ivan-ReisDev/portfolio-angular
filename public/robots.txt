@@ -1,0 +1,59 @@
+# Robots.txt para ivanreis.com.br
+# Diretrizes para crawlers brasileiros e internacionais
+
+User-agent: *
+Allow: /
+
+# Impedir acesso a áreas administrativas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /dist/
+Disallow: /*.json$
+
+# Permitir acesso a recursos estáticos
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
+
+# Sitemaps brasileiros
+Sitemap: https://ivanreis.com.br/sitemap.xml
+Sitemap: https://ivanreis.com.br/sitemap-images.xml
+
+# Crawler específico do Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Crawler específico do Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Crawler específico do Facebook
+User-agent: facebookexternalhit
+Allow: /
+
+# Crawler específico do Twitter
+User-agent: Twitterbot
+Allow: /
+
+# Crawler específico do LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# Bloquear crawlers maliciosos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Localização geográfica para SEO brasileiro
+# Prioridade para conteúdo brasileiro em português

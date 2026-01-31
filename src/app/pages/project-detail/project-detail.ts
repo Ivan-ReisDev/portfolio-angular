@@ -1,9 +1,11 @@
-import { Component, input, computed, inject, signal, HostListener, PLATFORM_ID } from '@angular/core';
+import { Component, input, computed, inject, signal, HostListener, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { ImageGallery } from '../../core/components/image-gallery/image-gallery';
 import { getTechIconClass } from '../../core/utils/tech-icons';
+import { SEOService } from '../../core/services/seo.service';
+import { Project } from '../../core/models/project.model';
 
 @Component({
   selector: 'app-project-detail',
@@ -11,11 +13,12 @@ import { getTechIconClass } from '../../core/utils/tech-icons';
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.scss'
 })
-export class ProjectDetail {
+export class ProjectDetail implements AfterViewInit {
   private readonly projectService = inject(ProjectService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly seoService = inject(SEOService);
 
   // Route param bound via withComponentInputBinding
   slug = input<string>('');
@@ -62,6 +65,14 @@ export class ProjectDetail {
     }
   }
 
+  // Implement SEO when project is loaded
+  ngAfterViewInit(): void {
+    const project = this.project();
+    if (project) {
+      this.seoService.setProjectSEO(project);
+    }
+  }
+
   goBack(): void {
     this.router.navigate(['/'], { fragment: 'projetos' });
   }
@@ -81,4 +92,21 @@ export class ProjectDetail {
   }
 
   getTechIconClass = getTechIconClass;
+
+  generateWhatsAppShareLink(): string {
+    const project = this.project();
+    if (!project) return '';
+    
+    const text = this.seoService.generateWhatsAppShareText(project);
+    const url = this.seoService.generateProjectShareUrl(project.id);
+    return `https://wa.me/?text=${encodeURIComponent(text)}`;
+  }
+
+  generateLinkedInShareLink(): string {
+    const project = this.project();
+    if (!project) return '';
+    
+    const url = this.seoService.generateProjectShareUrl(project.id);
+    return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  }
 }

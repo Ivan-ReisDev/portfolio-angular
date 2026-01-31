@@ -1,145 +1,274 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import { Project } from '../models/project.model';
 
 export interface SEOData {
   title: string;
   description: string;
-  keywords?: string;
-  author?: string;
+  keywords?: string[];
   image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
   url?: string;
-  type?: string;
-  locale?: string;
   siteName?: string;
+  locale?: string;
+}
+
+export interface PersonSchema {
+  '@context': string;
+  '@type': string;
+  name: string;
+  alternateName?: string;
+  jobTitle: string;
+  url: string;
+  image?: string;
+  description: string;
+  sameAs?: string[];
+  knowsAbout?: string[];
+  nationality?: string;
+  knowsLanguage?: string;
+  alumniOf?: {
+    '@type': string;
+    name: string;
+  };
+  address?: {
+    '@type': string;
+    addressCountry: string;
+    addressRegion: string;
+    addressLocality: string;
+  };
+}
+
+export interface ProjectSchema {
+  '@context': string;
+  '@type': string;
+  name: string;
+  description: string;
+  creator: {
+    '@type': string;
+    name: string;
+  };
+  programmingLanguage?: string[];
+  applicationCategory?: string;
+  dateCreated?: string;
+  url?: string;
+  image?: string | string[];
+  offers?: {
+    '@type': string;
+    url?: string;
+    availability?: string;
+  };
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class SEOService {
-  private readonly defaultData = {
-    author: 'Ivan Reis',
-    siteName: 'Ivan Reis - Portfolio',
-    locale: 'pt_BR',
-    type: 'website',
-    url: 'https://ivanreis.com.br'
-  };
+  private readonly baseUrl = 'https://ivanreis.com.br';
+  private readonly isBrowser: boolean;
+  private readonly siteName = 'Ivan Reis - Portfolio';
 
   constructor(
     private title: Title,
     private meta: Meta,
-    private router: Router
-  ) {}
-
-  updateSEO(data: SEOData): void {
-    const fullData = { ...this.defaultData, ...data };
-    const fullUrl = data.url ? `${this.defaultData.url}${data.url}` : this.defaultData.url;
-
-    this.title.setTitle(fullData.title);
-
-    this.meta.updateTag({ name: 'description', content: fullData.description });
-    this.meta.updateTag({ name: 'author', content: fullData.author });
-    this.meta.updateTag({ name: 'keywords', content: fullData.keywords || '' });
-    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-    this.meta.updateTag({ name: 'googlebot', content: 'index, follow' });
-    this.meta.updateTag({ name: 'language', content: 'pt-BR' });
-    this.meta.updateTag({ name: 'geo.region', content: 'BR' });
-    this.meta.updateTag({ name: 'geo.placename', content: 'Brazil' });
-    this.meta.updateTag({ name: 'ICBM', content: '-14.2350,-51.9253' });
-
-    this.meta.updateTag({ property: 'og:title', content: fullData.title });
-    this.meta.updateTag({ property: 'og:description', content: fullData.description });
-    this.meta.updateTag({ property: 'og:image', content: fullData.image || `${this.defaultData.url}/images/og-default.jpg` });
-    this.meta.updateTag({ property: 'og:url', content: fullUrl });
-    this.meta.updateTag({ property: 'og:type', content: fullData.type });
-    this.meta.updateTag({ property: 'og:locale', content: 'pt_BR' });
-    this.meta.updateTag({ property: 'og:site_name', content: fullData.siteName });
-
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: fullData.title });
-    this.meta.updateTag({ name: 'twitter:description', content: fullData.description });
-    this.meta.updateTag({ name: 'twitter:image', content: fullData.image || `${this.defaultData.url}/images/og-default.jpg` });
-    this.meta.updateTag({ name: 'twitter:creator', content: '@ivanreis' });
-    this.meta.updateTag({ name: 'twitter:site', content: '@ivanreis' });
-
-    this.meta.updateTag({ itemprop: 'name', content: fullData.title });
-    this.meta.updateTag({ itemprop: 'description', content: fullData.description });
-    this.meta.updateTag({ itemprop: 'image', content: fullData.image || `${this.defaultData.url}/images/og-default.jpg` });
-
-    const canonicalUrl = document.querySelector('link[rel="canonical"]');
-    if (canonicalUrl) {
-      canonicalUrl.setAttribute('href', fullUrl);
-    } else {
-      const link: HTMLLinkElement = document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      link.setAttribute('href', fullUrl);
-      document.head.appendChild(link);
-    }
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  setHomeSEO(): void {
-    this.updateSEO({
-      title: 'Ivan Reis - Desenvolvedor Full-Stack | Portfolio',
-      description: 'Desenvolvedor Full-Stack especializado em Angular, Node.js, TypeScript. Criação de aplicações web modernas, APIs RESTful e plataformas escaláveis. Conheça meus projetos!',
-      keywords: 'desenvolvedor full-stack, angular, nodejs, typescript, portfolio, ivan reis, programador, desenvolvedor web, brasil',
-      image: '/images/og-home.jpg',
-      type: 'website'
-    });
+  setBasicSEO(seoData: SEOData): void {
+    if (!this.isBrowser) return;
+
+    const fullTitle = `${seoData.title} | ${this.siteName}`;
+    
+    this.title.setTitle(fullTitle);
+    
+    this.meta.updateTag({ name: 'description', content: seoData.description });
+    
+    if (seoData.keywords && seoData.keywords.length > 0) {
+      this.meta.updateTag({ name: 'keywords', content: seoData.keywords.join(', ') });
+    }
+    
+    this.meta.updateTag({ name: 'author', content: 'Ivan Reis' });
+    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
+    this.meta.updateTag({ name: 'language', content: seoData.locale || 'pt-BR' });
+    
+    this.updateOpenGraph(seoData);
+    this.updateTwitterCards(seoData);
+    this.setCanonical(seoData.url || `${this.baseUrl}${this.router.url}`);
+  }
+
+  setPersonSEO(): void {
+    if (!this.isBrowser) return;
+
+    const personSchema: PersonSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Ivan Reis',
+      alternateName: 'Ivan Reis Desenvolvedor',
+      jobTitle: 'Desenvolvedor Full Stack',
+      url: this.baseUrl,
+      image: `${this.baseUrl}/images/ivan-reis-profile.jpg`,
+      description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Focado em desenvolver soluções web modernas e escaláveis para empresas no Brasil.',
+      sameAs: [
+        'https://github.com/ivanreis',
+        'https://linkedin.com/in/ivanreis',
+        'https://instagram.com/ivanreis'
+      ],
+      knowsAbout: [
+        'Desenvolvimento Web',
+        'Angular Framework',
+        'TypeScript',
+        'Node.js',
+        'Aplicações E-commerce'
+      ],
+      nationality: 'Brasileiro',
+      knowsLanguage: 'pt-BR',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'BR',
+        addressRegion: 'SP',
+        addressLocality: 'São Paulo'
+      }
+    };
+
+    this.addStructuredData(personSchema);
   }
 
   setProjectSEO(project: Project): void {
-    const title = `${project.title} - Ivan Reis | Portfolio`;
-    const description = project.description.length > 160 
-      ? project.description.substring(0, 157) + '...' 
-      : project.description;
+    if (!this.isBrowser) return;
+
+    const title = `${project.title} | Projeto Desenvolvido por Ivan Reis`;
+    const description = `${project.description} Desenvolvedor brasileiro especializado em ${project.technologies.slice(0, 3).join(', ')}.`;
     
-    this.updateSEO({
-      title,
+    this.setBasicSEO({
+      title: project.title,
       description,
-      keywords: `${project.technologies.join(', ')}, ${project.title}, ivan reis, portfolio, projeto, desenvolvimento web`,
-      image: project.images[0] || '/images/og-default.jpg',
-      url: `/projeto/${project.id}`,
-      type: 'article'
+      keywords: project.technologies,
+      image: project.images?.[0] ? `${this.baseUrl}${project.images[0]}` : undefined,
+      imageAlt: `${project.title} - Print do projeto`,
+      type: 'article',
+      url: `${this.baseUrl}/projetos/${project.id}`,
+      locale: 'pt_BR'
     });
+
+    const projectSchema: ProjectSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: project.title,
+      description: project.description,
+      creator: {
+        '@type': 'Person',
+        name: 'Ivan Reis'
+      },
+      programmingLanguage: project.technologies,
+      applicationCategory: 'Web Application',
+      dateCreated: new Date().toISOString(),
+      url: `${this.baseUrl}/projetos/${project.id}`,
+      image: project.images?.[0] ? `${this.baseUrl}${project.images[0]}` : undefined,
+      offers: project.demoUrl ? {
+        '@type': 'Offer',
+        url: project.demoUrl,
+        availability: 'https://schema.org/InStock'
+      } : undefined
+    };
+
+    this.addStructuredData(projectSchema);
   }
 
   setAboutSEO(): void {
-    this.updateSEO({
-      title: 'Sobre Ivan Reis - Desenvolvedor Full-Stack | Curriculo',
-      description: 'Conheça mais sobre Ivan Reis, desenvolvedor Full-Stack com experiência em Angular, Node.js, TypeScript e tecnologias modernas. Formação, habilidades e trajetória profissional.',
-      keywords: 'sobre ivan reis, curriculo, desenvolvedor full-stack, habilidades, experiencia profissional, angular, nodejs',
-      image: '/images/og-about.jpg',
-      url: '/sobre',
-      type: 'profile'
-    });
+    if (!this.isBrowser) return;
+
+    const seoData: SEOData = {
+      title: 'Sobre Ivan Reis - Desenvolvedor Full Stack',
+      description: 'Conheça Ivan Reis, desenvolvedor full stack brasileiro com experiência em Angular, TypeScript, Node.js e desenvolvimento de aplicações web modernas para empresas.',
+      keywords: ['sobre ivanreis', 'desenvolvedor full stack', 'curriculo programador', 'experiência angular', 'typescript developer'],
+      type: 'website',
+      url: `${this.baseUrl}/sobre`,
+      locale: 'pt_BR'
+    };
+
+    this.setBasicSEO(seoData);
+    this.setPersonSEO();
   }
 
   setContactSEO(): void {
-    this.updateSEO({
-      title: 'Contato - Ivan Reis | Desenvolvedor Full-Stack',
-      description: 'Entre em contato com Ivan Reis, desenvolvedor Full-Stack. Disponível para projetos freelancers, consultoria e oportunidades profissionais.',
-      keywords: 'contato ivan reis, freelancer, desenvolvedor, oportunidades, projeto, consultoria',
-      image: '/images/og-contact.jpg',
-      url: '/contato',
-      type: 'website'
+    if (!this.isBrowser) return;
+
+    const seoData: SEOData = {
+      title: 'Contato - Ivan Reis | Desenvolvedor Full Stack',
+      description: 'Entre em contato com Ivan Reis, desenvolvedor full stack brasileiro. Disponível para projetos de desenvolvimento web, e-commerce e aplicações customizadas.',
+      keywords: ['contato ivanreis', 'freelancer ti', 'orçamento desenvolvimento', 'desenvolvedor são paulo', 'web developer brasil'],
+      type: 'website',
+      url: `${this.baseUrl}/contato`,
+      locale: 'pt_BR'
+    };
+
+    this.setBasicSEO(seoData);
+  }
+
+  private updateOpenGraph(seoData: SEOData): void {
+    const ogData = {
+      'og:title': seoData.title,
+      'og:description': seoData.description,
+      'og:type': seoData.type || 'website',
+      'og:locale': seoData.locale || 'pt_BR',
+      'og:site_name': this.siteName,
+      'og:url': seoData.url || `${this.baseUrl}${this.router.url}`,
+      'og:image': seoData.image,
+      'og:image:alt': seoData.imageAlt,
+      'og:image:width': '1200',
+      'og:image:height': '630'
+    };
+
+    Object.entries(ogData).forEach(([property, content]) => {
+      if (content) {
+        this.meta.updateTag({ property, content: String(content) });
+      }
     });
   }
 
-  addStructuredData(jsonLd: object): void {
-    const script = document.createElement('script') as HTMLScriptElement;
+  private updateTwitterCards(seoData: SEOData): void {
+    const twitterData = {
+      'twitter:card': 'summary_large_image',
+      'twitter:site': '@ivanreis',
+      'twitter:creator': '@ivanreis',
+      'twitter:title': seoData.title,
+      'twitter:description': seoData.description,
+      'twitter:image': seoData.image
+    };
+
+    Object.entries(twitterData).forEach(([name, content]) => {
+      if (content) {
+        this.meta.updateTag({ name, content: String(content) });
+      }
+    });
+  }
+
+  private setCanonical(url: string): void {
+    this.meta.updateTag({ rel: 'canonical', href: url });
+  }
+
+  private addStructuredData(schema: PersonSchema | ProjectSchema): void {
+    const existingScript = document.querySelector('script[type="application/ld+json"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(jsonLd, null, 2);
+    script.textContent = JSON.stringify(schema);
     document.head.appendChild(script);
   }
 
-  removeStructuredData(): void {
-    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-    scripts.forEach(script => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    });
+  generateProjectShareUrl(projectId: string): string {
+    return `https://ivanreis.com.br/projetos/${projectId}`;
+  }
+
+  generateWhatsAppShareText(project: Project): string {
+    return `🚀 ${project.title} - Confira este projeto desenvolvido por Ivan Reis: ${this.generateProjectShareUrl(project.id)}`;
   }
 }

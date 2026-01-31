@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Provei.ai Images -->
+  <url>
+    <loc>https://ivanreis.com.br/projetos/provei-ai</loc>
+    <lastmod>2025-01-31T12:00:00-03:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ivanreis.com.br/images/provei-ai/provei-ai.png</image:loc>
+      <image:title>Provei.ai - Dashboard do Sistema</image:title>
+      <image:caption>Provei.ai - Plataforma de provador virtual com IA</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ivanreis.com.br/images/provei-ai/dashboard.png</image:loc>
+      <image:title>Provei.ai - Interface Principal</image:title>
+      <image:caption>Provei.ai - Dashboard administrativo do sistema de provador virtual</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ivanreis.com.br/images/provei-ai/furniture.png</image:loc>
+      <image:title>Provei.ai - Exemplo de Uso</image:title>
+      <image:caption>Provei.ai - Cliente visualizando móveis com provador virtual</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Construtiva Images -->
+  <url>
+    <loc>https://ivanreis.com.br/projetos/construtiva-landing-page</loc>
+    <lastmod>2025-01-31T12:00:00-03:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ivanreis.com.br/images/construtiva/construtiva.png</image:loc>
+      <image:title>Construtiva Projetos - Landing Page Completa</image:title>
+      <image:caption>Landing page profissional para empresa de construção brasileira</image:caption>
+    </image:image>
+  </url>
+</urlset>

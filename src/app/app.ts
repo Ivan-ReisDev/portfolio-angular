@@ -12,6 +12,7 @@ import { Footer } from './core/components/footer/footer';
 import { Projects } from "./core/components/projects/projects";
 import { Education } from "./core/components/education/education";
 import { Contact } from "./core/components/contact/contact";
+import { SEOService } from './core/services/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { Contact } from "./core/components/contact/contact";
 export class App implements AfterViewInit {
   protected readonly title = signal('portfolio');
   activeSection = signal('inicio');
+  private readonly seoService = inject(SEOService);
 
   // Init function for particles
   async particlesInit(engine: Engine): Promise<void> {
@@ -90,6 +92,20 @@ export class App implements AfterViewInit {
   ngAfterViewInit(): void {
     // Skip browser-only initialization during SSR
     if (!isPlatformBrowser(this.platformId)) return;
+
+    // Set SEO for home page
+    if (this.isHomePage()) {
+      this.seoService.setBasicSEO({
+        title: 'Ivan Reis - Desenvolvedor Full Stack',
+        description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Portfolio com projetos inovadores como Provei.ai, sistemas para e-commerce e aplicações web modernas.',
+        keywords: ['desenvolvedor full stack', 'programador angular', 'web developer brasil', 'freelancer ti', 'typescript', 'nestjs'],
+        type: 'website',
+        url: 'https://ivanreis.com.br',
+        locale: 'pt_BR'
+      });
+      
+      this.seoService.setPersonSEO();
+    }
 
     // Only setup scroll handling when on home page
     if (!this.scrollContainer?.nativeElement) return;
