@@ -9,7 +9,6 @@
     </header>
 
     <div class="detail-content">
-      <!-- Left column: Gallery -->
       <section class="gallery-column">
         <app-image-gallery
           [images]="proj.images"
@@ -25,7 +24,6 @@
         }
       </section>
 
-      <!-- Right column: Info -->
       <section class="info-column">
         <div class="info-card">
           <div class="description">
@@ -72,7 +70,6 @@
       </section>
     </div>
 
-    <!-- Prev/Next navigation -->
     <nav class="project-nav">
       @if (prevProject(); as prev) {
         <a [routerLink]="['/projeto', prev.id]" class="nav-link prev">
@@ -107,7 +104,6 @@
   </div>
 }
 
-<!-- Demo modal (for projects with iframe) -->
 @if (demoOpen() && project()?.iframe) {
   <div class="demo-modal" (click)="closeDemo()">
     <div class="demo-container" (click)="$event.stopPropagation()">

@@ -27,12 +27,9 @@ export class About implements AfterViewInit, OnDestroy {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // Anima os cards (da direita)
               if (cardsContainer) cardsContainer.classList.add('active');
-              // Anima o texto (da esquerda)
               if (containt) containt.classList.add('active');
             } else {
-              // Remove animações ao sair
               if (cardsContainer) cardsContainer.classList.remove('active');
               if (containt) containt.classList.remove('active');
             }

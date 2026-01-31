@@ -5,7 +5,6 @@ export const serverRoutes: ServerRoute[] = [
     path: 'projeto/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      // Read project IDs directly from filesystem at build time
       const fs = await import('node:fs/promises');
       const path = await import('node:path');
       const filePath = path.join(process.cwd(), 'public', 'data', 'projects.json');

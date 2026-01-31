@@ -3,7 +3,7 @@
 @keyframes opacit {
   0% {
     opacity: 0;
-    transform: translateX(60px); // Use transform for better GPU performance
+    transform: translateX(60px); 
   }
   100% {
     opacity: 1;
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  
+
   > div {
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@
     flex-wrap: wrap;
     gap: 40px; // More spacing between icons
     max-width: 1000px; // Limit width to keep them clustered
-    
+
     @media (max-width: 576px) {
       gap: 20px; // Reduce gap on mobile
     }

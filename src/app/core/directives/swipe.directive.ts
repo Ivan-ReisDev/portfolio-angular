@@ -56,10 +56,6 @@ export class SwipeDirective implements OnInit, OnDestroy {
     const deltaY = e.clientY - this.startY;
     const duration = Date.now() - this.startTime;
 
-    // Swipe detection criteria:
-    // - Fast enough (< 500ms)
-    // - Long enough horizontal movement (> 50px)
-    // - More horizontal than vertical (2:1 ratio)
     const minSwipeDistance = 50;
     const maxSwipeTime = 500;
 

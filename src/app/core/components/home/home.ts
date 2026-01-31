@@ -23,29 +23,40 @@ export class Home implements AfterViewInit, OnDestroy {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // Adicionar classe reset primeiro para voltar ao estado inicial
               entry.target.classList.add('reset');
               entry.target.classList.remove('active');
 
-              // Pequeno delay para permitir que o CSS processe o reset
               setTimeout(() => {
                 entry.target.classList.remove('reset');
                 entry.target.classList.add('active');
               }, 50);
             } else {
-              // Quando sair do viewport, remover as classes
               entry.target.classList.remove('active');
               entry.target.classList.remove('reset');
             }
           });
         },
         {
-          threshold: 0.3, // Ativa quando 30% da seção está visível
+          threshold: 0.3
         }
       );
 
       if (section) {
         this.observer.observe(section);
+      }
+    }
+  }
+
+  scrollToNextSection() {
+    if (isPlatformBrowser(this.platformId)) {
+      const currentSection = this.elementRef.nativeElement;
+      const nextSection = currentSection.nextElementSibling;
+      
+      if (nextSection) {
+        nextSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
       }
     }
   }

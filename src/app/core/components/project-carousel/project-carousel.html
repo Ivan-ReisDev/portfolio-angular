@@ -6,11 +6,8 @@
     </div>
   } @else {
 
-    <!-- Carousel mode (desktop/tablet) -->
     @if (isCarouselMode()) {
       <div class="carousel-container" appSwipe (swipeLeft)="onSwipeLeft()" (swipeRight)="onSwipeRight()">
-
-        <!-- Left arrow -->
         <button
           class="nav-arrow left"
           (click)="prev()"
@@ -19,7 +16,6 @@
           <i class="fa-solid fa-chevron-left"></i>
         </button>
 
-        <!-- Carousel track -->
         <div class="carousel-track">
           @for (project of projects(); track project.id; let i = $index) {
             @if (isCardVisible(i)) {
@@ -32,8 +28,6 @@
             }
           }
         </div>
-
-        <!-- Right arrow -->
         <button
           class="nav-arrow right"
           (click)="next()"
@@ -43,7 +37,6 @@
         </button>
       </div>
 
-      <!-- Dots indicator -->
       <div class="dots-container">
         @for (project of projects(); track project.id; let i = $index) {
           <button
@@ -55,8 +48,6 @@
         }
       </div>
     }
-
-    <!-- Mobile stacked mode -->
     @if (!isCarouselMode()) {
       <div class="cards-stack">
         @for (project of projects(); track project.id) {

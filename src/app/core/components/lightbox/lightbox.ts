@@ -69,7 +69,6 @@ export class Lightbox implements OnInit, OnDestroy {
   }
 
   onBackdropClick(event: MouseEvent): void {
-    // Only close if clicking directly on backdrop, not on image or controls
     if ((event.target as HTMLElement).classList.contains('lightbox-backdrop')) {
       this.close();
     }

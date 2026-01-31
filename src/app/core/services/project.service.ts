@@ -28,7 +28,6 @@ export class ProjectService {
   }
 
   private loadProjects(): void {
-    // Check TransferState first (client rehydration)
     if (this.transferState.hasKey(PROJECTS_KEY)) {
       const cached = this.transferState.get(PROJECTS_KEY, []);
       this._projects.set(cached);
@@ -37,14 +36,12 @@ export class ProjectService {
       return;
     }
 
-    // Fetch from JSON
     this.http.get<{ projects: Project[] }>('/data/projects.json')
       .pipe(
         tap(response => {
           this._projects.set(response.projects);
           this._loading.set(false);
 
-          // Store in TransferState for client hydration (only on server)
           if (isPlatformServer(this.platformId)) {
             this.transferState.set(PROJECTS_KEY, response.projects);
           }

@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    children: []  // Home is rendered directly in App component
+    children: []
   },
   {
     path: 'projeto/:slug',

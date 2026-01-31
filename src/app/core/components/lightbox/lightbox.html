@@ -4,16 +4,12 @@
   appSwipe
   (swipeLeft)="next()"
   (swipeRight)="prev()">
-
-  <!-- Close button -->
   <button
     class="close-btn"
     (click)="close()"
     aria-label="Fechar lightbox">
     <i class="fas fa-times"></i>
   </button>
-
-  <!-- Navigation: Previous -->
   @if (hasPrev()) {
     <button
       class="nav-btn nav-prev"
@@ -22,15 +18,11 @@
       <i class="fas fa-chevron-left"></i>
     </button>
   }
-
-  <!-- Main image -->
   <img
     class="lightbox-image"
     [src]="currentImage()"
     [alt]="alt()"
     (click)="$event.stopPropagation()" />
-
-  <!-- Navigation: Next -->
   @if (hasNext()) {
     <button
       class="nav-btn nav-next"
@@ -39,7 +31,5 @@
       <i class="fas fa-chevron-right"></i>
     </button>
   }
-
-  <!-- Counter -->
   <span class="lightbox-counter">{{ counter() }}</span>
 </div>

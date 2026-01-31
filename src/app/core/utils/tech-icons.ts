@@ -1,4 +1,3 @@
-// Mapeamento de tecnologias para classes de ícone
 const TECH_ICON_MAP: Record<string, string> = {
   'CSS': 'devicon-css3-plain',
   'HTML': 'devicon-html5-plain',
@@ -45,7 +44,6 @@ export function getTechIconClass(tech: string): string {
   if (TECH_ICON_MAP[tech]) {
     return TECH_ICON_MAP[tech];
   }
-  // Fallback: tenta gerar automaticamente
   const normalized = tech.toLowerCase().replace(/\./g, '').replace(/\s/g, '');
   return `devicon-${normalized}-plain`;
 }

@@ -26,7 +26,6 @@ export class Navbar {
   private toggleBodyScroll() {
     if (!isPlatformBrowser(this.platformId)) return;
     document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
-    // Also lock the scroll container
     const scrollContainer = document.querySelector('.scroll-container') as HTMLElement;
     if (scrollContainer) {
       scrollContainer.style.overflow = this.isMenuOpen ? 'hidden' : '';

@@ -1,5 +1,4 @@
 <div class="image-gallery">
-  <!-- Main image (clickable to open lightbox) -->
   <button
     class="main-image-container"
     (click)="openLightbox()"
@@ -13,8 +12,6 @@
       <i class="fas fa-search-plus"></i>
     </div>
   </button>
-
-  <!-- Thumbnails (shown if more than 1 image) -->
   @if (hasMultipleImages()) {
     <div class="thumbnails-container">
       @for (img of images(); track img; let i = $index) {
@@ -30,8 +27,6 @@
     </div>
   }
 </div>
-
-<!-- Lightbox (conditionally rendered) -->
 @if (lightboxOpen()) {
   <app-lightbox
     [images]="images()"

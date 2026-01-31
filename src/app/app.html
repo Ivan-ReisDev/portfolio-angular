@@ -1,7 +1,8 @@
+@if (isBrowser) {
+  <ngx-particles [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit" />
+}
+
 @if (isHomePage()) {
-  @if (isBrowser) {
-    <ngx-particles [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit" />
-  }
   <app-header [activeSection]="activeSection()" />
 
   <div class="scroll-container" #scrollContainer tabindex="0">

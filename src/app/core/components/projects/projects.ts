@@ -20,7 +20,6 @@ import { Title } from '../typography/title/title';
 export class Projects implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
 
-  // Signal to track when section is visible (for entry animation)
   readonly isVisible = signal(false);
 
   constructor(

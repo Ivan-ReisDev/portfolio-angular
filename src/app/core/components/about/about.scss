@@ -1,6 +1,5 @@
 @use 'app.scss' as *;
 
-// Animação da esquerda para direita (texto)
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
@@ -29,10 +28,10 @@
 .content {
   width: 100%;
   max-width: 1200px;
-  height: auto; // Allow content to dictate height
+  height: auto;
   min-height: 80vh;
   display: flex;
-  flex-direction: column; // Stack vertically
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 60px;
@@ -48,14 +47,14 @@
   & main {
     display: flex;
     flex-direction: column;
-    align-items: center; // Center text
+    align-items: center;
     justify-content: center;
     opacity: 0;
-    transform: translateY(30px); // Slide up animation
+    transform: translateY(30px);
     width: 100%;
     max-width: 900px;
     text-align: center;
-    
+
     app-title {
       --title-font-size: 56px;
       --title-color: #fff;
@@ -68,12 +67,9 @@
       --title-font-size-md: 40px;
       --title-font-size-sm: 32px;
     }
-    
-    // REMOVED: Heavy glass box mixin
-    // @include section-content-glass; 
+
   }
 
-  // Quando a seção estiver ativa, anima o main
   &.active main {
     animation: fadeInUp 1s ease-out forwards;
   }
@@ -98,7 +94,6 @@
   }
 }
 
-// Reuse generic fade in up animation or define it
 @keyframes fadeInUp {
   from {
     opacity: 0;

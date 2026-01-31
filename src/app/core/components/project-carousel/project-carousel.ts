@@ -24,14 +24,10 @@ export class ProjectCarousel {
   private readonly projectService = inject(ProjectService);
   private readonly breakpointObserver = inject(BreakpointObserver);
 
-  // Projects from service
   readonly projects = this.projectService.projects;
   readonly loading = this.projectService.loading;
 
-  // Carousel state
   readonly currentIndex = signal(0);
-
-  // Responsive viewport mode
   readonly viewportMode = toSignal(
     this.breakpointObserver.observe([
       '(max-width: 767px)',
@@ -47,26 +43,18 @@ export class ProjectCarousel {
     { initialValue: 'desktop' as ViewportMode }
   );
 
-  // Navigation state - always enabled for infinite loop
   readonly canGoNext = computed(() => this.projects().length > 1);
   readonly canGoPrev = computed(() => this.projects().length > 1);
-
-  // Whether to show carousel mode (desktop/tablet) or stacked mode (mobile)
   readonly isCarouselMode = computed(() =>
     this.viewportMode() !== 'mobile'
   );
-
-  // Get position class for each card index relative to current (with infinite loop)
   getCardPosition(index: number): string {
     const current = this.currentIndex();
     const total = this.projects().length;
 
     if (total === 0) return 'far-left';
 
-    // Calculate the shortest distance considering loop
     let diff = index - current;
-
-    // Normalize for circular navigation
     if (diff > total / 2) {
       diff -= total;
     } else if (diff < -total / 2) {
@@ -80,25 +68,19 @@ export class ProjectCarousel {
     return 'far-right';
   }
 
-  // Check if card should be visible in carousel mode (with infinite loop)
   isCardVisible(index: number): boolean {
     const current = this.currentIndex();
     const total = this.projects().length;
 
-    if (total <= 3) return true; // Show all if 3 or fewer
+    if (total <= 3) return true;
 
-    // Calculate circular distance
     let diff = Math.abs(index - current);
 
-    // Consider the wrap-around distance
     const wrapDiff = total - diff;
     const minDiff = Math.min(diff, wrapDiff);
-
-    // Show center + 1 on each side = 3 cards max
     return minDiff <= 1;
   }
 
-  // Navigation methods (infinite loop)
   next(): void {
     if (this.canGoNext()) {
       const total = this.projects().length;
@@ -119,7 +101,6 @@ export class ProjectCarousel {
     }
   }
 
-  // Swipe handlers
   onSwipeLeft(): void {
     this.next();
   }

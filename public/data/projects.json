@@ -187,24 +187,60 @@
       ]
     },
     {
-      "id": "portfolio-site",
-      "title": "Portfolio Pessoal",
-      "description": "Site portfolio responsivo com animacoes suaves, modo escuro e formulario de contato integrado.",
-      "fullDescription": "Portfolio pessoal desenvolvido para showcasing de projetos e habilidades profissionais. Apresenta design moderno com animacoes CSS suaves, tema claro/escuro com persistencia de preferencia, carrossel interativo de projetos, secao de habilidades com visualizacao de nivel de proficiencia e formulario de contato integrado com validacao. Otimizado para SEO e performance com Lighthouse score 95+.",
-      "technologies": ["Angular", "TypeScript", "SCSS", "Angular SSR", "Vercel"],
-      "images": [
-        "/images/projects/portfolio-site/thumb.png",
-        "/images/projects/portfolio-site/projects.png",
-        "/images/projects/portfolio-site/contact.png"
+      "id": "voz-rubro-negra",
+      "title": "Voz Rubro-Negra – Portal Automatizado do Flamengo",
+      "description": "Portal de notícias automatizado com IA que escaneia a internet de hora em hora, gerando e publicando matérias sobre o Flamengo de forma autônoma.",
+      "fullDescription": "O Voz Rubro-Negra é um portal de notícias personalizado e totalmente automatizado, dedicado ao Clube de Regatas do Flamengo. Assim como outros portais da mesma linha, o sistema conta com um cron job executado de 1 em 1 hora, acionando uma inteligência artificial que varre a internet em busca de novas notícias sobre o clube. Ao identificar novidades relevantes, a IA gera automaticamente uma matéria completa e publica no portal sem qualquer intervenção humana. O site oferece cobertura completa do Flamengo, incluindo agenda de jogos com informações de campeonatos como Série A e Copa Libertadores, seção de odds, newsletter e um blog com todo o histórico de publicações. O projeto foi desenvolvido com foco em performance, automação inteligente e experiência do usuário, garantindo que torcedores rubro-negros tenham acesso a conteúdo atualizado em tempo quase real.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "NestJS",
+        "Tailwind CSS",
+        "OpenAI API",
+        "Cron Job",
+        "Vercel"
       ],
-      "demoUrl": "https://portfolio.dev",
-      "githubUrl": "https://github.com/deeivan/portfolio",
+      "images": ["/images/flamengo/inicio.png", "/images/flamengo/inicio-news.png", "/images/flamengo/portal.png", "/images/flamengo/noticia.png"],
+      "demoUrl": "https://www.vozrubronegra.com.br",
+      "githubUrl": null,
       "features": [
-        "Design responsivo e moderno",
-        "Tema claro/escuro com persistencia",
-        "Carrossel interativo de projetos",
-        "Formulario de contato com validacao",
-        "Otimizado para SEO (Lighthouse 95+)"
+        "Cron job de 1h em 1h com IA escaneando a internet por novas notícias",
+        "Geração e publicação automática de matérias sem intervenção humana",
+        "Agenda de jogos com datas, horários, escudos e informações de campeonatos",
+        "Seção de odds para acompanhamento de probabilidades esportivas",
+        "Newsletter para recebimento de notícias e análises por e-mail",
+        "Interface responsiva com tema escuro nas cores do Flamengo"
+      ]
+    },
+    {
+      "id": "blog-botafogo",
+      "title": "Coração Glorioso – Portal Automatizado do Botafogo",
+      "description": "Portal de notícias automatizado com IA que escaneia a internet de hora em hora, gerando e publicando matérias sobre o Botafogo de forma autônoma.",
+      "fullDescription": "O Coração Glorioso é um portal de notícias personalizado e totalmente automatizado, dedicado ao Botafogo de Futebol e Regatas. O sistema conta com um cron job que executa de 1 em 1 hora, acionando uma inteligência artificial que varre a internet em busca de novas notícias sobre o clube. Quando identifica novidades relevantes, a IA gera automaticamente uma matéria completa e publica no portal sem qualquer intervenção humana. Além das notícias, o site oferece agenda de jogos, seção de odds, newsletter e um blog com todo o histórico de publicações. O projeto foi desenvolvido com foco em performance, automação inteligente e experiência do usuário, garantindo que torcedores tenham acesso a conteúdo atualizado em tempo quase real.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "NestJS",
+        "Tailwind CSS",
+        "OpenAI API",
+        "Cron Job",
+        "Vercel"
+      ],
+      "images": [
+        "/images/botafogo/inicio.png",
+        "/images/botafogo/portal.png",
+        "/images/botafogo/noticias.png",
+        "/images/botafogo/sobre.png"
+      ],
+      "demoUrl": "https://blog-botafogo.vercel.app",
+      "githubUrl": null,
+      "features": [
+        "Cron job de 1h em 1h com IA escaneando a internet por novas notícias",
+        "Geração e publicação automática de matérias sem intervenção humana",
+        "Agenda de jogos com datas, horários e escudos dos times",
+        "Seção de odds para acompanhamento de probabilidades esportivas",
+        "Newsletter para recebimento de notícias por e-mail",
+        "Interface responsiva e otimizada para performance"
       ]
     }
   ]

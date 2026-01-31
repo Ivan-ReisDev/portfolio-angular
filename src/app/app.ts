@@ -1,8 +1,6 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, computed } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map, startWith } from 'rxjs';
+import { Router, RouterOutlet } from '@angular/router';
 import { NgxParticlesModule } from "@tsparticles/angular"; 
 import { Engine, IOptions, RecursivePartial } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
@@ -83,20 +81,9 @@ export class App implements AfterViewInit {
   // Check if running in browser
   protected readonly isBrowser = isPlatformBrowser(this.platformId);
 
-  // Track if we're on the home page
-  private readonly currentUrl = toSignal(
-    this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map(event => event.urlAfterRedirects),
-      startWith(this.router.url)
-    ),
-    { initialValue: '/' }
-  );
-
-  isHomePage = computed(() => {
-    const url = this.currentUrl();
-    return url === '/' || url === '' || url.startsWith('/#');
-  });
+  isHomePage() {
+    return this.router.url === '/' || this.router.url === '' || this.router.url.startsWith('/#');
+  }
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
@@ -107,19 +94,14 @@ export class App implements AfterViewInit {
     // Only setup scroll handling when on home page
     if (!this.scrollContainer?.nativeElement) return;
 
-    // Adicionar listener de scroll
     this.scrollContainer.nativeElement.addEventListener('scroll', () => {
       this.onScroll();
     });
 
-    // Detectar seção inicial após um pequeno delay
     setTimeout(() => {
       this.onScroll();
-      // Dar foco ao container para permitir navegação por teclado
       this.scrollContainer.nativeElement.focus();
     }, 100);
-
-    // Navegação por teclado
     this.scrollContainer.nativeElement.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
@@ -127,7 +109,6 @@ export class App implements AfterViewInit {
       }
     });
 
-    // Interceptar cliques nos links da navbar (only in browser)
     if (typeof document !== 'undefined') {
       document.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
@@ -177,12 +158,10 @@ export class App implements AfterViewInit {
 
     let currentSection = 'inicio';
 
-    // Percorrer as seções de trás para frente
     for (let i = sections.length - 1; i >= 0; i--) {
       const element = document.getElementById(sections[i]);
       if (element) {
         const elementTop = element.offsetTop;
-        // Considera a seção ativa se o scroll passou do início dela
         if (scrollPosition >= elementTop - 100) {
           currentSection = sections[i];
           break;
