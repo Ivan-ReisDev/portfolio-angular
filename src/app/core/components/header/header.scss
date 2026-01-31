@@ -38,18 +38,31 @@
   }
 
   // Logo Styles
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 40px;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .header-logo {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(67, 163, 190, 0.3));
+  }
+
   & h1 {
     font-weight: 300;
     font-size: 22px; // Slightly refined size
     letter-spacing: 1px;
-    margin-right: 40px;
+    margin: 0; // Reset margin
     display: flex;
     align-items: center;
-    transition: opacity 0.3s ease;
-    
-    &:hover {
-      opacity: 0.9;
-    }
     
     span {
       color: $secondary-blue;
