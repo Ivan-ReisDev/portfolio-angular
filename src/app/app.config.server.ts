@@ -10,7 +10,7 @@ const serverConfig: ApplicationConfig = {
     {
       provide: API_CONFIG,
       useFactory: () => ({
-        baseUrl: process.env['API_URL'] || 'https://neuron-5dsg.onrender.com'
+        baseUrl: process.env['API_URL'] || 'https://neuron-5dsg.onrender.com/api'
       })
     }
   ]
