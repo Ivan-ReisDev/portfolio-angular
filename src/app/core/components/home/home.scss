@@ -32,8 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  // overflow: hidden; // handled by mixin
-  padding: 20px 0; // Add safe padding
+  padding: 20px 0;
   scroll-snap-align: start;
   z-index: 1;
 
@@ -42,9 +41,6 @@
     height: auto;
     scroll-snap-align: none;
   }
-
-  // Removed old image background and overlays since mixin handles it
-
 
     .content {
     position: relative;
@@ -58,10 +54,12 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transform: translateY(60px); // Use transform for better performance
+    transform: translateY(60px);
     padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-x: hidden;
 
-    // 1. Name (Top, Small)
     .greeting {
       font-size: 16px;
       font-weight: 500;
@@ -77,40 +75,70 @@
       display: inline-block;
     }
 
-    // 2. Role (Massive)
     .main-title {
       display: flex;
-      flex-direction: column; // Stack them
+      flex-direction: column;
       align-items: center;
+      text-align: center;
       line-height: 0.9;
       text-transform: uppercase;
       font-weight: 900;
       margin-bottom: 50px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
       
-      // "DESENVOLVEDOR"
       span:first-child {
-        font-size: clamp(1.5rem, 4vw, 3rem); // Reduced from 2rem/4rem
+        font-size: clamp(1.5rem, 4vw, 3rem);
         font-weight: 700;
         color: transparent;
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5); // Outline effect
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
         letter-spacing: 0.1em;
         margin-bottom: 10px;
       }
 
-      // "FULLSTACK"
       .highlight {
-        font-size: clamp(3.5rem, 10vw, 7rem); // Reduced from 4rem/10rem
+        font-size: clamp(3.5rem, 10vw, 7rem);
         background: linear-gradient(90deg, #43a3be, #6432c8);
         -webkit-background-clip: text;
-        background-clip: text; // Standard property
+        background-clip: text;
         -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 30px rgba(67, 163, 190, 0.3)); // Glow
+        filter: drop-shadow(0 0 30px rgba(67, 163, 190, 0.3));
       }
 
       @media (max-width: 768px) {
         margin-bottom: 30px;
+
         span:first-child {
-          font-size: clamp(1.2rem, 5vw, 2rem); // Adjusted for mobile
+          font-size: clamp(1.2rem, 5vw, 2rem);
+        }
+
+        .highlight {
+          font-size: clamp(2.8rem, 12vw, 5rem);
+        }
+      }
+
+      @media (max-width: 575px) {
+        margin-bottom: 24px;
+
+        span:first-child {
+          font-size: clamp(1rem, 4.5vw, 1.6rem);
+        }
+
+        .highlight {
+          font-size: clamp(2.2rem, 11vw, 3.5rem);
+        }
+      }
+
+      @media (max-width: 399px) {
+        margin-bottom: 20px;
+
+        span:first-child {
+          font-size: clamp(0.9rem, 4vw, 1.4rem);
+        }
+
+        .highlight {
+          font-size: clamp(1.8rem, 10vw, 2.8rem);
         }
       }
     }
@@ -151,13 +179,13 @@
         }
         
         &.btn-primary {
-          background: #fff; // High contrast white button
+          background: #fff;
           color: #000;
           box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 
           &:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(67, 163, 190, 0.4); // Blue glow on hover
+            box-shadow: 0 10px 30px rgba(67, 163, 190, 0.4);
           }
         }
 
@@ -188,7 +216,6 @@
     transform: translateY(60px);
   }
 
-  // Scroll Indicator Styles
   .scroll-indicator {
     position: absolute;
     bottom: 40px;
@@ -200,7 +227,7 @@
     opacity: 0.7;
 
     @media (max-width: 767px) {
-      display: none; // Hide on mobile to avoid overlap with social sidebar
+      display: none;
     }
     
     .mouse {
