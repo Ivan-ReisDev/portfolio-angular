@@ -28,6 +28,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
-    { provide: API_CONFIG, useValue: { baseUrl: 'http://localhost:3000/api' } }
+    { provide: API_CONFIG, useValue: { baseUrl: 'https://neuron-5dsg.onrender.com' } }
   ]
 };
