@@ -1,32 +1,104 @@
-          <section id="contato" class="contact-section">
+<section id="contato" class="contact-section">
   <div class="content">
     <app-title title="Contato" />
-    
+
     <div class="cta-container">
       <h2 class="emblematic-phrase" #phrase>
         Eai ! gostou do que viu ?<br>
         <span class="highlight">Vamos trabalhar juntos!</span>
       </h2>
-      
-      <form class="contact-form" #form>
+
+      <form
+        class="contact-form"
+        #formElement
+        [formGroup]="contactForm"
+        (ngSubmit)="onSubmit()"
+      >
+        @if (submitSuccess()) {
+          <div class="feedback-banner success">
+            <span>Mensagem enviada com sucesso!</span>
+            <button type="button" class="feedback-dismiss" (click)="dismissSuccess()">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        }
+
+        @if (submitError(); as errorMsg) {
+          <div class="feedback-banner error">
+            <span>{{ errorMsg }}</span>
+            <button type="button" class="feedback-dismiss" (click)="dismissError()">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        }
+
         <div class="form-group">
           <label for="name">Nome</label>
-          <input type="text" id="name" placeholder="Seu nome" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="seu@email.com" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="message">Mensagem</label>
-          <textarea id="message" rows="5" placeholder="Sua mensagem..." required></textarea>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Seu nome"
+            [class.invalid]="contactForm.controls.name.touched && contactForm.controls.name.invalid"
+          >
+          @if (contactForm.controls.name.touched && contactForm.controls.name.hasError('required')) {
+            <span class="field-error">Nome e obrigatorio.</span>
+          }
         </div>
 
-        <button type="submit" class="submit-btn">
-          Enviar Mensagem
-          <i class="fa-solid fa-paper-plane"></i>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="seu@email.com"
+            [class.invalid]="contactForm.controls.email.touched && contactForm.controls.email.invalid"
+          >
+          @if (contactForm.controls.email.touched && contactForm.controls.email.hasError('required')) {
+            <span class="field-error">Email e obrigatorio.</span>
+          } @else if (contactForm.controls.email.touched && contactForm.controls.email.hasError('email')) {
+            <span class="field-error">Formato de email invalido.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Telefone <span class="optional-label">(opcional)</span></label>
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            placeholder="+55 11 99999-9999"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="description">Mensagem</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            rows="5"
+            placeholder="Sua mensagem..."
+            [class.invalid]="contactForm.controls.description.touched && contactForm.controls.description.invalid"
+          ></textarea>
+          @if (contactForm.controls.description.touched && contactForm.controls.description.hasError('required')) {
+            <span class="field-error">Mensagem e obrigatoria.</span>
+          }
+        </div>
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="isSubmitting()"
+          [class.loading]="isSubmitting()"
+        >
+          @if (isSubmitting()) {
+            <span class="spinner"></span>
+            Enviando...
+          } @else {
+            Enviar Mensagem
+            <i class="fa-solid fa-paper-plane"></i>
+          }
         </button>
       </form>
     </div>
