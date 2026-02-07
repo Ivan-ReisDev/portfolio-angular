@@ -51,6 +51,7 @@ export class Login implements AfterViewInit, OnDestroy {
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly turnstileToken = signal<string | null>(null);
+  readonly turnstileAvailable = signal(false);
 
   private widgetId: string | null = null;
 
@@ -127,7 +128,7 @@ export class Login implements AfterViewInit, OnDestroy {
       return;
     }
 
-    if (!this.turnstileToken()) {
+    if (this.turnstileAvailable() && !this.turnstileToken()) {
       this.errorMessage.set('Complete a verificação de segurança.');
       return;
     }
@@ -136,9 +137,10 @@ export class Login implements AfterViewInit, OnDestroy {
     this.errorMessage.set(null);
 
     const { email, password } = this.loginForm.getRawValue();
+    const turnstileToken = this.turnstileToken() ?? undefined;
 
     this.authService
-      .login({ email, password, turnstileToken: this.turnstileToken()! })
+      .login({ email, password, turnstileToken })
       .subscribe({
         next: () => {
           this.isSubmitting.set(false);
@@ -167,12 +169,16 @@ export class Login implements AfterViewInit, OnDestroy {
     script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoaded';
     script.async = true;
     script.defer = true;
+    script.onerror = () => {
+      this.ngZone.run(() => this.turnstileAvailable.set(false));
+    };
     document.head.appendChild(script);
   }
 
   private renderWidget(): void {
     if (!this.turnstileContainer?.nativeElement || !window.turnstile) return;
 
+    this.turnstileAvailable.set(true);
     this.widgetId = window.turnstile.render(this.turnstileContainer.nativeElement, {
       sitekey: TURNSTILE_SITE_KEY,
       theme: 'dark',
@@ -183,7 +189,10 @@ export class Login implements AfterViewInit, OnDestroy {
         this.ngZone.run(() => this.turnstileToken.set(null));
       },
       'error-callback': () => {
-        this.ngZone.run(() => this.turnstileToken.set(null));
+        this.ngZone.run(() => {
+          this.turnstileAvailable.set(false);
+          this.turnstileToken.set(null);
+        });
       }
     });
   }

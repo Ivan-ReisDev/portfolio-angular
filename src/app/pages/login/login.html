@@ -83,7 +83,7 @@
         <button
           type="submit"
           class="submit-btn"
-          [disabled]="isSubmitting() || !turnstileToken()"
+          [disabled]="isSubmitting() || (turnstileAvailable() && !turnstileToken())"
           [class.loading]="isSubmitting()"
         >
           @if (isSubmitting()) {
