@@ -137,8 +137,9 @@ body {
   border: none;
   box-shadow: none;
 
-  a {
-    color: rgba(255, 255, 255, 0.7); // More visible by default
+  a, a:hover, a:visited, a:active {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none !important;
     font-size: 24px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
