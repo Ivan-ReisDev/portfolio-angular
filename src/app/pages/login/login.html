@@ -76,10 +76,14 @@
           }
         </div>
 
+        <div class="turnstile-wrapper">
+          <div #turnstileContainer></div>
+        </div>
+
         <button
           type="submit"
           class="submit-btn"
-          [disabled]="isSubmitting()"
+          [disabled]="isSubmitting() || !turnstileToken()"
           [class.loading]="isSubmitting()"
         >
           @if (isSubmitting()) {

@@ -1,4 +1,14 @@
-import { Component, inject, signal, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  PLATFORM_ID,
+  AfterViewInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+  NgZone
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,21 +19,40 @@ import { loadSlim } from '@tsparticles/slim';
 
 import { AuthService } from '../../core/api/services/auth.service';
 
+declare global {
+  interface Window {
+    turnstile: {
+      render: (container: HTMLElement, options: Record<string, unknown>) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+    onTurnstileLoaded: () => void;
+  }
+}
+
+const TURNSTILE_SITE_KEY = '0x4AAAAAACY37U40bZy-BusW';
+
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, NgxParticlesModule],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class Login {
+export class Login implements AfterViewInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly ngZone = inject(NgZone);
+
+  @ViewChild('turnstileContainer') turnstileContainer!: ElementRef<HTMLDivElement>;
 
   protected readonly isBrowser = isPlatformBrowser(this.platformId);
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  readonly turnstileToken = signal<string | null>(null);
+
+  private widgetId: string | null = null;
 
   async particlesInit(engine: Engine): Promise<void> {
     await loadSlim(engine);
@@ -76,6 +105,18 @@ export class Login {
 
   readonly showPassword = signal(false);
 
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
+    this.loadTurnstileScript();
+  }
+
+  ngOnDestroy(): void {
+    if (!this.isBrowser) return;
+    if (this.widgetId && window.turnstile) {
+      window.turnstile.remove(this.widgetId);
+    }
+  }
+
   togglePasswordVisibility(): void {
     this.showPassword.update((v) => !v);
   }
@@ -86,22 +127,72 @@ export class Login {
       return;
     }
 
+    if (!this.turnstileToken()) {
+      this.errorMessage.set('Complete a verificação de segurança.');
+      return;
+    }
+
     this.isSubmitting.set(true);
     this.errorMessage.set(null);
 
     const { email, password } = this.loginForm.getRawValue();
 
-    this.authService.login({ email, password }).subscribe({
-      next: () => {
-        this.isSubmitting.set(false);
-        const redirectPath = this.authService.isAdmin() ? '/dashboard' : '/dashboard/tickets';
-        this.router.navigate([redirectPath]);
+    this.authService
+      .login({ email, password, turnstileToken: this.turnstileToken()! })
+      .subscribe({
+        next: () => {
+          this.isSubmitting.set(false);
+          const redirectPath = this.authService.isAdmin() ? '/dashboard' : '/dashboard/tickets';
+          this.router.navigate([redirectPath]);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isSubmitting.set(false);
+          this.errorMessage.set(this.parseError(error));
+          this.resetTurnstile();
+        }
+      });
+  }
+
+  private loadTurnstileScript(): void {
+    if (window.turnstile) {
+      this.renderWidget();
+      return;
+    }
+
+    window.onTurnstileLoaded = () => {
+      this.ngZone.run(() => this.renderWidget());
+    };
+
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoaded';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
+  private renderWidget(): void {
+    if (!this.turnstileContainer?.nativeElement || !window.turnstile) return;
+
+    this.widgetId = window.turnstile.render(this.turnstileContainer.nativeElement, {
+      sitekey: TURNSTILE_SITE_KEY,
+      theme: 'dark',
+      callback: (token: string) => {
+        this.ngZone.run(() => this.turnstileToken.set(token));
       },
-      error: (error: HttpErrorResponse) => {
-        this.isSubmitting.set(false);
-        this.errorMessage.set(this.parseError(error));
+      'expired-callback': () => {
+        this.ngZone.run(() => this.turnstileToken.set(null));
+      },
+      'error-callback': () => {
+        this.ngZone.run(() => this.turnstileToken.set(null));
       }
     });
+  }
+
+  private resetTurnstile(): void {
+    this.turnstileToken.set(null);
+    if (this.widgetId && window.turnstile) {
+      window.turnstile.reset(this.widgetId);
+    }
   }
 
   private parseError(error: HttpErrorResponse): string {

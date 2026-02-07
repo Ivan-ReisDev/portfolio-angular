@@ -5,6 +5,7 @@ export type Permission = `${Resource}:${Action}`;
 export interface LoginPayload {
   email: string;
   password: string;
+  turnstileToken?: string;
 }
 
 export interface AuthResponse {

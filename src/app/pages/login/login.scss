@@ -225,6 +225,12 @@
   padding-left: 4px;
 }
 
+.turnstile-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
 .submit-btn {
   margin-top: 8px;
   background: linear-gradient(135deg, $secondary-blue, #6432c8);
