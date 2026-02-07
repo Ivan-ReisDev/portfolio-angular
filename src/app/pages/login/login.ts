@@ -30,7 +30,7 @@ declare global {
   }
 }
 
-const TURNSTILE_SITE_KEY = '0x4AAAAAACY37U40bZy-BusW';
+const TURNSTILE_SITE_KEY = '0x4AAAAAACY37U4ObZy-BusW';
 
 @Component({
   selector: 'app-login',
