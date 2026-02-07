@@ -14,11 +14,12 @@ import { Footer } from './core/components/footer/footer';
 import { Projects } from "./core/components/projects/projects";
 import { Education } from "./core/components/education/education";
 import { Contact } from "./core/components/contact/contact";
+import { Toast } from './core/components/dashboard/toast/toast';
 import { SEOService } from './core/services/seo.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule],
+  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule, Toast],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -27,15 +28,13 @@ export class App implements AfterViewInit {
   activeSection = signal('inicio');
   private readonly seoService = inject(SEOService);
 
-  // Init function for particles
   async particlesInit(engine: Engine): Promise<void> {
     await loadSlim(engine);
   }
 
-  // Particles Options
   particlesOptions: RecursivePartial<IOptions> = {
     fpsLimit: 120,
-    fullScreen: { enable: true, zIndex: 50 }, // Above content but with pointer-events: none
+    fullScreen: { enable: true, zIndex: 50 },
     interactivity: {
       detectsOn: "window",
       events: {
@@ -63,7 +62,7 @@ export class App implements AfterViewInit {
         speed: 0.8,
         straight: false,
       },
-      number: { density: { enable: true, width: 800 }, value: 50 }, // Reduced from 80 for better mobile performance
+      number: { density: { enable: true, width: 800 }, value: 50 },
       opacity: { value: 0.5 },
       shape: { type: "circle" },
       size: { value: { min: 1, max: 3 } },

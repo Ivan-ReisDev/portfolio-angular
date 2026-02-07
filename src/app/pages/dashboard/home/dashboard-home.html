@@ -1,0 +1,65 @@
+<div class="dashboard-home">
+  <div class="page-header">
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-subtitle">
+      Bem-vindo de volta<span class="user-email">{{ userName()?.email }}</span>
+    </p>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando dados...</span>
+    </div>
+  } @else {
+    @if (stats().length > 0) {
+      <div class="stats-grid">
+        @for (stat of stats(); track stat.label) {
+          <a [routerLink]="stat.route" class="stat-card">
+            <div class="stat-icon" [style.background]="'linear-gradient(135deg, ' + stat.color + '22, ' + stat.color + '08)'">
+              <i [class]="stat.icon" [style.color]="stat.color"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value">{{ stat.value }}</span>
+              <span class="stat-label">{{ stat.label }}</span>
+            </div>
+          </a>
+        }
+      </div>
+    }
+
+    @if (recentContacts().length > 0) {
+      <div class="recent-section">
+        <div class="section-header">
+          <h2 class="section-title">Contatos Recentes</h2>
+          <a routerLink="/dashboard/contacts" class="view-all">
+            Ver todos <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th class="hide-mobile">Telefone</th>
+                <th class="hide-mobile">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (contact of recentContacts(); track contact.id) {
+                <tr>
+                  <td>{{ contact.name }}</td>
+                  <td class="email-cell">{{ contact.email }}</td>
+                  <td class="hide-mobile">{{ contact.phone || '-' }}</td>
+                  <td class="hide-mobile">{{ contact.createdAt | date:'dd/MM/yyyy' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+  }
+</div>

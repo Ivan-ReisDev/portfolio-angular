@@ -1,0 +1,7 @@
+@use '../dashboard-shared' as *;
+
+.title-cell {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

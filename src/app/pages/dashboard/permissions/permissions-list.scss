@@ -1,0 +1,101 @@
+@use '../dashboard-shared' as *;
+
+.total-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(67, 163, 190, 0.1);
+  border: 1px solid rgba(67, 163, 190, 0.2);
+  color: $secondary-blue;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.permissions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.permission-card {
+  background: rgba(25, 25, 35, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.resource-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: $secondary-blue;
+  text-transform: capitalize;
+}
+
+.count {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(67, 163, 190, 0.1);
+  color: $secondary-blue;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-body {
+  padding: 12px 16px;
+}
+
+.permission-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+.perm-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  i {
+    font-size: 12px;
+    width: 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.perm-key {
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+  color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px 8px;
+  border-radius: 4px;
+}

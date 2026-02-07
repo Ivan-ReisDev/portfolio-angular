@@ -14,6 +14,14 @@ export const serverRoutes: ServerRoute[] = [
     fallback: PrerenderFallback.Server
   },
   {
+    path: 'login',
+    renderMode: RenderMode.Server
+  },
+  {
+    path: 'dashboard/**',
+    renderMode: RenderMode.Client
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender
   }

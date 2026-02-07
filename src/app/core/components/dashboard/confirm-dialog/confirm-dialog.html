@@ -1,0 +1,32 @@
+@if (visible()) {
+  <div class="confirm-overlay" (click)="onOverlayClick($event)">
+    <div class="confirm-container">
+      <div class="confirm-icon" [class.destructive]="destructive()">
+        <i [class]="destructive() ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-question'"></i>
+      </div>
+      <h3 class="confirm-title">{{ title() }}</h3>
+      <p class="confirm-message">{{ message() }}</p>
+      <div class="confirm-actions">
+        <button
+          class="btn btn-cancel"
+          (click)="cancel.emit()"
+          [disabled]="loading()"
+        >
+          {{ cancelLabel() }}
+        </button>
+        <button
+          class="btn btn-confirm"
+          [class.destructive]="destructive()"
+          [class.loading]="loading()"
+          (click)="confirm.emit()"
+          [disabled]="loading()"
+        >
+          @if (loading()) {
+            <span class="spinner"></span>
+          }
+          {{ confirmLabel() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

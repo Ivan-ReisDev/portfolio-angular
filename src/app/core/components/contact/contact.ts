@@ -103,7 +103,7 @@ export class Contact implements AfterViewInit {
 
   private parseErrorMessage(error: HttpErrorResponse): string {
     if (error.status === 0) {
-      return 'Sem conexao com o servidor. Tente novamente mais tarde.';
+      return 'Sem conexão com o servidor. Tente novamente mais tarde.';
     }
 
     const body = error.error;

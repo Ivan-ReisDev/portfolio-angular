@@ -42,7 +42,7 @@
             [class.invalid]="contactForm.controls.name.touched && contactForm.controls.name.invalid"
           >
           @if (contactForm.controls.name.touched && contactForm.controls.name.hasError('required')) {
-            <span class="field-error">Nome e obrigatorio.</span>
+            <span class="field-error">Nome é obrigatório.</span>
           }
         </div>
 
@@ -56,9 +56,9 @@
             [class.invalid]="contactForm.controls.email.touched && contactForm.controls.email.invalid"
           >
           @if (contactForm.controls.email.touched && contactForm.controls.email.hasError('required')) {
-            <span class="field-error">Email e obrigatorio.</span>
+            <span class="field-error">Email é obrigatório.</span>
           } @else if (contactForm.controls.email.touched && contactForm.controls.email.hasError('email')) {
-            <span class="field-error">Formato de email invalido.</span>
+            <span class="field-error">Formato de email inválido.</span>
           }
         </div>
 
@@ -82,7 +82,7 @@
             [class.invalid]="contactForm.controls.description.touched && contactForm.controls.description.invalid"
           ></textarea>
           @if (contactForm.controls.description.touched && contactForm.controls.description.hasError('required')) {
-            <span class="field-error">Mensagem e obrigatoria.</span>
+            <span class="field-error">Mensagem é obrigatória.</span>
           }
         </div>
 

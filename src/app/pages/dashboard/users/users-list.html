@@ -1,0 +1,172 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Usuários</h1>
+    @if (canCreate) {
+      <button class="btn-primary" (click)="openCreateModal()">
+        <i class="fa-solid fa-plus"></i> Novo Usuário
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando usuários...</span>
+    </div>
+  } @else {
+    @if (users().length === 0) {
+      <div class="table-card">
+        <div class="empty-state">
+          <i class="fa-solid fa-users"></i>
+          <p>Nenhum usuário encontrado.</p>
+        </div>
+      </div>
+    } @else {
+      <div class="table-card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th class="hide-mobile">Criado em</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of users(); track user.id) {
+                <tr>
+                  <td>{{ user.name }}</td>
+                  <td class="email-cell">{{ user.email }}</td>
+                  <td><span class="badge badge-purple">{{ user.role.name }}</span></td>
+                  <td class="hide-mobile">{{ user.createdAt | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                    <div class="actions-cell">
+                      @if (canUpdate) {
+                        <button class="action-btn" title="Editar" (click)="openEditModal(user)">
+                          <i class="fa-solid fa-pen"></i>
+                        </button>
+                      }
+                      @if (canDelete) {
+                        <button class="action-btn delete" title="Remover" (click)="confirmDelete(user)">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (meta(); as paginationMeta) {
+          @if (paginationMeta.totalPages > 1) {
+            <div class="pagination">
+              <button class="page-btn" [disabled]="!paginationMeta.hasPreviousPage" (click)="loadUsers(currentPage() - 1)">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              @for (page of pages; track page) {
+                <button class="page-btn" [class.active]="page === currentPage()" (click)="loadUsers(page)">{{ page }}</button>
+              }
+              <button class="page-btn" [disabled]="!paginationMeta.hasNextPage" (click)="loadUsers(currentPage() + 1)">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          }
+        }
+      </div>
+    }
+  }
+</div>
+
+<app-modal
+  [title]="isEditing ? 'Editar Usuário' : 'Novo Usuário'"
+  [visible]="showFormModal()"
+  (close)="closeFormModal()"
+>
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="userName">Nome</label>
+      <input
+        type="text"
+        id="userName"
+        formControlName="name"
+        placeholder="Nome do usuário"
+        [class.invalid]="userForm.controls.name.touched && userForm.controls.name.invalid"
+      >
+      @if (userForm.controls.name.touched && userForm.controls.name.hasError('required')) {
+        <span class="field-error">Nome é obrigatório.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="userEmail">Email</label>
+      <input
+        type="email"
+        id="userEmail"
+        formControlName="email"
+        placeholder="email@exemplo.com"
+        [class.invalid]="userForm.controls.email.touched && userForm.controls.email.invalid"
+      >
+      @if (userForm.controls.email.touched && userForm.controls.email.hasError('required')) {
+        <span class="field-error">Email é obrigatório.</span>
+      } @else if (userForm.controls.email.touched && userForm.controls.email.hasError('email')) {
+        <span class="field-error">Formato de email inválido.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="userPassword">Senha {{ isEditing ? '(deixe em branco para manter)' : '' }}</label>
+      <input
+        type="password"
+        id="userPassword"
+        formControlName="password"
+        placeholder="Senha"
+        [class.invalid]="userForm.controls.password.touched && userForm.controls.password.invalid"
+      >
+      @if (userForm.controls.password.touched && userForm.controls.password.hasError('minlength')) {
+        <span class="field-error">Senha deve ter no mínimo 6 caracteres.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="userRole">Role</label>
+      <select
+        id="userRole"
+        formControlName="roleId"
+        [class.invalid]="userForm.controls.roleId.touched && userForm.controls.roleId.invalid"
+      >
+        <option value="" disabled>Selecione uma role</option>
+        @for (role of roles(); track role.id) {
+          <option [value]="role.id">{{ role.name }}</option>
+        }
+      </select>
+      @if (userForm.controls.roleId.touched && userForm.controls.roleId.hasError('required')) {
+        <span class="field-error">Role é obrigatória.</span>
+      }
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-modal-cancel" (click)="closeFormModal()">Cancelar</button>
+      <button type="submit" class="btn-modal-submit" [disabled]="submitting()">
+        @if (submitting()) {
+          <span class="spinner"></span>
+        }
+        {{ isEditing ? 'Atualizar' : 'Criar' }}
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-confirm-dialog
+  [visible]="showDeleteConfirm()"
+  title="Remover Usuário"
+  [message]="'Deseja remover o usuário ' + (deletingUser()?.name ?? '') + '? Esta ação não pode ser desfeita.'"
+  confirmLabel="Remover"
+  [destructive]="true"
+  [loading]="deleting()"
+  (confirm)="deleteUser()"
+  (cancel)="cancelDelete()"
+/>

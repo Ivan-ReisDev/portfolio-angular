@@ -1,0 +1,46 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Permissões</h1>
+    @if (!loading()) {
+      <span class="total-badge">{{ totalCount() }} permissões</span>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando permissões...</span>
+    </div>
+  } @else {
+    @if (groups().length === 0) {
+      <div class="table-card">
+        <div class="empty-state">
+          <i class="fa-solid fa-key"></i>
+          <p>Nenhuma permissão encontrada.</p>
+        </div>
+      </div>
+    } @else {
+      <div class="permissions-grid">
+        @for (group of groups(); track group.resource) {
+          <div class="permission-card">
+            <div class="card-header">
+              <span class="resource-name">{{ group.resource }}</span>
+              <span class="count">{{ group.permissions.length }}</span>
+            </div>
+            <div class="card-body">
+              @for (perm of group.permissions; track perm.id) {
+                <div class="permission-item">
+                  <div class="perm-action">
+                    <i [class]="getActionIcon(perm.action)"></i>
+                    <span>{{ perm.action }}</span>
+                  </div>
+                  <code class="perm-key">{{ perm.resource }}:{{ perm.action }}</code>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

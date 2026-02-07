@@ -1,0 +1,223 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Meus Tickets</h1>
+    <button class="btn-primary" (click)="openCreateModal()">
+      <i class="fa-solid fa-plus"></i> Novo Ticket
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando tickets...</span>
+    </div>
+  } @else {
+    @if (tickets().length === 0) {
+      <div class="table-card">
+        <div class="empty-state">
+          <i class="fa-solid fa-ticket"></i>
+          <p>Nenhum ticket encontrado.</p>
+        </div>
+      </div>
+    } @else {
+      <div class="table-card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Prioridade</th>
+                <th>Status</th>
+                <th class="hide-mobile">Data</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (ticket of tickets(); track ticket.id) {
+                <tr>
+                  <td class="title-cell">{{ ticket.title }}</td>
+                  <td>
+                    <span class="badge badge-priority-{{ ticket.priority }}">
+                      {{ priorityLabel(ticket.priority) }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge badge-status-{{ ticket.status }}">
+                      {{ statusLabel(ticket.status) }}
+                    </span>
+                  </td>
+                  <td class="hide-mobile">{{ ticket.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td>
+                    <div class="actions-cell">
+                      <button class="action-btn view" title="Ver detalhes" (click)="viewTicket(ticket)">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (meta(); as paginationMeta) {
+          @if (paginationMeta.totalPages > 1) {
+            <div class="pagination">
+              <button
+                class="page-btn"
+                [disabled]="!paginationMeta.hasPreviousPage"
+                (click)="loadTickets(currentPage() - 1)"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              @for (page of pages; track page) {
+                <button
+                  class="page-btn"
+                  [class.active]="page === currentPage()"
+                  (click)="loadTickets(page)"
+                >
+                  {{ page }}
+                </button>
+              }
+              <button
+                class="page-btn"
+                [disabled]="!paginationMeta.hasNextPage"
+                (click)="loadTickets(currentPage() + 1)"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          }
+        }
+      </div>
+    }
+  }
+</div>
+
+<app-modal
+  [title]="'Novo Ticket'"
+  [visible]="showCreateModal()"
+  (close)="closeCreateModal()"
+>
+  <form [formGroup]="ticketForm" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="ticketTitle">Título</label>
+      <input
+        type="text"
+        id="ticketTitle"
+        formControlName="title"
+        placeholder="Título do ticket"
+        [class.invalid]="ticketForm.controls.title.touched && ticketForm.controls.title.invalid"
+      >
+      @if (ticketForm.controls.title.touched && ticketForm.controls.title.hasError('required')) {
+        <span class="field-error">Título é obrigatório.</span>
+      } @else if (ticketForm.controls.title.touched && ticketForm.controls.title.hasError('maxlength')) {
+        <span class="field-error">Título deve ter no máximo 200 caracteres.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="ticketDescription">Descrição</label>
+      <textarea
+        id="ticketDescription"
+        formControlName="description"
+        placeholder="Descreva o problema detalhadamente..."
+        rows="4"
+        [class.invalid]="ticketForm.controls.description.touched && ticketForm.controls.description.invalid"
+      ></textarea>
+      @if (ticketForm.controls.description.touched && ticketForm.controls.description.hasError('required')) {
+        <span class="field-error">Descrição é obrigatória.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="ticketPriority">Prioridade</label>
+      <select id="ticketPriority" formControlName="priority">
+        <option value="low">Baixa</option>
+        <option value="medium">Média</option>
+        <option value="high">Alta</option>
+        <option value="urgent">Urgente</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Links</label>
+      <div class="links-field">
+        @for (link of linksArray.controls; track $index; let i = $index) {
+          <div class="link-row">
+            <input
+              type="url"
+              [formControl]="$any(link)"
+              placeholder="https://exemplo.com/screenshot.png"
+            >
+            <button type="button" class="btn-remove-link" (click)="removeLink(i)">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        }
+        <button type="button" class="btn-add-link" (click)="addLink()">
+          <i class="fa-solid fa-plus"></i> Adicionar link
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-modal-cancel" (click)="closeCreateModal()">Cancelar</button>
+      <button type="submit" class="btn-modal-submit" [disabled]="submitting()">
+        @if (submitting()) {
+          <span class="spinner"></span>
+        }
+        Criar Ticket
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal
+  [title]="'Detalhes do Ticket'"
+  [visible]="showDetailModal()"
+  (close)="closeDetailModal()"
+>
+  @if (selectedTicket(); as ticket) {
+    <div class="detail-grid">
+      <div class="detail-item full-width">
+        <span class="detail-label">Título</span>
+        <span class="detail-value">{{ ticket.title }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Status</span>
+        <span class="badge badge-status-{{ ticket.status }}">
+          {{ statusLabel(ticket.status) }}
+        </span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Prioridade</span>
+        <span class="badge badge-priority-{{ ticket.priority }}">
+          {{ priorityLabel(ticket.priority) }}
+        </span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Criado em</span>
+        <span class="detail-value">{{ ticket.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Atualizado em</span>
+        <span class="detail-value">{{ ticket.updatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <div class="detail-item full-width">
+        <span class="detail-label">Descrição</span>
+        <span class="detail-value message">{{ ticket.description }}</span>
+      </div>
+      @if (ticket.links && ticket.links.length > 0) {
+        <div class="detail-item full-width">
+          <span class="detail-label">Links</span>
+          <div class="detail-links">
+            @for (link of ticket.links; track link) {
+              <a [href]="link" target="_blank" rel="noopener noreferrer">{{ link }}</a>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</app-modal>

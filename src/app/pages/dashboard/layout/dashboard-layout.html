@@ -1,0 +1,74 @@
+<div class="dashboard-wrapper">
+  @if (isBrowser) {
+    <ngx-particles
+      [id]="'dashboard-particles'"
+      [options]="particlesOptions"
+      [particlesInit]="particlesInit"
+      class="particles-bg"
+    />
+  }
+
+  <aside class="sidebar" [class.open]="sidebarOpen()">
+    <div class="sidebar-header">
+      <a href="/" class="sidebar-brand">
+        <img src="favicon.png" alt="Ivan.Dev Logo" class="sidebar-logo">
+        <span class="sidebar-brand-name">Ivan<span class="brand-accent">.dev</span></span>
+      </a>
+      <button class="sidebar-close" (click)="closeSidebar()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      @for (item of visibleNavItems; track item.route) {
+        <a
+          class="nav-item"
+          [routerLink]="item.route"
+          [routerLinkActive]="'active'"
+          [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+          (click)="closeSidebar()"
+        >
+          <i [class]="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="/" class="nav-item portfolio-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Portfolio</span>
+      </a>
+    </div>
+  </aside>
+
+  @if (sidebarOpen()) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <div class="main-area">
+    <header class="topbar">
+      <button class="hamburger" (click)="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="topbar-spacer"></div>
+
+      <div class="topbar-user">
+        @if (userRole(); as role) {
+          <span class="role-badge">{{ role }}</span>
+        }
+        <div class="user-avatar">
+          <span>{{ userInitials }}</span>
+        </div>
+        <button class="logout-btn" (click)="logout()" title="Sair">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <router-outlet />
+    </main>
+  </div>
+</div>

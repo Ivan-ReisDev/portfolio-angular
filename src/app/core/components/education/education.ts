@@ -31,6 +31,12 @@ export class Education {
 
   timeline: TimelineItem[] = [
     {
+      date: 'Janeiro 2026',
+      title: 'Pós-Graduação em Ciências de Dados e Inteligência Artificial — UNINTER',
+      description:
+        'Início da especialização em Ciências de Dados e Inteligência Artificial no Centro Universitário Internacional UNINTER. O curso abrange análise e modelagem de dados, aprendizado de máquina, deep learning, processamento de linguagem natural, visão computacional e técnicas avançadas de IA aplicadas à resolução de problemas reais.',
+    },
+    {
       date: 'Janeiro 2025',
       title: 'Reverbs Tecnologia - Tech Lead/Desenvolvedor Full Stack',
       description:

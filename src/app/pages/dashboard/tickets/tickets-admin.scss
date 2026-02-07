@@ -1,0 +1,11 @@
+@use '../dashboard-shared' as *;
+
+.title-cell {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email-cell {
+  color: $secondary-blue !important;
+}

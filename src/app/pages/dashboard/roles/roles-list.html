@@ -1,0 +1,146 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Roles</h1>
+    @if (canCreate) {
+      <button class="btn-primary" (click)="openCreateModal()">
+        <i class="fa-solid fa-plus"></i> Nova Role
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando roles...</span>
+    </div>
+  } @else {
+    @if (roles().length === 0) {
+      <div class="table-card">
+        <div class="empty-state">
+          <i class="fa-solid fa-shield-halved"></i>
+          <p>Nenhuma role encontrada.</p>
+        </div>
+      </div>
+    } @else {
+      <div class="table-card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Permissões</th>
+                <th class="hide-mobile">Criado em</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (role of roles(); track role.id) {
+                <tr>
+                  <td><span class="badge badge-purple">{{ role.name }}</span></td>
+                  <td>
+                    <span class="badge badge-blue">{{ role.permissions.length }} permissões</span>
+                  </td>
+                  <td class="hide-mobile">{{ role.createdAt | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                    <div class="actions-cell">
+                      @if (canUpdate) {
+                        <button class="action-btn" title="Editar" (click)="openEditModal(role)">
+                          <i class="fa-solid fa-pen"></i>
+                        </button>
+                      }
+                      @if (canDelete) {
+                        <button class="action-btn delete" title="Remover" (click)="confirmDelete(role)">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (meta(); as paginationMeta) {
+          @if (paginationMeta.totalPages > 1) {
+            <div class="pagination">
+              <button class="page-btn" [disabled]="!paginationMeta.hasPreviousPage" (click)="loadRoles(currentPage() - 1)">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              @for (page of pages; track page) {
+                <button class="page-btn" [class.active]="page === currentPage()" (click)="loadRoles(page)">{{ page }}</button>
+              }
+              <button class="page-btn" [disabled]="!paginationMeta.hasNextPage" (click)="loadRoles(currentPage() + 1)">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          }
+        }
+      </div>
+    }
+  }
+</div>
+
+<app-modal
+  [title]="isEditing ? 'Editar Role' : 'Nova Role'"
+  [visible]="showFormModal()"
+  (close)="closeFormModal()"
+>
+  <form [formGroup]="roleForm" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="roleName">Nome</label>
+      <input
+        type="text"
+        id="roleName"
+        formControlName="name"
+        placeholder="Nome da role"
+        [class.invalid]="roleForm.controls.name.touched && roleForm.controls.name.invalid"
+      >
+      @if (roleForm.controls.name.touched && roleForm.controls.name.hasError('required')) {
+        <span class="field-error">Nome é obrigatório.</span>
+      }
+    </div>
+
+    <div class="permissions-section">
+      <label class="permissions-label">Permissões</label>
+      @for (group of permissionGroups(); track group.resource) {
+        <div class="permission-group">
+          <span class="group-name">{{ group.resource }}</span>
+          <div class="permission-checkboxes">
+            @for (perm of group.permissions; track perm.id) {
+              <label class="checkbox-label" [class.checked]="isPermissionSelected(perm.id)">
+                <input
+                  type="checkbox"
+                  [checked]="isPermissionSelected(perm.id)"
+                  (change)="togglePermission(perm.id)"
+                >
+                <span class="checkbox-text">{{ perm.action }}</span>
+              </label>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-modal-cancel" (click)="closeFormModal()">Cancelar</button>
+      <button type="submit" class="btn-modal-submit" [disabled]="submitting()">
+        @if (submitting()) {
+          <span class="spinner"></span>
+        }
+        {{ isEditing ? 'Atualizar' : 'Criar' }}
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-confirm-dialog
+  [visible]="showDeleteConfirm()"
+  title="Remover Role"
+  [message]="'Deseja remover a role ' + (deletingRole()?.name ?? '') + '? Esta ação não pode ser desfeita.'"
+  confirmLabel="Remover"
+  [destructive]="true"
+  [loading]="deleting()"
+  (confirm)="deleteRole()"
+  (cancel)="cancelDelete()"
+/>

@@ -1,0 +1,120 @@
+import { Component, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NgxParticlesModule } from '@tsparticles/angular';
+import { Engine, IOptions, RecursivePartial } from '@tsparticles/engine';
+import { loadSlim } from '@tsparticles/slim';
+
+import { AuthService } from '../../core/api/services/auth.service';
+
+@Component({
+  selector: 'app-login',
+  imports: [ReactiveFormsModule, NgxParticlesModule],
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
+})
+export class Login {
+  private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
+
+  protected readonly isBrowser = isPlatformBrowser(this.platformId);
+  readonly isSubmitting = signal(false);
+  readonly errorMessage = signal<string | null>(null);
+
+  async particlesInit(engine: Engine): Promise<void> {
+    await loadSlim(engine);
+  }
+
+  particlesOptions: RecursivePartial<IOptions> = {
+    fpsLimit: 120,
+    fullScreen: { enable: true, zIndex: 1 },
+    interactivity: {
+      detectsOn: 'window',
+      events: {
+        onHover: { enable: true, mode: 'repulse' },
+        resize: { enable: true }
+      },
+      modes: {
+        repulse: { distance: 100, duration: 0.4 }
+      }
+    },
+    particles: {
+      color: { value: '#ffffff' },
+      links: { enable: false },
+      move: {
+        direction: 'none',
+        enable: true,
+        outModes: 'out',
+        random: true,
+        speed: 0.6,
+        straight: false
+      },
+      number: { density: { enable: true, width: 800 }, value: 40 },
+      opacity: { value: 0.4 },
+      shape: { type: 'circle' },
+      size: { value: { min: 1, max: 3 } }
+    },
+    detectRetina: true,
+    style: {
+      pointerEvents: 'none',
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%'
+    }
+  };
+
+  readonly loginForm = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
+  readonly showPassword = signal(false);
+
+  togglePasswordVisibility(): void {
+    this.showPassword.update((v) => !v);
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting.set(true);
+    this.errorMessage.set(null);
+
+    const { email, password } = this.loginForm.getRawValue();
+
+    this.authService.login({ email, password }).subscribe({
+      next: () => {
+        this.isSubmitting.set(false);
+        const redirectPath = this.authService.isAdmin() ? '/dashboard' : '/dashboard/tickets';
+        this.router.navigate([redirectPath]);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isSubmitting.set(false);
+        this.errorMessage.set(this.parseError(error));
+      }
+    });
+  }
+
+  private parseError(error: HttpErrorResponse): string {
+    if (error.status === 0) {
+      return 'Sem conexão com o servidor. Tente novamente mais tarde.';
+    }
+    if (error.status === 401) {
+      return 'Email ou senha incorretos.';
+    }
+    const body = error.error;
+    if (body?.message) {
+      return Array.isArray(body.message) ? body.message.join(', ') : body.message;
+    }
+    return 'Ocorreu um erro inesperado. Tente novamente.';
+  }
+}
