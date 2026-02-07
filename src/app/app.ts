@@ -173,7 +173,7 @@ export class App implements AfterViewInit {
 
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
-    if (!element) return;
+    if (!element || !this.scrollContainer?.nativeElement) return;
 
     const container = this.scrollContainer.nativeElement;
 
@@ -200,6 +200,8 @@ export class App implements AfterViewInit {
   }
 
   onScroll() {
+    if (!this.scrollContainer?.nativeElement) return;
+
     const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
     const container = this.scrollContainer.nativeElement;
     const scrollPosition = container.scrollTop;
