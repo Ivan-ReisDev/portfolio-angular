@@ -56,7 +56,9 @@
 
       <div class="topbar-user">
         @if (userRole(); as role) {
-          <span class="role-badge">{{ role }}</span>
+          @if (role === 'Admin') {
+            <span class="role-badge">{{ role }}</span>
+          }
         }
         <div class="user-avatar">
           <span>{{ userInitials }}</span>

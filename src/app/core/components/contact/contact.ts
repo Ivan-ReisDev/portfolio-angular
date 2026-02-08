@@ -14,11 +14,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Title } from '../typography/title/title';
+import { PhoneMaskDirective } from '../../directives/phone-mask.directive';
 import { ContactApiService } from '../../api/services/contact-api.service';
 
 @Component({
   selector: 'app-contact',
-  imports: [Title, ReactiveFormsModule],
+  imports: [Title, ReactiveFormsModule, PhoneMaskDirective],
   templateUrl: './contact.html',
   styleUrl: './contact.scss'
 })
@@ -36,9 +37,9 @@ export class Contact implements AfterViewInit {
   readonly submitError = signal<string | null>(null);
 
   readonly contactForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.maxLength(150)]],
     email: ['', [Validators.required, Validators.email]],
-    phone: [''],
+    phone: ['', [Validators.minLength(10), Validators.maxLength(11)]],
     description: ['', [Validators.required]]
   });
 
