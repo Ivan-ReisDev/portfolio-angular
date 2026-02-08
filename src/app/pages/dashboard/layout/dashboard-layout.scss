@@ -234,6 +234,76 @@ $topbar-height: 80px;
   }
 }
 
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.group-toggle {
+  justify-content: space-between;
+  
+  .nav-item-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .toggle-icon {
+    width: auto;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  &.expanded {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+
+    .toggle-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.nav-subitems {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-left: 12px;
+  
+  &.open {
+    max-height: 500px;
+    opacity: 1;
+    margin-bottom: 8px;
+  }
+
+  .sub-item {
+    font-size: 14px;
+    padding: 10px 16px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0 12px 12px 0;
+    
+    i {
+      font-size: 14px;
+      width: 20px;
+    }
+
+    &.active {
+      background: linear-gradient(90deg, rgba($preloader-accent, 0.1), transparent);
+      border-color: $secondary-blue;
+      box-shadow: none;
+
+      &::before {
+        display: none; // Hide the left border bar for subitems
+      }
+    }
+  }
+}
+
 .sidebar-footer {
   padding: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);

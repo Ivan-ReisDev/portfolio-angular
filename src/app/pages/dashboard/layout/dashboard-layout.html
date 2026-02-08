@@ -20,17 +20,42 @@
     </div>
 
     <nav class="sidebar-nav">
-      @for (item of visibleNavItems; track item.route) {
-        <a
-          class="nav-item"
-          [routerLink]="item.route"
-          [routerLinkActive]="'active'"
-          [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
-          (click)="closeSidebar()"
-        >
-          <i [class]="item.icon"></i>
-          <span>{{ item.label }}</span>
-        </a>
+      @for (item of visibleNavItems; track item.label) {
+        @if (!item.children) {
+          <a
+            class="nav-item"
+            [routerLink]="item.route"
+            [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+            (click)="closeSidebar()"
+          >
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        } @else {
+          <div class="nav-group">
+            <button class="nav-item group-toggle" [class.expanded]="adminMenuExpanded()" (click)="toggleAdminMenu()">
+              <div class="nav-item-content">
+                <i [class]="item.icon"></i>
+                <span>{{ item.label }}</span>
+              </div>
+              <i class="fa-solid fa-chevron-down toggle-icon"></i>
+            </button>
+            <div class="nav-subitems" [class.open]="adminMenuExpanded()">
+              @for (subItem of item.children; track subItem.resource) {
+                <a
+                  class="nav-item sub-item"
+                  [routerLink]="subItem.route"
+                  [routerLinkActive]="'active'"
+                  (click)="closeSidebar()"
+                >
+                  <i [class]="subItem.icon"></i>
+                  <span>{{ subItem.label }}</span>
+                </a>
+              }
+            </div>
+          </div>
+        }
       }
     </nav>
 
