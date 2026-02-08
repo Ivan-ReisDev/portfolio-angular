@@ -29,6 +29,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
-    { provide: API_CONFIG, useValue: { baseUrl: 'https://neuron-5dsg.onrender.com/api' } }
+    { provide: API_CONFIG, useValue: { baseUrl: 'https://api.ivanreis.com.br/api' } }
   ]
 };
