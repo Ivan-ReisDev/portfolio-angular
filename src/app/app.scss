@@ -115,6 +115,8 @@ body {
   scroll-snap-align: start;
   position: sticky;
   top: 0;
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .center {

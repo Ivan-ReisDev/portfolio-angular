@@ -1,4 +1,4 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, DestroyRef } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, DestroyRef, OnDestroy } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -15,15 +15,16 @@ import { Projects } from "./core/components/projects/projects";
 import { Education } from "./core/components/education/education";
 import { Contact } from "./core/components/contact/contact";
 import { Toast } from './core/components/dashboard/toast/toast';
+import { Preloader } from './core/components/preloader/preloader';
 import { SEOService } from './core/services/seo.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule, Toast],
+  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule, Toast, Preloader],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App implements AfterViewInit {
+export class App implements AfterViewInit, OnDestroy {
   protected readonly title = signal('portfolio');
   activeSection = signal('inicio');
   private readonly seoService = inject(SEOService);
@@ -33,17 +34,14 @@ export class App implements AfterViewInit {
   }
 
   particlesOptions: RecursivePartial<IOptions> = {
-    fpsLimit: 120,
+    fpsLimit: 60,
     fullScreen: { enable: true, zIndex: 50 },
     interactivity: {
       detectsOn: "window",
       events: {
-        onHover: { enable: true, mode: "repulse" },
+        onHover: { enable: false },
         resize: { enable: true }
       },
-      modes: {
-        repulse: { distance: 100, duration: 0.4 }
-      }
     },
     particles: {
       color: { value: "#ffffff" },
@@ -87,6 +85,12 @@ export class App implements AfterViewInit {
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
+  private scrollHandler: (() => void) | null = null;
+  private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+  private clickHandler: ((e: MouseEvent) => void) | null = null;
+  private scrollRafId = 0;
+  private scrollHandlingInitialized = false;
+
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -110,6 +114,8 @@ export class App implements AfterViewInit {
             this.scrollToSection(fragment);
           }
         }, 50);
+      } else {
+        this.destroyScrollHandling();
       }
     });
 
@@ -118,17 +124,38 @@ export class App implements AfterViewInit {
       this.initializeScrollHandling();
     }
 
-    if (typeof document !== 'undefined') {
-      document.addEventListener('click', (e: MouseEvent) => {
-        const target = e.target as HTMLElement;
-        if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
-          e.preventDefault();
-          const sectionId = target.getAttribute('href')?.substring(1);
-          if (sectionId) {
-            this.scrollToSection(sectionId);
-          }
+    this.setupGlobalClickInterceptor();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyScrollHandling();
+    this.removeGlobalClickInterceptor();
+    if (this.scrollRafId) {
+      cancelAnimationFrame(this.scrollRafId);
+    }
+  }
+
+  private setupGlobalClickInterceptor(): void {
+    if (typeof document === 'undefined' || this.clickHandler) return;
+
+    this.clickHandler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const sectionId = target.getAttribute('href')?.substring(1);
+        if (sectionId) {
+          this.scrollToSection(sectionId);
         }
-      });
+      }
+    };
+
+    document.addEventListener('click', this.clickHandler);
+  }
+
+  private removeGlobalClickInterceptor(): void {
+    if (this.clickHandler && typeof document !== 'undefined') {
+      document.removeEventListener('click', this.clickHandler);
+      this.clickHandler = null;
     }
   }
 
@@ -152,9 +179,29 @@ export class App implements AfterViewInit {
   private initializeScrollHandling(): void {
     if (!this.scrollContainer?.nativeElement) return;
 
-    this.scrollContainer.nativeElement.addEventListener('scroll', () => {
-      this.onScroll();
-    });
+    if (this.scrollHandlingInitialized) return;
+    this.scrollHandlingInitialized = true;
+
+    const container = this.scrollContainer.nativeElement;
+
+    this.scrollHandler = () => {
+      if (this.scrollRafId) return;
+      this.scrollRafId = requestAnimationFrame(() => {
+        this.scrollRafId = 0;
+        this.onScroll();
+      });
+    };
+
+    container.addEventListener('scroll', this.scrollHandler, { passive: true });
+
+    this.keydownHandler = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        this.navigateToSection(e.key === 'ArrowDown' ? 'next' : 'prev');
+      }
+    };
+
+    container.addEventListener('keydown', this.keydownHandler);
 
     setTimeout(() => {
       this.onScroll();
@@ -162,13 +209,28 @@ export class App implements AfterViewInit {
         this.scrollContainer.nativeElement.focus();
       }
     }, 100);
+  }
 
-    this.scrollContainer.nativeElement.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        this.navigateToSection(e.key === 'ArrowDown' ? 'next' : 'prev');
-      }
-    });
+  private destroyScrollHandling(): void {
+    const container = this.scrollContainer?.nativeElement;
+    if (!container) return;
+
+    if (this.scrollHandler) {
+      container.removeEventListener('scroll', this.scrollHandler);
+      this.scrollHandler = null;
+    }
+
+    if (this.keydownHandler) {
+      container.removeEventListener('keydown', this.keydownHandler);
+      this.keydownHandler = null;
+    }
+
+    if (this.scrollRafId) {
+      cancelAnimationFrame(this.scrollRafId);
+      this.scrollRafId = 0;
+    }
+
+    this.scrollHandlingInitialized = false;
   }
 
   scrollToSection(sectionId: string) {

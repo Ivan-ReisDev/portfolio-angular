@@ -39,6 +39,7 @@
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
     
+    <link rel="preload" href="favicon.png" as="image" type="image/png" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link
       rel="stylesheet"
@@ -50,6 +51,110 @@
     />
   </head>
   <body>
+<div id="initial-preloader">
+      <style>
+        #initial-preloader {
+          position: fixed;
+          inset: 0;
+          z-index: 99999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #060608;
+          background: radial-gradient(circle at center, #1a1a20 0%, #060608 100%);
+          transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+        }
+
+        #initial-preloader.hiding {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+        }
+
+        #initial-preloader .ip-content {
+          position: relative;
+          width: 120px;
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Orbital Spinner */
+        #initial-preloader .ip-spinner {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-top-color: #43a3be;
+          border-right-color: rgba(67, 163, 190, 0.3);
+          animation: ipSpin 1.5s linear infinite;
+        }
+
+        #initial-preloader .ip-spinner::before {
+          content: '';
+          position: absolute;
+          inset: 4px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-top-color: rgba(67, 163, 190, 0.6);
+          border-left-color: rgba(67, 163, 190, 0.2);
+          animation: ipSpin 2s linear infinite reverse;
+        }
+
+        #initial-preloader .ip-spinner::after {
+          content: '';
+          position: absolute;
+          inset: 12px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-top-color: rgba(67, 163, 190, 0.8);
+          animation: ipSpin 3s linear infinite;
+        }
+
+        /* Logo */
+        #initial-preloader .ip-logo {
+          width: 60px;
+          height: 60px;
+          position: relative;
+          z-index: 1;
+          animation: ipPulse 3s ease-in-out infinite;
+        }
+
+        #initial-preloader .ip-logo img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          filter: drop-shadow(0 0 15px rgba(67, 163, 190, 0.3));
+        }
+
+        @keyframes ipSpin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        @keyframes ipPulse {
+          0%, 100% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          #initial-preloader .ip-spinner,
+          #initial-preloader .ip-spinner::before,
+          #initial-preloader .ip-spinner::after,
+          #initial-preloader .ip-logo {
+            animation: none;
+          }
+        }
+      </style>
+      
+      <div class="ip-content">
+        <div class="ip-spinner"></div>
+        <div class="ip-logo">
+          <img src="favicon.png" alt="Loading..." width="60" height="60" />
+        </div>
+      </div>
+    </div>
     <app-root></app-root>
   </body>
 </html>

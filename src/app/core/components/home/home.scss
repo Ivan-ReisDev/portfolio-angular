@@ -35,6 +35,8 @@
   padding: 20px 0;
   scroll-snap-align: start;
   z-index: 1;
+  will-change: transform;
+  contain: layout style paint;
 
   @media (max-width: 767px) {
     position: relative;
@@ -70,7 +72,6 @@
       background: rgba(255, 255, 255, 0.1);
       padding: 8px 20px;
       border-radius: 50px;
-      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       display: inline-block;
     }

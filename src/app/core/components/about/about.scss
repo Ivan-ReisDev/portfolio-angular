@@ -23,6 +23,8 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  will-change: transform;
+  contain: layout style paint;
 
   @media (max-width: 767px) {
     height: auto;

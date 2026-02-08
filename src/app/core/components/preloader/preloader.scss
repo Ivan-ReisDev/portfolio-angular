@@ -1,0 +1,102 @@
+$preloader-bg: #060608;
+$preloader-accent: #43a3be;
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $preloader-bg;
+  background: radial-gradient(circle at center, lighten($preloader-bg, 5%) 0%, $preloader-bg 100%);
+  transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+
+  &.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__spinner {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: $preloader-accent;
+    border-right-color: rgba($preloader-accent, 0.3);
+    animation: preloaderSpin 1.5s linear infinite;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: rgba($preloader-accent, 0.6);
+      border-left-color: rgba($preloader-accent, 0.2);
+      animation: preloaderSpin 2s linear infinite reverse;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: rgba($preloader-accent, 0.8);
+      animation: preloaderSpin 3s linear infinite;
+    }
+  }
+
+  &__logo {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    z-index: 1;
+    animation: preloaderPulse 3s ease-in-out infinite;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 15px rgba($preloader-accent, 0.3));
+    }
+  }
+}
+
+@keyframes preloaderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes preloaderPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader__spinner,
+  .preloader__spinner::before,
+  .preloader__spinner::after,
+  .preloader__logo {
+    animation: none;
+  }
+
+  .preloader {
+    transition: none;
+
+    &.fade-out {
+      opacity: 0;
+    }
+  }
+}

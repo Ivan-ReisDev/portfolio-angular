@@ -6,9 +6,9 @@
 }
 
 @keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 rgba(67, 163, 190, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(67, 163, 190, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(67, 163, 190, 0); }
+  0% { opacity: 1; transform: scale(1); }
+  70% { opacity: 0; transform: scale(2.5); }
+  100% { opacity: 0; transform: scale(2.5); }
 }
 
 .progresso {
@@ -22,6 +22,8 @@
   align-items: center;
   justify-content: center;
   z-index: 4;
+  will-change: transform;
+  contain: layout style paint;
   padding: 80px 20px;
   scroll-snap-align: start;
 
@@ -118,7 +120,20 @@ main {
     border: 2px solid rgba(66, 66, 66, 1);
     box-shadow: 0 0 10px $secondary-blue;
     z-index: 2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    background-color: rgba(67, 163, 190, 0.4);
+    border-radius: 50%;
+    z-index: 1;
     animation: pulseGlow 3s infinite;
+    will-change: transform, opacity;
   }
 }
 
@@ -135,17 +150,15 @@ main {
 .timeline-content {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
   padding: 20px 24px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
 
-  // Hover Effect
   &:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(67, 163, 190, 0.3);
@@ -214,8 +227,6 @@ main {
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-
   &:hover {
     background: $secondary-blue;
     border-color: $secondary-blue;

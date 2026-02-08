@@ -12,6 +12,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
+  contain: layout style paint;
   
   @media (max-width: 767px) {
     height: auto;
