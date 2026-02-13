@@ -31,6 +31,12 @@ export class Education {
 
   timeline: TimelineItem[] = [
     {
+      date: 'Fevereiro 2026',
+      title: 'Pós-Graduação em Segurança e Defesa Cibernética — UNINTER',
+      description:
+        'Início da especialização em Segurança e Defesa Cibernética no Centro Universitário Internacional UNINTER. O curso desenvolve competências profissionais em proteção de dados, sistemas e redes, abrangendo análise de vulnerabilidades, resposta a incidentes, criptografia, segurança ofensiva e defensiva, governança de segurança da informação e técnicas avançadas de defesa cibernética aplicadas a ambientes corporativos.',
+    },
+    {
       date: 'Janeiro 2026',
       title: 'Pós-Graduação em Ciências de Dados e Inteligência Artificial — UNINTER',
       description:
