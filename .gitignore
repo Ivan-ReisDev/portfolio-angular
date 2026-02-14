@@ -38,6 +38,9 @@ testem.log
 /typings
 __screenshots__/
 
+# PDFs
+*.pdf
+
 # System files
 .DS_Store
 Thumbs.db
