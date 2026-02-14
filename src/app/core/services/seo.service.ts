@@ -108,30 +108,40 @@ export class SEOService {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Ivan Reis',
-      alternateName: 'Ivan Reis Desenvolvedor',
-      jobTitle: 'Desenvolvedor Full Stack',
+      alternateName: 'Ivan Reis Dev',
+      jobTitle: 'Tech Lead & Desenvolvedor Full Stack',
       url: this.baseUrl,
       image: `${this.baseUrl}/images/ivan-reis-profile.jpg`,
-      description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Focado em desenvolver soluções web modernas e escaláveis para empresas no Brasil.',
+      description: 'Tech Lead e Desenvolvedor Full Stack com 4+ anos de experiência em soluções escaláveis com inteligência artificial, automações e APIs robustas.',
       sameAs: [
-        'https://github.com/ivanreis',
+        'https://github.com/Ivan-ReisDev',
         'https://linkedin.com/in/ivanreis',
         'https://instagram.com/ivanreis'
       ],
       knowsAbout: [
-        'Desenvolvimento Web',
-        'Angular Framework',
+        'NestJS',
+        'React',
+        'Next.js',
+        'Angular',
+        'FastAPI',
         'TypeScript',
-        'Node.js',
-        'Aplicações E-commerce'
+        'PostgreSQL',
+        'Docker',
+        'AWS',
+        'Inteligência Artificial',
+        'DevOps'
       ],
       nationality: 'Brasileiro',
       knowsLanguage: 'pt-BR',
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'UNINTER - Centro Universitário Internacional'
+      },
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'BR',
-        addressRegion: 'SP',
-        addressLocality: 'São Paulo'
+        addressRegion: 'RJ',
+        addressLocality: 'Rio de Janeiro'
       }
     };
 
@@ -142,7 +152,7 @@ export class SEOService {
     if (!this.isBrowser) return;
 
     const title = `${project.title} | Projeto Desenvolvido por Ivan Reis`;
-    const description = `${project.description} Desenvolvedor brasileiro especializado em ${project.technologies.slice(0, 3).join(', ')}.`;
+    const description = `${project.description} Desenvolvido com ${project.technologies.slice(0, 3).join(', ')} por Ivan Reis.`;
     
     this.setBasicSEO({
       title: project.title,
@@ -183,9 +193,9 @@ export class SEOService {
     if (!this.isBrowser) return;
 
     const seoData: SEOData = {
-      title: 'Sobre Ivan Reis - Desenvolvedor Full Stack',
-      description: 'Conheça Ivan Reis, desenvolvedor full stack brasileiro com experiência em Angular, TypeScript, Node.js e desenvolvimento de aplicações web modernas para empresas.',
-      keywords: ['sobre ivanreis', 'desenvolvedor full stack', 'curriculo programador', 'experiência angular', 'typescript developer'],
+      title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+      description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado e pós-graduando em Ciência de Dados e Segurança Cibernética pela UNINTER.',
+      keywords: ['sobre ivan reis', 'tech lead', 'desenvolvedor full stack', 'currículo', 'nestjs', 'react', 'angular', 'inteligência artificial'],
       type: 'website',
       url: `${this.baseUrl}/sobre`,
       locale: 'pt_BR'
@@ -199,9 +209,9 @@ export class SEOService {
     if (!this.isBrowser) return;
 
     const seoData: SEOData = {
-      title: 'Contato - Ivan Reis | Desenvolvedor Full Stack',
-      description: 'Entre em contato com Ivan Reis, desenvolvedor full stack brasileiro. Disponível para projetos de desenvolvimento web, e-commerce e aplicações customizadas.',
-      keywords: ['contato ivanreis', 'freelancer ti', 'orçamento desenvolvimento', 'desenvolvedor são paulo', 'web developer brasil'],
+      title: 'Contato - Ivan Reis | Tech Lead & Desenvolvedor Full Stack',
+      description: 'Entre em contato com Ivan Reis. Disponível para projetos de desenvolvimento, automações com IA, consultoria técnica e liderança de equipes.',
+      keywords: ['contato ivan reis', 'contratar tech lead', 'desenvolvedor full stack', 'consultoria técnica', 'automação com ia'],
       type: 'website',
       url: `${this.baseUrl}/contato`,
       locale: 'pt_BR'

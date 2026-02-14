@@ -25,33 +25,36 @@ export class SEOTemplates {
 
   getHomeTemplate(): SEOTemplate {
     return {
-      title: 'Ivan Reis - Desenvolvedor Full-Stack | Angular, Node.js, TypeScript',
-      description: 'Desenvolvedor Full-Stack especializado em criar aplicações web modernas com Angular, Node.js, TypeScript. Explore meu portfolio com projetos reais em e-commerce, IA, automação e APIs RESTful.',
+      title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+      description: 'Tech Lead e Desenvolvedor Full Stack com 4+ anos criando soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, FastAPI, AWS e PostgreSQL.',
       keywords: [
-        'desenvolvedor full-stack',
+        'tech lead',
+        'desenvolvedor full stack',
         'ivanreis.com.br',
-        'angular developer',
-        'nodejs developer',
-        'typescript developer',
-        'desenvolvimento web brasil',
-        'portfolio desenvolvedor',
-        'freelancer desenvolvimento',
-        'api restful',
-        'desenvolvedor são paulo',
-        'react developer',
-        'nextjs developer'
+        'inteligência artificial',
+        'automação',
+        'nestjs',
+        'react',
+        'nextjs',
+        'angular',
+        'fastapi',
+        'typescript',
+        'postgresql',
+        'aws',
+        'docker',
+        'devops'
       ],
       og: {
-        title: 'Ivan Reis - Desenvolvedor Full-Stack | Portfolio',
-        description: 'Desenvolvedor Full-Stack especializado em Angular, Node.js, TypeScript. Criação de aplicações web modernas e APIs escaláveis.',
+        title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack | Portfolio',
+        description: 'Tech Lead e Full Stack com 4+ anos criando soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, AWS.',
         image: `${this.baseUrl}/images/og-home.jpg`,
         type: 'website',
         locale: 'pt_BR'
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Ivan Reis - Desenvolvedor Full-Stack',
-        description: 'Especialista em Angular, Node.js, TypeScript. Crio aplicações web modernas e plataformas escaláveis.',
+        title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+        description: 'Soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, AWS e PostgreSQL.',
         image: `${this.baseUrl}/images/og-home.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
@@ -61,7 +64,7 @@ export class SEOTemplates {
         '@type': 'WebSite',
         name: 'Ivan Reis - Portfolio',
         url: this.baseUrl,
-        description: 'Portfolio profissional de Ivan Reis, desenvolvedor Full-Stack especializado em tecnologias modernas.',
+        description: 'Portfolio profissional de Ivan Reis, Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial.',
         author: {
           '@type': 'Person',
           name: 'Ivan Reis'
@@ -146,31 +149,33 @@ export class SEOTemplates {
 
   getAboutTemplate(): SEOTemplate {
     return {
-      title: 'Sobre Ivan Reis - Desenvolvedor Full-Stack | Curriculo e Experiência',
-      description: 'Conheça Ivan Reis, desenvolvedor Full-Stack com 5+ anos de experiência em Angular, Node.js, TypeScript. Formação, habilidades, certificações e trajetória profissional.',
+      title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+      description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado e pós-graduando em Ciência de Dados e Segurança Cibernética pela UNINTER.',
       keywords: [
         'sobre ivan reis',
-        'curriculo ivan reis',
-        'desenvolvedor full-stack',
+        'currículo ivan reis',
+        'tech lead',
+        'desenvolvedor full stack',
         'experiência profissional',
-        'habilidades técnicas',
-        'angular developer',
-        'nodejs developer',
-        'typescript expert',
-        'desenvolvedor são paulo',
-        'portfolio profissional'
+        'nestjs',
+        'react',
+        'angular',
+        'inteligência artificial',
+        'automação',
+        'segurança cibernética',
+        'ciência de dados'
       ],
       og: {
-        title: 'Sobre Ivan Reis - Desenvolvedor Full-Stack',
-        description: 'Conheça minha trajetória profissional, habilidades e experiências como desenvolvedor Full-Stack.',
+        title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+        description: 'Tech Lead com 4+ anos de experiência. Especialista em soluções escaláveis com IA, automações e APIs robustas.',
         image: `${this.baseUrl}/images/og-about.jpg`,
         type: 'profile',
         locale: 'pt_BR'
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Sobre Ivan Reis - Desenvolvedor Full-Stack',
-        description: 'Desenvolvedor especializado em Angular, Node.js, TypeScript. Conheça minha experiência e habilidades.',
+        title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+        description: 'Tech Lead com 4+ anos. NestJS, React, Next.js, Angular, FastAPI, AWS, IA e automações.',
         image: `${this.baseUrl}/images/og-about.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
@@ -179,38 +184,43 @@ export class SEOTemplates {
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Ivan Reis',
-        jobTitle: 'Desenvolvedor Full-Stack',
-        description: 'Desenvolvedor Full-Stack especializado em Angular, Node.js, TypeScript e tecnologias modernas.',
+        jobTitle: 'Tech Lead & Desenvolvedor Full Stack',
+        description: 'Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial, automações e APIs robustas.',
         url: this.baseUrl,
         image: `${this.baseUrl}/images/profile-photo.jpg`,
         email: 'contato@ivanreis.com.br',
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'BR',
-          addressRegion: 'São Paulo'
+          addressRegion: 'Rio de Janeiro'
         },
         alumniOf: [
           {
             '@type': 'EducationalOrganization',
-            name: 'Universidade Federal de São Paulo',
+            name: 'UNINTER - Centro Universitário Internacional',
             addressCountry: 'BR'
           }
         ],
         knowsAbout: [
-          'Desenvolvimento Web',
-          'Angular',
-          'Node.js',
-          'TypeScript',
-          'APIs RESTful',
-          'MongoDB',
-          'PostgreSQL',
-          'Docker',
+          'NestJS',
           'React',
-          'Next.js'
+          'Next.js',
+          'Angular',
+          'FastAPI',
+          'TypeScript',
+          'PostgreSQL',
+          'MongoDB',
+          'Redis',
+          'Docker',
+          'AWS',
+          'Google Cloud',
+          'Inteligência Artificial',
+          'DevOps',
+          'CI/CD'
         ],
         sameAs: [
           'https://linkedin.com/in/ivanreis',
-          'https://github.com/deeivan',
+          'https://github.com/Ivan-ReisDev',
           'https://twitter.com/ivanreis'
         ]
       }
@@ -219,31 +229,30 @@ export class SEOTemplates {
 
   getContactTemplate(): SEOTemplate {
     return {
-      title: 'Contato - Ivan Reis | Desenvolvedor Full-Stack | Freelancer',
-      description: 'Entre em contato com Ivan Reis, desenvolvedor Full-Stack. Disponível para projetos freelance, consultoria técnica e oportunidades profissionais. Resposta rápida!',
+      title: 'Contato - Ivan Reis | Tech Lead & Desenvolvedor Full Stack',
+      description: 'Entre em contato com Ivan Reis. Disponível para projetos de desenvolvimento, automações com IA, consultoria técnica e liderança de equipes.',
       keywords: [
         'contato ivan reis',
-        'freelancer desenvolvimento',
-        'desenvolvedor para contratar',
+        'contratar tech lead',
+        'desenvolvedor full stack',
         'consultoria técnica',
+        'automação com ia',
         'orçamento desenvolvimento web',
-        'projetos freelance',
-        'oportunidades tecnologia',
-        'desenvolvedor angular',
-        'desenvolvedor nodejs',
-        'desenvolvimento sob demanda'
+        'projetos nestjs react angular',
+        'liderança técnica',
+        'desenvolvedor para contratar'
       ],
       og: {
-        title: 'Contato - Ivan Reis | Desenvolvedor Full-Stack',
-        description: 'Disponível para projetos freelance, consultoria e oportunidades profissionais.',
+        title: 'Contato - Ivan Reis | Tech Lead & Desenvolvedor Full Stack',
+        description: 'Disponível para projetos de desenvolvimento, automações com IA, consultoria técnica e liderança de equipes.',
         image: `${this.baseUrl}/images/og-contact.jpg`,
         type: 'website',
         locale: 'pt_BR'
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Contato - Ivan Reis | Desenvolvedor Full-Stack',
-        description: 'Disponível para projetos freelance e oportunidades. Vamos conversar!',
+        title: 'Contato - Ivan Reis | Tech Lead & Full Stack',
+        description: 'Disponível para projetos, automações com IA e consultoria técnica. Vamos conversar!',
         image: `${this.baseUrl}/images/og-contact.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
@@ -251,23 +260,24 @@ export class SEOTemplates {
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
-        name: 'Ivan Reis - Desenvolvedor Full-Stack',
+        name: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
         url: `${this.baseUrl}/contato`,
-        telephone: '+55-11-99999-9999',
+        telephone: '+55-21-98559-8348',
         email: 'contato@ivanreis.com.br',
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'BR',
-          addressRegion: 'SP'
+          addressRegion: 'RJ'
         },
         openingHours: 'Mo-Fr 09:00-18:00',
         serviceType: [
-          'Desenvolvimento Web',
-          'APIs RESTful',
-          'Aplicações Angular',
-          'Sistemas Node.js',
+          'Desenvolvimento Web Full Stack',
+          'APIs e Microsserviços',
+          'Automação com Inteligência Artificial',
+          'Aplicações React/Next.js/Angular',
+          'Sistemas NestJS/Express/FastAPI',
           'Consultoria Técnica',
-          'Freelancer'
+          'Liderança de Equipes'
         ],
         areaServed: {
           '@type': 'Country',

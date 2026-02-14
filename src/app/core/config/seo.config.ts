@@ -151,21 +151,21 @@ export const SEO_CONFIG: SEOConfiguration = {
   },
   business: {
     type: 'ProfessionalService',
-    name: 'Ivan Reis - Desenvolvedor Full-Stack',
-    description: 'Desenvolvedor Full-Stack especializado em Angular, Node.js, TypeScript e tecnologias modernas para web.',
+    name: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+    description: 'Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial, automações, APIs robustas e deploy em cloud.',
     services: [
-      'Desenvolvimento Web Full-Stack',
-      'APIs RESTful e Microserviços',
-      'Aplicações Angular/React',
-      'Sistemas Node.js/TypeScript',
+      'Desenvolvimento Web Full Stack',
+      'APIs RESTful e Microsserviços',
+      'Inteligência Artificial e Automação',
+      'Aplicações Angular/React/Next.js',
+      'Sistemas NestJS/Express/FastAPI',
       'Integração de Sistemas',
       'Consultoria Técnica',
       'Otimização de Performance',
-      'Migração de Legacy Systems',
       'Desenvolvimento de E-commerce',
-      'Automação de Processos',
-      'Cloud Computing',
-      'DevOps'
+      'Automação de Processos com IA',
+      'Cloud Computing (AWS, Google Cloud)',
+      'DevOps e CI/CD'
     ],
     serviceArea: {
       country: 'Brasil',
@@ -220,47 +220,54 @@ export const SEO_CONFIG: SEOConfiguration = {
 
 export const SEO_TEMPLATES = {
   home: {
-    title: 'Ivan Reis - Desenvolvedor Full-Stack | Angular, Node.js, TypeScript',
-    description: 'Desenvolvedor Full-Stack especializado em criar aplicações web modernas com Angular, Node.js, TypeScript. Explore meu portfolio com projetos reais.',
+    title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+    description: 'Tech Lead e Desenvolvedor Full Stack com 4+ anos criando soluções escaláveis com IA. NestJS, React, Next.js, Angular, FastAPI, AWS e PostgreSQL.',
     keywords: [
-      'desenvolvedor full-stack',
-      'angular developer',
-      'nodejs developer', 
-      'typescript developer',
-      'desenvolvimento web brasil',
-      'portfolio desenvolvedor',
-      'freelancer desenvolvimento',
-      'api restful',
-      'desenvolvedor são paulo'
+      'tech lead',
+      'desenvolvedor full stack',
+      'inteligência artificial',
+      'automação',
+      'nestjs',
+      'react',
+      'nextjs',
+      'angular',
+      'fastapi',
+      'typescript',
+      'postgresql',
+      'aws',
+      'docker',
+      'devops'
     ],
     image: '/images/og-home.jpg'
   },
   about: {
-    title: 'Sobre Ivan Reis - Desenvolvedor Full-Stack | Curriculo e Experiência',
-    description: 'Conheça Ivan Reis, desenvolvedor Full-Stack com experiência em Angular, Node.js, TypeScript. Formação e trajetória profissional.',
+    title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
+    description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado e pós-graduando na UNINTER.',
     keywords: [
       'sobre ivan reis',
-      'curriculo ivan reis',
-      'desenvolvedor full-stack',
+      'currículo ivan reis',
+      'tech lead',
+      'desenvolvedor full stack',
       'experiência profissional',
-      'habilidades técnicas',
-      'angular developer',
-      'nodejs developer',
-      'typescript expert'
+      'nestjs',
+      'react',
+      'angular',
+      'inteligência artificial',
+      'automação'
     ],
     image: '/images/og-about.jpg'
   },
   contact: {
-    title: 'Contato - Ivan Reis | Desenvolvedor Full-Stack | Freelancer',
-    description: 'Entre em contato com Ivan Reis, desenvolvedor Full-Stack. Disponível para projetos freelance, consultoria e oportunidades.',
+    title: 'Contato - Ivan Reis | Tech Lead & Desenvolvedor Full Stack',
+    description: 'Entre em contato com Ivan Reis. Disponível para projetos de desenvolvimento, automações com IA, consultoria técnica e liderança de equipes.',
     keywords: [
       'contato ivan reis',
-      'freelancer desenvolvimento',
-      'desenvolvedor para contratar',
+      'contratar tech lead',
+      'desenvolvedor full stack',
       'consultoria técnica',
+      'automação com ia',
       'orçamento desenvolvimento web',
-      'projetos freelance',
-      'oportunidades tecnologia'
+      'projetos nestjs react angular'
     ],
     image: '/images/og-contact.jpg'
   },
