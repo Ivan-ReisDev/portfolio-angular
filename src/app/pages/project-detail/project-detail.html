@@ -62,7 +62,7 @@
             @if (proj.githubUrl) {
               <a [href]="proj.githubUrl" target="_blank" rel="noopener" class="link-btn github">
                 <i class="fa-brands fa-github"></i>
-                Ver Codigo
+                Ver Código
               </a>
             }
             
@@ -97,7 +97,7 @@
         <a [routerLink]="['/projeto', next.id]" class="nav-link next">
           <img [src]="next.images[0]" [alt]="next.title" class="nav-thumb" />
           <div class="nav-content">
-            <span class="nav-label">Proximo</span>
+            <span class="nav-label">Próximo</span>
             <span class="nav-title">{{ next.title }}</span>
           </div>
           <i class="fa-solid fa-chevron-right"></i>
@@ -107,8 +107,8 @@
   </main>
 } @else {
   <div class="not-found">
-    <h1>Projeto nao encontrado</h1>
-    <p>O projeto que voce procura nao existe ou foi removido.</p>
+    <h1>Projeto não encontrado</h1>
+    <p>O projeto que você procura não existe ou foi removido.</p>
     <button class="back-btn" (click)="goBack()">
       <i class="fa-solid fa-arrow-left"></i>
       Voltar aos Projetos

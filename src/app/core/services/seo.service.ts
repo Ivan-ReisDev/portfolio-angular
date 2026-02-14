@@ -68,7 +68,7 @@ export interface ProjectSchema {
 export class SEOService {
   private readonly baseUrl = 'https://ivanreis.com.br';
   private readonly isBrowser: boolean;
-  private readonly siteName = 'Ivan Reis - Portfolio';
+  private readonly siteName = 'Ivan Reis - Portfólio';
 
   constructor(
     private title: Title,

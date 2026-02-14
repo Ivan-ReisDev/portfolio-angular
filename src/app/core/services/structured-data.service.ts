@@ -140,9 +140,9 @@ export class StructuredDataService {
     return {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Ivan Reis - Portfolio',
+      name: 'Ivan Reis - Portfólio',
       url: this.baseUrl,
-      description: 'Portfolio profissional de Ivan Reis, desenvolvedor Full-Stack. Projetos em Angular, Node.js, TypeScript e tecnologias modernas.',
+      description: 'Portfólio profissional de Ivan Reis, desenvolvedor Full-Stack. Projetos em Angular, Node.js, TypeScript e tecnologias modernas.',
       author: {
         '@type': 'Person',
         name: 'Ivan Reis'
@@ -175,7 +175,7 @@ export class StructuredDataService {
         'Aplicação',
         'Plataforma Digital'
       ],
-      keywords: [...project.technologies, 'portfolio', 'ivan reis', 'desenvolvimento web'],
+      keywords: [...project.technologies, 'portfólio', 'ivan reis', 'desenvolvimento web'],
       programmingLanguage: project.technologies.filter((tech: string) => 
         ['JavaScript', 'TypeScript', 'Python', 'PHP', 'Java', 'C#', 'Go'].includes(tech)
       ),
@@ -208,7 +208,7 @@ export class StructuredDataService {
         '@type': 'WebPage',
         '@id': `${this.baseUrl}/projeto/${project.id}`
       },
-      articleSection: 'Portfolio',
+      articleSection: 'Portfólio',
       keywords: [...project.technologies, project.title.toLowerCase(), 'desenvolvimento web', 'ivan reis'],
       inLanguage: 'pt-BR'
     };

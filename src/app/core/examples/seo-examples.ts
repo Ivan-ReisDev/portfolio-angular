@@ -1,7 +1,7 @@
 export const SEO_EXAMPLES = {
   proveiAi: {
     meta: {
-      title: 'Provei.ai – Provador Virtual | Ivan Reis | Portfolio',
+      title: 'Provei.ai – Provador Virtual | Ivan Reis | Portfólio',
       description: 'Plataforma inovadora de provador virtual para e-commerces com IA que aumenta conversão em até 35% e reduz devoluções em 25%. Desenvolvido com NestJS, Next.js e OpenAI API.',
       keywords: [
         'provei.ai',
@@ -30,7 +30,7 @@ export const SEO_EXAMPLES = {
       'og:url': 'https://ivanreis.com.br/projeto/provei-ai',
       'og:type': 'article',
       'og:locale': 'pt_BR',
-      'og:site_name': 'Ivan Reis - Portfolio',
+      'og:site_name': 'Ivan Reis - Portfólio',
       'og:image:width': '1200',
       'og:image:height': '630',
       'og:image:alt': 'Provei.ai - Provador Virtual para E-commerce'
@@ -119,7 +119,7 @@ export const SEO_EXAMPLES = {
       'og:url': 'https://ivanreis.com.br/projeto/construtiva-landing-page',
       'og:type': 'article',
       'og:locale': 'pt_BR',
-      'og:site_name': 'Ivan Reis - Portfolio'
+      'og:site_name': 'Ivan Reis - Portfólio'
     },
     twitter: {
       'twitter:card': 'summary_large_image',
@@ -174,7 +174,7 @@ export const SEO_EXAMPLES = {
 
   everyFans: {
     meta: {
-      title: 'EveryFans – Plataforma Criadores | Ivan Reis | Portfolio Tech',
+      title: 'EveryFans – Plataforma Criadores | Ivan Reis | Portfólio Tech',
       description: 'Plataforma SaaS completa para gestão de conteúdo e automação para criadores digitais. Auto-edição, agendamento multiplataforma e analytics. NestJS, React, TypeScript.',
       keywords: [
         'everyfans plataforma',
@@ -201,7 +201,7 @@ export const SEO_EXAMPLES = {
       'og:url': 'https://ivanreis.com.br/projeto/everyfans-platform',
       'og:type': 'article',
       'og:locale': 'pt_BR',
-      'og:site_name': 'Ivan Reis - Portfolio'
+      'og:site_name': 'Ivan Reis - Portfólio'
     },
     twitter: {
       'twitter:card': 'summary_large_image',
@@ -284,7 +284,7 @@ export const SEO_EXAMPLES = {
       'og:url': 'https://ivanreis.com.br/projeto/voz-rubro-negra',
       'og:type': 'article',
       'og:locale': 'pt_BR',
-      'og:site_name': 'Ivan Reis - Portfolio'
+      'og:site_name': 'Ivan Reis - Portfólio'
     },
     twitter: {
       'twitter:card': 'summary_large_image',
@@ -355,7 +355,7 @@ export const SEO_EXAMPLES = {
         'nodejs developer',
         'typescript expert',
         'desenvolvimento web são paulo',
-        'portfolio desenvolvedor',
+        'portfólio desenvolvedor',
         'freelancer tech',
         'api restful',
         'react developer',
@@ -374,7 +374,7 @@ export const SEO_EXAMPLES = {
       'og:url': 'https://ivanreis.com.br',
       'og:type': 'website',
       'og:locale': 'pt_BR',
-      'og:site_name': 'Ivan Reis - Portfolio',
+      'og:site_name': 'Ivan Reis - Portfólio',
       'og:image:width': '1200',
       'og:image:height': '630'
     },

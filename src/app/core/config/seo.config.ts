@@ -98,7 +98,7 @@ export interface SEOConfiguration {
 
 export const SEO_CONFIG: SEOConfiguration = {
   site: {
-    name: 'Ivan Reis - Portfolio',
+    name: 'Ivan Reis - Portfólio',
     url: 'https://ivanreis.com.br',
     domain: 'ivanreis.com.br',
     author: 'Ivan Reis',
@@ -272,26 +272,26 @@ export const SEO_TEMPLATES = {
     image: '/images/og-contact.jpg'
   },
   project: {
-    titleTemplate: '%projectTitle% - Ivan Reis | Portfolio',
+    titleTemplate: '%projectTitle% - Ivan Reis | Portfólio',
     descriptionTemplate: '%projectDescription% - Desenvolvido com %technologies% por Ivan Reis.',
     keywordsTemplate: [
       '%projectTitle%',
       '%technologies%',
       'ivan reis',
-      'portfolio desenvolvedor',
+      'portfólio desenvolvedor',
       'desenvolvimento web',
       'full-stack',
       'projeto web'
     ]
   },
   error: {
-    title: 'Página Não Encontrada | Ivan Reis | Portfolio',
-    description: 'A página que você procura não foi encontrada. Navegue pelo portfolio de Ivan Reis para conhecer projetos.',
+    title: 'Página Não Encontrada | Ivan Reis | Portfólio',
+    description: 'A página que você procura não foi encontrada. Navegue pelo portfólio de Ivan Reis para conhecer projetos.',
     keywords: [
       'pagina não encontrada',
       'erro 404',
       'ivan reis',
-      'portfolio',
+      'portfólio',
       'desenvolvedor web'
     ],
     image: '/images/og-404.jpg'
@@ -302,18 +302,18 @@ export const OPEN_GRAPH_TEMPLATES = {
   website: {
     type: 'website',
     locale: 'pt_BR',
-    siteName: 'Ivan Reis - Portfolio'
+    siteName: 'Ivan Reis - Portfólio'
   },
   article: {
     type: 'article',
     locale: 'pt_BR',
-    siteName: 'Ivan Reis - Portfolio',
-    section: 'Portfolio'
+    siteName: 'Ivan Reis - Portfólio',
+    section: 'Portfólio'
   },
   profile: {
     type: 'profile',
     locale: 'pt_BR',
-    siteName: 'Ivan Reis - Portfolio'
+    siteName: 'Ivan Reis - Portfólio'
   }
 };
 

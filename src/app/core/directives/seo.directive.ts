@@ -57,7 +57,7 @@ export class SEODirective implements OnInit, OnDestroy {
     this.meta.updateTag({ property: 'og:url', content: url });
     this.meta.updateTag({ property: 'og:type', content: this.type });
     this.meta.updateTag({ property: 'og:locale', content: 'pt_BR' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'Ivan Reis - Portfolio' });
+    this.meta.updateTag({ property: 'og:site_name', content: 'Ivan Reis - Portfólio' });
 
     this.meta.updateTag({ name: 'twitter:card', content: this.twitterCard });
     this.meta.updateTag({ name: 'twitter:title', content: this.title });

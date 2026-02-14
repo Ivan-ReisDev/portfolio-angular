@@ -167,7 +167,7 @@ export class App implements AfterViewInit, OnDestroy {
   private setHomeSEO(): void {
     this.seoService.setBasicSEO({
       title: 'Ivan Reis - Desenvolvedor Full Stack',
-      description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Portfolio com projetos inovadores como Provei.ai, sistemas para e-commerce e aplicações web modernas.',
+      description: 'Desenvolvedor full stack brasileiro especializado em Angular, TypeScript e Node.js. Portfólio com projetos inovadores como Provei.ai, sistemas para e-commerce e aplicações web modernas.',
       keywords: ['desenvolvedor full stack', 'programador angular', 'web developer brasil', 'freelancer ti', 'typescript', 'nestjs'],
       type: 'website',
       url: 'https://ivanreis.com.br',

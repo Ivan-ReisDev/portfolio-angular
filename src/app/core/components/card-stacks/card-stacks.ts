@@ -71,7 +71,7 @@ export class CardStacks {
       icon: 'devicon-fastapi-plain',
       name: 'FastAPI',
       description:
-        'O FastAPI é um framework Python focado no desenvolvimento de API’s, tem como principais características ser moderno, rápido e simples. ',
+        'O FastAPI é um framework Python focado no desenvolvimento de APIs, tem como principais características ser moderno, rápido e simples.',
     },
     {
       icon: 'devicon-dot-net-plain',
@@ -101,7 +101,7 @@ export class CardStacks {
       icon: 'devicon-tailwindcss-original',
       name: 'Tailwind.CSS',
       description:
-        'Traduzido do inglês-Tailwind CSS é uma estrutura CSS de código aberto. A principal característica desta biblioteca é que, ao contrário de outros frameworks CSS como o Bootstrap, ela não fornece uma série de classes predefinidas para elementos como botões ou tabelas.',
+        'Tailwind CSS é uma estrutura CSS de código aberto. A principal característica desta biblioteca é que, ao contrário de outros frameworks CSS como o Bootstrap, ela não fornece uma série de classes predefinidas para elementos como botões ou tabelas.',
     },
     {
       icon: 'devicon-mongodb-plain',

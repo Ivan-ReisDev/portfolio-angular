@@ -45,7 +45,7 @@ export class SEOTemplates {
         'devops'
       ],
       og: {
-        title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack | Portfolio',
+        title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack | Portfólio',
         description: 'Tech Lead e Full Stack com 4+ anos criando soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, AWS.',
         image: `${this.baseUrl}/images/og-home.jpg`,
         type: 'website',
@@ -62,9 +62,9 @@ export class SEOTemplates {
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'Ivan Reis - Portfolio',
+        name: 'Ivan Reis - Portfólio',
         url: this.baseUrl,
-        description: 'Portfolio profissional de Ivan Reis, Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial.',
+        description: 'Portfólio profissional de Ivan Reis, Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial.',
         author: {
           '@type': 'Person',
           name: 'Ivan Reis'
@@ -80,7 +80,7 @@ export class SEOTemplates {
   }
 
   getProjectTemplate(project: any): SEOTemplate {
-    const title = `${project.title} - Ivan Reis | Portfolio de Desenvolvimento`;
+    const title = `${project.title} - Ivan Reis | Portfólio de Desenvolvimento`;
     const description = project.description.length > 160 
       ? project.description.substring(0, 157) + '...' 
       : project.description;
@@ -92,7 +92,7 @@ export class SEOTemplates {
         ...project.technologies,
         project.title.toLowerCase(),
         'ivan reis',
-        'portfolio desenvolvedor',
+        'portfólio desenvolvedor',
         'desenvolvimento web',
         'full-stack',
         'angular',
@@ -289,7 +289,7 @@ export class SEOTemplates {
 
   getProveiAiTemplate(): SEOTemplate {
     return {
-      title: 'Provei.ai – Provador Virtual | Ivan Reis | Portfolio',
+      title: 'Provei.ai – Provador Virtual | Ivan Reis | Portfólio',
       description: 'Plataforma de provador virtual para e-commerces com IA. Aumenta conversão e reduz devoluções. Desenvolvido com NestJS, Next.js, TypeScript e OpenAI API.',
       keywords: [
         'provei.ai',
@@ -433,7 +433,7 @@ export class SEOTemplates {
 
   getEveryFansTemplate(): SEOTemplate {
     return {
-      title: 'EveryFans – Plataforma para Criadores | Ivan Reis | Portfolio',
+      title: 'EveryFans – Plataforma para Criadores | Ivan Reis | Portfólio',
       description: 'Plataforma completa para gestão de conteúdo e automação para criadores. Auto-edição, agendamento, publicação automática e analytics. NestJS, React, TypeScript.',
       keywords: [
         'everyfans',
@@ -504,18 +504,18 @@ export class SEOTemplates {
 
   get404Template(): SEOTemplate {
     return {
-      title: 'Página Não Encontrada | Ivan Reis | Portfolio',
-      description: 'A página que você procura não foi encontrada. Navegue pelo portfolio de Ivan Reis para conhecer projetos de desenvolvimento web.',
+      title: 'Página Não Encontrada | Ivan Reis | Portfólio',
+      description: 'A página que você procura não foi encontrada. Navegue pelo portfólio de Ivan Reis para conhecer projetos de desenvolvimento web.',
       keywords: [
         'pagina não encontrada',
         'erro 404',
         'ivan reis',
-        'portfolio',
+        'portfólio',
         'desenvolvedor web'
       ],
       og: {
         title: 'Página Não Encontrada',
-        description: 'A página solicitada não foi encontrada. Volte ao portfolio principal.',
+        description: 'A página solicitada não foi encontrada. Volte ao portfólio principal.',
         image: `${this.baseUrl}/images/og-404.jpg`,
         type: 'website',
         locale: 'pt_BR'
@@ -532,7 +532,7 @@ export class SEOTemplates {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Página Não Encontrada',
-        description: 'Página de erro 404 para Ivan Reis Portfolio',
+        description: 'Página de erro 404 para Ivan Reis Portfólio',
         url: `${this.baseUrl}/404`
       }
     };
