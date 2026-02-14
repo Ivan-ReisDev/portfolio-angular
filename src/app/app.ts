@@ -234,13 +234,23 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   scrollToSection(sectionId: string) {
-    const element = document.getElementById(sectionId);
-    if (!element || !this.scrollContainer?.nativeElement) return;
+    if (!this.scrollContainer?.nativeElement) return;
 
     const container = this.scrollContainer.nativeElement;
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
+    const targetIndex = sections.indexOf(sectionId);
+    if (targetIndex === -1) return;
+
+    let scrollTarget = 0;
+    for (let i = 0; i < targetIndex; i++) {
+      const el = document.getElementById(sections[i]);
+      if (el) {
+        scrollTarget += el.getBoundingClientRect().height;
+      }
+    }
 
     container.scrollTo({
-      top: element.offsetTop,
+      top: scrollTarget,
       behavior: 'smooth'
     });
 
@@ -269,16 +279,16 @@ export class App implements AfterViewInit, OnDestroy {
     const scrollPosition = container.scrollTop;
 
     let currentSection = 'inicio';
+    let accumulatedHeight = 0;
 
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const element = document.getElementById(sections[i]);
-      if (element) {
-        const elementTop = element.offsetTop;
-        if (scrollPosition >= elementTop - 100) {
-          currentSection = sections[i];
-          break;
-        }
+    for (const sectionId of sections) {
+      const element = document.getElementById(sectionId);
+      if (!element) continue;
+
+      if (scrollPosition >= accumulatedHeight - 100) {
+        currentSection = sectionId;
       }
+      accumulatedHeight += element.getBoundingClientRect().height;
     }
 
     if (this.activeSection() !== currentSection) {

@@ -21,6 +21,7 @@ $gray: #686868;
       radial-gradient(circle at 80% 20%, rgba(100, 50, 200, 0.05) 0%, transparent 30%),
       radial-gradient(circle at 20% 80%, rgba(67, 163, 190, 0.05) 0%, transparent 30%);
     z-index: 0;
+    pointer-events: none;
     animation: bgShift 20s ease-in-out infinite alternate;
 
     // Disable animation on mobile for better performance
