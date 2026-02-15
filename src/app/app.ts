@@ -16,11 +16,12 @@ import { Education } from "./core/components/education/education";
 import { Contact } from "./core/components/contact/contact";
 import { Toast } from './core/components/dashboard/toast/toast';
 import { Preloader } from './core/components/preloader/preloader';
+import { Noah } from './core/components/noah/noah';
 import { SEOService } from './core/services/seo.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule, Toast, Preloader],
+  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule, Toast, Preloader, Noah],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

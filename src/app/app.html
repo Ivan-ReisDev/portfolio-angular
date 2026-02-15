@@ -32,6 +32,11 @@
       <i class="fab fa-whatsapp"></i>
     </a>
   </aside>
+
+  <app-noah
+    [activeSection]="activeSection()"
+    (navigateTo)="scrollToSection($event)"
+  />
 }
 
 <app-preloader />

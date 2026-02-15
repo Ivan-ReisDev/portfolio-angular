@@ -1,0 +1,148 @@
+@if (showNoah()) {
+  <div
+    class="noah-wrapper"
+    [class.side-left]="currentSide() === 'left'"
+    [class.side-right]="currentSide() === 'right'"
+    [class.pos-bottom]="currentPopup() === 'above'"
+    [class.pos-top]="currentPopup() === 'below'"
+    [style.top]="currentConfig().top"
+    [style.bottom]="currentConfig().bottom"
+    [style.left]="currentConfig().left"
+    [style.right]="currentConfig().right"
+    [@noahPresence]="{ value: true, params: { enterTransform: enterTransform() } }"
+    (@noahPresence.done)="onLeaveFinished($event)"
+  >
+
+    @if (isChatOpen()) {
+      <div class="noah-chat" @chatAnim>
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <div class="chat-avatar">
+              <svg viewBox="0 0 64 64" width="32" height="32">
+                <rect x="12" y="18" width="40" height="32" rx="8" fill="#0d1b2a" stroke="#43a3be" stroke-width="2"/>
+                <rect x="22" y="8" width="20" height="14" rx="6" fill="#0d1b2a" stroke="#43a3be" stroke-width="2"/>
+                <circle cx="27" cy="15" r="2.5" fill="#43a3be"/>
+                <circle cx="37" cy="15" r="2.5" fill="#43a3be"/>
+                <line x1="32" y1="2" x2="32" y2="8" stroke="#43a3be" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="32" cy="2" r="2" fill="#43a3be"/>
+                <rect x="20" y="26" width="8" height="8" rx="2" fill="#43a3be" opacity="0.9"/>
+                <rect x="36" y="26" width="8" height="8" rx="2" fill="#43a3be" opacity="0.9"/>
+                <rect x="26" y="40" width="12" height="3" rx="1.5" fill="#43a3be" opacity="0.6"/>
+                <rect x="6" y="28" width="6" height="4" rx="2" fill="#0d1b2a" stroke="#43a3be" stroke-width="1.5"/>
+                <rect x="52" y="28" width="6" height="4" rx="2" fill="#0d1b2a" stroke="#43a3be" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="chat-header-text">
+              <span class="chat-name">Noah</span>
+              <span class="chat-status">Online</span>
+            </div>
+          </div>
+          <button class="chat-close" (click)="closeChat()" aria-label="Fechar chat">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="chat-body">
+          @for (msg of chatMessages(); track msg) {
+            <div class="chat-message" @messageAnim>
+              <div class="msg-avatar">
+                <svg viewBox="0 0 64 64" width="24" height="24">
+                  <rect x="12" y="18" width="40" height="32" rx="8" fill="#0d1b2a" stroke="#43a3be" stroke-width="2"/>
+                  <rect x="22" y="8" width="20" height="14" rx="6" fill="#0d1b2a" stroke="#43a3be" stroke-width="2"/>
+                  <circle cx="27" cy="15" r="2" fill="#43a3be"/>
+                  <circle cx="37" cy="15" r="2" fill="#43a3be"/>
+                  <rect x="20" y="26" width="8" height="8" rx="2" fill="#43a3be" opacity="0.9"/>
+                  <rect x="36" y="26" width="8" height="8" rx="2" fill="#43a3be" opacity="0.9"/>
+                </svg>
+              </div>
+              <div class="msg-content">
+                <p>{{ msg }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (showQuickActions()) {
+          <div class="chat-actions">
+            @for (action of quickActions; track action.action) {
+              <button class="action-chip" (click)="onQuickAction(action.action)">
+                <i [class]="action.icon"></i>
+                <span>{{ action.label }}</span>
+              </button>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    @if (showBubble() && !isChatOpen()) {
+      <div class="noah-bubble" @bubbleAnim>
+        <button class="bubble-close" (click)="dismissBubble()" aria-label="Fechar mensagem">
+          <i class="fas fa-times"></i>
+        </button>
+        <p>{{ bubbleText() }}</p>
+        <div class="bubble-tail"></div>
+      </div>
+    }
+
+    <button
+      class="noah-robot"
+      [class.active]="isChatOpen()"
+      [class.waving]="isWaving()"
+      (click)="toggleChat()"
+      aria-label="Abrir assistente Noah"
+    >
+      <svg viewBox="0 0 80 80" class="robot-svg" [class.blink]="isBlinking()">
+        <defs>
+          <filter id="noahGlow">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <linearGradient id="noahBodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#132a3e"/>
+            <stop offset="100%" stop-color="#0d1b2a"/>
+          </linearGradient>
+          <linearGradient id="noahAccent" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#43a3be"/>
+            <stop offset="100%" stop-color="#6432c8"/>
+          </linearGradient>
+        </defs>
+
+        <line x1="40" y1="4" x2="40" y2="14" stroke="url(#noahAccent)" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="40" cy="4" r="3" fill="#43a3be" filter="url(#noahGlow)" class="antenna-dot"/>
+
+        <rect x="22" y="14" width="36" height="24" rx="9" fill="url(#noahBodyGrad)" stroke="#43a3be" stroke-width="1.5"/>
+
+        <g class="eyes">
+          <rect x="29" y="22" width="8" height="8" rx="3" fill="#43a3be" class="eye-left"/>
+          <rect x="43" y="22" width="8" height="8" rx="3" fill="#43a3be" class="eye-right"/>
+        </g>
+
+        <rect x="14" y="42" width="52" height="28" rx="9" fill="url(#noahBodyGrad)" stroke="#43a3be" stroke-width="1.5"/>
+
+        <rect x="22" y="49" width="12" height="3" rx="1.5" fill="#43a3be" opacity="0.4"/>
+        <rect x="22" y="54" width="16" height="3" rx="1.5" fill="#43a3be" opacity="0.3"/>
+        <rect x="22" y="59" width="10" height="3" rx="1.5" fill="#43a3be" opacity="0.2"/>
+        <circle cx="54" cy="55" r="6" fill="none" stroke="#43a3be" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="54" cy="55" r="2.5" fill="#43a3be" opacity="0.4"/>
+
+        <g class="arm arm-left">
+          <rect x="4" y="47" width="10" height="16" rx="5" fill="url(#noahBodyGrad)" stroke="#43a3be" stroke-width="1.5"/>
+        </g>
+        <g class="arm arm-right">
+          <rect x="66" y="47" width="10" height="16" rx="5" fill="url(#noahBodyGrad)" stroke="#43a3be" stroke-width="1.5"/>
+        </g>
+
+        <rect x="24" y="70" width="12" height="6" rx="3" fill="url(#noahBodyGrad)" stroke="#43a3be" stroke-width="1"/>
+        <rect x="44" y="70" width="12" height="6" rx="3" fill="url(#noahBodyGrad)" stroke="#43a3be" stroke-width="1"/>
+      </svg>
+
+      @if (!hasInteracted() && !showBubble() && !isChatOpen()) {
+        <span class="noah-badge"></span>
+      }
+    </button>
+  </div>
+}
