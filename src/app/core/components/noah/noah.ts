@@ -186,11 +186,15 @@ export class Noah implements OnChanges, OnDestroy {
   private currentSection = '';
   private initialized = false;
   private pendingSection = '';
+  private readonly isMobile = signal(false);
+  private mediaQuery: MediaQueryList | null = null;
+  private readonly mediaQueryHandler = (e: MediaQueryListEvent) => this.isMobile.set(e.matches);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['activeSection'] && isPlatformBrowser(this.platformId)) {
       if (!this.initialized) {
         this.initialized = true;
+        this.setupMobileDetection();
         this.startBlinking();
         this.showInSection(this.activeSection, true);
       } else {
@@ -201,6 +205,9 @@ export class Noah implements OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     this.clearAllTimers();
+    if (this.mediaQuery) {
+      this.mediaQuery.removeEventListener('change', this.mediaQueryHandler);
+    }
   }
 
   toggleChat(): void {
@@ -266,6 +273,11 @@ export class Noah implements OnChanges, OnDestroy {
     this.hideBubble();
     this.clearTimers();
 
+    if (this.isMobile()) {
+      this.transitionSectionInPlace(section);
+      return;
+    }
+
     this.pendingSection = section;
     this.showNoah.set(false);
   }
@@ -277,8 +289,15 @@ export class Noah implements OnChanges, OnDestroy {
     if (!config) return;
 
     this.currentConfig.set(config);
-    this.currentSide.set(config.side);
-    this.currentPopup.set(config.popup);
+
+    if (this.isMobile()) {
+      this.currentSide.set('right');
+      this.currentPopup.set('above');
+    } else {
+      this.currentSide.set(config.side);
+      this.currentPopup.set(config.popup);
+    }
+
     this.enterTransform.set(ENTRANCE_TRANSFORMS[config.entrance]);
 
     const delay = isFirst ? 800 : 50;
@@ -291,6 +310,22 @@ export class Noah implements OnChanges, OnDestroy {
 
       this.scheduleBubble(section, config);
     }, delay);
+  }
+
+  private transitionSectionInPlace(section: string): void {
+    this.currentSection = section;
+    const config = SECTION_CONFIGS[section];
+    if (!config) return;
+    this.currentConfig.set(config);
+    this.currentSide.set('right');
+    this.currentPopup.set('above');
+    this.scheduleBubble(section, config);
+  }
+
+  private setupMobileDetection(): void {
+    this.mediaQuery = window.matchMedia('(max-width: 767px)');
+    this.isMobile.set(this.mediaQuery.matches);
+    this.mediaQuery.addEventListener('change', this.mediaQueryHandler);
   }
 
   private scheduleBubble(section: string, config: SectionConfig): void {

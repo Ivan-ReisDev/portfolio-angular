@@ -125,6 +125,14 @@ $bubble-border: rgba(67, 163, 190, 0.25);
       bottom: calc(100% + 10px) !important;
       top: auto !important;
     }
+
+    .noah-bubble .bubble-tail {
+      bottom: -6px !important;
+      top: auto !important;
+      right: 24px !important;
+      left: auto !important;
+      transform: rotate(45deg) !important;
+    }
   }
 }
 
