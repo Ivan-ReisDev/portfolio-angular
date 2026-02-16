@@ -17,11 +17,12 @@ import { Contact } from "./core/components/contact/contact";
 import { Toast } from './core/components/dashboard/toast/toast';
 import { Preloader } from './core/components/preloader/preloader';
 import { Noah } from './core/components/noah/noah';
+import { BlogPreview } from './core/components/blog-preview/blog-preview';
 import { SEOService } from './core/services/seo.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, Contact, NgxParticlesModule, Toast, Preloader, Noah],
+  imports: [RouterOutlet, Header, Home, About, Footer, Projects, Education, BlogPreview, Contact, NgxParticlesModule, Toast, Preloader, Noah],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -238,7 +239,7 @@ export class App implements AfterViewInit, OnDestroy {
     if (!this.scrollContainer?.nativeElement) return;
 
     const container = this.scrollContainer.nativeElement;
-    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
     const targetIndex = sections.indexOf(sectionId);
     if (targetIndex === -1) return;
 
@@ -259,7 +260,7 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   navigateToSection(direction: 'next' | 'prev') {
-    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
     const currentIndex = sections.indexOf(this.activeSection());
 
     let targetIndex: number;
@@ -275,7 +276,7 @@ export class App implements AfterViewInit, OnDestroy {
   onScroll() {
     if (!this.scrollContainer?.nativeElement) return;
 
-    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'contato'];
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
     const container = this.scrollContainer.nativeElement;
     const scrollPosition = container.scrollTop;
 

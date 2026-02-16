@@ -14,6 +14,18 @@ export const serverRoutes: ServerRoute[] = [
     fallback: PrerenderFallback.Server
   },
   {
+    path: 'blog/:slug',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      const fs = await import('node:fs/promises');
+      const path = await import('node:path');
+      const filePath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
+      const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+      return data.posts.map((p: { slug: string }) => ({ slug: p.slug }));
+    },
+    fallback: PrerenderFallback.Server
+  },
+  {
     path: 'login',
     renderMode: RenderMode.Server
   },

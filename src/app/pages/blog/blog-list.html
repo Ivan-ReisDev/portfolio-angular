@@ -1,0 +1,56 @@
+<main class="blog-page">
+  <header class="page-header">
+    <a routerLink="/" fragment="blog" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+      Voltar
+    </a>
+    <h1 class="page-title">Blog</h1>
+    <p class="page-subtitle">Cheatsheets, artigos e receitas de código</p>
+  </header>
+
+  <nav class="filters">
+    @for (filter of filters; track filter) {
+      <button
+        class="filter-btn"
+        [class.active]="activeFilter() === filter"
+        (click)="setFilter(filter)"
+      >
+        {{ filterLabel(filter) }}
+      </button>
+    }
+  </nav>
+
+  @if (!loading() && filteredPosts().length > 0) {
+    <div class="posts-grid">
+      @for (post of filteredPosts(); track post.slug) {
+        <a class="post-card" [routerLink]="['/blog', post.slug]">
+          <div class="card-image">
+            <img [src]="post.coverImage" [alt]="post.title" loading="lazy" />
+            <span class="card-badge">{{ categoryLabel(post.category) }}</span>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-excerpt">{{ post.excerpt }}</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <span class="card-date">{{ formatDate(post.publishedAt) }}</span>
+                <span class="card-read-time">{{ post.readTime }} min</span>
+              </div>
+              <div class="card-tags">
+                @for (tag of post.tags.slice(0, 3); track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  }
+
+  @if (!loading() && filteredPosts().length === 0) {
+    <div class="empty-state">
+      <p>Nenhum post encontrado nessa categoria.</p>
+    </div>
+  }
+</main>

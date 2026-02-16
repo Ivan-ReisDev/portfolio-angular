@@ -85,6 +85,15 @@ const SECTION_CONFIGS: Record<string, SectionConfig> = {
     entrance: 'slide-up',
     popup: 'below',
   },
+  blog: {
+    messages: ['Aqui compartilhamos o que aprendemos no dia a dia. Dá uma olhada nos nossos artigos!'],
+    delay: 2000,
+    duration: 7000,
+    top: 'auto', bottom: '80px', left: 'auto', right: '40px',
+    side: 'right',
+    entrance: 'slide-right',
+    popup: 'above',
+  },
   contato: {
     messages: ['Chegou até aqui? Manda uma mensagem pra gente, adoramos conhecer novos projetos!'],
     delay: 1000,

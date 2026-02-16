@@ -1,0 +1,342 @@
+@use 'app.scss' as *;
+
+.blog-post-page {
+  @include premium-background;
+  min-height: 100vh;
+  padding: 24px;
+  padding-top: 120px;
+  padding-bottom: 80px;
+
+  @media (min-width: 768px) {
+    padding: 40px;
+    padding-top: 140px;
+    padding-bottom: 100px;
+  }
+}
+
+.post {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  margin-bottom: 16px;
+
+  i {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    border-color: $secondary-blue;
+    background: rgba($secondary-blue, 0.1);
+    box-shadow: 0 0 25px rgba($secondary-blue, 0.2);
+
+    i {
+      transform: translateX(-4px);
+    }
+  }
+}
+
+.post-meta-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.post-badge {
+  padding: 6px 16px;
+  background: rgba($secondary-blue, 0.1);
+  border: 1px solid rgba($secondary-blue, 0.2);
+  border-radius: 50px;
+  color: $secondary-blue;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.post-date,
+.post-read-time {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.post-title {
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+  margin: 8px 0 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.post-excerpt {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.post-cover {
+  margin-bottom: 48px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 420px;
+    object-fit: cover;
+  }
+}
+
+.post-content {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+
+  h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 48px 0 16px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 36px 0 12px;
+  }
+
+  p {
+    margin: 0 0 20px;
+  }
+
+  ul, ol {
+    margin: 0 0 20px;
+    padding-left: 24px;
+
+    li {
+      margin-bottom: 8px;
+    }
+  }
+
+  strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  code {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 14px;
+    color: $secondary-blue;
+  }
+
+  pre {
+    margin: 0 0 24px;
+    padding: 20px 24px;
+    background: rgba(6, 6, 8, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow-x: auto;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: pre;
+    }
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+  }
+
+  a {
+    color: $secondary-blue;
+    text-decoration: none;
+    border-bottom: 1px solid rgba($secondary-blue, 0.3);
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-bottom-color: $secondary-blue;
+      text-shadow: 0 0 8px rgba($secondary-blue, 0.3);
+    }
+  }
+}
+
+.related-section {
+  max-width: 800px;
+  margin: 80px auto 0;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.related-title {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0 0 24px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.related-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(6, 6, 8, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    border-color: $secondary-blue;
+    box-shadow: 0 0 20px rgba($secondary-blue, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+
+    .related-image img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.related-image {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+}
+
+.related-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  background: rgba(6, 6, 8, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  color: $secondary-blue;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.related-body {
+  padding: 16px;
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0 0 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

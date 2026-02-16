@@ -1,0 +1,53 @@
+@if (post(); as p) {
+  <main class="blog-post-page">
+    <article class="post">
+      <header class="post-header">
+        <a routerLink="/blog" class="back-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+          Voltar ao Blog
+        </a>
+
+        <div class="post-meta-top">
+          <span class="post-badge">{{ categoryLabel(p.category) }}</span>
+          <span class="post-date">{{ formatDate(p.publishedAt) }}</span>
+          <span class="post-read-time">{{ p.readTime }} min de leitura</span>
+        </div>
+
+        <h1 class="post-title">{{ p.title }}</h1>
+        <p class="post-excerpt">{{ p.excerpt }}</p>
+
+        <div class="post-tags">
+          @for (tag of p.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </header>
+
+      <div class="post-cover">
+        <img [src]="p.coverImage" [alt]="p.title" />
+      </div>
+
+      <div class="post-content" [innerHTML]="p.content"></div>
+    </article>
+
+    @if (relatedPosts().length > 0) {
+      <aside class="related-section">
+        <h2 class="related-title">Posts Relacionados</h2>
+        <div class="related-grid">
+          @for (related of relatedPosts(); track related.slug) {
+            <a class="related-card" [routerLink]="['/blog', related.slug]">
+              <div class="related-image">
+                <img [src]="related.coverImage" [alt]="related.title" loading="lazy" />
+                <span class="related-badge">{{ categoryLabel(related.category) }}</span>
+              </div>
+              <div class="related-body">
+                <h3>{{ related.title }}</h3>
+                <p>{{ related.excerpt }}</p>
+              </div>
+            </a>
+          }
+        </div>
+      </aside>
+    }
+  </main>
+}

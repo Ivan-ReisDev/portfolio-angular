@@ -1,0 +1,50 @@
+<section id="blog" class="blog-section" #blogSection>
+  <div class="content">
+    <header>
+      <app-title title="Blog" />
+      <p class="subtitle">Cheatsheets, artigos e receitas de código</p>
+    </header>
+
+    @if (!loading() && posts().length > 0) {
+      <div class="posts-grid" [class.visible]="isVisible()">
+        @if (featuredPost; as post) {
+          <a class="featured-card" [routerLink]="['/blog', post.slug]">
+            <div class="featured-image">
+              <img [src]="post.coverImage" [alt]="post.title" loading="lazy" />
+              <span class="badge">{{ categoryLabel(post.category) }}</span>
+            </div>
+            <h3 class="featured-title">{{ post.title }}</h3>
+            <p class="featured-excerpt">{{ post.excerpt }}</p>
+            <div class="featured-meta">
+              <span class="author">Por {{ post.author }}</span>
+              <span class="read-more">Ler mais</span>
+            </div>
+          </a>
+        }
+
+        <div class="side-cards">
+          @for (post of sidePosts; track post.slug) {
+            <a class="side-card" [routerLink]="['/blog', post.slug]">
+              <div class="side-image">
+                <img [src]="post.coverImage" [alt]="post.title" loading="lazy" />
+                <span class="badge">{{ categoryLabel(post.category) }}</span>
+              </div>
+              <div class="side-body">
+                <h3 class="side-title">{{ post.title }}</h3>
+                <p class="side-excerpt">{{ post.excerpt }}</p>
+                <div class="side-meta">
+                  <span class="author">Por {{ post.author }}</span>
+                  <span class="read-more">Ler mais</span>
+                </div>
+              </div>
+            </a>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="cta-wrapper">
+      <a routerLink="/blog" class="btn-view-all">Ver Todos</a>
+    </div>
+  </div>
+</section>
