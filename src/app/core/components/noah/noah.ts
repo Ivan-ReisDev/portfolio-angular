@@ -27,7 +27,7 @@ type NoahEntrance = 'slide-left' | 'slide-right' | 'slide-up' | 'slide-down' | '
 type PopupPosition = 'above' | 'below';
 
 type SectionConfig = {
-  message: string;
+  messages: string[];
   delay: number;
   duration: number;
   top: string;
@@ -47,7 +47,7 @@ type QuickAction = {
 
 const SECTION_CONFIGS: Record<string, SectionConfig> = {
   inicio: {
-    message: 'E aí! Sou o Noah, bem-vindo ao nosso espaço. Fica à vontade pra explorar e qualquer coisa me chama!',
+    messages: ['E aí! Sou o Noah, bem-vindo ao nosso espaço. Fica à vontade pra explorar e qualquer coisa me chama!'],
     delay: 3000,
     duration: 8000,
     top: 'auto', bottom: '30px', left: 'auto', right: '30px',
@@ -56,7 +56,7 @@ const SECTION_CONFIGS: Record<string, SectionConfig> = {
     popup: 'above',
   },
   sobre: {
-    message: 'Aqui você conhece um pouco mais sobre nós. Curtiu? Bora trocar uma ideia!',
+    messages: ['Aqui você conhece um pouco mais sobre nós. Curtiu? Bora trocar uma ideia!'],
     delay: 2000,
     duration: 7000,
     top: 'auto', bottom: '80px', left: '100px', right: 'auto',
@@ -65,7 +65,10 @@ const SECTION_CONFIGS: Record<string, SectionConfig> = {
     popup: 'above',
   },
   projetos: {
-    message: 'Esses são alguns dos nossos trabalhos. Podemos criar algo incrível juntos também!',
+    messages: [
+      'Esses são alguns dos nossos trabalhos. Podemos criar algo incrível juntos também!',
+      'Clica em um dos cards pra conhecer mais detalhes sobre cada projeto!',
+    ],
     delay: 2000,
     duration: 7000,
     top: '140px', bottom: 'auto', left: 'auto', right: '40px',
@@ -74,7 +77,7 @@ const SECTION_CONFIGS: Record<string, SectionConfig> = {
     popup: 'below',
   },
   progresso: {
-    message: 'Nossa jornada até aqui. Estamos sempre evoluindo pra entregar o melhor!',
+    messages: ['Nossa jornada até aqui. Estamos sempre evoluindo pra entregar o melhor!'],
     delay: 2000,
     duration: 7000,
     top: '140px', bottom: 'auto', left: '100px', right: 'auto',
@@ -83,7 +86,7 @@ const SECTION_CONFIGS: Record<string, SectionConfig> = {
     popup: 'below',
   },
   contato: {
-    message: 'Chegou até aqui? Manda uma mensagem pra gente, adoramos conhecer novos projetos!',
+    messages: ['Chegou até aqui? Manda uma mensagem pra gente, adoramos conhecer novos projetos!'],
     delay: 1000,
     duration: 8000,
     top: 'auto', bottom: '100px', left: '50%', right: 'auto',
@@ -182,6 +185,8 @@ export class Noah implements OnChanges, OnDestroy {
   private blinkInterval: ReturnType<typeof setInterval> | null = null;
   private waveTimer: ReturnType<typeof setTimeout> | null = null;
   private entranceTimer: ReturnType<typeof setTimeout> | null = null;
+  private nextBubbleTimer: ReturnType<typeof setTimeout> | null = null;
+  private currentMessageIndex = 0;
   private dismissedSections = new Set<string>();
   private currentSection = '';
   private initialized = false;
@@ -331,15 +336,32 @@ export class Noah implements OnChanges, OnDestroy {
   private scheduleBubble(section: string, config: SectionConfig): void {
     if (this.dismissedSections.has(section)) return;
 
+    this.currentMessageIndex = 0;
+    this.showMessageAtIndex(section, config);
+  }
+
+  private showMessageAtIndex(section: string, config: SectionConfig): void {
+    if (this.currentMessageIndex >= config.messages.length) return;
+    if (this.dismissedSections.has(section)) return;
+
+    const delay = this.currentMessageIndex === 0 ? config.delay : 1500;
+
     this.bubbleTimer = setTimeout(() => {
       if (this.isChatOpen() || this.currentSection !== section) return;
-      this.bubbleText.set(config.message);
+      this.bubbleText.set(config.messages[this.currentMessageIndex]);
       this.showBubble.set(true);
 
       this.bubbleHideTimer = setTimeout(() => {
         this.hideBubble();
+        this.currentMessageIndex++;
+
+        if (this.currentMessageIndex < config.messages.length) {
+          this.nextBubbleTimer = setTimeout(() => {
+            this.showMessageAtIndex(section, config);
+          }, 400);
+        }
       }, config.duration);
-    }, config.delay);
+    }, delay);
   }
 
   private triggerWave(): void {
@@ -354,6 +376,7 @@ export class Noah implements OnChanges, OnDestroy {
   private clearTimers(): void {
     if (this.bubbleTimer) { clearTimeout(this.bubbleTimer); this.bubbleTimer = null; }
     if (this.bubbleHideTimer) { clearTimeout(this.bubbleHideTimer); this.bubbleHideTimer = null; }
+    if (this.nextBubbleTimer) { clearTimeout(this.nextBubbleTimer); this.nextBubbleTimer = null; }
     if (this.entranceTimer) { clearTimeout(this.entranceTimer); this.entranceTimer = null; }
     if (this.waveTimer) { clearTimeout(this.waveTimer); this.waveTimer = null; }
   }
