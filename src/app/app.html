@@ -6,9 +6,11 @@
   />
 }
 
-@if (isHomePage()) {
+@if (showHeader()) {
   <app-header [activeSection]="activeSection()" />
+}
 
+@if (isHomePage()) {
   <div class="scroll-container" #scrollContainer tabindex="0">
     <app-home />
     <app-about />
@@ -19,6 +21,13 @@
     <app-footer />
   </div>
 
+  <app-noah
+    [activeSection]="activeSection()"
+    (navigateTo)="scrollToSection($event)"
+  />
+}
+
+@if (showHeader()) {
   <aside class="social-sidebar">
     <a href="https://github.com/Ivan-ReisDev" target="_blank">
       <i class="fab fa-github"></i>
@@ -33,13 +42,13 @@
       <i class="fab fa-whatsapp"></i>
     </a>
   </aside>
-
-  <app-noah
-    [activeSection]="activeSection()"
-    (navigateTo)="scrollToSection($event)"
-  />
 }
 
 <app-preloader />
 <router-outlet />
+
+@if (showHeader() && !isHomePage()) {
+  <app-footer />
+}
+
 <app-toast />

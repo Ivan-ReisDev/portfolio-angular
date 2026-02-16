@@ -1,5 +1,6 @@
 import { Component, inject, input, computed } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
+import { MarkdownComponent } from 'ngx-markdown';
 import { BlogService } from '../../core/services/blog.service';
 import { SEOService } from '../../core/services/seo.service';
 
@@ -11,7 +12,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 @Component({
   selector: 'app-blog-post',
-  imports: [RouterLink],
+  imports: [RouterLink, MarkdownComponent],
   templateUrl: './blog-post.html',
   styleUrl: './blog-post.scss',
 })

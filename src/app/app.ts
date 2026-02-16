@@ -1,5 +1,5 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, DestroyRef, OnDestroy } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, signal, ViewChild, ElementRef, AfterViewInit, inject, PLATFORM_ID, DestroyRef, OnDestroy, Renderer2 } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
@@ -81,9 +81,12 @@ export class App implements AfterViewInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly renderer = inject(Renderer2);
+  private readonly document = inject(DOCUMENT);
 
   protected readonly isBrowser = isPlatformBrowser(this.platformId);
   readonly isHomePage = signal(true);
+  readonly showHeader = signal(true);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
@@ -105,6 +108,12 @@ export class App implements AfterViewInit, OnDestroy {
       const urlWithoutFragment = event.urlAfterRedirects.split('#')[0];
       const isHome = urlWithoutFragment === '/' || urlWithoutFragment === '';
       this.isHomePage.set(isHome);
+
+      const hideHeaderRoutes = ['/login', '/dashboard'];
+      const shouldHideHeader = hideHeaderRoutes.some(r => urlWithoutFragment.startsWith(r));
+      this.showHeader.set(!shouldHideHeader);
+
+      this.updateHtmlOverflowClass(isHome);
 
       if (isHome) {
         this.setHomeSEO();
@@ -141,12 +150,16 @@ export class App implements AfterViewInit, OnDestroy {
     if (typeof document === 'undefined' || this.clickHandler) return;
 
     this.clickHandler = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+      const target = (e.target as HTMLElement).closest('a');
+      if (target?.getAttribute('href')?.startsWith('#')) {
         e.preventDefault();
         const sectionId = target.getAttribute('href')?.substring(1);
         if (sectionId) {
-          this.scrollToSection(sectionId);
+          if (this.isHomePage()) {
+            this.scrollToSection(sectionId);
+          } else {
+            this.router.navigate(['/'], { fragment: sectionId });
+          }
         }
       }
     };
@@ -164,6 +177,22 @@ export class App implements AfterViewInit, OnDestroy {
   private updateIsHomePage(): void {
     const urlWithoutFragment = this.router.url.split('#')[0];
     this.isHomePage.set(urlWithoutFragment === '/' || urlWithoutFragment === '');
+
+    const hideHeaderRoutes = ['/login', '/dashboard'];
+    const shouldHideHeader = hideHeaderRoutes.some(r => urlWithoutFragment.startsWith(r));
+    this.showHeader.set(!shouldHideHeader);
+
+    this.updateHtmlOverflowClass(this.isHomePage());
+  }
+
+  private updateHtmlOverflowClass(isHome: boolean): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const html = this.document.documentElement;
+    if (isHome) {
+      this.renderer.addClass(html, 'home-page');
+    } else {
+      this.renderer.removeClass(html, 'home-page');
+    }
   }
 
   private setHomeSEO(): void {

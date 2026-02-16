@@ -27,7 +27,7 @@
         <img [src]="p.coverImage" [alt]="p.title" />
       </div>
 
-      <div class="post-content" [innerHTML]="p.content"></div>
+      <markdown class="post-content" clipboard [data]="p.content"></markdown>
     </article>
 
     @if (relatedPosts().length > 0) {

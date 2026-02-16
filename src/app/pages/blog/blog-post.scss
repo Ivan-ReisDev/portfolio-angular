@@ -193,6 +193,7 @@
   }
 
   pre {
+    position: relative;
     margin: 0 0 24px;
     padding: 20px 24px;
     background: rgba(6, 6, 8, 0.6);
@@ -201,14 +202,26 @@
     overflow-x: auto;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
+    &[class*='language-'] {
+      background: rgba(6, 6, 8, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      margin: 0 0 24px;
+      padding: 20px 24px;
+    }
+
     code {
       background: none;
       border: none;
       padding: 0;
       font-size: 14px;
       line-height: 1.7;
-      color: rgba(255, 255, 255, 0.8);
       white-space: pre;
+      text-shadow: none;
+
+      &:not([class*='language-']) {
+        color: rgba(255, 255, 255, 0.8);
+      }
     }
 
     &::-webkit-scrollbar {
@@ -235,6 +248,16 @@
       border-bottom-color: $secondary-blue;
       text-shadow: 0 0 8px rgba($secondary-blue, 0.3);
     }
+  }
+
+  blockquote {
+    margin: 0 0 20px;
+    padding: 16px 20px;
+    border-left: 3px solid rgba($secondary-blue, 0.4);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 0 8px 8px 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
   }
 }
 

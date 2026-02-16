@@ -73,12 +73,21 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #060608;
+}
+
+html.home-page,
+html.home-page body {
   overflow: hidden;
-  background-color: #060608; // Dark background to match theme
 
   @media (max-width: 767px) {
-    overflow: auto; // Allow native scrolling on mobile
+    overflow: auto;
   }
+}
+
+html:not(.home-page),
+html:not(.home-page) body {
+  overflow: auto;
 }
 
 .scroll-container {
