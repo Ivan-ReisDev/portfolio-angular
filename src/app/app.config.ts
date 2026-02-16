@@ -30,6 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
     provideMarkdown(),
-    { provide: API_CONFIG, useValue: { baseUrl: 'https://api.ivanreis.com.br/:3000/api' } }
+    { provide: API_CONFIG, useValue: { baseUrl: 'https://api.ivanreis.com.br/api' } }
   ]
 };
