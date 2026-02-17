@@ -9,12 +9,12 @@
   <div class="sidebar-backdrop" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
 
   <ul class="nav-links" [class.active]="isMenuOpen">
-    <li><a href="#inicio" [class.active]="activeSection === 'inicio'" (click)="closeMenu()">Início</a></li>
-    <li><a href="#sobre" [class.active]="activeSection === 'sobre'" (click)="closeMenu()">Sobre</a></li>
-    <li><a href="#projetos" [class.active]="activeSection === 'projetos'" (click)="closeMenu()">Projetos</a></li>
-    <li><a href="#progresso" [class.active]="activeSection === 'progresso'" (click)="closeMenu()">Progresso</a></li>
-    <li><a href="#blog" [class.active]="activeSection === 'blog'" (click)="closeMenu()">Blog</a></li>
-    <li><a href="#contato" [class.active]="activeSection === 'contato'" (click)="closeMenu()">Contato</a></li>
+    <li><a href="/#inicio" [class.active]="activeSection === 'inicio'" (click)="navigateToSection($event, 'inicio')">Início</a></li>
+    <li><a href="/#sobre" [class.active]="activeSection === 'sobre'" (click)="navigateToSection($event, 'sobre')">Sobre</a></li>
+    <li><a href="/#projetos" [class.active]="activeSection === 'projetos'" (click)="navigateToSection($event, 'projetos')">Projetos</a></li>
+    <li><a href="/#progresso" [class.active]="activeSection === 'progresso'" (click)="navigateToSection($event, 'progresso')">Progresso</a></li>
+    <li><a href="/#blog" [class.active]="activeSection === 'blog'" (click)="navigateToSection($event, 'blog')">Blog</a></li>
+    <li><a href="/#contato" [class.active]="activeSection === 'contato'" (click)="navigateToSection($event, 'contato')">Contato</a></li>
     
     <li class="mobile-cv-item">
       <button class="mobile-btn-cv">Download CV</button>
