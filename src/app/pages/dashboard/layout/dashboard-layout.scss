@@ -17,7 +17,6 @@ $topbar-height: 80px;
   position: relative;
   overflow-x: hidden;
 
-  /* Premium Background Layer */
   &::before {
     content: '';
     position: fixed;
@@ -31,10 +30,8 @@ $topbar-height: 80px;
       radial-gradient(circle at 40% 80%, rgba(67, 163, 190, 0.05) 0%, transparent 35%);
     z-index: 0;
     pointer-events: none;
-    animation: bgPulse 15s ease-in-out infinite alternate;
   }
 
-  /* Noise Texture */
   &::after {
     content: '';
     position: fixed;
@@ -44,16 +41,6 @@ $topbar-height: 80px;
     z-index: 0;
     pointer-events: none;
   }
-}
-
-.particles-bg {
-  position: fixed !important;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
 }
 
 .sidebar {
@@ -508,7 +495,3 @@ $topbar-height: 80px;
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes bgPulse {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; }
-}

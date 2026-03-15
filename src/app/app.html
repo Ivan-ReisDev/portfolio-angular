@@ -1,4 +1,4 @@
-@if (isBrowser) {
+@if (isBrowser && showHeader()) {
   <ngx-particles
     [id]="'tsparticles'"
     [options]="particlesOptions"

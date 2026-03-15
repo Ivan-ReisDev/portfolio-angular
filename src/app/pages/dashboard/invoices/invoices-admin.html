@@ -1,0 +1,389 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Faturas</h1>
+    @if (canCreate) {
+      <button class="btn-primary" (click)="openCreateModal()">
+        <i class="fa-solid fa-plus"></i> Nova Fatura
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Carregando faturas...</span>
+    </div>
+  } @else {
+    @if (invoices().length === 0) {
+      <div class="table-card">
+        <div class="empty-state">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <p>Nenhuma fatura encontrada.</p>
+        </div>
+      </div>
+    } @else {
+      <div class="table-card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th class="hide-mobile">Usuário</th>
+                <th>Valor</th>
+                <th>Vencimento</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (invoice of invoices(); track invoice.id) {
+                <tr>
+                  <td class="description-cell">{{ invoice.description }}</td>
+                  <td class="hide-mobile email-cell">{{ invoice.user.email }}</td>
+                  <td class="amount-cell">{{ formatAmount(invoice.amount) }}</td>
+                  <td>{{ invoice.dueDate | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                    <span class="badge badge-status-{{ resolveStatus(invoice) }}">
+                      {{ statusLabel(resolveStatus(invoice)) }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="actions-cell">
+                      <button class="action-btn view" title="Ver detalhes" (click)="viewInvoice(invoice)">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
+                      @if (canUpdate) {
+                        <button class="action-btn" title="Editar" (click)="openEditModal(invoice)">
+                          <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="action-btn" title="Enviar Nota Fiscal" (click)="triggerNotaFiscalUpload(invoice.id)">
+                          <i class="fa-solid fa-file-arrow-up"></i>
+                        </button>
+                        <button class="action-btn" title="Enviar Comprovante" (click)="triggerComprovanteUpload(invoice.id)">
+                          <i class="fa-solid fa-receipt"></i>
+                        </button>
+                      }
+                      @if (invoice.notaFiscalId) {
+                        <button class="action-btn view" title="Ver Nota Fiscal" (click)="openNotaFiscal(invoice.id)">
+                          <i class="fa-solid fa-file-invoice"></i>
+                        </button>
+                      }
+                      @if (invoice.comprovantes?.length) {
+                        <button class="action-btn view" title="Ver Comprovantes ({{ invoice.comprovantes!.length }})" (click)="viewInvoice(invoice)">
+                          <i class="fa-solid fa-file-circle-check"></i>
+                        </button>
+                      }
+                      @if (canDelete) {
+                        <button class="action-btn delete" title="Remover" (click)="confirmDelete(invoice)">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (meta(); as paginationMeta) {
+          @if (paginationMeta.totalPages > 1) {
+            <div class="pagination">
+              <button
+                class="page-btn"
+                [disabled]="!paginationMeta.hasPreviousPage"
+                (click)="loadInvoices(currentPage() - 1)"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              @for (page of pages; track page) {
+                <button
+                  class="page-btn"
+                  [class.active]="page === currentPage()"
+                  (click)="loadInvoices(page)"
+                >
+                  {{ page }}
+                </button>
+              }
+              <button
+                class="page-btn"
+                [disabled]="!paginationMeta.hasNextPage"
+                (click)="loadInvoices(currentPage() + 1)"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          }
+        }
+      </div>
+    }
+  }
+</div>
+
+<input
+  type="file"
+  #notaFiscalInput
+  hidden
+  accept=".pdf,.png,.jpg,.jpeg,.webp"
+  (change)="onNotaFiscalSelected($event)"
+>
+
+<input
+  type="file"
+  #comprovanteInput
+  hidden
+  accept=".pdf,.png,.jpg,.jpeg,.webp"
+  (change)="onComprovanteSelected($event)"
+>
+
+<app-modal
+  [title]="'Detalhes da Fatura'"
+  [visible]="showDetailModal()"
+  (close)="closeDetailModal()"
+>
+  @if (selectedInvoice(); as invoice) {
+    <div class="detail-grid">
+      <div class="detail-item full-width">
+        <span class="detail-label">Descrição</span>
+        <span class="detail-value">{{ invoice.description }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Status</span>
+        <span class="badge badge-status-{{ resolveStatus(invoice) }}">
+          {{ statusLabel(resolveStatus(invoice)) }}
+        </span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Valor</span>
+        <span class="detail-value amount-value">{{ formatAmount(invoice.amount) }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Usuário</span>
+        <span class="detail-value">{{ invoice.user.name }} ({{ invoice.user.email }})</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Vencimento</span>
+        <span class="detail-value">{{ invoice.dueDate | date:'dd/MM/yyyy' }}</span>
+      </div>
+      @if (invoice.paidAt) {
+        <div class="detail-item">
+          <span class="detail-label">Pago em</span>
+          <span class="detail-value">{{ invoice.paidAt | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      }
+      <div class="detail-item">
+        <span class="detail-label">Criado em</span>
+        <span class="detail-value">{{ invoice.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Atualizado em</span>
+        <span class="detail-value">{{ invoice.updatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      @if (invoice.notaFiscalId || invoice.comprovantes?.length) {
+        <div class="detail-item full-width">
+          <span class="detail-label">Arquivos</span>
+          <div class="detail-files">
+            @if (invoice.notaFiscalId) {
+              <button class="btn-file" (click)="openNotaFiscal(invoice.id)">
+                <i class="fa-solid fa-file-invoice"></i> Nota Fiscal
+              </button>
+            }
+            @if (invoice.comprovantes?.length) {
+              @for (fileId of invoice.comprovantes!; track fileId; let i = $index) {
+                <div class="comprovante-item">
+                  <button class="btn-file" (click)="openComprovante(invoice.id, fileId)">
+                    <i class="fa-solid fa-file-circle-check"></i> Comprovante {{ i + 1 }}
+                  </button>
+                  <button class="action-btn delete" title="Remover comprovante" (click)="deleteComprovante(invoice.id, fileId)">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</app-modal>
+
+<app-modal
+  [title]="'Nova Fatura'"
+  [visible]="showCreateModal()"
+  (close)="closeCreateModal()"
+>
+  <form [formGroup]="createForm" (ngSubmit)="submitCreateForm()">
+    <div class="form-group">
+      <label for="createDescription">Descrição</label>
+      <input
+        type="text"
+        id="createDescription"
+        formControlName="description"
+        placeholder="Descrição da fatura"
+        [class.invalid]="createForm.controls.description.touched && createForm.controls.description.invalid"
+      >
+      @if (createForm.controls.description.touched && createForm.controls.description.hasError('required')) {
+        <span class="field-error">Descrição é obrigatória.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="createAmount">Valor (R$)</label>
+      <input
+        type="number"
+        id="createAmount"
+        formControlName="amount"
+        placeholder="0.00"
+        step="0.01"
+        min="0.01"
+        [class.invalid]="createForm.controls.amount.touched && createForm.controls.amount.invalid"
+      >
+      @if (createForm.controls.amount.touched && createForm.controls.amount.hasError('required')) {
+        <span class="field-error">Valor é obrigatório.</span>
+      } @else if (createForm.controls.amount.touched && createForm.controls.amount.hasError('min')) {
+        <span class="field-error">Valor deve ser maior que zero.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="createDueDate">Data de Vencimento</label>
+      <input
+        type="date"
+        id="createDueDate"
+        formControlName="dueDate"
+        [class.invalid]="createForm.controls.dueDate.touched && createForm.controls.dueDate.invalid"
+      >
+      @if (createForm.controls.dueDate.touched && createForm.controls.dueDate.hasError('required')) {
+        <span class="field-error">Data de vencimento é obrigatória.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="createUserId">Usuário</label>
+      <select
+        id="createUserId"
+        formControlName="userId"
+        [class.invalid]="createForm.controls.userId.touched && createForm.controls.userId.invalid"
+      >
+        <option value="" disabled>Selecione um usuário</option>
+        @for (user of users(); track user.id) {
+          <option [value]="user.id">{{ user.name }} ({{ user.email }})</option>
+        }
+      </select>
+      @if (createForm.controls.userId.touched && createForm.controls.userId.hasError('required')) {
+        <span class="field-error">Usuário é obrigatório.</span>
+      }
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-modal-cancel" (click)="closeCreateModal()">Cancelar</button>
+      <button type="submit" class="btn-modal-submit" [disabled]="submitting()">
+        @if (submitting()) {
+          <span class="spinner"></span>
+        }
+        Criar
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal
+  [title]="'Editar Fatura'"
+  [visible]="showEditModal()"
+  (close)="closeEditModal()"
+>
+  <form [formGroup]="editForm" (ngSubmit)="submitEditForm()">
+    <div class="form-group">
+      <label for="editDescription">Descrição</label>
+      <input
+        type="text"
+        id="editDescription"
+        formControlName="description"
+        placeholder="Descrição da fatura"
+        [class.invalid]="editForm.controls.description.touched && editForm.controls.description.invalid"
+      >
+      @if (editForm.controls.description.touched && editForm.controls.description.hasError('required')) {
+        <span class="field-error">Descrição é obrigatória.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="editAmount">Valor (R$)</label>
+      <input
+        type="number"
+        id="editAmount"
+        formControlName="amount"
+        placeholder="0.00"
+        step="0.01"
+        min="0.01"
+        [class.invalid]="editForm.controls.amount.touched && editForm.controls.amount.invalid"
+      >
+      @if (editForm.controls.amount.touched && editForm.controls.amount.hasError('required')) {
+        <span class="field-error">Valor é obrigatório.</span>
+      } @else if (editForm.controls.amount.touched && editForm.controls.amount.hasError('min')) {
+        <span class="field-error">Valor deve ser maior que zero.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="editDueDate">Data de Vencimento</label>
+      <input
+        type="date"
+        id="editDueDate"
+        formControlName="dueDate"
+        [class.invalid]="editForm.controls.dueDate.touched && editForm.controls.dueDate.invalid"
+      >
+      @if (editForm.controls.dueDate.touched && editForm.controls.dueDate.hasError('required')) {
+        <span class="field-error">Data de vencimento é obrigatória.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="editUserId">Usuário</label>
+      <select
+        id="editUserId"
+        formControlName="userId"
+        [class.invalid]="editForm.controls.userId.touched && editForm.controls.userId.invalid"
+      >
+        <option value="" disabled>Selecione um usuário</option>
+        @for (user of users(); track user.id) {
+          <option [value]="user.id">{{ user.name }} ({{ user.email }})</option>
+        }
+      </select>
+      @if (editForm.controls.userId.touched && editForm.controls.userId.hasError('required')) {
+        <span class="field-error">Usuário é obrigatório.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="editPaidAt">Data de Pagamento</label>
+      <input
+        type="datetime-local"
+        id="editPaidAt"
+        formControlName="paidAt"
+      >
+      <span class="field-hint">Preencha para marcar como paga. Deixe vazio para manter pendente.</span>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-modal-cancel" (click)="closeEditModal()">Cancelar</button>
+      <button type="submit" class="btn-modal-submit" [disabled]="submitting()">
+        @if (submitting()) {
+          <span class="spinner"></span>
+        }
+        Atualizar
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-confirm-dialog
+  [visible]="showDeleteConfirm()"
+  title="Remover Fatura"
+  [message]="'Deseja remover a fatura ' + (deletingInvoice()?.description ?? '') + '? Esta ação não pode ser desfeita.'"
+  confirmLabel="Remover"
+  [destructive]="true"
+  [loading]="deleting()"
+  (confirm)="deleteInvoice()"
+  (cancel)="cancelDelete()"
+/>

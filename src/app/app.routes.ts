@@ -88,6 +88,14 @@ export const routes: Routes = [
         title: 'Tickets',
         canActivate: [permissionGuard],
         data: { resource: 'tickets', action: 'read' }
+      },
+      {
+        path: 'invoices',
+        loadComponent: () => import('./pages/dashboard/invoices/invoices-page')
+          .then(m => m.InvoicesPage),
+        title: 'Faturas',
+        canActivate: [permissionGuard],
+        data: { resource: 'invoices', action: 'read' }
       }
     ]
   }

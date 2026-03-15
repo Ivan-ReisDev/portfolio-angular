@@ -1,4 +1,4 @@
-export type Resource = 'contacts' | 'users' | 'roles' | 'permissions' | 'tickets';
+export type Resource = 'contacts' | 'users' | 'roles' | 'permissions' | 'tickets' | 'invoices';
 export type Action = 'create' | 'read' | 'update' | 'delete';
 export type Permission = `${Resource}:${Action}`;
 

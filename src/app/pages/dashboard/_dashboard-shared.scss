@@ -472,21 +472,21 @@
     box-shadow: 0 0 10px rgba(100, 50, 200, 0.1);
   }
 
-  &.badge-green, &.badge-status-closed, &.badge-priority-low {
+  &.badge-green, &.badge-status-closed, &.badge-priority-low, &.badge-status-paid {
     background: rgba(46, 204, 113, 0.1);
     color: #2ecc71;
     border: 1px solid rgba(46, 204, 113, 0.2);
     box-shadow: 0 0 10px rgba(46, 204, 113, 0.1);
   }
 
-  &.badge-yellow, &.badge-status-in-progress {
+  &.badge-yellow, &.badge-status-in-progress, &.badge-status-pending {
     background: rgba(241, 196, 15, 0.1);
     color: #f1c40f;
     border: 1px solid rgba(241, 196, 15, 0.2);
     box-shadow: 0 0 10px rgba(241, 196, 15, 0.1);
   }
 
-  &.badge-red, &.badge-priority-urgent, &.badge-error {
+  &.badge-red, &.badge-priority-urgent, &.badge-error, &.badge-status-overdue {
     background: rgba(231, 76, 60, 0.1);
     color: #e74c3c;
     border: 1px solid rgba(231, 76, 60, 0.2);

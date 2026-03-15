@@ -1,13 +1,4 @@
 <div class="dashboard-wrapper">
-  @if (isBrowser) {
-    <ngx-particles
-      [id]="'dashboard-particles'"
-      [options]="particlesOptions"
-      [particlesInit]="particlesInit"
-      class="particles-bg"
-    />
-  }
-
   <aside class="sidebar" [class.open]="sidebarOpen()">
     <div class="sidebar-header">
       <a href="/" class="sidebar-brand">

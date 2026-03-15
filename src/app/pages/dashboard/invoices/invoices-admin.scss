@@ -1,0 +1,62 @@
+@use '../dashboard-shared' as *;
+
+.description-cell {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email-cell {
+  color: $secondary-blue !important;
+}
+
+.amount-cell {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.amount-value {
+  font-weight: 700;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-files {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(67, 163, 190, 0.05);
+  border: 1px solid rgba(67, 163, 190, 0.3);
+  color: $secondary-blue;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(67, 163, 190, 0.1);
+    border-color: rgba(67, 163, 190, 0.5);
+    transform: translateY(-1px);
+  }
+}
+
+.comprovante-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-hint {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 12px;
+  font-style: italic;
+  margin-left: 4px;
+}
