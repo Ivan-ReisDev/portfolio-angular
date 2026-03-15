@@ -63,4 +63,8 @@ export class InvoiceApiService {
   deleteComprovante(invoiceId: string, fileId: string): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}/${invoiceId}/comprovantes/${fileId}`);
   }
+
+  notify(id: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.endpoint}/${id}/notify`, {});
+  }
 }

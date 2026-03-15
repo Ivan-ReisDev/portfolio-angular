@@ -53,6 +53,7 @@ export class InvoicesAdmin implements OnInit {
 
   readonly uploadingNotaFiscal = signal(false);
   readonly uploadingComprovante = signal(false);
+  readonly notifying = signal(false);
   private uploadTargetId = '';
 
   readonly canCreate = this.authService.hasPermission('invoices', 'create');
@@ -348,6 +349,27 @@ export class InvoicesAdmin implements OnInit {
           this.loadInvoices(this.currentPage());
         },
         error: () => this.toast.error('Erro ao remover comprovante.')
+      });
+  }
+
+  notifyInvoice(invoice: Invoice): void {
+    if (invoice.paidAt) {
+      this.toast.error('Fatura já está paga.');
+      return;
+    }
+    this.notifying.set(true);
+    this.invoiceApi
+      .notify(invoice.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.toast.success(res.message);
+          this.notifying.set(false);
+        },
+        error: () => {
+          this.toast.error('Erro ao enviar notificação.');
+          this.notifying.set(false);
+        }
       });
   }
 

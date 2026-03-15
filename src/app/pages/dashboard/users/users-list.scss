@@ -3,3 +3,10 @@
 .email-cell {
   color: $secondary-blue !important;
 }
+
+.field-hint {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 12px;
+  font-style: italic;
+  margin-left: 4px;
+}

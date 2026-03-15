@@ -73,6 +73,16 @@
                           <i class="fa-solid fa-file-circle-check"></i>
                         </button>
                       }
+                      @if (canUpdate && resolveStatus(invoice) !== 'paid') {
+                        <button
+                          class="action-btn notify"
+                          title="Notificar via WhatsApp"
+                          [disabled]="notifying()"
+                          (click)="notifyInvoice(invoice)"
+                        >
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      }
                       @if (canDelete) {
                         <button class="action-btn delete" title="Remover" (click)="confirmDelete(invoice)">
                           <i class="fa-solid fa-trash-can"></i>
@@ -376,6 +386,17 @@
     </div>
   </form>
 </app-modal>
+
+@if (uploadingNotaFiscal() || uploadingComprovante()) {
+  <div class="upload-overlay">
+    <div class="upload-card">
+      <div class="upload-spinner"></div>
+      <span class="upload-label">
+        {{ uploadingNotaFiscal() ? 'Enviando nota fiscal...' : 'Enviando comprovante...' }}
+      </span>
+    </div>
+  </div>
+}
 
 <app-confirm-dialog
   [visible]="showDeleteConfirm()"

@@ -2,6 +2,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  phone?: string;
   role: {
     id: string;
     name: string;
@@ -15,6 +16,7 @@ export interface CreateUserPayload {
   email: string;
   password: string;
   roleId: string;
+  phone?: string;
 }
 
 export interface UpdateUserPayload {
@@ -22,4 +24,5 @@ export interface UpdateUserPayload {
   email?: string;
   password?: string;
   roleId?: string;
+  phone?: string;
 }

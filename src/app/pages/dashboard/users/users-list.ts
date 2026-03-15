@@ -49,7 +49,8 @@ export class UsersList implements OnInit {
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    roleId: ['', [Validators.required]]
+    roleId: ['', [Validators.required]],
+    phone: ['']
   });
 
   get isEditing(): boolean {
@@ -105,7 +106,8 @@ export class UsersList implements OnInit {
       name: user.name,
       email: user.email,
       password: '',
-      roleId: user.role.id
+      roleId: user.role.id,
+      phone: user.phone ?? ''
     });
     this.userForm.controls.password.clearValidators();
     this.userForm.controls.password.setValidators([Validators.minLength(6)]);
@@ -129,7 +131,7 @@ export class UsersList implements OnInit {
     const values = this.userForm.getRawValue();
 
     if (this.isEditing) {
-      const payload: any = { name: values.name, email: values.email, roleId: values.roleId };
+      const payload: any = { name: values.name, email: values.email, roleId: values.roleId, phone: values.phone || undefined };
       if (values.password) payload.password = values.password;
 
       this.userApi
