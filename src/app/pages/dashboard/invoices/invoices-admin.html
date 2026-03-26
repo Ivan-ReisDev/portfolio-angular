@@ -78,7 +78,7 @@
                           class="action-btn notify"
                           title="Notificar via WhatsApp"
                           [disabled]="notifying()"
-                          (click)="notifyInvoice(invoice)"
+                          (click)="confirmNotify(invoice)"
                         >
                           <i class="fa-brands fa-whatsapp"></i>
                         </button>
@@ -407,4 +407,15 @@
   [loading]="deleting()"
   (confirm)="deleteInvoice()"
   (cancel)="cancelDelete()"
+/>
+
+<app-confirm-dialog
+  [visible]="showNotifyConfirm()"
+  title="Notificar via WhatsApp"
+  [message]="'Enviar notificação de cobrança da fatura ' + (notifyingInvoice()?.description ?? '') + ' para o usuário?'"
+  confirmLabel="Enviar"
+  [destructive]="false"
+  [loading]="notifying()"
+  (confirm)="notifyInvoice()"
+  (cancel)="cancelNotify()"
 />

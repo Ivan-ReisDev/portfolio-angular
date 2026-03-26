@@ -33,13 +33,14 @@ export class DashboardLayout {
     { label: 'Contatos', icon: 'fa-solid fa-address-book', route: '/dashboard/contacts', resource: 'contacts', action: 'read' },
     { label: 'Tickets', icon: 'fa-solid fa-ticket', route: '/dashboard/tickets', resource: 'tickets', action: 'read' },
     { label: 'Faturas', icon: 'fa-solid fa-file-invoice-dollar', route: '/dashboard/invoices', resource: 'invoices', action: 'read' },
-    { 
-      label: 'Administração', 
+    {
+      label: 'Administração',
       icon: 'fa-solid fa-user-shield',
       children: [
         { label: 'Usuários', icon: 'fa-solid fa-users', route: '/dashboard/users', resource: 'users', action: 'read' },
         { label: 'Roles', icon: 'fa-solid fa-shield-halved', route: '/dashboard/roles', resource: 'roles', action: 'read' },
-        { label: 'Permissões', icon: 'fa-solid fa-key', route: '/dashboard/permissions', resource: 'permissions', action: 'read' }
+        { label: 'Permissões', icon: 'fa-solid fa-key', route: '/dashboard/permissions', resource: 'permissions', action: 'read' },
+        { label: 'E-mails', icon: 'fa-solid fa-envelope', route: '/dashboard/emails' }
       ]
     }
   ];

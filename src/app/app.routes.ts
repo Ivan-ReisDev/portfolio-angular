@@ -96,6 +96,13 @@ export const routes: Routes = [
         title: 'Faturas',
         canActivate: [permissionGuard],
         data: { resource: 'invoices', action: 'read' }
+      },
+      {
+        path: 'emails',
+        loadComponent: () => import('./pages/dashboard/emails/emails-page')
+          .then(m => m.EmailsPage),
+        title: 'E-mails',
+        canActivate: [adminGuard]
       }
     ]
   }

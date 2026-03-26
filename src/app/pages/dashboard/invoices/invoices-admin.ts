@@ -51,6 +51,9 @@ export class InvoicesAdmin implements OnInit {
   readonly deletingInvoice = signal<Invoice | null>(null);
   readonly deleting = signal(false);
 
+  readonly showNotifyConfirm = signal(false);
+  readonly notifyingInvoice = signal<Invoice | null>(null);
+
   readonly uploadingNotaFiscal = signal(false);
   readonly uploadingComprovante = signal(false);
   readonly notifying = signal(false);
@@ -352,11 +355,24 @@ export class InvoicesAdmin implements OnInit {
       });
   }
 
-  notifyInvoice(invoice: Invoice): void {
+  confirmNotify(invoice: Invoice): void {
     if (invoice.paidAt) {
       this.toast.error('Fatura já está paga.');
       return;
     }
+    this.notifyingInvoice.set(invoice);
+    this.showNotifyConfirm.set(true);
+  }
+
+  cancelNotify(): void {
+    this.showNotifyConfirm.set(false);
+    this.notifyingInvoice.set(null);
+  }
+
+  notifyInvoice(): void {
+    const invoice = this.notifyingInvoice();
+    if (!invoice) return;
+
     this.notifying.set(true);
     this.invoiceApi
       .notify(invoice.id)
@@ -365,6 +381,8 @@ export class InvoicesAdmin implements OnInit {
         next: (res) => {
           this.toast.success(res.message);
           this.notifying.set(false);
+          this.showNotifyConfirm.set(false);
+          this.notifyingInvoice.set(null);
         },
         error: () => {
           this.toast.error('Erro ao enviar notificação.');

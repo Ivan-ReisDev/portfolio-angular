@@ -1,0 +1,115 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Enviar E-mail</h1>
+      <p class="page-subtitle">Envie e-mails personalizados usando templates pré-definidos</p>
+    </div>
+  </div>
+
+  <div class="template-selector">
+    <h3 class="section-label">Selecione o Template</h3>
+    <div class="template-cards">
+      @for (tpl of templates; track tpl.value) {
+        <button
+          class="template-card"
+          [class.active]="selectedTemplate() === tpl.value"
+          (click)="selectTemplate(tpl.value)"
+        >
+          <div class="template-icon">
+            <i [class]="tpl.icon"></i>
+          </div>
+          <div class="template-info">
+            <span class="template-name">{{ tpl.label }}</span>
+            <span class="template-desc">{{ tpl.description }}</span>
+          </div>
+          @if (selectedTemplate() === tpl.value) {
+            <i class="fa-solid fa-circle-check check-icon"></i>
+          }
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="sendEmail()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="to">Destinatário *</label>
+          <input
+            id="to"
+            type="email"
+            formControlName="to"
+            placeholder="email@exemplo.com"
+            [class.invalid]="form.controls.to.touched && form.controls.to.invalid"
+          />
+          @if (form.controls.to.touched && form.controls.to.hasError('required')) {
+            <span class="field-error">E-mail é obrigatório</span>
+          }
+          @if (form.controls.to.touched && form.controls.to.hasError('email')) {
+            <span class="field-error">E-mail inválido</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="contactName">Nome (saudação)</label>
+          <input
+            id="contactName"
+            type="text"
+            formControlName="contactName"
+            placeholder="Ex: Maria"
+          />
+          <span class="field-hint">Personaliza a saudação: "Olá, Maria,"</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Assunto</label>
+        <input
+          id="subject"
+          type="text"
+          formControlName="subject"
+          placeholder="Currículo Desenvolvedor Full-Stack (padrão)"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary btn-send"
+        [disabled]="form.invalid || sending()"
+      >
+        @if (sending()) {
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          Enviando...
+        } @else {
+          <i class="fa-solid fa-paper-plane"></i>
+          Enviar E-mail
+        }
+      </button>
+    </form>
+  </div>
+
+  @if (sentEmails().length > 0) {
+    <div class="history-card">
+      <h3 class="section-label">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        Enviados nesta sessão
+      </h3>
+      <div class="history-list">
+        @for (email of sentEmails(); track $index) {
+          <div class="history-item">
+            <div class="history-status">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="history-info">
+              <span class="history-to">{{ email.to }}</span>
+              <span class="history-template">
+                {{ email.template === 'recruiter' ? 'Recrutador' : 'Boas-vindas' }}
+              </span>
+            </div>
+            <span class="history-time">{{ email.sentAt | date:'HH:mm' }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
