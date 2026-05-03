@@ -12,6 +12,40 @@ $_scrollbar-thumb-hover: #6432c8;
   box-sizing: border-box;
 }
 
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #060608;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #060608;
+}
+
+html.home-page,
+html.home-page body {
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    overflow: auto;
+  }
+}
+
+html:not(.home-page),
+html:not(.home-page) body {
+  overflow: auto;
+}
+
 // ===== Custom Scrollbar =====
 
 // Firefox

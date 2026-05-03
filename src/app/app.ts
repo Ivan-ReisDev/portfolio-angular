@@ -105,12 +105,12 @@ export class App implements AfterViewInit, OnDestroy {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe((event) => {
-      const urlWithoutFragment = event.urlAfterRedirects.split('#')[0];
-      const isHome = urlWithoutFragment === '/' || urlWithoutFragment === '';
+      const currentPath = this.getPathWithoutQueryOrFragment(event.urlAfterRedirects);
+      const isHome = currentPath === '/';
       this.isHomePage.set(isHome);
 
       const hideHeaderRoutes = ['/login', '/dashboard'];
-      const shouldHideHeader = hideHeaderRoutes.some(r => urlWithoutFragment.startsWith(r));
+      const shouldHideHeader = hideHeaderRoutes.some(r => currentPath.startsWith(r));
       this.showHeader.set(!shouldHideHeader);
 
       this.updateHtmlOverflowClass(isHome);
@@ -120,7 +120,7 @@ export class App implements AfterViewInit, OnDestroy {
         setTimeout(() => {
           this.initializeScrollHandling();
 
-          const fragment = event.urlAfterRedirects.split('#')[1];
+          const fragment = this.router.parseUrl(event.urlAfterRedirects).fragment;
           if (fragment) {
             this.scrollToSection(fragment);
           }
@@ -175,14 +175,21 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   private updateIsHomePage(): void {
-    const urlWithoutFragment = this.router.url.split('#')[0];
-    this.isHomePage.set(urlWithoutFragment === '/' || urlWithoutFragment === '');
+    const currentPath = this.getPathWithoutQueryOrFragment(this.router.url);
+    this.isHomePage.set(currentPath === '/');
 
     const hideHeaderRoutes = ['/login', '/dashboard'];
-    const shouldHideHeader = hideHeaderRoutes.some(r => urlWithoutFragment.startsWith(r));
+    const shouldHideHeader = hideHeaderRoutes.some(r => currentPath.startsWith(r));
     this.showHeader.set(!shouldHideHeader);
 
     this.updateHtmlOverflowClass(this.isHomePage());
+  }
+
+  private getPathWithoutQueryOrFragment(url: string): string {
+    const primaryRoute = this.router.parseUrl(url).root.children['primary'];
+    const path = primaryRoute?.segments.map(segment => segment.path).join('/') ?? '';
+
+    return path ? `/${path}` : '/';
   }
 
   private updateHtmlOverflowClass(isHome: boolean): void {
