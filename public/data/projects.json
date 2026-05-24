@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": "provei-ai",
-      "title": "Provei.ai – Provador Virtual",
+      "title": "Provei.ai - Provador Virtual",
       "description": "Plataforma de provador virtual para e-commerces, permitindo que clientes visualizem produtos em seu próprio ambiente ou corpo antes da compra.",
       "fullDescription": "O Provei.ai é uma plataforma inovadora que oferece uma experiência de provador virtual para lojas online, permitindo que clientes vejam produtos em seu próprio ambiente ou corpo usando apenas uma foto. O sistema aumenta a taxa de conversão, reduz devoluções e melhora o engajamento dos usuários. A integração com e-commerces é simples e rápida, compatível com plataformas como Shopify, WordPress, VTEX e WooCommerce, via script leve. A aplicação foi desenvolvida priorizando performance, experiência do usuário e escalabilidade, tornando-se uma solução moderna e confiável para lojas digitais que desejam melhorar a experiência de compra.",
       "technologies": [
@@ -34,6 +34,40 @@
       ]
     },
     {
+      "id": "produtiva-grafica",
+      "title": "Gráfica Produtiva – Plataforma de Uniformes e Comunicação Visual",
+      "description": "Plataforma institucional e catálogo digital desenvolvido em Laravel para gráfica especializada em uniformes corporativos, brindes e comunicação visual no Rio de Janeiro.",
+      "fullDescription": "A Gráfica Produtiva é uma plataforma web completa desenvolvida em Laravel para uma gráfica com mais de 10 anos de experiência no mercado, especializada em uniformes corporativos, escolares, hospitalares e operacionais, além de brindes, produtos gráficos e comunicação visual. O sistema apresenta um catálogo digital robusto organizado por departamentos e categorias, com páginas individuais de produto, banners rotativos na home, seção de produtos em destaque, área institucional 'Quem Somos' e showcase de clientes atendidos. A integração com WhatsApp permite que visitantes solicitem orçamentos personalizados de forma rápida e direta, com mensagens pré-preenchidas por produto. O projeto foi desenvolvido com foco em SEO On-page, performance, responsividade e conversão, incluindo compliance com cookies/LGPD, certificados de segurança visíveis e estrutura de URLs amigáveis para indexação orgânica. A arquitetura em Laravel garante manutenção facilitada do catálogo, escalabilidade e flexibilidade para evolução contínua do sistema.",
+      "technologies": [
+        "Laravel",
+        "PHP",
+        "MySQL",
+        "Blade",
+        "Tailwind CSS",
+        "Alpine.js",
+        "SEO On-page"
+      ],
+      "images": [
+        "/images/produtiva-grafica/produtiva-grafica.png",
+        "/images/produtiva-grafica/produtiva-grafica-2.png",
+        "/images/produtiva-grafica/produtiva-grafica-3.png",
+        "/images/produtiva-grafica/produtiva-grafica-4.png",
+        "/images/produtiva-grafica/produtiva-grafica-5.png",
+        "/images/produtiva-grafica/produtiva-grafica-6.png"
+      ],
+      "demoUrl": "https://produtivagrafica.com.br",
+      "githubUrl": null,
+      "features": [
+        "Catálogo digital organizado por departamentos e categorias hierárquicas",
+        "Páginas individuais de produto com galeria de imagens e CTA de orçamento",
+        "Banners rotativos na home para destaques e campanhas sazonais",
+        "Integração com WhatsApp com mensagem pré-preenchida por produto",
+        "Estrutura otimizada para SEO On-page e indexação orgânica",
+        "Compliance com cookies/LGPD e certificados de segurança visíveis",
+        "Design responsivo mobile-first para todos os dispositivos"
+      ]
+    },
+    {
       "id": "construtiva-landing-page",
       "title": "Landing Page Construtiva Projetos e Reformas",
       "description": "Landing page institucional desenvolvida para apresentação de serviços e captação de leads no segmento de construção e reformas.",
@@ -59,7 +93,7 @@
     },
     {
       "id": "everyfans-platform",
-      "title": "EveryFans – Plataforma de Gestão para Criadores",
+      "title": "EveryFans - Plataforma de Gestão para Criadores",
       "description": "Plataforma SaaS com arquitetura de micro‑serviços para gestão, automação e processamento de conteúdo para criadores, com filas assíncronas, pagamentos via Stripe e edição de vídeo com IA.",
       "fullDescription": "O EveryFans é uma plataforma SaaS desenvolvida em arquitetura de micro‑serviços para criadores de conteúdo que desejam automatizar toda a sua rotina de produção digital. O backend em NestJS é dividido em serviços independentes que se comunicam por filas Redis (BullMQ), garantindo processamento assíncrono e escalável de tarefas pesadas como edição e transcodificação de vídeos. O processamento de vídeo utiliza integração com GPT para geração automática de cortes, legendas e thumbnails inteligentes. O sistema de pagamentos e assinaturas é gerenciado via Stripe, com webhooks para controle de planos e cobranças recorrentes. A plataforma reúne gestão de elenco, auto‑edição de vídeos e fotos, agendamento e publicação automática em redes sociais, analytics e armazenamento seguro, tudo orquestrado por containers Docker em ambiente de produção.",
       "technologies": [
@@ -96,7 +130,7 @@
     },
     {
       "id": "echo-ai",
-      "title": "Echo AI – Plataforma de Agentes Inteligentes",
+      "title": "Echo AI - Plataforma de Agentes Inteligentes",
       "description": "Plataforma de inteligência artificial que permite criar e conversar com agentes personalizados, integrando modelos GPT e Gemini com memória vetorial e processamento assíncrono.",
       "fullDescription": "O Echo AI foi uma plataforma de inteligência artificial desenvolvida para permitir que usuários criassem seus próprios agentes conversacionais personalizados. O sistema integrava modelos da OpenAI (GPT) e do Google (Gemini), oferecendo flexibilidade na escolha do modelo por agente. Cada agente contava com memória vetorial persistente via Supabase, permitindo conversas contextuais e recuperação inteligente de informações anteriores. A arquitetura foi construída com NestJS no backend, utilizando filas com Redis (BullMQ) para processamento assíncrono de mensagens e tarefas pesadas, garantindo escalabilidade e responsividade mesmo sob alta demanda. O frontend em React oferecia uma interface intuitiva para criação, configuração e interação com os agentes.",
       "technologies": [
@@ -196,7 +230,7 @@
     },
     {
       "id": "system-rhc",
-      "title": "System RHC – Sistema Policial para Habbo Hotel",
+      "title": "System RHC - Sistema Policial para Habbo Hotel",
       "description": "Plataforma web completa para gestão de uma organização policial no Habbo Hotel, com controle de alistamento, patentes, departamentos, relatórios e painel administrativo.",
       "fullDescription": "O System RHC é uma plataforma web desenvolvida para a RHC Corporation, voltada à gestão completa de uma polícia dentro do Habbo Hotel. No universo Habbo, organizações policiais funcionam como comunidades de role-play com hierarquia militar, e o system é a ferramenta central para administrar toda essa estrutura fora do jogo. A plataforma oferece sistema de alistamento para novos recrutas, gerenciamento de patentes e promoções com histórico completo, controle de departamentos e companhias, geração de relatórios de atividade, consulta de membros com status e dados atualizados, além de um painel administrativo com permissões por cargo. O projeto foi construído com foco em usabilidade, segurança dos dados e escalabilidade para suportar o crescimento da organização.",
       "technologies": [
@@ -228,7 +262,7 @@
     },
     {
       "id": "voz-rubro-negra",
-      "title": "Voz Rubro-Negra – Portal Automatizado do Flamengo",
+      "title": "Voz Rubro-Negra - Portal Automatizado do Flamengo",
       "description": "Portal de notícias automatizado com IA que escaneia a internet de hora em hora, gerando e publicando matérias sobre o Flamengo de forma autônoma.",
       "fullDescription": "O Voz Rubro-Negra é um portal de notícias personalizado e totalmente automatizado, dedicado ao Clube de Regatas do Flamengo. Assim como outros portais da mesma linha, o sistema conta com um cron job executado de 1 em 1 hora, acionando uma inteligência artificial que varre a internet em busca de novas notícias sobre o clube. Ao identificar novidades relevantes, a IA gera automaticamente uma matéria completa e publica no portal sem qualquer intervenção humana. O site oferece cobertura completa do Flamengo, incluindo agenda de jogos com informações de campeonatos como Série A e Copa Libertadores, seção de odds, newsletter e um blog com todo o histórico de publicações. O projeto foi desenvolvido com foco em performance, automação inteligente e experiência do usuário, garantindo que torcedores rubro-negros tenham acesso a conteúdo atualizado em tempo quase real.",
       "technologies": [
@@ -259,7 +293,7 @@
     },
     {
       "id": "blog-botafogo",
-      "title": "Coração Glorioso – Portal Automatizado do Botafogo",
+      "title": "Coração Glorioso - Portal Automatizado do Botafogo",
       "description": "Portal de notícias automatizado com IA que escaneia a internet de hora em hora, gerando e publicando matérias sobre o Botafogo de forma autônoma.",
       "fullDescription": "O Coração Glorioso é um portal de notícias personalizado e totalmente automatizado, dedicado ao Botafogo de Futebol e Regatas. O sistema conta com um cron job que executa de 1 em 1 hora, acionando uma inteligência artificial que varre a internet em busca de novas notícias sobre o clube. Quando identifica novidades relevantes, a IA gera automaticamente uma matéria completa e publica no portal sem qualquer intervenção humana. Além das notícias, o site oferece agenda de jogos, seção de odds, newsletter e um blog com todo o histórico de publicações. O projeto foi desenvolvido com foco em performance, automação inteligente e experiência do usuário, garantindo que torcedores tenham acesso a conteúdo atualizado em tempo quase real.",
       "technologies": [
