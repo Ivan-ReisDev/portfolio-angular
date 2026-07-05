@@ -1,0 +1,332 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - img "Loading..."
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "Logo Ivan .dev" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e6]:
+            - img "Logo" [ref=e7]
+            - generic [ref=e8]:
+              - text: Ivan
+              - generic [ref=e9]: .dev
+        - navigation [ref=e11]
+    - generic [ref=e16]:
+      - generic [ref=e19]:
+        - generic [ref=e20]: Ivan Reis
+        - heading "DESENVOLVEDOR FULL-STACK" [level=1] [ref=e21]:
+          - generic [ref=e22]: DESENVOLVEDOR
+          - generic [ref=e23]: FULL-STACK
+        - generic [ref=e24]:
+          - link "Ver Projetos" [ref=e25] [cursor=pointer]:
+            - /url: "#projetos"
+          - link "Contato" [ref=e26] [cursor=pointer]:
+            - /url: "#contato"
+      - generic [ref=e35]:
+        - main [ref=e36]:
+          - generic "Sobre Mim" [ref=e37]:
+            - heading "Sobre Mim" [level=2] [ref=e38]
+          - paragraph [ref=e39]:
+            - text: Desenvolvo soluções e automações escaláveis, integrando backend robusto e frontend moderno a recursos de inteligência artificial. Tenho mais de
+            - strong [ref=e40]: 4 anos de experiência
+            - text: na criação de APIs e aplicações com
+            - strong [ref=e41]: NestJS
+            - text: ","
+            - strong [ref=e42]: Express
+            - text: e
+            - strong [ref=e43]: FastAPI
+            - text: ", interfaces reativas com"
+            - strong [ref=e44]: React
+            - text: ","
+            - strong [ref=e45]: Next.js
+            - text: e
+            - strong [ref=e46]: Angular
+            - text: ", e modelagem de dados em"
+            - strong [ref=e47]: PostgreSQL
+            - text: . Também atuo com práticas de DevOps e integração contínua (GitHub Actions) e realizo deploys em AWS e Google Cloud. Meu foco é entregar sistemas testáveis, observáveis e altamente otimizados para produção.
+        - generic [ref=e50]:
+          - generic [ref=e51] [cursor=pointer]:
+            - generic [ref=e52]: 
+            - generic [ref=e53]: Nest.JS
+          - generic [ref=e54] [cursor=pointer]:
+            - generic [ref=e55]: 
+            - generic [ref=e56]: TypeScript
+          - generic [ref=e57] [cursor=pointer]:
+            - generic [ref=e58]: 
+            - generic [ref=e59]: JavaScript
+          - generic [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]: 
+            - generic [ref=e62]: Node.JS
+          - generic [ref=e63] [cursor=pointer]:
+            - generic [ref=e64]: 
+            - generic [ref=e65]: Express.js
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]: 
+            - generic [ref=e68]: Angular
+          - generic [ref=e69] [cursor=pointer]:
+            - generic [ref=e70]: 
+            - generic [ref=e71]: Next.js
+          - generic [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]: 
+            - generic [ref=e74]: React
+          - generic [ref=e75] [cursor=pointer]:
+            - generic [ref=e76]: 
+            - generic [ref=e77]: Python
+          - generic [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]: 
+            - generic [ref=e80]: FastAPI
+          - generic [ref=e81] [cursor=pointer]:
+            - generic [ref=e82]: 
+            - generic [ref=e83]: .Net
+          - generic [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: 
+            - generic [ref=e86]: PHP
+          - generic [ref=e87] [cursor=pointer]:
+            - generic [ref=e88]: 
+            - generic [ref=e89]: Symfony
+          - generic [ref=e90] [cursor=pointer]:
+            - generic [ref=e91]: 
+            - generic [ref=e92]: Laravel
+          - generic [ref=e93] [cursor=pointer]:
+            - generic [ref=e94]: 
+            - generic [ref=e95]: Tailwind.CSS
+          - generic [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]: 
+            - generic [ref=e98]: Mongo.DB
+          - generic [ref=e99] [cursor=pointer]:
+            - generic [ref=e100]: 
+            - generic [ref=e101]: PostgreSQL
+          - generic [ref=e102] [cursor=pointer]:
+            - generic [ref=e103]: 
+            - generic [ref=e104]: Redis
+          - generic [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]: 
+            - generic [ref=e107]: BullMQ
+          - generic [ref=e108] [cursor=pointer]:
+            - generic [ref=e109]: 
+            - generic [ref=e110]: Jest
+          - generic [ref=e111] [cursor=pointer]:
+            - generic [ref=e112]: 
+            - generic [ref=e113]: Docker
+          - generic [ref=e114] [cursor=pointer]:
+            - generic [ref=e115]: 
+            - generic [ref=e116]: AWS
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - generic "Projetos" [ref=e121]:
+            - heading "Projetos" [level=2] [ref=e122]
+          - paragraph [ref=e123]: Alguns dos meus trabalhos recentes
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - button "Projeto anterior" [ref=e128] [cursor=pointer]:
+              - generic [ref=e129]: 
+            - generic [ref=e130]:
+              - article [ref=e133]:
+                - link "Ver detalhes do projeto Provei.ai - Provador Virtual" [ref=e134] [cursor=pointer]:
+                  - /url: /projeto/provei-ai
+                  - img "Provei.ai - Provador Virtual" [ref=e136]
+                - generic [ref=e137]:
+                  - link "Provei.ai - Provador Virtual" [ref=e138] [cursor=pointer]:
+                    - /url: /projeto/provei-ai
+                    - heading "Provei.ai - Provador Virtual" [level=3] [ref=e139]
+                  - paragraph [ref=e140]: Plataforma de provador virtual para e-commerces, permitindo que clientes visualizem produtos em seu próprio ambiente ou corpo antes da compra.
+                  - generic [ref=e141]:
+                    - generic [ref=e142]:
+                      - generic [ref=e143]: 
+                      - text: NestJS
+                    - generic [ref=e144]:
+                      - generic [ref=e145]: 
+                      - text: Next.js
+                    - generic [ref=e146]:
+                      - generic [ref=e147]: 
+                      - text: TypeScript
+                  - link "Ver demonstracao" [ref=e149] [cursor=pointer]:
+                    - /url: https://provei.ai
+                    - generic [ref=e150]: 
+                    - text: Visitar Site
+              - article [ref=e153] [cursor=pointer]:
+                - link "Ver detalhes do projeto Gráfica Produtiva – Plataforma de Uniformes e Comunicação Visual" [ref=e154]:
+                  - /url: /projeto/produtiva-grafica
+                  - img "Gráfica Produtiva – Plataforma de Uniformes e Comunicação Visual" [ref=e156]
+                - generic [ref=e157]:
+                  - link "Gráfica Produtiva – Plataforma de Uniformes e Comunicação Visual" [ref=e158]:
+                    - /url: /projeto/produtiva-grafica
+                    - heading "Gráfica Produtiva – Plataforma de Uniformes e Comunicação Visual" [level=3] [ref=e159]
+                  - paragraph [ref=e160]: Plataforma institucional e catálogo digital desenvolvido em Laravel para gráfica especializada em uniformes corporativos, brindes e comunicação visual no Rio de Janeiro.
+                  - generic [ref=e161]:
+                    - generic [ref=e162]:
+                      - generic [ref=e163]: 
+                      - text: Laravel
+                    - generic [ref=e164]:
+                      - generic [ref=e165]: 
+                      - text: PHP
+                    - generic [ref=e166]:
+                      - generic [ref=e167]: 
+                      - text: MySQL
+                  - link "Ver demonstracao" [ref=e169]:
+                    - /url: https://produtivagrafica.com.br
+                    - generic [ref=e170]: 
+                    - text: Visitar Site
+              - article [ref=e173] [cursor=pointer]:
+                - link "Ver detalhes do projeto Coração Glorioso - Portal Automatizado do Botafogo" [ref=e174]:
+                  - /url: /projeto/blog-botafogo
+                  - img "Coração Glorioso - Portal Automatizado do Botafogo" [ref=e176]
+                - generic [ref=e177]:
+                  - link "Coração Glorioso - Portal Automatizado do Botafogo" [ref=e178]:
+                    - /url: /projeto/blog-botafogo
+                    - heading "Coração Glorioso - Portal Automatizado do Botafogo" [level=3] [ref=e179]
+                  - paragraph [ref=e180]: Portal de notícias automatizado com IA que escaneia a internet de hora em hora, gerando e publicando matérias sobre o Botafogo de forma autônoma.
+                  - generic [ref=e181]:
+                    - generic [ref=e182]:
+                      - generic [ref=e183]: 
+                      - text: Next.js
+                    - generic [ref=e184]:
+                      - generic [ref=e185]: 
+                      - text: TypeScript
+                    - generic [ref=e186]:
+                      - generic [ref=e187]: 
+                      - text: NestJS
+                  - link "Ver demonstracao" [ref=e189]:
+                    - /url: https://blog-botafogo.vercel.app
+                    - generic [ref=e190]: 
+                    - text: Visitar Site
+            - button "Próximo projeto" [ref=e191] [cursor=pointer]:
+              - generic [ref=e192]: 
+          - generic [ref=e193]:
+            - button "Ir para projeto 1" [ref=e194] [cursor=pointer]
+            - button "Ir para projeto 2" [ref=e195] [cursor=pointer]
+            - button "Ir para projeto 3" [ref=e196] [cursor=pointer]
+            - button "Ir para projeto 4" [ref=e197] [cursor=pointer]
+            - button "Ir para projeto 5" [ref=e198] [cursor=pointer]
+            - button "Ir para projeto 6" [ref=e199] [cursor=pointer]
+            - button "Ir para projeto 7" [ref=e200] [cursor=pointer]
+            - button "Ir para projeto 8" [ref=e201] [cursor=pointer]
+            - button "Ir para projeto 9" [ref=e202] [cursor=pointer]
+            - button "Ir para projeto 10" [ref=e203] [cursor=pointer]
+      - generic [ref=e206]:
+        - main [ref=e207]:
+          - generic "Progresso" [ref=e208]:
+            - heading "Progresso" [level=2] [ref=e209]
+          - paragraph [ref=e210]: Minha evolução profissional ao longo do tempo, reunindo experiências, cargos e formações que marcaram minha trajetória na área de tecnologia.
+        - generic [ref=e211]:
+          - generic [ref=e212]:
+            - generic [ref=e213]: Fevereiro 2026
+            - heading "Pós-Graduação em Segurança e Defesa Cibernética — UNINTER" [level=3] [ref=e214]
+            - paragraph: Início da especialização em Segurança e Defesa Cibernética no Centro Universitário Internacional UNINTER. O curso desenvolve competências profissionais em proteção de dados, sistemas e redes, abrangendo análise de vulnerabilidades, resposta a incidentes, criptografia, segurança ofensiva e defensiva, governança de segurança da informação e técnicas avançadas de defesa cibernética aplicadas a ambientes corporativos.
+          - generic [ref=e215]:
+            - generic [ref=e216]: Janeiro 2026
+            - heading "Pós-Graduação em Ciências de Dados e Inteligência Artificial — UNINTER" [level=3] [ref=e217]
+            - paragraph: Início da especialização em Ciências de Dados e Inteligência Artificial no Centro Universitário Internacional UNINTER. O curso abrange análise e modelagem de dados, aprendizado de máquina, deep learning, processamento de linguagem natural, visão computacional e técnicas avançadas de IA aplicadas à resolução de problemas reais.
+          - generic [ref=e218]:
+            - generic [ref=e219]: Janeiro 2025
+            - heading "Reverbs Tecnologia - Tech Lead/Desenvolvedor Full Stack" [level=3] [ref=e220]
+            - paragraph: Atuação como Tech Lead e Desenvolvedor Full Stack, liderando projetos de desenvolvimento web e APIs, com foco em arquitetura, escalabilidade e boas práticas. Criação de automações robustas e aplicações que utilizam inteligência artificial, além da implementação de soluções escaláveis com NestJS, Next.js, React (Vite), Redis, AWS, PostgreSQL, Docker, FastAPI, Google Cloud Compute e Supabase. Responsável também pela configuração e manutenção de pipelines de CI/CD com GitHub Actions, automatizando testes, builds e deploys.
+          - button "mostrar mais " [ref=e221] [cursor=pointer]:
+            - text: mostrar mais
+            - generic [ref=e222]: 
+      - generic [ref=e225]:
+        - generic [ref=e226]:
+          - generic "Blog" [ref=e227]:
+            - heading "Blog" [level=2] [ref=e228]
+          - paragraph [ref=e229]: Cheatsheets, artigos e receitas de código
+        - generic [ref=e230]:
+          - 'link "Cheatsheet Dockerfile: Guia Completo do Básico ao Avançado Cheatsheet Cheatsheet Dockerfile: Guia Completo do Básico ao Avançado Referência definitiva com tudo sobre Dockerfile: instruções essenciais, multi-stage builds, otimização de layers, cache, segurança, .dockerignore e boas práticas para imagens de produção. Por Ivan Reis Ler mais" [ref=e231] [cursor=pointer]':
+            - /url: /blog/cheatsheet-dockerfile-guia-completo
+            - generic [ref=e232]:
+              - 'img "Cheatsheet Dockerfile: Guia Completo do Básico ao Avançado" [ref=e233]'
+              - generic [ref=e234]: Cheatsheet
+            - 'heading "Cheatsheet Dockerfile: Guia Completo do Básico ao Avançado" [level=3] [ref=e235]'
+            - paragraph [ref=e236]: "Referência definitiva com tudo sobre Dockerfile: instruções essenciais, multi-stage builds, otimização de layers, cache, segurança, .dockerignore e boas práticas para imagens de produção."
+            - generic [ref=e237]:
+              - generic [ref=e238]: Por Ivan Reis
+              - generic [ref=e239]: Ler mais
+          - generic [ref=e240]:
+            - 'link "Cheatsheet Angular: Guia Completo do Básico ao Avançado Cheatsheet Cheatsheet Angular: Guia Completo do Básico ao Avançado Referência definitiva com tudo sobre Angular moderno: CLI, componentes standalone, signals, templates, diretivas, pipes, services, roteamento, formulários, HTTP, SSR e boas práticas. Por Ivan Reis Ler mais" [ref=e241] [cursor=pointer]':
+              - /url: /blog/cheatsheet-angular-guia-completo
+              - generic [ref=e242]:
+                - 'img "Cheatsheet Angular: Guia Completo do Básico ao Avançado" [ref=e243]'
+                - generic [ref=e244]: Cheatsheet
+              - generic [ref=e245]:
+                - 'heading "Cheatsheet Angular: Guia Completo do Básico ao Avançado" [level=3] [ref=e246]'
+                - paragraph [ref=e247]: "Referência definitiva com tudo sobre Angular moderno: CLI, componentes standalone, signals, templates, diretivas, pipes, services, roteamento, formulários, HTTP, SSR e boas práticas."
+                - generic [ref=e248]:
+                  - generic [ref=e249]: Por Ivan Reis
+                  - generic [ref=e250]: Ler mais
+            - 'link "Cheatsheet Docker Compose: Comandos e Estruturas Essenciais Cheatsheet Cheatsheet Docker Compose: Comandos e Estruturas Essenciais Referência completa com os comandos Docker Compose mais usados no dia a dia, cobrindo build, logs, redes, health checks, profiles, limites de recursos e boas práticas para projetos multi-serviço. Por Ivan Reis Ler mais" [ref=e251] [cursor=pointer]':
+              - /url: /blog/cheatsheet-docker-compose-comandos-essenciais
+              - generic [ref=e252]:
+                - 'img "Cheatsheet Docker Compose: Comandos e Estruturas Essenciais" [ref=e253]'
+                - generic [ref=e254]: Cheatsheet
+              - generic [ref=e255]:
+                - 'heading "Cheatsheet Docker Compose: Comandos e Estruturas Essenciais" [level=3] [ref=e256]'
+                - paragraph [ref=e257]: Referência completa com os comandos Docker Compose mais usados no dia a dia, cobrindo build, logs, redes, health checks, profiles, limites de recursos e boas práticas para projetos multi-serviço.
+                - generic [ref=e258]:
+                  - generic [ref=e259]: Por Ivan Reis
+                  - generic [ref=e260]: Ler mais
+            - 'link "Cheatsheet SQL: Comandos Essenciais do Básico ao Avançado Cheatsheet Cheatsheet SQL: Comandos Essenciais do Básico ao Avançado Referência completa com os comandos SQL mais usados no dia a dia, cobrindo CRUD, JOINs, agregações, window functions, CTEs, transações, índices e controle de acesso. Por Ivan Reis Ler mais" [ref=e261] [cursor=pointer]':
+              - /url: /blog/cheatsheet-sql-comandos-essenciais
+              - generic [ref=e262]:
+                - 'img "Cheatsheet SQL: Comandos Essenciais do Básico ao Avançado" [ref=e263]'
+                - generic [ref=e264]: Cheatsheet
+              - generic [ref=e265]:
+                - 'heading "Cheatsheet SQL: Comandos Essenciais do Básico ao Avançado" [level=3] [ref=e266]'
+                - paragraph [ref=e267]: Referência completa com os comandos SQL mais usados no dia a dia, cobrindo CRUD, JOINs, agregações, window functions, CTEs, transações, índices e controle de acesso.
+                - generic [ref=e268]:
+                  - generic [ref=e269]: Por Ivan Reis
+                  - generic [ref=e270]: Ler mais
+        - link "Ver Todos" [ref=e272] [cursor=pointer]:
+          - /url: /blog
+      - generic [ref=e275]:
+        - generic "Contato" [ref=e276]:
+          - heading "Contato" [level=2] [ref=e277]
+        - generic [ref=e278]:
+          - heading "E aí! Gostou do que viu? Vamos trabalhar juntos!" [level=2] [ref=e279]:
+            - text: E aí! Gostou do que viu?
+            - generic [ref=e280]: Vamos trabalhar juntos!
+          - generic [ref=e281]:
+            - generic [ref=e282]:
+              - generic [ref=e283]: Nome
+              - textbox "Nome" [ref=e284]:
+                - /placeholder: Seu nome
+            - generic [ref=e285]:
+              - generic [ref=e286]: Email
+              - textbox "Email" [ref=e287]:
+                - /placeholder: seu@email.com
+            - generic [ref=e288]:
+              - generic [ref=e289]: Telefone (opcional)
+              - textbox "Telefone (opcional)" [ref=e290]:
+                - /placeholder: (11) 99999-9999
+            - generic [ref=e291]:
+              - generic [ref=e292]: Mensagem
+              - textbox "Mensagem" [ref=e293]:
+                - /placeholder: Sua mensagem...
+            - button "Enviar Mensagem " [ref=e294] [cursor=pointer]:
+              - text: Enviar Mensagem
+              - generic [ref=e295]: 
+      - contentinfo [ref=e297]:
+        - generic [ref=e298]:
+          - paragraph [ref=e299]: © 2026 - Desenvolvido e projetado por Ivan Reis
+          - generic [ref=e300]:
+            - link "GitHub" [ref=e301] [cursor=pointer]:
+              - /url: https://github.com/Ivan-ReisDev
+              - generic [ref=e302]: 
+            - link "LinkedIn" [ref=e303] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/ivan-reis-b93b32248
+              - generic [ref=e304]: 
+            - link "WhatsApp" [ref=e305] [cursor=pointer]:
+              - /url: https://wa.me/5521985598348?text=Ol%C3%A1!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20trabalharmos%20juntos.%20Podemos%20trocar%20uma%20ideia%3F
+              - generic [ref=e306]: 
+    - complementary [ref=e307]:
+      - link "" [ref=e308] [cursor=pointer]:
+        - /url: https://github.com/Ivan-ReisDev
+        - generic [ref=e309]: 
+      - link "" [ref=e310] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/ivan-reis-b93b32248
+        - generic [ref=e311]: 
+      - link "" [ref=e312] [cursor=pointer]:
+        - /url: https://wa.me/5521985598348?text=Ol%C3%A1!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20trabalharmos%20juntos.%20Podemos%20trocar%20uma%20ideia%3F
+        - generic [ref=e313]: 
+    - img "Loading" [ref=e318]

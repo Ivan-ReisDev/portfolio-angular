@@ -1,0 +1,275 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "(21) 97009-4262" [ref=e5] [cursor=pointer]:
+      - /url: https://wa.me/5521970094262
+      - img [ref=e6]
+      - text: (21) 97009-4262
+    - generic [ref=e8]: uniformes de qualidade com agilidade
+  - banner [ref=e9]:
+    - generic [ref=e12]:
+      - link "Gráfica Produtiva" [ref=e13] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br
+        - img "Gráfica Produtiva" [ref=e14]
+      - navigation [ref=e15]:
+        - link "Início" [ref=e16] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br
+        - generic [ref=e17]: "|"
+        - link "Uniformes" [ref=e18] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/uniformes
+        - generic [ref=e19]: "|"
+        - link "Brindes" [ref=e20] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/brindes
+        - generic [ref=e21]: "|"
+        - link "Produtos Gráficos" [ref=e22] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/produtos-graficos
+        - generic [ref=e23]: "|"
+        - link "Comunicação Visual" [ref=e24] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/comunicacao-visual
+        - generic [ref=e25]: "|"
+        - link "Catálogo" [ref=e26] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/catalogo
+        - generic [ref=e27]: "|"
+        - link "Sobre" [ref=e28] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/sobre
+      - link "Baixar Catálogo" [ref=e30] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br/catalogo-produtos-produtiva.pdf
+        - img [ref=e31]
+        - generic [ref=e34]: Baixar Catálogo
+  - main [ref=e35]:
+    - navigation "Breadcrumb" [ref=e38]:
+      - link "Início" [ref=e39] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br
+      - img [ref=e40]
+      - link "Catálogo" [ref=e42] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br/catalogo
+      - img [ref=e43]
+      - link "Camisa Polo" [ref=e45] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br/categoria/camisa-polo
+      - img [ref=e46]
+      - generic [ref=e48]: Polo Tradicional Masculina
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - img "Polo Tradicional Masculina" [ref=e58]
+          - button "Imagem anterior" [ref=e59]:
+            - img [ref=e60]
+          - button "Próxima imagem" [ref=e62]:
+            - img [ref=e63]
+        - generic [ref=e65]:
+          - button "Polo Tradicional Masculina" [ref=e66]:
+            - img "Polo Tradicional Masculina" [ref=e67]
+          - button "Polo Tradicional Masculina" [ref=e68]:
+            - img "Polo Tradicional Masculina" [ref=e69]
+          - button "Polo Tradicional Masculina" [ref=e70]:
+            - img "Polo Tradicional Masculina" [ref=e71]
+      - generic [ref=e72]:
+        - link "Camisa Polo" [ref=e73] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/categoria/camisa-polo
+        - heading "Polo Tradicional Masculina" [level=1] [ref=e74]
+        - generic [ref=e76]: Destaque
+        - paragraph [ref=e78]:
+          - text: "- Malha Pique 50 % Poliéster / 50 % Algodão"
+          - text: "- Malha Poliéster"
+          - text: "- Malha Algodão"
+          - text: "- entre outras"
+        - button "Ver Tabela de Medidas" [ref=e80]:
+          - img [ref=e81]
+          - text: Ver Tabela de Medidas
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - heading "Solicitar Orçamento" [level=2] [ref=e86]:
+              - img [ref=e87]
+              - text: Solicitar Orçamento
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - generic [ref=e91]: Quantidade por tamanho
+                - generic [ref=e92]:
+                  - generic [ref=e93]:
+                    - generic [ref=e94]: P
+                    - textbox "0" [ref=e95]
+                  - generic [ref=e96]:
+                    - generic [ref=e97]: M
+                    - textbox "0" [ref=e98]
+                  - generic [ref=e99]:
+                    - generic [ref=e100]: G
+                    - textbox "0" [ref=e101]
+                  - generic [ref=e102]:
+                    - generic [ref=e103]: GG
+                    - textbox "0" [ref=e104]
+                  - generic [ref=e105]:
+                    - generic [ref=e106]: XXG
+                    - textbox "0" [ref=e107]
+                  - generic [ref=e108]:
+                    - generic [ref=e109]: T6
+                    - textbox "0" [ref=e110]
+                  - generic [ref=e111]:
+                    - generic [ref=e112]: T8
+                    - textbox "0" [ref=e113]
+                  - generic [ref=e114]:
+                    - generic [ref=e115]: T10
+                    - textbox "0" [ref=e116]
+              - generic [ref=e117]:
+                - generic [ref=e118]: Cor
+                - combobox [ref=e119]:
+                  - option "Selecione..." [selected]
+                  - option "Branca"
+                  - option "Preta"
+                  - option "Cinza mescla"
+                  - option "Cinza chumbo"
+                  - option "Cinza gelo"
+                  - option "Cinza grafiti"
+                  - option "Areia"
+                  - option "Caqui"
+                  - option "Amarelo ouro"
+                  - option "Amarelo canário"
+                  - option "Azul royal"
+                  - option "Azul marinho"
+                  - option "Azul cedae"
+                  - option "Azul turquesa"
+                  - option "Azul motorista"
+                  - option "Verde bandeira"
+                  - option "Verde água"
+                  - option "Verde limão"
+                  - option "Vede musgo"
+                  - option "Toti"
+                  - option "Rosa bb"
+                  - option "Rosa Pink"
+                  - option "Vermelho"
+                  - option "Vinho"
+                  - option "Laranja"
+                  - option "Marron"
+                  - option "entre outras"
+          - link "Enviar pelo WhatsApp" [ref=e120] [cursor=pointer]:
+            - /url: https://wa.me/5521970094262?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20este%20produto%3A%20*Polo%20Tradicional%20Masculina%20*%0Ahttps%3A%2F%2Fprodutivagrafica.com.br%2Fproduto%2Fpolo-tradicional-masculina
+            - img [ref=e121]
+            - text: Enviar pelo WhatsApp
+    - generic [ref=e124]:
+      - generic [ref=e126]:
+        - text: Você também pode gostar
+        - heading "Produtos Relacionados" [level=2] [ref=e127]
+      - generic [ref=e129]:
+        - link "Polo Diferenciada Ver Detalhes Destaque Camisa Polo Polo Diferenciada" [ref=e130] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/polo-diferenciada
+          - generic [ref=e131]:
+            - img "Polo Diferenciada" [ref=e132]
+            - generic [ref=e135]: Ver Detalhes
+            - generic [ref=e136]: Destaque
+          - generic [ref=e137]:
+            - text: Camisa Polo
+            - heading "Polo Diferenciada" [level=3] [ref=e138]
+        - link "Polo Tradicional Feminina Ver Detalhes Camisa Polo Polo Tradicional Feminina" [ref=e140] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/polo-tradicional-feminina
+          - generic [ref=e141]:
+            - img "Polo Tradicional Feminina" [ref=e142]
+            - generic [ref=e145]: Ver Detalhes
+          - generic [ref=e146]:
+            - text: Camisa Polo
+            - heading "Polo Tradicional Feminina" [level=3] [ref=e147]
+  - contentinfo [ref=e149]:
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - generic [ref=e155]:
+          - img "Gráfica Produtiva" [ref=e156]
+          - paragraph [ref=e157]: UNIFORMES · GRÁFICA · COMUNICAÇÃO VISUAL
+          - paragraph [ref=e158]: Qualidade e identidade visual para sua empresa. Uniformes, impressos e comunicação visual – Rio de Janeiro.
+          - generic [ref=e161]: Feito com dedicação
+        - generic [ref=e162]:
+          - generic [ref=e163]: Departamentos
+          - list [ref=e164]:
+            - listitem [ref=e165]:
+              - link "Uniformes" [ref=e166] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/uniformes
+            - listitem [ref=e167]:
+              - link "Brindes" [ref=e168] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/brindes
+            - listitem [ref=e169]:
+              - link "Produtos Gráficos" [ref=e170] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/produtos-graficos
+            - listitem [ref=e171]:
+              - link "Comunicação Visual" [ref=e172] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/comunicacao-visual
+        - generic [ref=e173]:
+          - generic [ref=e174]: Categorias
+          - list [ref=e175]:
+            - listitem [ref=e176]:
+              - link "Calça" [ref=e177] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/calca
+            - listitem [ref=e178]:
+              - link "Operacionais" [ref=e179] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/operacionais
+            - listitem [ref=e180]:
+              - link "Restaurante" [ref=e181] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/restaurante
+            - listitem [ref=e182]:
+              - link "Bonés" [ref=e183] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/bones
+            - listitem [ref=e184]:
+              - link "Hospitalar" [ref=e185] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/hospitalar
+        - generic [ref=e186]:
+          - generic [ref=e187]: Informações
+          - list [ref=e188]:
+            - listitem [ref=e189]:
+              - link "Quem Somos" [ref=e190] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/sobre
+            - listitem [ref=e191]: Frete Grátis
+            - listitem [ref=e192]:
+              - link "Fale Conosco" [ref=e193] [cursor=pointer]:
+                - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+        - generic [ref=e194]:
+          - generic [ref=e195]: Contato
+          - generic [ref=e196]:
+            - link "(21) 97009-4262" [ref=e197] [cursor=pointer]:
+              - /url: https://wa.me/5521970094262
+              - img [ref=e198]
+              - text: (21) 97009-4262
+            - generic [ref=e200]:
+              - img [ref=e201]
+              - generic [ref=e204]: "Seg a Sex: 9h às 18h"
+            - link "produtivagrafica@gmail.com" [ref=e205] [cursor=pointer]:
+              - /url: mailto:produtivagrafica@gmail.com
+              - img [ref=e206]
+              - generic [ref=e209]: produtivagrafica@gmail.com
+            - link "@grafica_produtiva" [ref=e210] [cursor=pointer]:
+              - /url: https://instagram.com/grafica_produtiva
+              - img [ref=e211]
+              - generic [ref=e215]: "@grafica_produtiva"
+      - generic [ref=e217]:
+        - generic [ref=e218]:
+          - heading "Formas de Pagamento" [level=4] [ref=e219]
+          - generic [ref=e220]:
+            - generic [ref=e221]:
+              - img "Visa"
+            - generic [ref=e222]:
+              - img "Mastercard"
+            - generic [ref=e223]:
+              - img "Elo"
+            - generic [ref=e224]:
+              - img "Hipercard"
+            - generic [ref=e225]:
+              - img "Diners Club"
+            - generic [ref=e226]:
+              - img "Boleto"
+            - generic [ref=e227]:
+              - img "Depósito"
+        - generic [ref=e228]:
+          - heading "Certificados de Segurança" [level=4] [ref=e229]
+          - generic [ref=e230]:
+            - img "Google Safe Browsing"
+            - img "Loja Protegida - Certificado SSL"
+        - generic [ref=e231]:
+          - heading "Formas de Envio" [level=4] [ref=e232]
+          - generic [ref=e233]:
+            - img "Correios"
+            - img "PAC"
+            - img "Retirada no local"
+            - img "Motoboy"
+      - generic [ref=e235]:
+        - paragraph [ref=e236]: © 2026 Gráfica Produtiva. Todos os direitos reservados.
+        - paragraph [ref=e237]:
+          - text: Desenvolvido por
+          - link "Ivan Reis" [ref=e238] [cursor=pointer]:
+            - /url: https://ivanreis.com.br
+  - link "WhatsApp" [ref=e239] [cursor=pointer]:
+    - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+    - img [ref=e240]

@@ -10,7 +10,7 @@ const serverConfig: ApplicationConfig = {
     {
       provide: API_CONFIG,
       useFactory: () => ({
-        baseUrl: process.env['API_URL'] || 'https://api.ivanreis.com.br/api'
+        baseUrl: process.env['API_URL'] || 'https://q48pypbs7k3f7ke8g0ccura9.136.248.103.132.sslip.io/api'
       })
     }
   ]

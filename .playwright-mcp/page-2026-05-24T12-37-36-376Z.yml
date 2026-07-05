@@ -1,0 +1,324 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "(21) 97009-4262" [ref=e5] [cursor=pointer]:
+      - /url: https://wa.me/5521970094262
+      - img [ref=e6]
+      - text: (21) 97009-4262
+    - generic [ref=e8]: uniformes de qualidade com agilidade
+  - banner [ref=e9]:
+    - generic [ref=e12]:
+      - link "Gráfica Produtiva" [ref=e13] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br
+        - img "Gráfica Produtiva" [ref=e14]
+      - navigation [ref=e15]:
+        - link "Início" [ref=e16] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br
+        - generic [ref=e17]: "|"
+        - link "Uniformes" [ref=e18] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/uniformes
+        - generic [ref=e19]: "|"
+        - link "Brindes" [ref=e20] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/brindes
+        - generic [ref=e21]: "|"
+        - link "Produtos Gráficos" [ref=e22] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/produtos-graficos
+        - generic [ref=e23]: "|"
+        - link "Comunicação Visual" [ref=e24] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/departamento/comunicacao-visual
+        - generic [ref=e25]: "|"
+        - link "Catálogo" [ref=e26] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/catalogo
+        - generic [ref=e27]: "|"
+        - link "Sobre" [ref=e28] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/sobre
+      - link "Baixar Catálogo" [ref=e30] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br/catalogo-produtos-produtiva.pdf
+        - img [ref=e31]
+        - generic [ref=e34]: Baixar Catálogo
+  - main [ref=e35]:
+    - navigation "Breadcrumb" [ref=e38]:
+      - link "Início" [ref=e39] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br
+      - img [ref=e40]
+      - generic [ref=e42]: Catálogo
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - text: Nossos Produtos
+          - heading "Catálogo Completo" [level=1] [ref=e49]
+        - generic [ref=e51]: 42 produtos
+      - generic [ref=e52]:
+        - complementary [ref=e53]:
+          - generic [ref=e54]:
+            - heading "Categorias" [level=2] [ref=e55]
+            - list [ref=e56]:
+              - listitem [ref=e57]:
+                - link "Todos" [ref=e58] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/catalogo
+                  - text: Todos
+              - listitem [ref=e60]:
+                - link "Caneca" [ref=e61] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/caneca
+              - listitem [ref=e62]:
+                - link "Camisa Social" [ref=e63] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/camisa-social
+              - listitem [ref=e64]:
+                - link "Panfletos" [ref=e65] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/panfletos
+              - listitem [ref=e66]:
+                - link "Camisa Polo" [ref=e67] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/camisa-polo
+              - listitem [ref=e68]:
+                - link "Camisa T-shirt" [ref=e69] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/camisa-t-shirt
+              - listitem [ref=e70]:
+                - link "Colete" [ref=e71] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/colete
+              - listitem [ref=e72]:
+                - link "Sublimação Total" [ref=e73] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/sublimacao-total
+              - listitem [ref=e74]:
+                - link "Hospitalar" [ref=e75] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/hospitalar
+              - listitem [ref=e76]:
+                - link "Operacionais" [ref=e77] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/operacionais
+              - listitem [ref=e78]:
+                - link "Restaurante" [ref=e79] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/restaurante
+              - listitem [ref=e80]:
+                - link "Bonés" [ref=e81] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/bones
+              - listitem [ref=e82]:
+                - link "Calça" [ref=e83] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/calca
+              - listitem [ref=e84]:
+                - link "Personalizados" [ref=e85] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/personalizados
+              - listitem [ref=e86]:
+                - link "Cracha" [ref=e87] [cursor=pointer]:
+                  - /url: https://produtivagrafica.com.br/categoria/cracha
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - link "Sacochila Ver Detalhes Personalizados Sacochila" [ref=e90] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/sacochila
+              - generic [ref=e91]:
+                - img "Sacochila" [ref=e92]
+                - generic [ref=e95]: Ver Detalhes
+              - generic [ref=e96]:
+                - text: Personalizados
+                - heading "Sacochila" [level=3] [ref=e97]
+            - link "Squeezes Personalizadas Ver Detalhes Personalizados Squeezes Personalizadas" [ref=e99] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/squeezes-personalizadas
+              - generic [ref=e100]:
+                - img "Squeezes Personalizadas" [ref=e101]
+                - generic [ref=e104]: Ver Detalhes
+              - generic [ref=e105]:
+                - text: Personalizados
+                - heading "Squeezes Personalizadas" [level=3] [ref=e106]
+            - link "Conjunto Brim Manga Curta Ver Detalhes Operacionais Conjunto Brim Manga Curta" [ref=e108] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/conjunto-brim-manga-curta
+              - generic [ref=e109]:
+                - img "Conjunto Brim Manga Curta" [ref=e110]
+                - generic [ref=e113]: Ver Detalhes
+              - generic [ref=e114]:
+                - text: Operacionais
+                - heading "Conjunto Brim Manga Curta" [level=3] [ref=e115]
+            - link "Bota cano Longo Ver Detalhes Operacionais Bota cano Longo" [ref=e117] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/bota-cano-longo
+              - generic [ref=e118]:
+                - img "Bota cano Longo" [ref=e119]
+                - generic [ref=e122]: Ver Detalhes
+              - generic [ref=e123]:
+                - text: Operacionais
+                - heading "Bota cano Longo" [level=3] [ref=e124]
+            - link "Bota cano Curto Ver Detalhes Operacionais Bota cano Curto" [ref=e126] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/bota-cano-curto
+              - generic [ref=e127]:
+                - img "Bota cano Curto" [ref=e128]
+                - generic [ref=e131]: Ver Detalhes
+              - generic [ref=e132]:
+                - text: Operacionais
+                - heading "Bota cano Curto" [level=3] [ref=e133]
+            - link "Avental Saia / Comim e Garçon Ver Detalhes Destaque Restaurante Avental Saia / Comim e Garçon" [ref=e135] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/avental-saia-comim-e-garcon
+              - generic [ref=e136]:
+                - img "Avental Saia / Comim e Garçon" [ref=e137]
+                - generic [ref=e140]: Ver Detalhes
+                - generic [ref=e141]: Destaque
+              - generic [ref=e142]:
+                - text: Restaurante
+                - heading "Avental Saia / Comim e Garçon" [level=3] [ref=e143]
+            - link "Dolmã Jaleco Ver Detalhes Restaurante Dolmã Jaleco" [ref=e145] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/dolma-jaleco
+              - generic [ref=e146]:
+                - img "Dolmã Jaleco" [ref=e147]
+                - generic [ref=e150]: Ver Detalhes
+              - generic [ref=e151]:
+                - text: Restaurante
+                - heading "Dolmã Jaleco" [level=3] [ref=e152]
+            - link "Bonés Bordado Ver Detalhes Bonés Bonés Bordado" [ref=e154] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/bones-bordado
+              - generic [ref=e155]:
+                - img "Bonés Bordado" [ref=e156]
+                - generic [ref=e159]: Ver Detalhes
+              - generic [ref=e160]:
+                - text: Bonés
+                - heading "Bonés Bordado" [level=3] [ref=e161]
+            - link "Calça Carijó Ver Detalhes Calça Calça Carijó" [ref=e163] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/calca-carijo
+              - generic [ref=e164]:
+                - img "Calça Carijó" [ref=e165]
+                - generic [ref=e168]: Ver Detalhes
+              - generic [ref=e169]:
+                - text: Calça
+                - heading "Calça Carijó" [level=3] [ref=e170]
+            - link "Calça Social Masculina Ver Detalhes Calça Calça Social Masculina" [ref=e172] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/calca-social-masculina
+              - generic [ref=e173]:
+                - img "Calça Social Masculina" [ref=e174]
+                - generic [ref=e177]: Ver Detalhes
+              - generic [ref=e178]:
+                - text: Calça
+                - heading "Calça Social Masculina" [level=3] [ref=e179]
+            - link "Calça Social Feminina Ver Detalhes Calça Calça Social Feminina" [ref=e181] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/calca-social-feminina
+              - generic [ref=e182]:
+                - img "Calça Social Feminina" [ref=e183]
+                - generic [ref=e186]: Ver Detalhes
+              - generic [ref=e187]:
+                - text: Calça
+                - heading "Calça Social Feminina" [level=3] [ref=e188]
+            - link "Ecobag Personalizada Ver Detalhes Personalizados Ecobag Personalizada" [ref=e190] [cursor=pointer]:
+              - /url: https://produtivagrafica.com.br/produto/ecobag-personalizada
+              - generic [ref=e191]:
+                - img "Ecobag Personalizada" [ref=e192]
+                - generic [ref=e195]: Ver Detalhes
+              - generic [ref=e196]:
+                - text: Personalizados
+                - heading "Ecobag Personalizada" [level=3] [ref=e197]
+          - navigation "Pagination Navigation" [ref=e200]:
+            - generic [ref=e201]:
+              - img [ref=e203]
+              - generic [ref=e205]: "1"
+              - link "Go to page 2" [ref=e206] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/catalogo?page=2
+                - text: "2"
+              - link "Go to page 3" [ref=e207] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/catalogo?page=3
+                - text: "3"
+              - link "Go to page 4" [ref=e208] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/catalogo?page=4
+                - text: "4"
+              - link "pagination.next" [ref=e209] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/catalogo?page=2
+                - img [ref=e210]
+            - paragraph [ref=e212]: Exibindo 1–12 de 42 produtos
+  - contentinfo [ref=e213]:
+    - generic [ref=e217]:
+      - generic [ref=e218]:
+        - generic [ref=e219]:
+          - img "Gráfica Produtiva" [ref=e220]
+          - paragraph [ref=e221]: UNIFORMES · GRÁFICA · COMUNICAÇÃO VISUAL
+          - paragraph [ref=e222]: Qualidade e identidade visual para sua empresa. Uniformes, impressos e comunicação visual – Rio de Janeiro.
+          - generic [ref=e225]: Feito com dedicação
+        - generic [ref=e226]:
+          - generic [ref=e227]: Departamentos
+          - list [ref=e228]:
+            - listitem [ref=e229]:
+              - link "Uniformes" [ref=e230] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/uniformes
+            - listitem [ref=e231]:
+              - link "Brindes" [ref=e232] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/brindes
+            - listitem [ref=e233]:
+              - link "Produtos Gráficos" [ref=e234] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/produtos-graficos
+            - listitem [ref=e235]:
+              - link "Comunicação Visual" [ref=e236] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/comunicacao-visual
+        - generic [ref=e237]:
+          - generic [ref=e238]: Categorias
+          - list [ref=e239]:
+            - listitem [ref=e240]:
+              - link "Calça" [ref=e241] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/calca
+            - listitem [ref=e242]:
+              - link "Operacionais" [ref=e243] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/operacionais
+            - listitem [ref=e244]:
+              - link "Restaurante" [ref=e245] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/restaurante
+            - listitem [ref=e246]:
+              - link "Bonés" [ref=e247] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/bones
+            - listitem [ref=e248]:
+              - link "Hospitalar" [ref=e249] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/hospitalar
+        - generic [ref=e250]:
+          - generic [ref=e251]: Informações
+          - list [ref=e252]:
+            - listitem [ref=e253]:
+              - link "Quem Somos" [ref=e254] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/sobre
+            - listitem [ref=e255]: Frete Grátis
+            - listitem [ref=e256]:
+              - link "Fale Conosco" [ref=e257] [cursor=pointer]:
+                - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+        - generic [ref=e258]:
+          - generic [ref=e259]: Contato
+          - generic [ref=e260]:
+            - link "(21) 97009-4262" [ref=e261] [cursor=pointer]:
+              - /url: https://wa.me/5521970094262
+              - img [ref=e262]
+              - text: (21) 97009-4262
+            - generic [ref=e264]:
+              - img [ref=e265]
+              - generic [ref=e268]: "Seg a Sex: 9h às 18h"
+            - link "produtivagrafica@gmail.com" [ref=e269] [cursor=pointer]:
+              - /url: mailto:produtivagrafica@gmail.com
+              - img [ref=e270]
+              - generic [ref=e273]: produtivagrafica@gmail.com
+            - link "@grafica_produtiva" [ref=e274] [cursor=pointer]:
+              - /url: https://instagram.com/grafica_produtiva
+              - img [ref=e275]
+              - generic [ref=e279]: "@grafica_produtiva"
+      - generic [ref=e281]:
+        - generic [ref=e282]:
+          - heading "Formas de Pagamento" [level=4] [ref=e283]
+          - generic [ref=e284]:
+            - generic [ref=e285]:
+              - img "Visa"
+            - generic [ref=e286]:
+              - img "Mastercard"
+            - generic [ref=e287]:
+              - img "Elo"
+            - generic [ref=e288]:
+              - img "Hipercard"
+            - generic [ref=e289]:
+              - img "Diners Club"
+            - generic [ref=e290]:
+              - img "Boleto"
+            - generic [ref=e291]:
+              - img "Depósito"
+        - generic [ref=e292]:
+          - heading "Certificados de Segurança" [level=4] [ref=e293]
+          - generic [ref=e294]:
+            - img "Google Safe Browsing"
+            - img "Loja Protegida - Certificado SSL"
+        - generic [ref=e295]:
+          - heading "Formas de Envio" [level=4] [ref=e296]
+          - generic [ref=e297]:
+            - img "Correios"
+            - img "PAC"
+            - img "Retirada no local"
+            - img "Motoboy"
+      - generic [ref=e299]:
+        - paragraph [ref=e300]: © 2026 Gráfica Produtiva. Todos os direitos reservados.
+        - paragraph [ref=e301]:
+          - text: Desenvolvido por
+          - link "Ivan Reis" [ref=e302] [cursor=pointer]:
+            - /url: https://ivanreis.com.br
+  - link "WhatsApp" [ref=e303] [cursor=pointer]:
+    - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+    - img [ref=e304]

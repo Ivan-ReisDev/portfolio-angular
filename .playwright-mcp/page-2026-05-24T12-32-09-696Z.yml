@@ -1,0 +1,413 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "(21) 97009-4262" [ref=e5] [cursor=pointer]:
+      - /url: https://wa.me/5521970094262
+      - img [ref=e6]
+      - text: (21) 97009-4262
+    - generic [ref=e8]: uniformes de qualidade com agilidade
+  - banner [ref=e9]:
+    - generic [ref=e12]:
+      - link "Gráfica Produtiva" [ref=e13] [cursor=pointer]:
+        - /url: https://produtivagrafica.com.br
+        - img "Gráfica Produtiva" [ref=e14]
+      - button "Abrir menu de navegação" [ref=e15]:
+        - img [ref=e16]
+  - main [ref=e18]:
+    - heading "Gráfica Produtiva — Uniformes, Brindes e Comunicação Visual no Rio de Janeiro" [level=1] [ref=e19]
+    - region "Banners da Gráfica Produtiva" [ref=e20]:
+      - generic [ref=e21]:
+        - group "1 de 5" [ref=e22]:
+          - img "banner 1" [ref=e24]
+        - group [ref=e25]:
+          - img [ref=e27]
+        - group [ref=e28]:
+          - img [ref=e30]
+        - group [ref=e31]:
+          - img [ref=e33]
+        - group [ref=e34]:
+          - img [ref=e36]
+      - button "Slide anterior" [ref=e37] [cursor=pointer]:
+        - img [ref=e38]
+      - button "Próximo slide" [ref=e40] [cursor=pointer]:
+        - img [ref=e41]
+      - tablist "Selecionar slide" [ref=e43]:
+        - tab "Ir para o slide 1" [selected] [ref=e44] [cursor=pointer]
+        - tab "Ir para o slide 2" [ref=e45] [cursor=pointer]
+        - tab "Ir para o slide 3" [ref=e46] [cursor=pointer]
+        - tab "Ir para o slide 4" [ref=e47] [cursor=pointer]
+        - tab "Ir para o slide 5" [ref=e48] [cursor=pointer]
+    - link "Rolar para a próxima seção" [ref=e50] [cursor=pointer]:
+      - /url: "#sobre"
+      - img [ref=e51]
+    - generic [ref=e59]:
+      - generic [ref=e60]: Quem Somos
+      - heading "Conheça a Produtiva" [level=2] [ref=e61]
+      - paragraph [ref=e63]: Nascemos para suprir a carência de qualidade no mercado gráfico. Com mais de 10 anos de experiência, produzimos uniformes profissionais com acabamento técnico e controle de qualidade rigoroso, oferecendo soluções personalizadas e viáveis para empresas de diferentes setores. Inovamos continuamente, aperfeiçoando processos, materiais e atendimento, com o compromisso de entregar excelência; o sucesso e a satisfação dos nossos clientes são também o nosso.
+      - generic [ref=e64]:
+        - link "Saiba Mais" [ref=e65] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/sobre
+          - generic [ref=e66]: Saiba Mais
+          - img [ref=e67]
+        - link "Fale Conosco" [ref=e69] [cursor=pointer]:
+          - /url: https://wa.me/5521970094262
+          - img [ref=e70]
+          - text: Fale Conosco
+      - img "Bordado Produtiva" [ref=e74]
+    - generic [ref=e76]:
+      - generic [ref=e77]:
+        - text: O que Fazemos
+        - heading "Nossos Serviços" [level=2] [ref=e78]
+      - generic [ref=e80]:
+        - generic [ref=e81]:
+          - img [ref=e83]
+          - generic [ref=e85]:
+            - heading "Uniformes Corporativos" [level=3] [ref=e86]
+            - paragraph [ref=e87]: Camisas polo, camisetas, sociais e conjuntos completos para empresas de todos os portes.
+        - generic [ref=e88]:
+          - img [ref=e90]
+          - generic [ref=e92]:
+            - heading "Uniformes Escolares" [level=3] [ref=e93]
+            - paragraph [ref=e94]: Kits completos com camisetas, bermudas, jaquetas e acessórios para escolas e instituições.
+        - generic [ref=e95]:
+          - img [ref=e97]
+          - generic [ref=e99]:
+            - heading "Uniformes Hospitalares" [level=3] [ref=e100]
+            - paragraph [ref=e101]: Jalecos, scrubs e aventais para profissionais da saúde com conforto e praticidade.
+        - generic [ref=e102]:
+          - img [ref=e104]
+          - generic [ref=e106]:
+            - heading "Uniformes Operacionais" [level=3] [ref=e107]
+            - paragraph [ref=e108]: Macacões, jaquetas, calças de brim, jalecos, camisetas, calças e bermudas com faixa reflexivas.
+    - generic [ref=e110]:
+      - img [ref=e112]
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - text: "+0"
+          - paragraph [ref=e117]: Empresas Atendidas
+        - generic [ref=e118]:
+          - text: "+0"
+          - paragraph [ref=e119]: Uniformes Entregues
+        - generic [ref=e120]:
+          - text: "+0"
+          - paragraph [ref=e121]: Anos de Experiência
+        - generic [ref=e122]:
+          - text: 0%
+          - paragraph [ref=e123]: Satisfação
+    - generic [ref=e125]:
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - text: Seleção Especial
+          - heading "Produtos em Destaque" [level=2] [ref=e128]
+        - link "Ver catálogo completo" [ref=e130] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/catalogo
+          - text: Ver catálogo completo
+          - img [ref=e131]
+      - generic [ref=e133]:
+        - link "Polo Tradicional Masculina Ver Detalhes Destaque Camisa Polo Polo Tradicional Masculina" [ref=e134] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/polo-tradicional-masculina
+          - generic [ref=e135]:
+            - img "Polo Tradicional Masculina" [ref=e136]
+            - generic [ref=e139]: Ver Detalhes
+            - generic [ref=e140]: Destaque
+          - generic [ref=e141]:
+            - text: Camisa Polo
+            - heading "Polo Tradicional Masculina" [level=3] [ref=e142]
+        - link "Polo Diferenciada Ver Detalhes Destaque Camisa Polo Polo Diferenciada" [ref=e144] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/polo-diferenciada
+          - generic [ref=e145]:
+            - img "Polo Diferenciada" [ref=e146]
+            - generic [ref=e149]: Ver Detalhes
+            - generic [ref=e150]: Destaque
+          - generic [ref=e151]:
+            - text: Camisa Polo
+            - heading "Polo Diferenciada" [level=3] [ref=e152]
+        - link "T-shirt Poliestér Ver Detalhes Destaque Camisa T-shirt T-shirt Poliestér" [ref=e154] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/t-shirt-poliester
+          - generic [ref=e155]:
+            - img "T-shirt Poliestér" [ref=e156]
+            - generic [ref=e159]: Ver Detalhes
+            - generic [ref=e160]: Destaque
+          - generic [ref=e161]:
+            - text: Camisa T-shirt
+            - heading "T-shirt Poliestér" [level=3] [ref=e162]
+        - link "Camisa Longa Sublimação Total Ver Detalhes Destaque Sublimação Total Camisa Longa Sublimação Total" [ref=e164] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/camisa-longa-sublimacao-total
+          - generic [ref=e165]:
+            - img "Camisa Longa Sublimação Total" [ref=e166]
+            - generic [ref=e169]: Ver Detalhes
+            - generic [ref=e170]: Destaque
+          - generic [ref=e171]:
+            - text: Sublimação Total
+            - heading "Camisa Longa Sublimação Total" [level=3] [ref=e172]
+        - link "Camisa Social Manga Longa Ver Detalhes Destaque Camisa Social Camisa Social Manga Longa" [ref=e174] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/camisa-social-manga-longa
+          - generic [ref=e175]:
+            - img "Camisa Social Manga Longa" [ref=e176]
+            - generic [ref=e179]: Ver Detalhes
+            - generic [ref=e180]: Destaque
+          - generic [ref=e181]:
+            - text: Camisa Social
+            - heading "Camisa Social Manga Longa" [level=3] [ref=e182]
+        - link "Conjunto Brim c/ faixa Refletiva Ver Detalhes Destaque Operacionais Conjunto Brim c/ faixa Refletiva" [ref=e184] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/conjunto-brim-c-faixa-refletiva
+          - generic [ref=e185]:
+            - img "Conjunto Brim c/ faixa Refletiva" [ref=e186]
+            - generic [ref=e189]: Ver Detalhes
+            - generic [ref=e190]: Destaque
+          - generic [ref=e191]:
+            - text: Operacionais
+            - heading "Conjunto Brim c/ faixa Refletiva" [level=3] [ref=e192]
+        - link "Avental Saia / Comim e Garçon Ver Detalhes Destaque Restaurante Avental Saia / Comim e Garçon" [ref=e194] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/avental-saia-comim-e-garcon
+          - generic [ref=e195]:
+            - img "Avental Saia / Comim e Garçon" [ref=e196]
+            - generic [ref=e199]: Ver Detalhes
+            - generic [ref=e200]: Destaque
+          - generic [ref=e201]:
+            - text: Restaurante
+            - heading "Avental Saia / Comim e Garçon" [level=3] [ref=e202]
+        - link "Cracha Personalizado Ver Detalhes Destaque Cracha Cracha Personalizado" [ref=e204] [cursor=pointer]:
+          - /url: https://produtivagrafica.com.br/produto/cracha-personalizado
+          - generic [ref=e205]:
+            - img "Cracha Personalizado" [ref=e206]
+            - generic [ref=e209]: Ver Detalhes
+            - generic [ref=e210]: Destaque
+          - generic [ref=e211]:
+            - text: Cracha
+            - heading "Cracha Personalizado" [level=3] [ref=e212]
+    - generic [ref=e215]:
+      - generic [ref=e216]:
+        - text: Quem Confia
+        - heading "Nossos Melhores Clientes" [level=2] [ref=e217]
+        - paragraph [ref=e219]: Empresas de diversos setores que confiam em nosso trabalho de uniformes a comunicação visual.
+      - generic [ref=e222]:
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+        - generic:
+          - generic:
+            - img "Cliente Produtiva"
+      - generic [ref=e223]:
+        - generic [ref=e226]: Uniformes corporativos
+        - generic [ref=e230]: Comunicação visual
+        - generic [ref=e234]: Produtos gráficos
+    - generic [ref=e235]:
+      - img [ref=e240]
+      - generic [ref=e243]:
+        - text: Vamos conversar?
+        - heading "Solicite seu Orçamento" [level=2] [ref=e244]
+        - paragraph [ref=e245]: Entre em contato pelo WhatsApp e receba um orçamento personalizado. Atendemos empresas de todos os portes.
+        - link "Pedir Orçamento pelo WhatsApp" [ref=e246] [cursor=pointer]:
+          - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+          - img [ref=e247]
+          - text: Pedir Orçamento pelo WhatsApp
+  - contentinfo [ref=e249]:
+    - generic [ref=e253]:
+      - generic [ref=e254]:
+        - generic [ref=e255]:
+          - img "Gráfica Produtiva" [ref=e256]
+          - paragraph [ref=e257]: UNIFORMES · GRÁFICA · COMUNICAÇÃO VISUAL
+          - paragraph [ref=e258]: Qualidade e identidade visual para sua empresa. Uniformes, impressos e comunicação visual – Rio de Janeiro.
+          - generic [ref=e261]: Feito com dedicação
+        - generic [ref=e262]:
+          - generic [ref=e263]: Departamentos
+          - list [ref=e264]:
+            - listitem [ref=e265]:
+              - link "Uniformes" [ref=e266] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/uniformes
+            - listitem [ref=e267]:
+              - link "Brindes" [ref=e268] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/brindes
+            - listitem [ref=e269]:
+              - link "Produtos Gráficos" [ref=e270] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/produtos-graficos
+            - listitem [ref=e271]:
+              - link "Comunicação Visual" [ref=e272] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/departamento/comunicacao-visual
+        - generic [ref=e273]:
+          - generic [ref=e274]: Categorias
+          - list [ref=e275]:
+            - listitem [ref=e276]:
+              - link "Calça" [ref=e277] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/calca
+            - listitem [ref=e278]:
+              - link "Operacionais" [ref=e279] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/operacionais
+            - listitem [ref=e280]:
+              - link "Restaurante" [ref=e281] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/restaurante
+            - listitem [ref=e282]:
+              - link "Bonés" [ref=e283] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/bones
+            - listitem [ref=e284]:
+              - link "Hospitalar" [ref=e285] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/categoria/hospitalar
+        - generic [ref=e286]:
+          - generic [ref=e287]: Informações
+          - list [ref=e288]:
+            - listitem [ref=e289]:
+              - link "Quem Somos" [ref=e290] [cursor=pointer]:
+                - /url: https://produtivagrafica.com.br/sobre
+            - listitem [ref=e291]: Frete Grátis
+            - listitem [ref=e292]:
+              - link "Fale Conosco" [ref=e293] [cursor=pointer]:
+                - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+        - generic [ref=e294]:
+          - generic [ref=e295]: Contato
+          - generic [ref=e296]:
+            - link "(21) 97009-4262" [ref=e297] [cursor=pointer]:
+              - /url: https://wa.me/5521970094262
+              - img [ref=e298]
+              - text: (21) 97009-4262
+            - generic [ref=e300]:
+              - img [ref=e301]
+              - generic [ref=e304]: "Seg a Sex: 9h às 18h"
+            - link "produtivagrafica@gmail.com" [ref=e305] [cursor=pointer]:
+              - /url: mailto:produtivagrafica@gmail.com
+              - img [ref=e306]
+              - generic [ref=e309]: produtivagrafica@gmail.com
+            - link "@grafica_produtiva" [ref=e310] [cursor=pointer]:
+              - /url: https://instagram.com/grafica_produtiva
+              - img [ref=e311]
+              - generic [ref=e315]: "@grafica_produtiva"
+      - generic [ref=e317]:
+        - generic [ref=e318]:
+          - heading "Formas de Pagamento" [level=4] [ref=e319]
+          - generic [ref=e320]:
+            - generic [ref=e321]:
+              - img "Visa"
+            - generic [ref=e322]:
+              - img "Mastercard"
+            - generic [ref=e323]:
+              - img "Elo"
+            - generic [ref=e324]:
+              - img "Hipercard"
+            - generic [ref=e325]:
+              - img "Diners Club"
+            - generic [ref=e326]:
+              - img "Boleto"
+            - generic [ref=e327]:
+              - img "Depósito"
+        - generic [ref=e328]:
+          - heading "Certificados de Segurança" [level=4] [ref=e329]
+          - generic [ref=e330]:
+            - img "Google Safe Browsing"
+            - img "Loja Protegida - Certificado SSL"
+        - generic [ref=e331]:
+          - heading "Formas de Envio" [level=4] [ref=e332]
+          - generic [ref=e333]:
+            - img "Correios"
+            - img "PAC"
+            - img "Retirada no local"
+            - img "Motoboy"
+      - generic [ref=e335]:
+        - paragraph [ref=e336]: © 2026 Gráfica Produtiva. Todos os direitos reservados.
+        - paragraph [ref=e337]:
+          - text: Desenvolvido por
+          - link "Ivan Reis" [ref=e338] [cursor=pointer]:
+            - /url: https://ivanreis.com.br
+  - link "WhatsApp" [ref=e339] [cursor=pointer]:
+    - /url: https://wa.me/5521970094262?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+este+produto%3A
+    - img [ref=e340]
