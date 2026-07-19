@@ -1,12 +1,13 @@
 @use 'app.scss' as *;
 
 .snap-section {
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   scroll-snap-align: start;
 }
 
 #projetos {
+  @include header-offset;
   position: sticky;
   top: 0;
   display: flex;
@@ -14,7 +15,7 @@
   justify-content: center;
   will-change: transform;
   contain: layout style paint;
-  
+
   @media (max-width: 767px) {
     height: auto;
     min-height: 100vh;
@@ -69,6 +70,16 @@
       padding: 40px 16px;
     }
 
+    @include short-viewport {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    @include very-short-viewport {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
     .title {
       width: 100%;
       margin-bottom: 20px;
@@ -76,6 +87,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      @include short-viewport {
+        margin-bottom: 12px;
+      }
+
+      @include very-short-viewport {
+        margin-bottom: 8px;
+      }
 
       app-title {
         display: inline-block;

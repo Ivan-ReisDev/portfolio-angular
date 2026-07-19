@@ -7,6 +7,7 @@
 
 .blog-section {
   @include premium-background;
+  @include header-offset(padding-top);
   position: sticky;
   top: 0;
   display: flex;
@@ -17,7 +18,9 @@
   contain: layout style paint;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 80px 20px;
+  padding-bottom: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
   scroll-snap-align: start;
 
   @media (max-width: 767px) {
@@ -25,7 +28,25 @@
     height: auto;
     scroll-snap-align: none;
     align-items: flex-start;
-    padding: 60px 16px;
+    padding-bottom: 60px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @include short-viewport {
+    padding-bottom: 40px;
+
+    .content {
+      gap: 30px;
+    }
+  }
+
+  @include very-short-viewport {
+    padding-bottom: 24px;
+
+    .content {
+      gap: 20px;
+    }
   }
 }
 

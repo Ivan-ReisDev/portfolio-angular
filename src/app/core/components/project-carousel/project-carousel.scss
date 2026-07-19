@@ -29,6 +29,14 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+
+  @include short-viewport {
+    padding: 20px 0;
+  }
+
+  @include very-short-viewport {
+    padding: 10px 0;
+  }
 }
 
 .carousel-track {
@@ -42,6 +50,14 @@
   position: relative;
   flex: 1;
   max-width: 1000px;
+
+  @include short-viewport {
+    min-height: 360px;
+  }
+
+  @include very-short-viewport {
+    min-height: 280px;
+  }
 }
 
 .carousel-item {
@@ -131,6 +147,12 @@
     transform: scale(1.1);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
+
+  @include very-short-viewport {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
 }
 
 // Dots indicator
@@ -139,6 +161,14 @@
   justify-content: center;
   gap: 12px;
   margin-top: 40px;
+
+  @include short-viewport {
+    margin-top: 24px;
+  }
+
+  @include very-short-viewport {
+    margin-top: 16px;
+  }
 }
 
 .dot {

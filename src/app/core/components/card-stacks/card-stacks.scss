@@ -67,6 +67,30 @@
       color: $secondary-blue;
     }
   }
+
+  @include short-viewport {
+    width: 70px;
+    height: 70px;
+
+    & i {
+      font-size: 35px;
+      margin-bottom: 6px;
+    }
+  }
+
+  @include very-short-viewport {
+    width: 56px;
+    height: 56px;
+
+    & i {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    & p {
+      font-size: 11px;
+    }
+  }
 }
 
 .tooltip {

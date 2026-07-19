@@ -41,8 +41,8 @@
     min-height: auto;
     height: auto;
     scroll-snap-align: none;
-    align-items: flex-start; // Align content to top when expanded
-    padding-top: 100px;
+    align-items: flex-start;
+    @include header-offset;
   }
 }
 

@@ -22,6 +22,7 @@
 
 .home {
   @include premium-background;
+  @include header-offset;
 
   width: 100%;
   min-height: 100vh;
@@ -62,6 +63,14 @@
     padding-right: 20px;
     overflow-x: hidden;
 
+    @include short-viewport {
+      padding-bottom: 30px;
+    }
+
+    @include very-short-viewport {
+      padding-bottom: 16px;
+    }
+
     .greeting {
       font-size: 16px;
       font-weight: 500;
@@ -88,7 +97,7 @@
       max-width: 100%;
       overflow-wrap: break-word;
       word-break: break-word;
-      
+
       span:first-child {
         font-size: clamp(1.5rem, 4vw, 3rem);
         font-weight: 700;
@@ -141,6 +150,14 @@
         .highlight {
           font-size: clamp(1.8rem, 10vw, 2.8rem);
         }
+      }
+
+      @include short-viewport {
+        margin-bottom: 24px;
+      }
+
+      @include very-short-viewport {
+        margin-bottom: 16px;
       }
     }
 
@@ -230,7 +247,11 @@
     @media (max-width: 767px) {
       display: none;
     }
-    
+
+    @include very-short-viewport {
+      display: none;
+    }
+
     .mouse {
       width: 30px;
       height: 50px;

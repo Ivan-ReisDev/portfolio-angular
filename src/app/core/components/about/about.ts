@@ -11,7 +11,8 @@ import { Title } from "../typography/title/title";
 })
 export class About implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
-
+  experiencia = new Date().getFullYear() - 2022;
+  
   constructor(
     private elementRef: ElementRef,
     @Inject(PLATFORM_ID) private platformId: Object
