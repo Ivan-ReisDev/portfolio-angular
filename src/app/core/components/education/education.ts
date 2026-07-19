@@ -31,6 +31,12 @@ export class Education {
 
   timeline: TimelineItem[] = [
     {
+      date: 'Junho 2026',
+      title: 'Desenvolvedor Full Stack - Youdata',
+      description:
+        'Atuação como Desenvolvedor Full Stack Pleno, alocado na Ancar, participando de todo o ciclo de desenvolvimento de aplicações web, desde o levantamento de requisitos e alinhamento com as áreas de negócio até o desenvolvimento, arquitetura e deploy em produção. Desenvolvimento de soluções utilizando TypeScript, React, Node.js, Express e NestJS, além da criação e evolução de APIs, integrações entre sistemas e implementação de novas funcionalidades. Experiência com o ecossistema Google Cloud Platform (GCP), atuando na infraestrutura e implantação de aplicações com foco em performance, escalabilidade e boas práticas de desenvolvimento.',
+    },
+    {
       date: 'Fevereiro 2026',
       title: 'Pós-Graduação em Segurança e Defesa Cibernética — UNINTER',
       description:
@@ -41,6 +47,12 @@ export class Education {
       title: 'Pós-Graduação em Ciências de Dados e Inteligência Artificial — UNINTER',
       description:
         'Início da especialização em Ciências de Dados e Inteligência Artificial no Centro Universitário Internacional UNINTER. O curso abrange análise e modelagem de dados, aprendizado de máquina, deep learning, processamento de linguagem natural, visão computacional e técnicas avançadas de IA aplicadas à resolução de problemas reais.',
+    },
+    {
+      date: 'Dezembro 2025',
+      title: 'Análista Desenvolvedor Full Stack - BSN Tecnologia',
+      description:
+        'Atuação no desenvolvimento e manutenção de CRMs, ERPs e aplicações personalizadas utilizando PHP (Laravel e Symfony), .NET, Angular (Ionic) e MySQL, realizando integrações com APIs de terceiros, incluindo a API do Banco do Brasil, além da manutenção de servidores por meio de File Manager. Trabalho com a metodologia ágil Kanban, participando da implementação de novas funcionalidades, correção de bugs e melhorias contínuas, com atuação em projetos para grandes clientes, como Invista (C6 Bank) e CAOA Chery, desenvolvendo soluções alinhadas às necessidades do negócio.',
     },
     {
       date: 'Janeiro 2025',

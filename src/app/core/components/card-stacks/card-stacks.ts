@@ -145,5 +145,11 @@ export class CardStacks {
       description:
         'A Amazon Web Services (AWS) é a plataforma de nuvem mais adotada e mais abrangente do mundo, oferecendo mais de 200 serviços completos de datacenters em todo o mundo.',
     },
+    {
+      icon: 'devicon-googlecloud-plain',
+      name: 'GCP',
+      description:
+        'O Google Cloud Platform (GCP) é o conjunto de serviços de nuvem do Google, construído sobre a mesma infraestrutura que sustenta produtos como Busca e YouTube. Destaca-se em análise de dados, inteligência artificial/machine learning e foi o criador do Kubernetes.',
+    },
   ];
 }
