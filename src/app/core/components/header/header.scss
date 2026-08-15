@@ -188,6 +188,26 @@
   }
 }
 
+@include laptop-height-viewport {
+  .header {
+    top: 16px;
+    height: 72px;
+
+    .logo-container {
+      gap: 10px;
+      margin-right: 30px;
+    }
+
+    .header-logo {
+      height: 30px;
+    }
+
+    .btn-cv {
+      padding: 10px 22px;
+    }
+  }
+}
+
 @include compact-landscape-viewport {
   .header {
     top: 12px;

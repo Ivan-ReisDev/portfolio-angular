@@ -210,6 +210,48 @@
   }
 }
 
+@include laptop-height-viewport {
+  .project-card,
+  .card-image-link {
+    border-radius: 20px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title-link {
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-size: 21px;
+  }
+
+  .card-description {
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .card-tags {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .tech-tag {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .link-btn {
+    min-height: 40px;
+    padding: 9px 14px;
+  }
+}
+
 @include compact-landscape-viewport {
   .project-card {
     border-radius: 18px;

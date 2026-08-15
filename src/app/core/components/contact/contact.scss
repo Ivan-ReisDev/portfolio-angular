@@ -44,6 +44,11 @@
     }
   }
 
+  @include laptop-height-viewport {
+    align-items: flex-start;
+    padding-bottom: 24px;
+  }
+
   @include compact-landscape-viewport {
     align-items: flex-start;
     padding-bottom: 20px;
@@ -69,6 +74,11 @@
     padding: 30px 16px;
   }
 
+  @include laptop-height-viewport {
+    height: auto;
+    padding: 16px 32px 24px;
+  }
+
   @include compact-landscape-viewport {
     height: auto;
     padding: 12px 32px 20px;
@@ -85,6 +95,11 @@
     --title-padding-right: 0;
     --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     --title-font-size-md: 40px;
+
+    @include laptop-height-viewport {
+      margin-bottom: 16px;
+      --title-font-size: 46px;
+    }
 
     @include compact-landscape-viewport {
       margin-bottom: 12px;
@@ -107,6 +122,14 @@
     padding: 0 40px;
   }
 
+  @include laptop-height-viewport {
+    gap: 28px;
+
+    @media (min-width: 900px) {
+      padding: 0 20px;
+    }
+  }
+
   @include compact-landscape-viewport {
     gap: 20px;
 
@@ -114,6 +137,7 @@
       padding: 0 20px;
     }
   }
+
 }
 
 .emblematic-phrase {
@@ -147,6 +171,10 @@
     margin-top: 10px;
   }
 
+  @include laptop-height-viewport {
+    font-size: clamp(30px, 3.8vw, 46px);
+  }
+
   @include compact-landscape-viewport {
     font-size: clamp(28px, 3.5vw, 42px);
   }
@@ -172,6 +200,21 @@
   @media (max-width: 576px) {
     padding: 25px 20px;
     gap: 16px;
+  }
+
+  @include laptop-height-viewport {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 14px;
+    max-width: 600px;
+    padding: 22px;
+
+    .feedback-banner,
+    .form-group:has(textarea),
+    .form-group:has(input[type='tel']),
+    .submit-btn {
+      grid-column: 1 / -1;
+    }
   }
 
   @include compact-landscape-viewport {
@@ -247,6 +290,11 @@
         }
       }
 
+      @include laptop-height-viewport {
+        padding: 13px 14px;
+        font-size: 14px;
+      }
+
       @include compact-landscape-viewport {
         padding: 12px 14px;
         font-size: 14px;
@@ -254,6 +302,11 @@
     }
 
     textarea {
+      @include laptop-height-viewport {
+        height: 80px;
+        resize: vertical;
+      }
+
       @include compact-landscape-viewport {
         height: 72px;
         resize: vertical;
@@ -311,6 +364,12 @@
 
     &.loading {
       pointer-events: none;
+    }
+
+    @include laptop-height-viewport {
+      margin-top: 4px;
+      padding: 14px;
+      font-size: 14px;
     }
 
     @include compact-landscape-viewport {

@@ -68,6 +68,7 @@ $header-offset-xs: 65px;
 $viewport-short-height: 800px;
 $viewport-very-short-height: 600px;
 $viewport-compact-landscape-height: 700px;
+$viewport-laptop-height: 950px;
 
 @mixin header-offset($property: padding-top) {
   #{$property}: $header-offset-desktop;
@@ -88,6 +89,12 @@ $viewport-compact-landscape-height: 700px;
     #{$property}: $header-offset-xs;
   }
 
+  // Desktop browsers on Full HD screens usually expose 800–950px of usable
+  // height after the browser chrome is discounted.
+  @media (min-width: 768px) and (min-height: 701px) and (max-height: #{$viewport-laptop-height}) {
+    #{$property}: 88px;
+  }
+
   // Matches the compact header dimensions (64px high + 12px from the top)
   // and leaves a small visual gutter below it.
   @media (min-width: 768px) and (max-height: #{$viewport-compact-landscape-height}) {
@@ -103,6 +110,15 @@ $viewport-compact-landscape-height: 700px;
 
 @mixin very-short-viewport {
   @media (max-height: #{$viewport-very-short-height}) {
+    @content;
+  }
+}
+
+// Full-width laptop/desktop layouts with reduced usable height. The lower bound
+// keeps the <=700px compact mode isolated; between 701px and 800px these rules
+// complement the existing short-viewport adjustments.
+@mixin laptop-height-viewport {
+  @media (min-width: 768px) and (min-height: 701px) and (max-height: #{$viewport-laptop-height}) {
     @content;
   }
 }

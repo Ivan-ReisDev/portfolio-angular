@@ -49,6 +49,13 @@
     }
   }
 
+  @include laptop-height-viewport {
+    align-items: flex-start;
+    padding-right: 20px;
+    padding-bottom: 24px;
+    padding-left: 20px;
+  }
+
   @include compact-landscape-viewport {
     align-items: flex-start;
     padding-top: 100px;
@@ -67,6 +74,10 @@
   flex-direction: column;
   gap: 48px;
 
+  @include laptop-height-viewport {
+    gap: 20px;
+  }
+
   @include compact-landscape-viewport {
     gap: 14px;
   }
@@ -78,6 +89,10 @@ header {
   align-items: center;
   text-align: center;
   gap: 16px;
+
+  @include laptop-height-viewport {
+    gap: 8px;
+  }
 
   @include compact-landscape-viewport {
     gap: 6px;
@@ -94,6 +109,10 @@ header {
     --title-margin: 0;
     --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     --title-font-size-md: 40px;
+
+    @include laptop-height-viewport {
+      --title-font-size: 46px;
+    }
 
     @include compact-landscape-viewport {
       --title-font-size: 40px;
@@ -123,6 +142,11 @@ header {
 
   @media (max-width: 991px) {
     grid-template-columns: 1fr;
+  }
+
+  @include laptop-height-viewport {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
   }
 }
 
@@ -192,6 +216,11 @@ header {
     height: 220px;
   }
 
+  @include laptop-height-viewport {
+    height: 220px;
+    margin-bottom: 12px;
+  }
+
   @include compact-landscape-viewport {
     height: 170px;
     margin-bottom: 10px;
@@ -210,6 +239,11 @@ header {
     font-size: 18px;
   }
 
+  @include laptop-height-viewport {
+    margin-bottom: 8px;
+    font-size: 19px;
+  }
+
   @include compact-landscape-viewport {
     margin-bottom: 6px;
     font-size: 17px;
@@ -226,6 +260,13 @@ header {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @include laptop-height-viewport {
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-line-clamp: 2;
+  }
 
   @include compact-landscape-viewport {
     margin-bottom: 8px;
@@ -285,6 +326,12 @@ header {
     grid-template-columns: 1fr;
   }
 
+  @include laptop-height-viewport {
+    grid-template-columns: 170px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+  }
+
   @include compact-landscape-viewport {
     grid-template-columns: 150px 1fr;
     gap: 12px;
@@ -308,6 +355,10 @@ header {
 
   @media (max-width: 480px) {
     height: 180px;
+  }
+
+  @include laptop-height-viewport {
+    height: 100px;
   }
 
   @include compact-landscape-viewport {

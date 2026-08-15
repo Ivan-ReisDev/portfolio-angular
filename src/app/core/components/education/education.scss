@@ -327,6 +327,68 @@ main {
   }
 }
 
+@include laptop-height-viewport {
+  .progresso {
+    align-items: flex-start;
+    padding: 112px 20px 24px;
+  }
+
+  .container {
+    gap: 18px;
+  }
+
+  main {
+    gap: 8px;
+
+    app-title {
+      --title-font-size: 46px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      line-height: 1.45;
+    }
+  }
+
+  .timeline-item {
+    margin-bottom: 12px;
+  }
+
+  .timeline-content {
+    gap: 6px;
+    padding: 14px 18px;
+  }
+
+  .timeline-date {
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  .timeline-title {
+    font-size: 18px;
+  }
+
+  .timeline-description {
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 3em;
+  }
+
+  .progresso.expanded .timeline-description {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    max-height: 50em;
+  }
+
+  .show-more-btn {
+    margin-top: 4px;
+    padding: 10px 24px;
+    font-size: 12px;
+  }
+}
+
 @include compact-landscape-viewport {
   .progresso {
     align-items: flex-start;

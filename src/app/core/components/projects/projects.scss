@@ -81,6 +81,11 @@
       padding-bottom: 16px;
     }
 
+    @include laptop-height-viewport {
+      height: auto;
+      padding: 16px 20px 24px;
+    }
+
     @include compact-landscape-viewport {
       height: auto;
       padding: 12px 20px 28px;
@@ -102,6 +107,10 @@
         margin-bottom: 8px;
       }
 
+      @include laptop-height-viewport {
+        margin-bottom: 8px;
+      }
+
       @include compact-landscape-viewport {
         margin-bottom: 4px;
       }
@@ -119,6 +128,10 @@
         --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         --title-font-size-md: 40px;
 
+        @include laptop-height-viewport {
+          --title-font-size: 46px;
+        }
+
         @include compact-landscape-viewport {
           --title-font-size: 42px;
         }
@@ -133,6 +146,11 @@
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 
         @media (max-width: 575px) {
+          font-size: 15px;
+        }
+
+        @include laptop-height-viewport {
+          margin-top: 4px;
           font-size: 15px;
         }
 
@@ -157,6 +175,11 @@
       &.visible {
         opacity: 1;
         transform: translateY(0);
+      }
+
+      @include laptop-height-viewport {
+        flex: none;
+        height: auto;
       }
 
       @include compact-landscape-viewport {

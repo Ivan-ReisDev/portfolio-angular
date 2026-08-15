@@ -68,6 +68,14 @@
     padding: 30px 16px;
   }
 
+  @include laptop-height-viewport {
+    max-width: 1120px;
+    min-height: 0;
+    gap: 24px;
+    padding: 16px 20px 24px;
+    transform: translateY(-48px);
+  }
+
   @include compact-landscape-viewport {
     max-width: 1080px;
     min-height: 0;
@@ -100,6 +108,11 @@
       --title-font-size-md: 40px;
       --title-font-size-sm: 32px;
 
+      @include laptop-height-viewport {
+        --title-font-size: 48px;
+        --title-margin: 0 0 12px 0;
+      }
+
       @include compact-landscape-viewport {
         --title-font-size: 42px;
         --title-margin: 0 0 10px 0;
@@ -123,6 +136,12 @@
     @media (max-width: 575px) {
       font-size: 15px;
       line-height: 1.7;
+    }
+
+    @include laptop-height-viewport {
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
     @include compact-landscape-viewport {
