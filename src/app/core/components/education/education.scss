@@ -26,6 +26,7 @@
   contain: layout style paint;
   padding: 80px 20px;
   scroll-snap-align: start;
+  @include compact-landscape-section;
 
   @media (max-width: 767px) {
     height: auto;
@@ -318,5 +319,62 @@ main {
 
   .timeline-title {
     font-size: 16px;
+  }
+}
+
+@include compact-landscape-viewport {
+  .progresso {
+    align-items: flex-start;
+    padding: 96px 20px 20px;
+  }
+
+  .container {
+    gap: 12px;
+  }
+
+  main {
+    gap: 6px;
+
+    app-title {
+      --title-font-size: 40px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  }
+
+  .timeline-item {
+    margin-bottom: 8px;
+  }
+
+  .timeline-content {
+    gap: 4px;
+    padding: 10px 14px;
+  }
+
+  .timeline-date {
+    margin-bottom: 2px;
+    font-size: 11px;
+  }
+
+  .timeline-title {
+    font-size: 17px;
+  }
+
+  .timeline-description {
+    font-size: 12px;
+    line-height: 1.45;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    max-height: 1.45em;
+  }
+
+  .show-more-btn {
+    gap: 7px;
+    margin-top: 4px;
+    padding: 9px 22px;
+    font-size: 11px;
   }
 }

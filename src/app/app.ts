@@ -93,7 +93,10 @@ export class App implements AfterViewInit, OnDestroy {
   private scrollHandler: (() => void) | null = null;
   private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
   private clickHandler: ((e: MouseEvent) => void) | null = null;
+  private resizeHandler: (() => void) | null = null;
   private scrollRafId = 0;
+  private resizeTimer: ReturnType<typeof setTimeout> | null = null;
+  private sectionBeforeResize = '';
   private scrollHandlingInitialized = false;
 
   ngAfterViewInit(): void {
@@ -241,6 +244,32 @@ export class App implements AfterViewInit, OnDestroy {
 
     container.addEventListener('keydown', this.keydownHandler);
 
+    this.resizeHandler = () => {
+      // Keep the section that was visible when resizing began. Without this,
+      // scrollTop still points to the old section heights and the user may need
+      // several wheel interactions before the next section can appear.
+      if (!this.sectionBeforeResize) {
+        this.sectionBeforeResize = this.activeSection();
+      }
+
+      if (this.resizeTimer) {
+        clearTimeout(this.resizeTimer);
+      }
+
+      this.resizeTimer = setTimeout(() => {
+        const sectionId = this.sectionBeforeResize || this.activeSection();
+        this.sectionBeforeResize = '';
+        this.resizeTimer = null;
+
+        requestAnimationFrame(() => {
+          this.scrollToSection(sectionId, 'instant');
+          this.onScroll();
+        });
+      }, 120);
+    };
+
+    window.addEventListener('resize', this.resizeHandler, { passive: true });
+
     setTimeout(() => {
       this.onScroll();
       if (this.scrollContainer?.nativeElement) {
@@ -263,6 +292,17 @@ export class App implements AfterViewInit, OnDestroy {
       this.keydownHandler = null;
     }
 
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler);
+      this.resizeHandler = null;
+    }
+
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = null;
+    }
+    this.sectionBeforeResize = '';
+
     if (this.scrollRafId) {
       cancelAnimationFrame(this.scrollRafId);
       this.scrollRafId = 0;
@@ -271,7 +311,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.scrollHandlingInitialized = false;
   }
 
-  scrollToSection(sectionId: string) {
+  scrollToSection(sectionId: string, behavior: 'smooth' | 'instant' = 'smooth') {
     if (!this.scrollContainer?.nativeElement) return;
 
     const container = this.scrollContainer.nativeElement;
@@ -287,10 +327,19 @@ export class App implements AfterViewInit, OnDestroy {
       }
     }
 
-    container.scrollTo({
-      top: scrollTarget,
-      behavior: 'smooth'
-    });
+    if (behavior === 'instant') {
+      // The container has scroll-behavior: smooth in CSS. Temporarily override
+      // it so a resize correction does not animate through several sections.
+      const previousScrollBehavior = container.style.scrollBehavior;
+      container.style.scrollBehavior = 'auto';
+      container.scrollTop = scrollTarget;
+      container.style.scrollBehavior = previousScrollBehavior;
+    } else {
+      container.scrollTo({
+        top: scrollTarget,
+        behavior: 'smooth'
+      });
+    }
 
     this.activeSection.set(sectionId);
   }

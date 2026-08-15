@@ -210,3 +210,40 @@
   }
 }
 
+@include compact-landscape-viewport {
+  .project-card {
+    border-radius: 18px;
+  }
+
+  .card-image-link {
+    border-radius: 18px 18px 0 0;
+  }
+
+  .card-content {
+    padding: 18px;
+  }
+
+  .card-title-link {
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-description {
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .card-tags {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .tech-tag {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}

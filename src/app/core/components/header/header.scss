@@ -187,3 +187,27 @@
     padding: 0 10px;
   }
 }
+
+@include compact-landscape-viewport {
+  .header {
+    top: 12px;
+    height: 64px;
+
+    .logo-container {
+      gap: 10px;
+      margin-right: 24px;
+    }
+
+    .header-logo {
+      height: 28px;
+    }
+
+    .btn-cv {
+      padding: 10px 20px;
+    }
+  }
+
+  .main {
+    padding: 0 20px;
+  }
+}

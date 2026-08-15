@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   AfterViewInit,
+  OnDestroy,
   ViewChild,
   signal,
   inject,
@@ -23,7 +24,8 @@ import { ContactApiService } from '../../api/services/contact-api.service';
   templateUrl: './contact.html',
   styleUrl: './contact.scss'
 })
-export class Contact implements AfterViewInit {
+export class Contact implements AfterViewInit, OnDestroy {
+  @ViewChild('contactSection', { static: true }) contactSection!: ElementRef<HTMLElement>;
   @ViewChild('phrase') phrase!: ElementRef;
   @ViewChild('formElement') formElement!: ElementRef;
 
@@ -36,6 +38,8 @@ export class Contact implements AfterViewInit {
   readonly submitSuccess = signal(false);
   readonly submitError = signal<string | null>(null);
 
+  private entranceObserver: IntersectionObserver | null = null;
+
   readonly contactForm = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.maxLength(150)]],
     email: ['', [Validators.required, Validators.email]],
@@ -45,20 +49,28 @@ export class Contact implements AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const observer = new IntersectionObserver(
+      this.entranceObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
+              this.phrase.nativeElement.classList.add('visible');
+              this.formElement.nativeElement.classList.add('visible');
+              this.entranceObserver?.disconnect();
             }
           });
         },
-        { threshold: 0.1 }
+        {
+          threshold: 0.2,
+          rootMargin: '0px 0px -8% 0px'
+        }
       );
 
-      if (this.phrase) observer.observe(this.phrase.nativeElement);
-      if (this.formElement) observer.observe(this.formElement.nativeElement);
+      this.entranceObserver.observe(this.contactSection.nativeElement);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.entranceObserver?.disconnect();
   }
 
   onSubmit(): void {

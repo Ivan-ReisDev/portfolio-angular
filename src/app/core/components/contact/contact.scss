@@ -1,8 +1,7 @@
 @use 'app.scss' as *;
 
 :host {
-  display: block;
-  width: 100%;
+  display: contents;
 }
 
 .contact-section {
@@ -21,6 +20,7 @@
   height: auto;
   padding-bottom: 80px;
   scroll-snap-align: start;
+  @include compact-landscape-section;
 
   @media (max-width: 767px) {
     position: relative;
@@ -43,6 +43,11 @@
       gap: 20px;
     }
   }
+
+  @include compact-landscape-viewport {
+    align-items: flex-start;
+    padding-bottom: 20px;
+  }
 }
 
 .content {
@@ -64,6 +69,11 @@
     padding: 30px 16px;
   }
 
+  @include compact-landscape-viewport {
+    height: auto;
+    padding: 12px 32px 20px;
+  }
+
   app-title {
     margin-bottom: 40px;
     align-self: center;
@@ -75,6 +85,11 @@
     --title-padding-right: 0;
     --title-text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     --title-font-size-md: 40px;
+
+    @include compact-landscape-viewport {
+      margin-bottom: 12px;
+      --title-font-size: 40px;
+    }
   }
 }
 
@@ -90,6 +105,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 40px;
+  }
+
+  @include compact-landscape-viewport {
+    gap: 20px;
+
+    @media (min-width: 900px) {
+      padding: 0 20px;
+    }
   }
 }
 
@@ -123,6 +146,10 @@
     display: block;
     margin-top: 10px;
   }
+
+  @include compact-landscape-viewport {
+    font-size: clamp(28px, 3.5vw, 42px);
+  }
 }
 
 .contact-form {
@@ -145,6 +172,21 @@
   @media (max-width: 576px) {
     padding: 25px 20px;
     gap: 16px;
+  }
+
+  @include compact-landscape-viewport {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 12px;
+    max-width: 620px;
+    padding: 18px;
+
+    .feedback-banner,
+    .form-group:has(textarea),
+    .form-group:has(input[type='tel']),
+    .submit-btn {
+      grid-column: 1 / -1;
+    }
   }
 
   &.visible {
@@ -204,6 +246,18 @@
           box-shadow: 0 0 20px rgba(231, 76, 60, 0.25);
         }
       }
+
+      @include compact-landscape-viewport {
+        padding: 12px 14px;
+        font-size: 14px;
+      }
+    }
+
+    textarea {
+      @include compact-landscape-viewport {
+        height: 72px;
+        resize: vertical;
+      }
     }
 
     .field-error {
@@ -257,6 +311,12 @@
 
     &.loading {
       pointer-events: none;
+    }
+
+    @include compact-landscape-viewport {
+      margin-top: 4px;
+      padding: 14px;
+      font-size: 14px;
     }
   }
 }

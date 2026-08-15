@@ -65,6 +65,9 @@ $header-offset-lg: 90px;
 $header-offset-md: 80px;
 $header-offset-sm: 70px;
 $header-offset-xs: 65px;
+$viewport-short-height: 800px;
+$viewport-very-short-height: 600px;
+$viewport-compact-landscape-height: 700px;
 
 @mixin header-offset($property: padding-top) {
   #{$property}: $header-offset-desktop;
@@ -84,10 +87,13 @@ $header-offset-xs: 65px;
   @media (max-width: 575px) {
     #{$property}: $header-offset-xs;
   }
-}
 
-$viewport-short-height: 800px;
-$viewport-very-short-height: 600px;
+  // Matches the compact header dimensions (64px high + 12px from the top)
+  // and leaves a small visual gutter below it.
+  @media (min-width: 768px) and (max-height: #{$viewport-compact-landscape-height}) {
+    #{$property}: 84px;
+  }
+}
 
 @mixin short-viewport {
   @media (max-height: #{$viewport-short-height}) {
@@ -98,6 +104,28 @@ $viewport-very-short-height: 600px;
 @mixin very-short-viewport {
   @media (max-height: #{$viewport-very-short-height}) {
     @content;
+  }
+}
+
+// Laptops and landscape tablets can have desktop width but very little usable
+// vertical space (for example when DevTools is docked). Keep this separate from
+// the mobile breakpoints, where sections already use their natural document flow.
+@mixin compact-landscape-viewport {
+  @media (min-width: 768px) and (max-height: #{$viewport-compact-landscape-height}) {
+    @content;
+  }
+}
+
+@mixin compact-landscape-section {
+  @include compact-landscape-viewport {
+    // Preserve the layered transition where the next section rises over the
+    // previous one, while still allowing the section to grow when necessary.
+    position: sticky;
+    top: 0;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    scroll-snap-align: start;
   }
 }
 
@@ -167,6 +195,8 @@ html:not(.home-page) body {
   top: 0;
   will-change: transform;
   contain: layout style paint;
+
+  @include compact-landscape-section;
 }
 
 .center {

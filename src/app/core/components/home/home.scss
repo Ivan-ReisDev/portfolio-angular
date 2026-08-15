@@ -38,6 +38,7 @@
   z-index: 1;
   will-change: transform;
   contain: layout style paint;
+  @include compact-landscape-section;
 
   @media (max-width: 767px) {
     position: relative;
@@ -299,4 +300,3 @@
   50% { opacity: 1; }
   100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
 }
-

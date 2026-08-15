@@ -30,6 +30,11 @@
     @media (max-width: 576px) {
       gap: 20px; // Reduce gap on mobile
     }
+
+    @include compact-landscape-viewport {
+      gap: 16px 24px;
+      max-width: 920px;
+    }
   }
 }
 
@@ -75,6 +80,20 @@
     & i {
       font-size: 35px;
       margin-bottom: 6px;
+    }
+  }
+
+  @include compact-landscape-viewport {
+    width: 64px;
+    height: 64px;
+
+    & i {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    & span {
+      font-size: 11px;
     }
   }
 

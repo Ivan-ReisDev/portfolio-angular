@@ -524,3 +524,31 @@ $bubble-border: rgba(67, 163, 190, 0.25);
     }
   }
 }
+
+@media (min-width: 768px) and (max-height: 700px) {
+  .noah-wrapper,
+  .noah-wrapper.side-left,
+  .noah-wrapper.side-right {
+    width: 56px;
+    height: 56px;
+    inset: auto 18px 18px auto !important;
+
+    .noah-bubble {
+      display: none;
+    }
+
+    .noah-chat {
+      top: auto !important;
+      right: 0 !important;
+      bottom: calc(100% + 10px) !important;
+      left: auto !important;
+      max-height: calc(100dvh - 100px);
+    }
+  }
+
+  .noah-robot {
+    width: 56px;
+    height: 56px;
+    padding: 5px;
+  }
+}
