@@ -5,7 +5,11 @@ import { Title } from '../typography/title/title';
 type TimelineItem = {
   date: string;
   title: string;
-  description: string;
+  description?: string;
+  descriptionParts?: {
+    text: string;
+    highlighted?: boolean;
+  }[];
 };
 
 @Component({
@@ -31,26 +35,27 @@ export class Education {
 
   timeline: TimelineItem[] = [
     {
+      date: 'Agosto 2026',
+      title: 'Pós-Graduações em Tecnologia - UNINTER',
+      descriptionParts: [
+        { text: 'Conclusão das pós-graduações em ' },
+        { text: 'Ciências de Dados e Inteligência Artificial', highlighted: true },
+        { text: ' e em ' },
+        { text: 'Segurança e Defesa Cibernética', highlighted: true },
+        {
+          text: ' no Centro Universitário Internacional UNINTER. As formações ampliaram meus conhecimentos em análise e modelagem de dados, aprendizado de máquina, inteligência artificial, proteção de dados, análise de vulnerabilidades, resposta a incidentes, criptografia e segurança ofensiva e defensiva.',
+        },
+      ],
+    },
+    {
       date: 'Junho 2026',
-      title: 'Desenvolvedor Full Stack - Youdata',
+      title: 'Desenvolvedor Full Stack Pleno - Youdata',
       description:
         'Atuação como Desenvolvedor Full Stack Pleno, alocado na Ancar, participando de todo o ciclo de desenvolvimento de aplicações web, desde o levantamento de requisitos e alinhamento com as áreas de negócio até o desenvolvimento, arquitetura e deploy em produção. Desenvolvimento de soluções utilizando TypeScript, React, Node.js, Express e NestJS, além da criação e evolução de APIs, integrações entre sistemas e implementação de novas funcionalidades. Experiência com o ecossistema Google Cloud Platform (GCP), atuando na infraestrutura e implantação de aplicações com foco em performance, escalabilidade e boas práticas de desenvolvimento.',
     },
     {
-      date: 'Fevereiro 2026',
-      title: 'Pós-Graduação em Segurança e Defesa Cibernética — UNINTER',
-      description:
-        'Início da especialização em Segurança e Defesa Cibernética no Centro Universitário Internacional UNINTER. O curso desenvolve competências profissionais em proteção de dados, sistemas e redes, abrangendo análise de vulnerabilidades, resposta a incidentes, criptografia, segurança ofensiva e defensiva, governança de segurança da informação e técnicas avançadas de defesa cibernética aplicadas a ambientes corporativos.',
-    },
-    {
-      date: 'Janeiro 2026',
-      title: 'Pós-Graduação em Ciências de Dados e Inteligência Artificial — UNINTER',
-      description:
-        'Início da especialização em Ciências de Dados e Inteligência Artificial no Centro Universitário Internacional UNINTER. O curso abrange análise e modelagem de dados, aprendizado de máquina, deep learning, processamento de linguagem natural, visão computacional e técnicas avançadas de IA aplicadas à resolução de problemas reais.',
-    },
-    {
       date: 'Dezembro 2025',
-      title: 'Análista Desenvolvedor Full Stack - BSN Tecnologia',
+      title: 'Desenvolvedor Full Stack - BSN Tecnologia',
       description:
         'Atuação no desenvolvimento e manutenção de CRMs, ERPs e aplicações personalizadas utilizando PHP (Laravel e Symfony), .NET, Angular (Ionic) e MySQL, realizando integrações com APIs de terceiros, incluindo a API do Banco do Brasil, além da manutenção de servidores por meio de File Manager. Trabalho com a metodologia ágil Kanban, participando da implementação de novas funcionalidades, correção de bugs e melhorias contínuas, com atuação em projetos para grandes clientes, como Invista (C6 Bank) e CAOA Chery, desenvolvendo soluções alinhadas às necessidades do negócio.',
     },

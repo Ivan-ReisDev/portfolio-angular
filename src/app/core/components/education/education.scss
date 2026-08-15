@@ -203,6 +203,11 @@ main {
   max-height: 4.8em; // 3 lines * 1.6 line-height = 4.8em
   transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 
+  strong {
+    color: $secondary-blue;
+    font-weight: 600;
+  }
+
   // When section is expanded, show full descriptions
   .expanded & {
     -webkit-line-clamp: unset;

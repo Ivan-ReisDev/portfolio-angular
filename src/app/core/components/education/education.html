@@ -13,7 +13,19 @@
           <div class="timeline-content">
             <span class="timeline-date">{{ item.date }}</span>
             <h3 class="timeline-title">{{ item.title }}</h3>
-            <p class="timeline-description">{{ item.description }}</p>
+            <p class="timeline-description">
+              @if (item.descriptionParts) {
+                @for (part of item.descriptionParts; track $index) {
+                  @if (part.highlighted) {
+                    <strong>{{ part.text }}</strong>
+                  } @else {
+                    {{ part.text }}
+                  }
+                }
+              } @else {
+                {{ item.description }}
+              }
+            </p>
           </div>
         </div>
       }

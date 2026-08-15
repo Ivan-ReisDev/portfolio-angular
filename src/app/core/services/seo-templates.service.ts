@@ -150,7 +150,7 @@ export class SEOTemplates {
   getAboutTemplate(): SEOTemplate {
     return {
       title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
-      description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado e pós-graduando em Ciência de Dados e Segurança Cibernética pela UNINTER.',
+      description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado em ADS, com pós-graduações em Ciências de Dados e IA e em Segurança Cibernética pela UNINTER.',
       keywords: [
         'sobre ivan reis',
         'currículo ivan reis',

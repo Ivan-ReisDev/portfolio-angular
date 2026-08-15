@@ -194,7 +194,7 @@ export class SEOService {
 
     const seoData: SEOData = {
       title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
-      description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado e pós-graduando em Ciência de Dados e Segurança Cibernética pela UNINTER.',
+      description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado em ADS, com pós-graduações em Ciências de Dados e IA e em Segurança Cibernética pela UNINTER.',
       keywords: ['sobre ivan reis', 'tech lead', 'desenvolvedor full stack', 'currículo', 'nestjs', 'react', 'angular', 'inteligência artificial'],
       type: 'website',
       url: `${this.baseUrl}/sobre`,
