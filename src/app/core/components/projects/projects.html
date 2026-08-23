@@ -2,11 +2,25 @@
   <div class="content">
     <div class="title">
       <app-title title="Projetos" />
-      <p class="subtitle">Alguns dos meus trabalhos recentes</p>
     </div>
 
-    <div class="carousel-area" [class.visible]="isVisible()">
-      <app-project-carousel />
+    <div class="internal-preview">
+      <span class="internal-preview-label">Projetos internos recentes</span>
+      <div class="internal-projects-grid">
+        @for (project of internalProjects; track project.name) {
+          <article class="internal-project">
+            <span class="project-company">{{ project.company }}</span>
+            <h3 class="project-name">{{ project.name }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+          </article>
+        }
+      </div>
+    </div>
+
+    <div class="carousel-sticky-track">
+      <div class="carousel-area" [class.visible]="isVisible()">
+        <app-project-carousel />
+      </div>
     </div>
   </div>
 </section>

@@ -30,6 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
     provideMarkdown(),
-    { provide: API_CONFIG, useValue: { baseUrl: 'https://q48pypbs7k3f7ke8g0ccura9.136.248.103.132.sslip.io/api' } }
+    { provide: API_CONFIG, useValue: { baseUrl: 'https://ivanreis.com.br/api' } }
   ]
 };
