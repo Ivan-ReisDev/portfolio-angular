@@ -44,3 +44,12 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+# Backups locais do PostgreSQL
+backups/
+
+# Credenciais locais
+.env
+
+# Python
+__pycache__/
+*.pyc

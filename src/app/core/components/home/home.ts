@@ -23,16 +23,9 @@ export class Home implements AfterViewInit, OnDestroy {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('reset');
-              entry.target.classList.remove('active');
-
-              setTimeout(() => {
-                entry.target.classList.remove('reset');
-                entry.target.classList.add('active');
-              }, 50);
+              entry.target.classList.add('active');
             } else {
               entry.target.classList.remove('active');
-              entry.target.classList.remove('reset');
             }
           });
         },

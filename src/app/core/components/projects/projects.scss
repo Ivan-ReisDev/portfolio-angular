@@ -11,12 +11,8 @@
   height: auto;
   min-height: 100vh;
   min-height: 100dvh;
-  // A bottom inset lets this taller section scroll normally. It only becomes
-  // sticky when its final edge reaches the viewport, so Progresso can stack
-  // over the carousel without hiding the content above it.
   position: sticky;
-  top: auto;
-  bottom: 0;
+  top: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -28,7 +24,6 @@
     min-height: 100vh;
     min-height: 100dvh;
     position: relative;
-    bottom: auto;
     align-items: flex-start;
   }
   // Use overflow: clip instead of hidden — clips visual overflow without creating a scroll container
@@ -182,113 +177,6 @@
 .carousel-sticky-track {
   width: 100%;
   padding-bottom: 0;
-}
-
-.internal-preview {
-  width: 100%;
-  max-width: 1180px;
-  margin-bottom: clamp(72px, 11vh, 120px);
-
-  @include laptop-height-viewport {
-    margin-bottom: 56px;
-  }
-
-  @include compact-landscape-viewport {
-    margin-bottom: 42px;
-  }
-
-  @media (max-width: 767px) {
-    margin-bottom: 52px;
-  }
-}
-
-.internal-preview-label {
-  display: block;
-  margin-bottom: 26px;
-  color: $secondary-blue;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-  text-align: center;
-  text-transform: uppercase;
-
-  @include laptop-height-viewport {
-    margin-bottom: 22px;
-    font-size: 11px;
-  }
-}
-
-.internal-projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(40px, 5vw, 72px);
-
-  @media (max-width: 767px) {
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-}
-
-.internal-project {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-
-  .project-company {
-    display: block;
-    margin-bottom: 8px;
-    color: $secondary-blue;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-  }
-
-  .project-name {
-    margin: 0 0 10px;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  .project-description {
-    max-width: 350px;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.56);
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.6;
-  }
-
-  @include laptop-height-viewport {
-    .project-name {
-      font-size: 18px;
-    }
-
-    .project-description {
-      font-size: 12px;
-    }
-  }
-
-  @include compact-landscape-viewport {
-    .project-name {
-      margin-bottom: 6px;
-      font-size: 17px;
-    }
-
-    .project-description {
-      font-size: 11px;
-      line-height: 1.45;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .project-description {
-      max-width: 520px;
-    }
-  }
 }
 
 @keyframes bgShift {

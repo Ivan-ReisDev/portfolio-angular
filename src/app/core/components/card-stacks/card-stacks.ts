@@ -151,11 +151,17 @@ export class CardStacks {
       description:
         'O Google Cloud Platform (GCP) é o conjunto de serviços de nuvem do Google, construído sobre a mesma infraestrutura que sustenta produtos como Busca e YouTube. Destaca-se em análise de dados, inteligência artificial/machine learning e foi o criador do Kubernetes.',
     },
-        {
+    {
       icon: 'devicon-terraform-plain',
       name: 'Terraform',
       description:
         'O Terraform é uma ferramenta de Infraestrutura como Código (IaC) criada pela HashiCorp. Ela permite criar, alterar e gerenciar recursos de nuvem (como servidores, redes e bancos de dados) usando arquivos de texto simples e legíveis, em vez de cliques manuais em painéis web',
-    }
+    },
+    {
+      icon: 'devicon-cloudflare-plain',
+      name: 'Cloudflare',
+      description:
+        'Cloudflare é uma plataforma de infraestrutura web que oferece CDN, proteção contra DDoS, DNS e serviços de segurança, melhorando a performance e a disponibilidade de aplicações na internet.',
+    },
   ];
 }

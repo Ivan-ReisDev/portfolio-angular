@@ -49,9 +49,9 @@ export class Education {
     },
     {
       date: 'Junho 2026',
-      title: 'Desenvolvedor Full Stack Pleno - Youdata',
+      title: 'Desenvolvedor Full Stack - Youdata',
       description:
-        'Atuação como Desenvolvedor Full Stack Pleno, alocado na Ancar, participando de todo o ciclo de desenvolvimento de aplicações web, desde o levantamento de requisitos e alinhamento com as áreas de negócio até o desenvolvimento, arquitetura e deploy em produção. Desenvolvimento de soluções utilizando TypeScript, React, Node.js, Express e NestJS, além da criação e evolução de APIs, integrações entre sistemas e implementação de novas funcionalidades. Experiência com o ecossistema Google Cloud Platform (GCP), atuando na infraestrutura e implantação de aplicações com foco em performance, escalabilidade e boas práticas de desenvolvimento.',
+        'Atuação como Desenvolvedor Full Stack, alocado na Ancar, participando de todo o ciclo de desenvolvimento de aplicações web, desde o levantamento de requisitos e alinhamento com as áreas de negócio até o desenvolvimento, arquitetura e deploy em produção. Desenvolvimento de soluções utilizando TypeScript, React, Node.js, Express e NestJS, além da criação e evolução de APIs, integrações entre sistemas e implementação de novas funcionalidades. Experiência com o ecossistema Google Cloud Platform (GCP), atuando na infraestrutura e implantação de aplicações com foco em performance, escalabilidade e boas práticas de desenvolvimento.',
     },
     {
       date: 'Dezembro 2025',
