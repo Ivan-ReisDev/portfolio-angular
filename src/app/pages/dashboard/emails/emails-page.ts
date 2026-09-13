@@ -1,5 +1,6 @@
 import { Component, inject, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { finalize } from 'rxjs';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
@@ -56,35 +57,34 @@ export class EmailsPage {
 
   sendEmail(): void {
     if (this.form.invalid || this.sending()) return;
-
+    const values = this.form.getRawValue();
+    const payload = this.createPayload(values);
     this.sending.set(true);
-    const { to, contactName, subject } = this.form.getRawValue();
-
-    const payload: SendEmailPayload = {
-      to: to!,
-      template: this.selectedTemplate()
-    };
-
-    if (subject?.trim()) payload.subject = subject.trim();
-    if (contactName?.trim()) payload.context = { name: contactName.trim() };
-
     this.emailApi
       .send(payload)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.sending.set(false)))
       .subscribe({
-        next: () => {
-          this.toast.success(`E-mail enviado para ${to}`);
-          this.sentEmails.update(list => [
-            { to: to!, template: this.selectedTemplate(), sentAt: new Date() },
-            ...list
-          ]);
-          this.form.reset();
-        },
-        error: (err) => {
-          const message = err?.error?.message ?? 'Falha ao enviar e-mail';
-          this.toast.error(Array.isArray(message) ? message[0] : message);
-        },
-        complete: () => this.sending.set(false)
+        next: () => this.handleSendSuccess(values.to!, payload.template),
+        error: (error: unknown) => this.handleSendError(error)
       });
+  }
+
+  private createPayload(values: { to: string | null; contactName: string | null; subject: string | null }): SendEmailPayload {
+    const payload: SendEmailPayload = { to: values.to!, template: this.selectedTemplate() };
+    if (values.subject?.trim()) payload.subject = values.subject.trim();
+    if (values.contactName?.trim()) payload.context = { name: values.contactName.trim() };
+    return payload;
+  }
+
+  private handleSendSuccess(to: string, template: EmailTemplate): void {
+    this.toast.success(`E-mail enviado para ${to}`);
+    this.sentEmails.update((list) => [{ to, template, sentAt: new Date() }, ...list]);
+    this.form.reset();
+  }
+
+  private handleSendError(error: unknown): void {
+    const body = error as { error?: { message?: unknown } };
+    const message = body.error?.message;
+    this.toast.error(Array.isArray(message) ? String(message[0]) : typeof message === 'string' ? message : 'Falha ao enviar e-mail');
   }
 }

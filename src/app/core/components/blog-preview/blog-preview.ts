@@ -61,6 +61,7 @@ export class BlogPreview implements OnInit, OnDestroy {
   }
 
   private setupObserver(): void {
+    if (typeof IntersectionObserver === 'undefined') return;
     this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

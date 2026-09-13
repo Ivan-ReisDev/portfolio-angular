@@ -47,26 +47,36 @@ export class Contact implements AfterViewInit, OnDestroy {
     description: ['', [Validators.required]]
   });
 
-  ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.entranceObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              this.phrase.nativeElement.classList.add('visible');
-              this.formElement.nativeElement.classList.add('visible');
-              this.entranceObserver?.disconnect();
-            }
-          });
-        },
-        {
-          threshold: 0.2,
-          rootMargin: '0px 0px -8% 0px'
-        }
-      );
-
-      this.entranceObserver.observe(this.contactSection.nativeElement);
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
+
+    this.setupEntranceObserver();
+  }
+
+  private setupEntranceObserver(): void {
+    if (typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
+    this.entranceObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.phrase.nativeElement.classList.add('visible');
+            this.formElement.nativeElement.classList.add('visible');
+            this.entranceObserver?.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -8% 0px'
+      }
+    );
+
+    this.entranceObserver.observe(this.contactSection.nativeElement);
   }
 
   ngOnDestroy(): void {
@@ -74,17 +84,18 @@ export class Contact implements AfterViewInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.contactForm.invalid) {
-      this.contactForm.markAllAsTouched();
-      return;
-    }
+    if (this.contactForm.invalid) return void this.contactForm.markAllAsTouched();
+    this.prepareSubmission();
+    this.sendContact(this.contactForm.getRawValue());
+  }
 
+  private prepareSubmission(): void {
     this.isSubmitting.set(true);
     this.submitError.set(null);
     this.submitSuccess.set(false);
+  }
 
-    const { name, email, phone, description } = this.contactForm.getRawValue();
-
+  private sendContact({ name, email, phone, description }: { name: string; email: string; phone: string; description: string }): void {
     this.contactApi
       .create({
         name,
@@ -115,16 +126,18 @@ export class Contact implements AfterViewInit, OnDestroy {
   }
 
   private parseErrorMessage(error: HttpErrorResponse): string {
-    if (error.status === 0) {
-      return 'Sem conexão com o servidor. Tente novamente mais tarde.';
-    }
+    if (error.status === 0) return 'Sem conexão com o servidor. Tente novamente mais tarde.';
+    return this.extractApiError(error.error) ?? 'Ocorreu um erro ao enviar sua mensagem. Tente novamente.';
+  }
 
-    const body = error.error;
+  private extractApiError(body: unknown): string | null {
+    if (!body || typeof body !== 'object' || !('message' in body)) return null;
+    return this.formatApiMessage((body as { message?: unknown }).message);
+  }
 
-    if (body?.message) {
-      return Array.isArray(body.message) ? body.message.join(', ') : body.message;
-    }
-
-    return 'Ocorreu um erro ao enviar sua mensagem. Tente novamente.';
+  private formatApiMessage(message: unknown): string | null {
+    if (Array.isArray(message)) return message.filter((item): item is string => typeof item === 'string').join(', ');
+    if (typeof message === 'string') return message;
+    return null;
   }
 }

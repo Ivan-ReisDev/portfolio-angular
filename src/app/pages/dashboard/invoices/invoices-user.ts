@@ -80,9 +80,11 @@ export class InvoicesUser implements OnInit {
   }
 
   resolveStatus(invoice: Invoice): InvoiceStatus {
-    if (invoice.status) return invoice.status;
-    if (invoice.paidAt) return 'paid';
-    return new Date(invoice.dueDate) < new Date() ? 'overdue' : 'pending';
+    return invoice.status ?? (invoice.paidAt ? 'paid' : this.isOverdue(invoice) ? 'overdue' : 'pending');
+  }
+
+  private isOverdue(invoice: Invoice): boolean {
+    return new Date(invoice.dueDate) < new Date();
   }
 
   statusLabel(status: InvoiceStatus): string {

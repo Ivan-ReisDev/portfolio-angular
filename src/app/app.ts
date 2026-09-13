@@ -103,35 +103,7 @@ export class App implements AfterViewInit, OnDestroy {
     if (!isPlatformBrowser(this.platformId)) return;
 
     this.updateIsHomePage();
-
-    this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe((event) => {
-      const currentPath = this.getPathWithoutQueryOrFragment(event.urlAfterRedirects);
-      const isHome = currentPath === '/';
-      this.isHomePage.set(isHome);
-
-      const hideHeaderRoutes = ['/login', '/dashboard'];
-      const shouldHideHeader = hideHeaderRoutes.some(r => currentPath.startsWith(r));
-      this.showHeader.set(!shouldHideHeader);
-
-      this.updateHtmlOverflowClass(isHome);
-
-      if (isHome) {
-        this.setHomeSEO();
-        setTimeout(() => {
-          this.initializeScrollHandling();
-
-          const fragment = this.router.parseUrl(event.urlAfterRedirects).fragment;
-          if (fragment) {
-            this.scrollToSection(fragment);
-          }
-        }, 50);
-      } else {
-        this.destroyScrollHandling();
-      }
-    });
+    this.subscribeToNavigation();
 
     if (this.isHomePage()) {
       this.setHomeSEO();
@@ -139,6 +111,31 @@ export class App implements AfterViewInit, OnDestroy {
     }
 
     this.setupGlobalClickInterceptor();
+  }
+
+  private subscribeToNavigation(): void {
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((event) => this.handleNavigation(event));
+  }
+
+  private handleNavigation(event: NavigationEnd): void {
+    const currentPath = this.getPathWithoutQueryOrFragment(event.urlAfterRedirects);
+    const isHome = currentPath === '/';
+    this.isHomePage.set(isHome);
+    this.showHeader.set(!['/login', '/dashboard'].some(route => currentPath.startsWith(route)));
+    this.updateHtmlOverflowClass(isHome);
+    isHome ? this.handleHomeNavigation(event) : this.destroyScrollHandling();
+  }
+
+  private handleHomeNavigation(event: NavigationEnd): void {
+    this.setHomeSEO();
+    setTimeout(() => {
+      this.initializeScrollHandling();
+      const fragment = this.router.parseUrl(event.urlAfterRedirects).fragment;
+      if (fragment) this.scrollToSection(fragment);
+    }, 50);
   }
 
   ngOnDestroy(): void {
@@ -157,17 +154,17 @@ export class App implements AfterViewInit, OnDestroy {
       if (target?.getAttribute('href')?.startsWith('#')) {
         e.preventDefault();
         const sectionId = target.getAttribute('href')?.substring(1);
-        if (sectionId) {
-          if (this.isHomePage()) {
-            this.scrollToSection(sectionId);
-          } else {
-            this.router.navigate(['/'], { fragment: sectionId });
-          }
-        }
+        if (sectionId) this.navigateToSectionId(sectionId);
       }
     };
 
     document.addEventListener('click', this.clickHandler);
+  }
+
+  private navigateToSectionId(sectionId: string): void {
+    this.isHomePage()
+      ? this.scrollToSection(sectionId)
+      : void this.router.navigate(['/'], { fragment: sectionId });
   }
 
   private removeGlobalClickInterceptor(): void {
@@ -219,12 +216,16 @@ export class App implements AfterViewInit, OnDestroy {
 
   private initializeScrollHandling(): void {
     if (!this.scrollContainer?.nativeElement) return;
-
     if (this.scrollHandlingInitialized) return;
     this.scrollHandlingInitialized = true;
+    this.registerScrollHandler();
+    this.registerKeyboardHandler();
+    this.registerResizeHandler();
+    setTimeout(() => this.focusScrollContainer(), 100);
+  }
 
+  private registerScrollHandler(): void {
     const container = this.scrollContainer.nativeElement;
-
     this.scrollHandler = () => {
       if (this.scrollRafId) return;
       this.scrollRafId = requestAnimationFrame(() => {
@@ -232,116 +233,102 @@ export class App implements AfterViewInit, OnDestroy {
         this.onScroll();
       });
     };
-
     container.addEventListener('scroll', this.scrollHandler, { passive: true });
+  }
 
-    this.keydownHandler = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        this.navigateToSection(e.key === 'ArrowDown' ? 'next' : 'prev');
-      }
+  private registerKeyboardHandler(): void {
+    const container = this.scrollContainer.nativeElement;
+    this.keydownHandler = (event: KeyboardEvent) => {
+      if (!['ArrowDown', 'ArrowUp'].includes(event.key)) return;
+      event.preventDefault();
+      this.navigateToSection(event.key === 'ArrowDown' ? 'next' : 'prev');
     };
-
     container.addEventListener('keydown', this.keydownHandler);
+  }
 
+  private registerResizeHandler(): void {
     this.resizeHandler = () => {
-      // Keep the section that was visible when resizing began. Without this,
-      // scrollTop still points to the old section heights and the user may need
-      // several wheel interactions before the next section can appear.
-      if (!this.sectionBeforeResize) {
-        this.sectionBeforeResize = this.activeSection();
-      }
-
-      if (this.resizeTimer) {
-        clearTimeout(this.resizeTimer);
-      }
-
-      this.resizeTimer = setTimeout(() => {
-        const sectionId = this.sectionBeforeResize || this.activeSection();
-        this.sectionBeforeResize = '';
-        this.resizeTimer = null;
-
-        requestAnimationFrame(() => {
-          this.scrollToSection(sectionId, 'instant');
-          this.onScroll();
-        });
-      }, 120);
+      this.sectionBeforeResize ||= this.activeSection();
+      if (this.resizeTimer) clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => this.finishResize(), 120);
     };
-
     window.addEventListener('resize', this.resizeHandler, { passive: true });
+  }
 
-    setTimeout(() => {
+  private finishResize(): void {
+    const sectionId = this.sectionBeforeResize || this.activeSection();
+    this.sectionBeforeResize = '';
+    this.resizeTimer = null;
+    requestAnimationFrame(() => {
+      this.scrollToSection(sectionId, 'instant');
       this.onScroll();
-      if (this.scrollContainer?.nativeElement) {
-        this.scrollContainer.nativeElement.focus();
-      }
-    }, 100);
+    });
+  }
+
+  private focusScrollContainer(): void {
+    this.onScroll();
+    this.scrollContainer?.nativeElement.focus();
   }
 
   private destroyScrollHandling(): void {
     const container = this.scrollContainer?.nativeElement;
     if (!container) return;
-
-    if (this.scrollHandler) {
-      container.removeEventListener('scroll', this.scrollHandler);
-      this.scrollHandler = null;
-    }
-
-    if (this.keydownHandler) {
-      container.removeEventListener('keydown', this.keydownHandler);
-      this.keydownHandler = null;
-    }
-
-    if (this.resizeHandler) {
-      window.removeEventListener('resize', this.resizeHandler);
-      this.resizeHandler = null;
-    }
-
-    if (this.resizeTimer) {
-      clearTimeout(this.resizeTimer);
-      this.resizeTimer = null;
-    }
-    this.sectionBeforeResize = '';
-
-    if (this.scrollRafId) {
-      cancelAnimationFrame(this.scrollRafId);
-      this.scrollRafId = 0;
-    }
-
+    this.removeScrollHandler(container);
+    this.removeKeyboardHandler(container);
+    this.removeResizeHandler();
+    this.cancelPendingScrollWork();
     this.scrollHandlingInitialized = false;
+  }
+
+  private removeScrollHandler(container: HTMLDivElement): void {
+    if (!this.scrollHandler) return;
+    container.removeEventListener('scroll', this.scrollHandler);
+    this.scrollHandler = null;
+  }
+
+  private removeKeyboardHandler(container: HTMLDivElement): void {
+    if (!this.keydownHandler) return;
+    container.removeEventListener('keydown', this.keydownHandler);
+    this.keydownHandler = null;
+  }
+
+  private removeResizeHandler(): void {
+    if (!this.resizeHandler) return;
+    window.removeEventListener('resize', this.resizeHandler);
+    this.resizeHandler = null;
+  }
+
+  private cancelPendingScrollWork(): void {
+    if (this.resizeTimer) clearTimeout(this.resizeTimer);
+    this.resizeTimer = null;
+    this.sectionBeforeResize = '';
+    if (!this.scrollRafId) return;
+    cancelAnimationFrame(this.scrollRafId);
+    this.scrollRafId = 0;
   }
 
   scrollToSection(sectionId: string, behavior: 'smooth' | 'instant' = 'smooth') {
     if (!this.scrollContainer?.nativeElement) return;
-
     const container = this.scrollContainer.nativeElement;
-    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
-    const targetIndex = sections.indexOf(sectionId);
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'] as const;
+    const targetIndex = sections.indexOf(sectionId as typeof sections[number]);
     if (targetIndex === -1) return;
-
-    let scrollTarget = 0;
-    for (let i = 0; i < targetIndex; i++) {
-      const el = document.getElementById(sections[i]);
-      if (el) {
-        scrollTarget += el.getBoundingClientRect().height;
-      }
-    }
-
-    if (behavior === 'instant') {
-      // The container has scroll-behavior: smooth in CSS. Temporarily override
-      // it so a resize correction does not animate through several sections.
-      const previousScrollBehavior = container.style.scrollBehavior;
-      container.style.scrollBehavior = 'auto';
-      container.scrollTop = scrollTarget;
-      container.style.scrollBehavior = previousScrollBehavior;
-    } else {
-      container.scrollTo({
-        top: scrollTarget,
-        behavior: 'smooth'
-      });
-    }
-
+    const scrollTarget = sections
+      .slice(0, targetIndex)
+      .reduce((total, id) => total + (document.getElementById(id)?.getBoundingClientRect().height ?? 0), 0);
+    this.applyScrollPosition(container, scrollTarget, behavior);
     this.activeSection.set(sectionId);
+  }
+
+  private applyScrollPosition(container: HTMLDivElement, top: number, behavior: 'smooth' | 'instant'): void {
+    if (behavior === 'smooth') {
+      container.scrollTo({ top, behavior });
+      return;
+    }
+    const previousScrollBehavior = container.style.scrollBehavior;
+    container.style.scrollBehavior = 'auto';
+    container.scrollTop = top;
+    container.style.scrollBehavior = previousScrollBehavior;
   }
 
   navigateToSection(direction: 'next' | 'prev') {
@@ -360,26 +347,23 @@ export class App implements AfterViewInit, OnDestroy {
 
   onScroll() {
     if (!this.scrollContainer?.nativeElement) return;
-
-    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
     const container = this.scrollContainer.nativeElement;
-    const scrollPosition = container.scrollTop;
-
-    let currentSection = 'inicio';
-    let accumulatedHeight = 0;
-
-    for (const sectionId of sections) {
-      const element = document.getElementById(sectionId);
-      if (!element) continue;
-
-      if (scrollPosition >= accumulatedHeight - 100) {
-        currentSection = sectionId;
-      }
-      accumulatedHeight += element.getBoundingClientRect().height;
-    }
-
+    const currentSection = this.findCurrentSection(container.scrollTop);
     if (this.activeSection() !== currentSection) {
       this.activeSection.set(currentSection);
     }
+  }
+
+  private findCurrentSection(scrollPosition: number): string {
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
+    let accumulatedHeight = 0;
+    let currentSection = sections[0];
+    for (const sectionId of sections) {
+      const element = document.getElementById(sectionId);
+      if (!element) continue;
+      if (scrollPosition >= accumulatedHeight - 100) currentSection = sectionId;
+      accumulatedHeight += element.getBoundingClientRect().height;
+    }
+    return currentSection;
   }
 }

@@ -8,13 +8,13 @@ import { API_CONFIG } from '../api.config';
 import {
   LoginPayload,
   AuthResponse,
-  JwtPayload,
+  AuthenticatedUser,
   Resource,
   Action,
   Permission
 } from '../models/auth.model';
 
-const TOKEN_KEY = 'accessToken';
+const AUTH_STORAGE_KEY = 'accessToken';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -24,30 +24,17 @@ export class AuthService {
   private readonly platformId = inject(PLATFORM_ID);
 
   private readonly _token = signal<string | null>(this.readTokenFromStorage());
-  private readonly _payload = computed<JwtPayload | null>(() => {
-    const token = this._token();
-    if (!token) return null;
-    return this.decodePayload(token);
-  });
+  // JWTs are opaque on the client. Claims are only accepted from the API's
+  // server-validated login response and are never decoded or used to grant access.
+  private readonly _identity = signal<AuthenticatedUser | null>(null);
 
-  readonly isLoggedIn = computed(() => {
-    const payload = this._payload();
-    if (!payload) return false;
-    return payload.exp * 1000 > Date.now();
-  });
+  readonly isLoggedIn = computed(() => this._token() !== null);
 
-  readonly currentUser = computed(() => {
-    const payload = this._payload();
-    if (!payload) return null;
-    return { sub: payload.sub, email: payload.email, role: payload.role };
-  });
+  readonly currentUser = computed(() => this._identity());
 
-  readonly userPermissions = computed<Permission[]>(() => {
-    const payload = this._payload();
-    return payload?.permissions ?? [];
-  });
+  readonly userPermissions = computed<Permission[]>(() => this._identity()?.permissions ?? []);
 
-  readonly userRole = computed(() => this._payload()?.role ?? null);
+  readonly userRole = computed(() => this._identity()?.role ?? null);
 
   login(payload: LoginPayload): Observable<AuthResponse> {
     return this.http
@@ -55,6 +42,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           this.setToken(response.accessToken);
+          this._identity.set(response.user ?? null);
         })
       );
   }
@@ -79,29 +67,20 @@ export class AuthService {
   private setToken(token: string): void {
     this._token.set(token);
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(TOKEN_KEY, token);
+      localStorage.setItem(AUTH_STORAGE_KEY, token);
     }
   }
 
   clearToken(): void {
     this._token.set(null);
+    this._identity.set(null);
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(AUTH_STORAGE_KEY);
     }
   }
 
   private readTokenFromStorage(): string | null {
     if (typeof localStorage === 'undefined') return null;
-    return localStorage.getItem(TOKEN_KEY);
-  }
-
-  private decodePayload(token: string): JwtPayload | null {
-    try {
-      const base64Payload = token.split('.')[1];
-      const jsonPayload = atob(base64Payload);
-      return JSON.parse(jsonPayload);
-    } catch {
-      return null;
-    }
+    return localStorage.getItem(AUTH_STORAGE_KEY);
   }
 }

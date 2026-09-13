@@ -9,7 +9,7 @@ import { AuthService } from '../../../core/api/services/auth.service';
 import { ToastService } from '../../../core/components/dashboard/toast/toast';
 import { Modal } from '../../../core/components/dashboard/modal/modal';
 import { ConfirmDialog } from '../../../core/components/dashboard/confirm-dialog/confirm-dialog';
-import { User } from '../../../core/api/models/user.model';
+import { User, UpdateUserPayload } from '../../../core/api/models/user.model';
 import { Role } from '../../../core/api/models/role.model';
 import { PaginationMeta } from '../../../core/api/models/api-response.model';
 
@@ -122,50 +122,43 @@ export class UsersList implements OnInit {
   }
 
   submitForm(): void {
-    if (this.userForm.invalid) {
-      this.userForm.markAllAsTouched();
-      return;
-    }
-
+    if (this.userForm.invalid) return void this.userForm.markAllAsTouched();
     this.submitting.set(true);
     const values = this.userForm.getRawValue();
+    const user = this.editingUser();
+    user ? this.updateUser(user.id, values) : this.createUser(values);
+  }
 
-    if (this.isEditing) {
-      const payload: any = { name: values.name, email: values.email, roleId: values.roleId, phone: values.phone || undefined };
-      if (values.password) payload.password = values.password;
+  private updateUser(id: string, values: ReturnType<typeof this.userForm.getRawValue>): void {
+    this.userApi.update(id, this.createUpdatePayload(values)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => this.handleSaveSuccess('Usuário atualizado com sucesso.'),
+      error: () => this.handleSaveError('Erro ao atualizar usuário.')
+    });
+  }
 
-      this.userApi
-        .update(this.editingUser()!.id, payload)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: () => {
-            this.toast.success('Usuário atualizado com sucesso.');
-            this.submitting.set(false);
-            this.closeFormModal();
-            this.loadUsers(this.currentPage());
-          },
-          error: () => {
-            this.toast.error('Erro ao atualizar usuário.');
-            this.submitting.set(false);
-          }
-        });
-    } else {
-      this.userApi
-        .create(values)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: () => {
-            this.toast.success('Usuário criado com sucesso.');
-            this.submitting.set(false);
-            this.closeFormModal();
-            this.loadUsers(this.currentPage());
-          },
-          error: () => {
-            this.toast.error('Erro ao criar usuário.');
-            this.submitting.set(false);
-          }
-        });
-    }
+  private createUser(values: ReturnType<typeof this.userForm.getRawValue>): void {
+    this.userApi.create(values).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => this.handleSaveSuccess('Usuário criado com sucesso.'),
+      error: () => this.handleSaveError('Erro ao criar usuário.')
+    });
+  }
+
+  private createUpdatePayload(values: ReturnType<typeof this.userForm.getRawValue>): UpdateUserPayload {
+    const payload: UpdateUserPayload = { name: values.name, email: values.email, roleId: values.roleId, phone: values.phone || undefined };
+    if (values.password) payload.password = values.password;
+    return payload;
+  }
+
+  private handleSaveSuccess(message: string): void {
+    this.toast.success(message);
+    this.submitting.set(false);
+    this.closeFormModal();
+    this.loadUsers(this.currentPage());
+  }
+
+  private handleSaveError(message: string): void {
+    this.toast.error(message);
+    this.submitting.set(false);
   }
 
   confirmDelete(user: User): void {

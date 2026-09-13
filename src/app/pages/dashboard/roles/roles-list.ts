@@ -151,48 +151,38 @@ export class RolesList implements OnInit {
   }
 
   submitForm(): void {
-    if (this.roleForm.invalid) {
-      this.roleForm.markAllAsTouched();
-      return;
-    }
-
+    if (this.roleForm.invalid) return void this.roleForm.markAllAsTouched();
     this.submitting.set(true);
     const name = this.roleForm.getRawValue().name;
     const permissionIds = Array.from(this.selectedPermissionIds());
+    const role = this.editingRole();
+    role ? this.updateRole(role.id, name, permissionIds) : this.createRole(name, permissionIds);
+  }
 
-    if (this.isEditing) {
-      this.roleApi
-        .update(this.editingRole()!.id, { name, permissionIds })
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: () => {
-            this.toast.success('Role atualizada com sucesso.');
-            this.submitting.set(false);
-            this.closeFormModal();
-            this.loadRoles(this.currentPage());
-          },
-          error: () => {
-            this.toast.error('Erro ao atualizar role.');
-            this.submitting.set(false);
-          }
-        });
-    } else {
-      this.roleApi
-        .create({ name, permissionIds })
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: () => {
-            this.toast.success('Role criada com sucesso.');
-            this.submitting.set(false);
-            this.closeFormModal();
-            this.loadRoles(this.currentPage());
-          },
-          error: () => {
-            this.toast.error('Erro ao criar role.');
-            this.submitting.set(false);
-          }
-        });
-    }
+  private updateRole(id: string, name: string, permissionIds: string[]): void {
+    this.roleApi.update(id, { name, permissionIds }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => this.handleSaveSuccess('Role atualizada com sucesso.'),
+      error: () => this.handleSaveError('Erro ao atualizar role.')
+    });
+  }
+
+  private createRole(name: string, permissionIds: string[]): void {
+    this.roleApi.create({ name, permissionIds }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => this.handleSaveSuccess('Role criada com sucesso.'),
+      error: () => this.handleSaveError('Erro ao criar role.')
+    });
+  }
+
+  private handleSaveSuccess(message: string): void {
+    this.toast.success(message);
+    this.submitting.set(false);
+    this.closeFormModal();
+    this.loadRoles(this.currentPage());
+  }
+
+  private handleSaveError(message: string): void {
+    this.toast.error(message);
+    this.submitting.set(false);
   }
 
   confirmDelete(role: Role): void {

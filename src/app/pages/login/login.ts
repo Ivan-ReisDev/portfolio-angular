@@ -123,22 +123,27 @@ export class Login implements AfterViewInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-
-    if (this.turnstileAvailable() && !this.turnstileToken()) {
-      this.errorMessage.set('Complete a verificação de segurança.');
-      return;
-    }
-
+    if (!this.isFormReady()) return;
     this.isSubmitting.set(true);
     this.errorMessage.set(null);
-
     const { email, password } = this.loginForm.getRawValue();
     const turnstileToken = this.turnstileToken() ?? undefined;
+    this.submitLogin(email, password, turnstileToken);
+  }
 
+  private isFormReady(): boolean {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return false;
+    }
+    if (this.turnstileAvailable() && !this.turnstileToken()) {
+      this.errorMessage.set('Complete a verificação de segurança.');
+      return false;
+    }
+    return true;
+  }
+
+  private submitLogin(email: string, password: string, turnstileToken?: string): void {
     this.authService
       .login({ email, password, turnstileToken })
       .subscribe({
@@ -205,16 +210,19 @@ export class Login implements AfterViewInit, OnDestroy {
   }
 
   private parseError(error: HttpErrorResponse): string {
-    if (error.status === 0) {
-      return 'Sem conexão com o servidor. Tente novamente mais tarde.';
-    }
-    if (error.status === 401) {
-      return 'Email ou senha incorretos.';
-    }
-    const body = error.error;
-    if (body?.message) {
-      return Array.isArray(body.message) ? body.message.join(', ') : body.message;
-    }
-    return 'Ocorreu um erro inesperado. Tente novamente.';
+    if (error.status === 0) return 'Sem conexão com o servidor. Tente novamente mais tarde.';
+    if (error.status === 401) return 'Email ou senha incorretos.';
+    return this.extractErrorMessage(error.error) ?? 'Ocorreu um erro inesperado. Tente novamente.';
+  }
+
+  private extractErrorMessage(body: unknown): string | null {
+    if (!body || typeof body !== 'object' || !('message' in body)) return null;
+    return this.formatErrorMessage((body as { message?: unknown }).message);
+  }
+
+  private formatErrorMessage(message: unknown): string | null {
+    if (Array.isArray(message)) return message.join(', ');
+    if (typeof message === 'string') return message;
+    return null;
   }
 }

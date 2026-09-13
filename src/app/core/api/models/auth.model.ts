@@ -10,6 +10,15 @@ export interface LoginPayload {
 
 export interface AuthResponse {
   accessToken: string;
+  /** Identity returned by the API after the token has been validated server-side. */
+  user?: AuthenticatedUser;
+}
+
+export interface AuthenticatedUser {
+  sub: string;
+  email: string;
+  role: string;
+  permissions: Permission[];
 }
 
 export interface JwtPayload {

@@ -49,9 +49,8 @@ export class PhoneMaskDirective implements ControlValueAccessor {
       'ArrowLeft', 'ArrowRight', 'Home', 'End',
     ];
 
-    if (allowed.includes(event.key)) return;
-    if (event.ctrlKey || event.metaKey) return;
-    if (!/^\d$/.test(event.key)) event.preventDefault();
+    if (allowed.includes(event.key) || event.ctrlKey || event.metaKey || /^\d$/.test(event.key)) return;
+    event.preventDefault();
   }
 
   private stripMask(value: string): string {
@@ -61,8 +60,10 @@ export class PhoneMaskDirective implements ControlValueAccessor {
   private applyMask(digits: string): string {
     if (digits.length === 0) return '';
     if (digits.length <= 2) return `(${digits}`;
-    if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-    if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
+    switch (true) {
+      case digits.length <= 6: return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+      case digits.length <= 10: return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+      default: return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
+    }
   }
 }

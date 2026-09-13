@@ -28,27 +28,28 @@ export class Projects implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const section = this.elementRef.nativeElement.querySelector('#projetos');
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.initializeObserver();
+  }
 
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-              this.isVisible.set(true);
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-        }
-      );
+  private initializeObserver(): void {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const section = this.elementRef.nativeElement.querySelector('#projetos');
 
-      if (section) {
-        this.observer.observe(section);
-      }
+    this.observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => this.updateVisibility(entry)),
+      { threshold: 0.1 }
+    );
+
+    if (section) {
+      this.observer.observe(section);
     }
+  }
+
+  private updateVisibility(entry: IntersectionObserverEntry): void {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('active');
+    this.isVisible.set(true);
   }
 
   ngOnDestroy() {

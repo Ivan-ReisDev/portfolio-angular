@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 
 import { AuthService } from '../../../core/api/services/auth.service';
+import { Action, Resource } from '../../../core/api/models/auth.model';
 
 interface NavItem {
   label: string;
@@ -47,20 +48,22 @@ export class DashboardLayout {
 
   get visibleNavItems(): NavItem[] {
     const isAdmin = this.authService.isAdmin();
-    
-    return this.navItems.map(item => {
-      if (item.children) {
-        // For parent items (Admin), checking if user should see the parent
-        // In this case, "Administração" is only for admins
-        if (!isAdmin) return null;
-        return item; // Start with children intact
-      }
-      
-      // Regular items permissions check
-      if (!item.resource || !item.action) return item;
-      if (isAdmin) return item;
-      return this.authService.hasPermission(item.resource as any, item.action as any) ? item : null;
-    }).filter(Boolean) as NavItem[];
+    return this.navItems.flatMap((item) => this.getVisibleItem(item, isAdmin));
+  }
+
+  private getVisibleItem(item: NavItem, isAdmin: boolean): NavItem[] {
+    if (item.children) return this.asVisibleItems(item, isAdmin);
+    return this.asVisibleItems(item, this.isRegularItemVisible(item, isAdmin));
+  }
+
+  private asVisibleItems(item: NavItem, visible: boolean): NavItem[] {
+    if (!visible) return [];
+    return [item];
+  }
+
+  private isRegularItemVisible(item: NavItem, isAdmin: boolean): boolean {
+    if (!item.resource || !item.action) return true;
+    return isAdmin || this.authService.hasPermission(item.resource as Resource, item.action as Action);
   }
 
   toggleAdminMenu(): void {

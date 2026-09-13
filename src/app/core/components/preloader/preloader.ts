@@ -54,24 +54,23 @@ export class Preloader implements OnInit {
         event instanceof NavigationError
       ),
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe(event => {
-      if (this.isInitialLoad) return;
+    ).subscribe(event => this.handleNavigationEvent(event));
+  }
 
-      if (event instanceof NavigationStart) {
-        this.visible.set(true);
-        this.fadeOut.set(false);
-      }
+  private handleNavigationEvent(event: NavigationStart | NavigationEnd | NavigationCancel | NavigationError): void {
+    if (this.isInitialLoad) return;
+    if (event instanceof NavigationStart) {
+      this.visible.set(true);
+      this.fadeOut.set(false);
+      return;
+    }
+    this.finishNavigation();
+  }
 
-      if (
-        event instanceof NavigationEnd ||
-        event instanceof NavigationCancel ||
-        event instanceof NavigationError
-      ) {
-        setTimeout(() => {
-          this.fadeOut.set(true);
-          setTimeout(() => this.visible.set(false), 600);
-        }, 200);
-      }
-    });
+  private finishNavigation(): void {
+    setTimeout(() => {
+      this.fadeOut.set(true);
+      setTimeout(() => this.visible.set(false), 600);
+    }, 200);
   }
 }

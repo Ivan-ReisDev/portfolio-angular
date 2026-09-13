@@ -125,25 +125,23 @@ export class TicketsAdmin implements OnInit {
   }
 
   submitEditForm(): void {
-    if (this.editForm.invalid) {
-      this.editForm.markAllAsTouched();
-      return;
-    }
-
+    if (this.editForm.invalid) return void this.editForm.markAllAsTouched();
     const ticket = this.editingTicket();
     if (!ticket) return;
-
     this.submitting.set(true);
     const values = this.editForm.getRawValue();
     const links = values.links
       .filter((l): l is string => typeof l === 'string' && l.trim().length > 0);
+    this.updateTicket(ticket.id, values.title, values.description, values.priority as TicketPriority, values.status as TicketStatus, links);
+  }
 
+  private updateTicket(id: string, title: string, description: string, priority: TicketPriority, status: TicketStatus, links: string[]): void {
     this.ticketApi
-      .update(ticket.id, {
-        title: values.title,
-        description: values.description,
-        priority: values.priority as TicketPriority,
-        status: values.status as TicketStatus,
+      .update(id, {
+        title,
+        description,
+        priority,
+        status,
         links
       })
       .pipe(takeUntilDestroyed(this.destroyRef))

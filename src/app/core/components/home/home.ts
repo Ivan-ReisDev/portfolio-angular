@@ -16,27 +16,21 @@ export class Home implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const section = this.elementRef.nativeElement.querySelector('#inicio');
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.initializeObserver();
+  }
 
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-            } else {
-              entry.target.classList.remove('active');
-            }
-          });
-        },
-        {
-          threshold: 0.3
-        }
-      );
+  private initializeObserver(): void {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const section = this.elementRef.nativeElement.querySelector('#inicio');
 
-      if (section) {
-        this.observer.observe(section);
-      }
+    this.observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.target.classList.toggle('active', entry.isIntersecting)),
+      { threshold: 0.3 }
+    );
+
+    if (section) {
+      this.observer.observe(section);
     }
   }
 

@@ -103,90 +103,49 @@ export class SEOService {
 
   setPersonSEO(): void {
     if (!this.isBrowser) return;
+    this.addStructuredData(this.createPersonSchema());
+  }
 
-    const personSchema: PersonSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Ivan Reis',
-      alternateName: 'Ivan Reis Dev',
-      jobTitle: 'Tech Lead & Desenvolvedor Full Stack',
-      url: this.baseUrl,
+  private createPersonSchema(): PersonSchema {
+    return {
+      '@context': 'https://schema.org', '@type': 'Person', name: 'Ivan Reis', alternateName: 'Ivan Reis Dev',
+      jobTitle: 'Tech Lead & Desenvolvedor Full Stack', url: this.baseUrl,
       image: `${this.baseUrl}/images/ivan-reis-profile.jpg`,
       description: 'Tech Lead e Desenvolvedor Full Stack com 4+ anos de experiência em soluções escaláveis com inteligência artificial, automações e APIs robustas.',
-      sameAs: [
-        'https://github.com/Ivan-ReisDev',
-        'https://linkedin.com/in/ivanreis',
-        'https://instagram.com/ivanreis'
-      ],
-      knowsAbout: [
-        'NestJS',
-        'React',
-        'Next.js',
-        'Angular',
-        'FastAPI',
-        'TypeScript',
-        'PostgreSQL',
-        'Docker',
-        'AWS',
-        'Inteligência Artificial',
-        'DevOps'
-      ],
-      nationality: 'Brasileiro',
-      knowsLanguage: 'pt-BR',
-      alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'UNINTER - Centro Universitário Internacional'
-      },
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'BR',
-        addressRegion: 'RJ',
-        addressLocality: 'Rio de Janeiro'
-      }
+      sameAs: ['https://github.com/Ivan-ReisDev', 'https://linkedin.com/in/ivanreis', 'https://instagram.com/ivanreis'],
+      knowsAbout: ['NestJS', 'React', 'Next.js', 'Angular', 'FastAPI', 'TypeScript', 'PostgreSQL', 'Docker', 'AWS', 'Inteligência Artificial', 'DevOps'],
+      nationality: 'Brasileiro', knowsLanguage: 'pt-BR',
+      alumniOf: { '@type': 'EducationalOrganization', name: 'UNINTER - Centro Universitário Internacional' },
+      address: { '@type': 'PostalAddress', addressCountry: 'BR', addressRegion: 'RJ', addressLocality: 'Rio de Janeiro' }
     };
-
-    this.addStructuredData(personSchema);
   }
 
   setProjectSEO(project: Project): void {
     if (!this.isBrowser) return;
+    this.setBasicSEO(this.createProjectSEOData(project));
+    this.addStructuredData(this.createProjectSchema(project));
+  }
 
-    const title = `${project.title} | Projeto Desenvolvido por Ivan Reis`;
-    const description = `${project.description} Desenvolvido com ${project.technologies.slice(0, 3).join(', ')} por Ivan Reis.`;
-    
-    this.setBasicSEO({
+  private createProjectSEOData(project: Project): SEOData {
+    return {
       title: project.title,
-      description,
+      description: `${project.description} Desenvolvido com ${project.technologies.slice(0, 3).join(', ')} por Ivan Reis.`,
       keywords: project.technologies,
       image: project.images?.[0] ? `${this.baseUrl}${project.images[0]}` : undefined,
-      imageAlt: `${project.title} - Print do projeto`,
-      type: 'article',
-      url: `${this.baseUrl}/projetos/${project.id}`,
-      locale: 'pt_BR'
-    });
-
-    const projectSchema: ProjectSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'CreativeWork',
-      name: project.title,
-      description: project.description,
-      creator: {
-        '@type': 'Person',
-        name: 'Ivan Reis'
-      },
-      programmingLanguage: project.technologies,
-      applicationCategory: 'Web Application',
-      dateCreated: new Date().toISOString(),
-      url: `${this.baseUrl}/projetos/${project.id}`,
-      image: project.images?.[0] ? `${this.baseUrl}${project.images[0]}` : undefined,
-      offers: project.demoUrl ? {
-        '@type': 'Offer',
-        url: project.demoUrl,
-        availability: 'https://schema.org/InStock'
-      } : undefined
+      imageAlt: `${project.title} - Print do projeto`, type: 'article',
+      url: `${this.baseUrl}/projetos/${project.id}`, locale: 'pt_BR'
     };
+  }
 
-    this.addStructuredData(projectSchema);
+  private createProjectSchema(project: Project): ProjectSchema {
+    return {
+      '@context': 'https://schema.org', '@type': 'CreativeWork', name: project.title,
+      description: project.description, creator: { '@type': 'Person', name: 'Ivan Reis' },
+      programmingLanguage: project.technologies, applicationCategory: 'Web Application',
+      dateCreated: new Date().toISOString(), url: `${this.baseUrl}/projetos/${project.id}`,
+      image: project.images?.[0] ? `${this.baseUrl}${project.images[0]}` : undefined,
+      offers: project.demoUrl ? { '@type': 'Offer', url: project.demoUrl, availability: 'https://schema.org/InStock' } : undefined
+    };
   }
 
   setAboutSEO(): void {

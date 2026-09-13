@@ -282,16 +282,17 @@ export class Noah implements OnChanges, OnDestroy {
 
   private moveToSection(section: string): void {
     if (section === this.currentSection) return;
-    if (this.isChatOpen()) this.closeChat();
-
+    this.closeChatIfOpen();
     this.hideBubble();
     this.clearTimers();
+    this.isMobile() ? this.transitionSectionInPlace(section) : this.queueSectionTransition(section);
+  }
 
-    if (this.isMobile()) {
-      this.transitionSectionInPlace(section);
-      return;
-    }
+  private closeChatIfOpen(): void {
+    if (this.isChatOpen()) this.closeChat();
+  }
 
+  private queueSectionTransition(section: string): void {
     this.pendingSection = section;
     this.showNoah.set(false);
   }
@@ -304,13 +305,7 @@ export class Noah implements OnChanges, OnDestroy {
 
     this.currentConfig.set(config);
 
-    if (this.isMobile()) {
-      this.currentSide.set('right');
-      this.currentPopup.set('above');
-    } else {
-      this.currentSide.set(config.side);
-      this.currentPopup.set(config.popup);
-    }
+    this.setSectionPlacement(config);
 
     this.enterTransform.set(ENTRANCE_TRANSFORMS[config.entrance]);
 
@@ -326,6 +321,14 @@ export class Noah implements OnChanges, OnDestroy {
     }, delay);
   }
 
+  private setSectionPlacement(config: SectionConfig): void {
+    const placement: Pick<SectionConfig, 'side' | 'popup'> = this.isMobile()
+      ? { side: 'right', popup: 'above' }
+      : config;
+    this.currentSide.set(placement.side);
+    this.currentPopup.set(placement.popup);
+  }
+
   private transitionSectionInPlace(section: string): void {
     this.currentSection = section;
     const config = SECTION_CONFIGS[section];
@@ -337,6 +340,7 @@ export class Noah implements OnChanges, OnDestroy {
   }
 
   private setupMobileDetection(): void {
+    if (typeof window.matchMedia !== 'function') return;
     this.mediaQuery = window.matchMedia('(max-width: 767px)');
     this.isMobile.set(this.mediaQuery.matches);
     this.mediaQuery.addEventListener('change', this.mediaQueryHandler);
@@ -350,8 +354,7 @@ export class Noah implements OnChanges, OnDestroy {
   }
 
   private showMessageAtIndex(section: string, config: SectionConfig): void {
-    if (this.currentMessageIndex >= config.messages.length) return;
-    if (this.dismissedSections.has(section)) return;
+    if (this.currentMessageIndex >= config.messages.length || this.dismissedSections.has(section)) return;
 
     const delay = this.currentMessageIndex === 0 ? config.delay : 1500;
 
@@ -383,11 +386,18 @@ export class Noah implements OnChanges, OnDestroy {
   }
 
   private clearTimers(): void {
-    if (this.bubbleTimer) { clearTimeout(this.bubbleTimer); this.bubbleTimer = null; }
-    if (this.bubbleHideTimer) { clearTimeout(this.bubbleHideTimer); this.bubbleHideTimer = null; }
-    if (this.nextBubbleTimer) { clearTimeout(this.nextBubbleTimer); this.nextBubbleTimer = null; }
-    if (this.entranceTimer) { clearTimeout(this.entranceTimer); this.entranceTimer = null; }
-    if (this.waveTimer) { clearTimeout(this.waveTimer); this.waveTimer = null; }
+    this.clearTimer('bubbleTimer');
+    this.clearTimer('bubbleHideTimer');
+    this.clearTimer('nextBubbleTimer');
+    this.clearTimer('entranceTimer');
+    this.clearTimer('waveTimer');
+  }
+
+  private clearTimer(timer: 'bubbleTimer' | 'bubbleHideTimer' | 'nextBubbleTimer' | 'entranceTimer' | 'waveTimer'): void {
+    const timeout = this[timer];
+    if (!timeout) return;
+    clearTimeout(timeout);
+    this[timer] = null;
   }
 
   private clearAllTimers(): void {

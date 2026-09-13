@@ -5,11 +5,16 @@ export const serverRoutes: ServerRoute[] = [
     path: 'projeto/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      const fs = await import('node:fs/promises');
-      const path = await import('node:path');
-      const filePath = path.join(process.cwd(), 'public', 'data', 'projects.json');
-      const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-      return data.projects.map((p: { id: string }) => ({ slug: p.id }));
+      try {
+        const fs = await import('node:fs/promises');
+        const path = await import('node:path');
+        const filePath = path.join(process.cwd(), 'public', 'data', 'projects.json');
+        const data = JSON.parse(await fs.readFile(filePath, 'utf-8')) as { projects: { id: string }[] };
+        return data.projects.map((p) => ({ slug: p.id }));
+      } catch (error: unknown) {
+        console.error('Não foi possível carregar os projetos para o prerender.', error);
+        return [];
+      }
     },
     fallback: PrerenderFallback.Server
   },
@@ -17,11 +22,16 @@ export const serverRoutes: ServerRoute[] = [
     path: 'blog/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      const fs = await import('node:fs/promises');
-      const path = await import('node:path');
-      const filePath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
-      const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-      return data.posts.map((p: { slug: string }) => ({ slug: p.slug }));
+      try {
+        const fs = await import('node:fs/promises');
+        const path = await import('node:path');
+        const filePath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
+        const data = JSON.parse(await fs.readFile(filePath, 'utf-8')) as { posts: { slug: string }[] };
+        return data.posts.map((p) => ({ slug: p.slug }));
+      } catch (error: unknown) {
+        console.error('Não foi possível carregar os posts para o prerender.', error);
+        return [];
+      }
     },
     fallback: PrerenderFallback.Server
   },

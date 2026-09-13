@@ -35,50 +35,40 @@ export class SEODirective implements OnInit, OnDestroy {
   }
 
   private updateMetaTags(): void {
-    if (this.title) {
-      this.titleService.setTitle(this.title);
-    }
-
-    if (this.description) {
-      this.meta.updateTag({ name: 'description', content: this.description });
-    }
-
-    if (this.keywords) {
-      this.meta.updateTag({ name: 'keywords', content: this.keywords });
-    }
-
-    this.meta.updateTag({ name: 'author', content: this.author });
-
+    this.updateBasicMetaTags();
     const url = `https://ivanreis.com.br${this.router.url}`;
-    
-    this.meta.updateTag({ property: 'og:title', content: this.title });
-    this.meta.updateTag({ property: 'og:description', content: this.description });
-    this.meta.updateTag({ property: 'og:image', content: this.image });
-    this.meta.updateTag({ property: 'og:url', content: url });
-    this.meta.updateTag({ property: 'og:type', content: this.type });
-    this.meta.updateTag({ property: 'og:locale', content: 'pt_BR' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'Ivan Reis - Portfólio' });
+    this.updateSocialMetaTags(url);
+    this.updateCanonical(url);
+  }
 
-    this.meta.updateTag({ name: 'twitter:card', content: this.twitterCard });
-    this.meta.updateTag({ name: 'twitter:title', content: this.title });
-    this.meta.updateTag({ name: 'twitter:description', content: this.description });
-    this.meta.updateTag({ name: 'twitter:image', content: this.image });
-    this.meta.updateTag({ name: 'twitter:creator', content: this.twitterCreator });
-    this.meta.updateTag({ name: 'twitter:site', content: this.twitterCreator });
+  private updateBasicMetaTags(): void {
+    this.titleService.setTitle(this.title || this.titleService.getTitle());
+    this.meta.updateTag({ name: 'description', content: this.description });
+    this.meta.updateTag({ name: 'keywords', content: this.keywords });
+    this.meta.updateTag({ name: 'author', content: this.author });
+  }
 
+  private updateSocialMetaTags(url: string): void {
+    const openGraph = { title: this.title, description: this.description, image: this.image, url, type: this.type, locale: 'pt_BR', site_name: 'Ivan Reis - Portfólio' };
+    const twitter = { card: this.twitterCard, title: this.title, description: this.description, image: this.image, creator: this.twitterCreator, site: this.twitterCreator };
+    const tags = [
+      ...Object.entries(openGraph).map(([property, content]) => ({ property: `og:${property}`, content })),
+      ...Object.entries(twitter).map(([name, content]) => ({ name: `twitter:${name}`, content }))
+    ];
+    for (const tag of tags) this.meta.updateTag(tag);
     this.meta.updateTag({ itemprop: 'name', content: this.title });
     this.meta.updateTag({ itemprop: 'description', content: this.description });
     this.meta.updateTag({ itemprop: 'image', content: this.image });
+  }
 
-    const canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-    if (canonicalLink) {
-      canonicalLink.href = url;
-    } else {
-      const link = document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      link.setAttribute('href', url);
-      document.head.appendChild(link);
-    }
+  private updateCanonical(url: string): void {
+    const canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    canonicalLink?.setAttribute('href', url);
+    if (canonicalLink) return;
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', url);
+    document.head.appendChild(link);
   }
 
   private removeMetaTags(): void {
@@ -103,19 +93,10 @@ export class SEODirective implements OnInit, OnDestroy {
       'image'
     ];
 
-    metaTags.forEach(tag => {
-      const metaElement = this.meta.getTag(`name='${tag}'`) || this.meta.getTag(`property='${tag}'`) || this.meta.getTag(`itemprop='${tag}'`);
-      if (metaElement) {
-        try {
-          this.meta.removeTag(`name='${tag}'`);
-        } catch {}
-        try {
-          this.meta.removeTag(`property='${tag}'`);
-        } catch {}
-        try {
-          this.meta.removeTag(`itemprop='${tag}'`);
-        } catch {}
-      }
-    });
+    for (const tag of metaTags) {
+      this.meta.removeTag(`name='${tag}'`);
+      this.meta.removeTag(`property='${tag}'`);
+      this.meta.removeTag(`itemprop='${tag}'`);
+    }
   }
 }

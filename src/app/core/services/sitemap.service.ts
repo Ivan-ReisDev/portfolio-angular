@@ -10,6 +10,10 @@ export interface SitemapUrl {
   priority: number;
 }
 
+interface ProjectsResponse {
+  projects: Project[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,43 +23,27 @@ export class SitemapService {
   constructor(private http: HttpClient) {}
   
   generateSitemap(projects: Project[]): string {
-    const urls: SitemapUrl[] = [
-      {
-        loc: this.baseUrl,
-        lastmod: new Date().toISOString(),
-        changefreq: 'weekly',
-        priority: 1.0
-      },
-      {
-        loc: `${this.baseUrl}/sobre`,
-        lastmod: new Date().toISOString(),
-        changefreq: 'monthly',
-        priority: 0.8
-      },
-      {
-        loc: `${this.baseUrl}/projetos`,
-        lastmod: new Date().toISOString(),
-        changefreq: 'weekly',
-        priority: 0.9
-      },
-      {
-        loc: `${this.baseUrl}/contato`,
-        lastmod: new Date().toISOString(),
-        changefreq: 'monthly',
-        priority: 0.7
-      }
-    ];
-    
-    projects.forEach(project => {
-      urls.push({
-        loc: `${this.baseUrl}/projetos/${project.id}`,
-        lastmod: new Date().toISOString(),
-        changefreq: 'monthly',
-        priority: 0.8
-      });
-    });
-    
+    const lastmod = new Date().toISOString();
+    const urls = [...this.getStaticUrls(lastmod), ...this.getProjectUrls(projects, lastmod)];
     return this.createSitemapXml(urls);
+  }
+
+  private getStaticUrls(lastmod: string): SitemapUrl[] {
+    return [
+      { loc: this.baseUrl, lastmod, changefreq: 'weekly', priority: 1.0 },
+      { loc: `${this.baseUrl}/sobre`, lastmod, changefreq: 'monthly', priority: 0.8 },
+      { loc: `${this.baseUrl}/projetos`, lastmod, changefreq: 'weekly', priority: 0.9 },
+      { loc: `${this.baseUrl}/contato`, lastmod, changefreq: 'monthly', priority: 0.7 }
+    ];
+  }
+
+  private getProjectUrls(projects: Project[], lastmod: string): SitemapUrl[] {
+    return projects.map((project) => ({
+      loc: `${this.baseUrl}/projetos/${project.id}`,
+      lastmod,
+      changefreq: 'monthly' as const,
+      priority: 0.8
+    }));
   }
   
   private createSitemapXml(urls: SitemapUrl[]): string {
@@ -104,20 +92,14 @@ export class SitemapService {
   }
   
   saveSitemap(): Observable<string> {
-    return this.http.get('/data/projects.json').pipe(
-      map((response: any) => {
-        const sitemap = this.generateSitemap(response.projects);
-        return sitemap;
-      })
+    return this.http.get<ProjectsResponse>('/data/projects.json').pipe(
+      map((response) => this.generateSitemap(response.projects))
     );
   }
   
   saveImageSitemap(): Observable<string> {
-    return this.http.get('/data/projects.json').pipe(
-      map((response: any) => {
-        const sitemap = this.generateImageSitemap(response.projects);
-        return sitemap;
-      })
+    return this.http.get<ProjectsResponse>('/data/projects.json').pipe(
+      map((response) => this.generateImageSitemap(response.projects))
     );
   }
 }

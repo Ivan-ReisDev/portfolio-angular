@@ -88,21 +88,20 @@ export class TicketsUser implements OnInit {
   }
 
   submitForm(): void {
-    if (this.ticketForm.invalid) {
-      this.ticketForm.markAllAsTouched();
-      return;
-    }
-
+    if (this.ticketForm.invalid) return void this.ticketForm.markAllAsTouched();
     this.submitting.set(true);
     const values = this.ticketForm.getRawValue();
     const links = values.links
       .filter((l): l is string => typeof l === 'string' && l.trim().length > 0);
+    this.createTicket(values.title, values.description, values.priority as TicketPriority, links);
+  }
 
+  private createTicket(title: string, description: string, priority: TicketPriority, links: string[]): void {
     this.ticketApi
       .create({
-        title: values.title,
-        description: values.description,
-        priority: values.priority as TicketPriority,
+        title,
+        description,
+        priority,
         ...(links.length > 0 ? { links } : {})
       })
       .pipe(takeUntilDestroyed(this.destroyRef))

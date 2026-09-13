@@ -19,35 +19,32 @@ export class About implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const section = this.elementRef.nativeElement.querySelector('#sobre');
-      const cardsContainer = this.elementRef.nativeElement.querySelector('.stacks > div');
-      const containt = this.elementRef.nativeElement.querySelector('.content');
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.initializeObserver();
+  }
 
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              if (cardsContainer) cardsContainer.classList.add('active');
-              if (containt) containt.classList.add('active');
-            } else {
-              if (cardsContainer) cardsContainer.classList.remove('active');
-              if (containt) containt.classList.remove('active');
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-        }
-      );
+  private initializeObserver(): void {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const section = this.elementRef.nativeElement.querySelector('#sobre');
+    const cardsContainer = this.elementRef.nativeElement.querySelector('.stacks > div');
+    const containt = this.elementRef.nativeElement.querySelector('.content');
 
-      if (section) {
-        this.observer.observe(section);
-      }
+    this.observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => this.updateVisibility(entry.isIntersecting, cardsContainer, containt)),
+      { threshold: 0.1 }
+    );
+
+    if (section) {
+      this.observer.observe(section);
     }
   }
 
   ngOnDestroy() {
     this.observer?.disconnect();
+  }
+
+  private updateVisibility(visible: boolean, cardsContainer: Element | null, content: Element | null): void {
+    cardsContainer?.classList.toggle('active', visible);
+    content?.classList.toggle('active', visible);
   }
 }

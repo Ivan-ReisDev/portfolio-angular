@@ -190,17 +190,14 @@ export class InvoicesAdmin implements OnInit {
   }
 
   submitEditForm(): void {
-    if (this.editForm.invalid) {
-      this.editForm.markAllAsTouched();
-      return;
-    }
-
+    if (this.editForm.invalid) return void this.editForm.markAllAsTouched();
     const invoice = this.editingInvoice();
     if (!invoice) return;
-
     this.submitting.set(true);
-    const values = this.editForm.getRawValue();
+    this.updateInvoice(invoice, this.editForm.getRawValue());
+  }
 
+  private updateInvoice(invoice: Invoice, values: ReturnType<typeof this.editForm.getRawValue>): void {
     this.invoiceApi
       .update(invoice.id, {
         description: values.description,
@@ -392,7 +389,10 @@ export class InvoicesAdmin implements OnInit {
   }
 
   resolveStatus(invoice: Invoice): InvoiceStatus {
-    if (invoice.status) return invoice.status;
+    return invoice.status ?? this.resolveUnpaidStatus(invoice);
+  }
+
+  private resolveUnpaidStatus(invoice: Invoice): InvoiceStatus {
     if (invoice.paidAt) return 'paid';
     return new Date(invoice.dueDate) < new Date() ? 'overdue' : 'pending';
   }

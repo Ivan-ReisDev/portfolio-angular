@@ -74,15 +74,10 @@ export class ProjectDetail implements AfterViewInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/'], { fragment: 'projetos' }).then(() => {
-      // Ensure scroll to projects section after navigation
-      setTimeout(() => {
-        const projectsElement = document.getElementById('projetos');
-        if (projectsElement) {
-          projectsElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    });
+    this.router
+      .navigate(['/'], { fragment: 'projetos' })
+      .then(() => this.scrollToProjects())
+      .catch((error: unknown) => console.error('Falha ao voltar para os projetos.', error));
   }
 
   openDemo(): void {
@@ -106,8 +101,14 @@ export class ProjectDetail implements AfterViewInit {
     if (!project) return '';
     
     const text = this.seoService.generateWhatsAppShareText(project);
-    const url = this.seoService.generateProjectShareUrl(project.id);
     return `https://wa.me/?text=${encodeURIComponent(text)}`;
+  }
+
+  private scrollToProjects(): void {
+    setTimeout(() => {
+      const projectsElement = document.getElementById('projetos');
+      projectsElement?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   }
 
   generateLinkedInShareLink(): string {

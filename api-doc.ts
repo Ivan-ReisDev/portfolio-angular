@@ -1,3 +1,4 @@
+/*
   # Neuron API - Guia de Endpoints para o Front-end
 
   Base URL: `http://localhost:3000`
@@ -21,7 +22,7 @@
   ```json
   {
     "email": "admin@neuron.dev",
-    "password": "Admin@123"
+    "password": "<senha-de-teste>"
   }
   ```
 
@@ -574,3 +575,4 @@
   2. `GET /invoices` — listar suas faturas (com status automatico)
   3. `GET /invoices/:id` — ver detalhes de uma fatura
   4. `GET /invoices/:id/nota-fiscal/url` — baixar/visualizar nota fiscal
+*/

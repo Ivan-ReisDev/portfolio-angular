@@ -53,19 +53,20 @@ export class ProjectCarousel {
     const total = this.projects().length;
 
     if (total === 0) return 'far-left';
+    return this.positionForDifference(this.normalizeDifference(index - current, total));
+  }
 
-    let diff = index - current;
-    if (diff > total / 2) {
-      diff -= total;
-    } else if (diff < -total / 2) {
-      diff += total;
-    }
+  private normalizeDifference(difference: number, total: number): number {
+    if (difference > total / 2) return difference - total;
+    if (difference < -total / 2) return difference + total;
+    return difference;
+  }
 
-    if (diff === 0) return 'center';
-    if (diff === -1 || (current === 0 && index === total - 1)) return 'left';
-    if (diff === 1 || (current === total - 1 && index === 0)) return 'right';
-    if (diff < -1) return 'far-left';
-    return 'far-right';
+  private positionForDifference(difference: number): string {
+    const adjacentPositions = new Map([[0, 'center'], [-1, 'left'], [1, 'right']]);
+    const knownPosition = adjacentPositions.get(difference);
+    if (knownPosition) return knownPosition;
+    return difference < 0 ? 'far-left' : 'far-right';
   }
 
   isCardVisible(index: number): boolean {

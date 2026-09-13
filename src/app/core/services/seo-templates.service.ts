@@ -1,3 +1,5 @@
+import { Project } from '../models/project.model';
+
 export interface SEOTemplate {
   title: string;
   description: string;
@@ -20,11 +22,10 @@ export interface SEOTemplate {
   jsonLd: object;
 }
 
-export class SEOTemplates {
-  private readonly baseUrl = 'https://ivanreis.com.br';
+const SEO_BASE_URL = 'https://ivanreis.com.br';
 
-  getHomeTemplate(): SEOTemplate {
-    return {
+const SEO_TEMPLATES = {
+  getHomeTemplate: {
       title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
       description: 'Tech Lead e Desenvolvedor Full Stack com 4+ anos criando soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, FastAPI, AWS e PostgreSQL.',
       keywords: [
@@ -47,7 +48,7 @@ export class SEOTemplates {
       og: {
         title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack | Portfólio',
         description: 'Tech Lead e Full Stack com 4+ anos criando soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, AWS.',
-        image: `${this.baseUrl}/images/og-home.jpg`,
+        image: `${SEO_BASE_URL}/images/og-home.jpg`,
         type: 'website',
         locale: 'pt_BR'
       },
@@ -55,7 +56,7 @@ export class SEOTemplates {
         card: 'summary_large_image',
         title: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
         description: 'Soluções escaláveis com IA, automações e APIs robustas. NestJS, React, Next.js, Angular, AWS e PostgreSQL.',
-        image: `${this.baseUrl}/images/og-home.jpg`,
+        image: `${SEO_BASE_URL}/images/og-home.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -63,7 +64,7 @@ export class SEOTemplates {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Ivan Reis - Portfólio',
-        url: this.baseUrl,
+        url: SEO_BASE_URL,
         description: 'Portfólio profissional de Ivan Reis, Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial.',
         author: {
           '@type': 'Person',
@@ -72,83 +73,12 @@ export class SEOTemplates {
         inLanguage: 'pt-BR',
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${this.baseUrl}/buscar?q={search_term_string}`,
+          target: `${SEO_BASE_URL}/buscar?q={search_term_string}`,
           'query-input': 'required name=search_term_string'
         }
       }
-    };
-  }
-
-  getProjectTemplate(project: any): SEOTemplate {
-    const title = `${project.title} - Ivan Reis | Portfólio de Desenvolvimento`;
-    const description = project.description.length > 160 
-      ? project.description.substring(0, 157) + '...' 
-      : project.description;
-    
-    return {
-      title,
-      description,
-      keywords: [
-        ...project.technologies,
-        project.title.toLowerCase(),
-        'ivan reis',
-        'portfólio desenvolvedor',
-        'desenvolvimento web',
-        'full-stack',
-        'angular',
-        'nodejs',
-        'typescript',
-        'projeto web',
-        'aplicação web'
-      ],
-      og: {
-        title: `${project.title} - Ivan Reis`,
-        description,
-        image: `${this.baseUrl}${project.images[0]}`,
-        type: 'article',
-        locale: 'pt_BR'
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: project.title,
-        description,
-        image: `${this.baseUrl}${project.images[0]}`,
-        creator: '@ivanreis',
-        site: '@ivanreis'
-      },
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'SoftwareApplication',
-        name: project.title,
-        description: project.description,
-        image: project.images.map((img: string) => `${this.baseUrl}${img}`),
-        url: project.demoUrl || `${this.baseUrl}/projeto/${project.id}`,
-        author: {
-          '@type': 'Person',
-          name: 'Ivan Reis',
-          url: this.baseUrl
-        },
-        applicationCategory: 'DeveloperApplication',
-        operatingSystem: 'Web',
-        programmingLanguage: project.technologies.filter((tech: string) => 
-          ['JavaScript', 'TypeScript', 'Python', 'PHP', 'Java'].includes(tech)
-        ),
-        offers: project.demoUrl ? {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'BRL'
-        } : undefined,
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.8',
-          ratingCount: '12'
-        }
-      }
-    };
-  }
-
-  getAboutTemplate(): SEOTemplate {
-    return {
+    },
+  getAboutTemplate: {
       title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
       description: 'Tech Lead com 4+ anos de experiência em NestJS, React, Next.js, Angular, FastAPI, AWS e IA. Graduado em ADS, com pós-graduações em Ciências de Dados e IA e em Segurança Cibernética pela UNINTER.',
       keywords: [
@@ -168,7 +98,7 @@ export class SEOTemplates {
       og: {
         title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
         description: 'Tech Lead com 4+ anos de experiência. Especialista em soluções escaláveis com IA, automações e APIs robustas.',
-        image: `${this.baseUrl}/images/og-about.jpg`,
+        image: `${SEO_BASE_URL}/images/og-about.jpg`,
         type: 'profile',
         locale: 'pt_BR'
       },
@@ -176,7 +106,7 @@ export class SEOTemplates {
         card: 'summary_large_image',
         title: 'Sobre Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
         description: 'Tech Lead com 4+ anos. NestJS, React, Next.js, Angular, FastAPI, AWS, IA e automações.',
-        image: `${this.baseUrl}/images/og-about.jpg`,
+        image: `${SEO_BASE_URL}/images/og-about.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -186,8 +116,8 @@ export class SEOTemplates {
         name: 'Ivan Reis',
         jobTitle: 'Tech Lead & Desenvolvedor Full Stack',
         description: 'Tech Lead e Desenvolvedor Full Stack especializado em soluções escaláveis com inteligência artificial, automações e APIs robustas.',
-        url: this.baseUrl,
-        image: `${this.baseUrl}/images/profile-photo.jpg`,
+        url: SEO_BASE_URL,
+        image: `${SEO_BASE_URL}/images/profile-photo.jpg`,
         email: 'contato@ivanreis.com.br',
         address: {
           '@type': 'PostalAddress',
@@ -224,11 +154,8 @@ export class SEOTemplates {
           'https://twitter.com/ivanreis'
         ]
       }
-    };
-  }
-
-  getContactTemplate(): SEOTemplate {
-    return {
+    },
+  getContactTemplate: {
       title: 'Contato - Ivan Reis | Tech Lead & Desenvolvedor Full Stack',
       description: 'Entre em contato com Ivan Reis. Disponível para projetos de desenvolvimento, automações com IA, consultoria técnica e liderança de equipes.',
       keywords: [
@@ -245,7 +172,7 @@ export class SEOTemplates {
       og: {
         title: 'Contato - Ivan Reis | Tech Lead & Desenvolvedor Full Stack',
         description: 'Disponível para projetos de desenvolvimento, automações com IA, consultoria técnica e liderança de equipes.',
-        image: `${this.baseUrl}/images/og-contact.jpg`,
+        image: `${SEO_BASE_URL}/images/og-contact.jpg`,
         type: 'website',
         locale: 'pt_BR'
       },
@@ -253,7 +180,7 @@ export class SEOTemplates {
         card: 'summary_large_image',
         title: 'Contato - Ivan Reis | Tech Lead & Full Stack',
         description: 'Disponível para projetos, automações com IA e consultoria técnica. Vamos conversar!',
-        image: `${this.baseUrl}/images/og-contact.jpg`,
+        image: `${SEO_BASE_URL}/images/og-contact.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -261,7 +188,7 @@ export class SEOTemplates {
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
         name: 'Ivan Reis - Tech Lead & Desenvolvedor Full Stack',
-        url: `${this.baseUrl}/contato`,
+        url: `${SEO_BASE_URL}/contato`,
         telephone: '+55-21-98559-8348',
         email: 'contato@ivanreis.com.br',
         address: {
@@ -284,11 +211,8 @@ export class SEOTemplates {
           name: 'Brasil'
         }
       }
-    };
-  }
-
-  getProveiAiTemplate(): SEOTemplate {
-    return {
+    },
+  getProveiAiTemplate: {
       title: 'Provei.ai – Provador Virtual | Ivan Reis | Portfólio',
       description: 'Plataforma de provador virtual para e-commerces com IA. Aumenta conversão e reduz devoluções. Desenvolvido com NestJS, Next.js, TypeScript e OpenAI API.',
       keywords: [
@@ -308,7 +232,7 @@ export class SEOTemplates {
       og: {
         title: 'Provei.ai – Provador Virtual com IA',
         description: 'Plataforma inovadora que aumenta conversão em e-commerces através de provador virtual com IA.',
-        image: `${this.baseUrl}/images/provei-ai/provei-ai.png`,
+        image: `${SEO_BASE_URL}/images/provei-ai/provei-ai.png`,
         type: 'article',
         locale: 'pt_BR'
       },
@@ -316,7 +240,7 @@ export class SEOTemplates {
         card: 'summary_large_image',
         title: 'Provei.ai – Provador Virtual',
         description: 'Plataforma de provador virtual para e-commerces que aumenta conversão e reduz devoluções.',
-        image: `${this.baseUrl}/images/provei-ai/provei-ai.png`,
+        image: `${SEO_BASE_URL}/images/provei-ai/provei-ai.png`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -326,15 +250,15 @@ export class SEOTemplates {
         name: 'Provei.ai – Provador Virtual',
         description: 'Plataforma de provador virtual para e-commerces, permitindo que clientes visualizem produtos em seu próprio ambiente antes da compra.',
         image: [
-          `${this.baseUrl}/images/provei-ai/provei-ai.png`,
-          `${this.baseUrl}/images/provei-ai/dashboard.png`,
-          `${this.baseUrl}/images/provei-ai/furniture.png`
+          `${SEO_BASE_URL}/images/provei-ai/provei-ai.png`,
+          `${SEO_BASE_URL}/images/provei-ai/dashboard.png`,
+          `${SEO_BASE_URL}/images/provei-ai/furniture.png`
         ],
         url: 'https://provei.ai',
         author: {
           '@type': 'Person',
           name: 'Ivan Reis',
-          url: this.baseUrl
+          url: SEO_BASE_URL
         },
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
@@ -358,11 +282,8 @@ export class SEOTemplates {
           ratingCount: '23'
         }
       }
-    };
-  }
-
-  getConstrutivaTemplate(): SEOTemplate {
-    return {
+    },
+  getConstrutivaTemplate: {
       title: 'Landing Page Construtiva | Ivan Reis | Desenvolvimento Web',
       description: 'Landing page institucional para Construtiva Projetos e Reformas. Foco em conversão, SEO local e integração com WhatsApp. Desenvolvido com PHP, CSS, HTML.',
       keywords: [
@@ -382,7 +303,7 @@ export class SEOTemplates {
       og: {
         title: 'Landing Page Construtiva Projetos e Reformas',
         description: 'Landing page institucional otimizada para conversão e SEO local no segmento de construção.',
-        image: `${this.baseUrl}/images/construtiva/construtiva.png`,
+        image: `${SEO_BASE_URL}/images/construtiva/construtiva.png`,
         type: 'article',
         locale: 'pt_BR'
       },
@@ -390,7 +311,7 @@ export class SEOTemplates {
         card: 'summary_large_image',
         title: 'Landing Page Construtiva',
         description: 'Website institucional para empresa de construção e reformas com foco em conversão.',
-        image: `${this.baseUrl}/images/construtiva/construtiva.png`,
+        image: `${SEO_BASE_URL}/images/construtiva/construtiva.png`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -401,14 +322,14 @@ export class SEOTemplates {
         description: 'Landing page institucional desenvolvida para apresentação de serviços e captação de leads.',
         url: 'https://construtivaprojetos.com.br',
         image: [
-          `${this.baseUrl}/images/construtiva/construtiva.png`,
-          `${this.baseUrl}/images/projects/construtiva/hero.png`,
-          `${this.baseUrl}/images/projects/construtiva/cta.png`
+          `${SEO_BASE_URL}/images/construtiva/construtiva.png`,
+          `${SEO_BASE_URL}/images/projects/construtiva/hero.png`,
+          `${SEO_BASE_URL}/images/projects/construtiva/cta.png`
         ],
         author: {
           '@type': 'Person',
           name: 'Ivan Reis',
-          url: this.baseUrl
+          url: SEO_BASE_URL
         },
         mainEntity: {
           '@type': 'LocalBusiness',
@@ -428,11 +349,8 @@ export class SEOTemplates {
           ]
         }
       }
-    };
-  }
-
-  getEveryFansTemplate(): SEOTemplate {
-    return {
+    },
+  getEveryFansTemplate: {
       title: 'EveryFans – Plataforma para Criadores | Ivan Reis | Portfólio',
       description: 'Plataforma completa para gestão de conteúdo e automação para criadores. Auto-edição, agendamento, publicação automática e analytics. NestJS, React, TypeScript.',
       keywords: [
@@ -452,7 +370,7 @@ export class SEOTemplates {
       og: {
         title: 'EveryFans – Plataforma de Gestão para Criadores',
         description: 'Sistema completo para gestão de conteúdo e automação para criadores de conteúdo digitais.',
-        image: `${this.baseUrl}/images/everyfans/everyfans.png`,
+        image: `${SEO_BASE_URL}/images/everyfans/everyfans.png`,
         type: 'article',
         locale: 'pt_BR'
       },
@@ -460,7 +378,7 @@ export class SEOTemplates {
         card: 'summary_large_image',
         title: 'EveryFans – Plataforma para Criadores',
         description: 'Plataforma completa que automatiza a rotina de criadores de conteúdo.',
-        image: `${this.baseUrl}/images/everyfans/everyfans.png`,
+        image: `${SEO_BASE_URL}/images/everyfans/everyfans.png`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -470,16 +388,16 @@ export class SEOTemplates {
         name: 'EveryFans – Plataforma de Gestão para Criadores',
         description: 'Sistema completo para gestão de conteúdo e automação para criadores, reunindo ferramentas em um único painel.',
         image: [
-          `${this.baseUrl}/images/everyfans/everyfans.png`,
-          `${this.baseUrl}/images/projects/everyfans/dashboard.png`,
-          `${this.baseUrl}/images/projects/everyfans/auto‑edicao.png`,
-          `${this.baseUrl}/images/projects/everyfans/publicação‑automatica.png`
+          `${SEO_BASE_URL}/images/everyfans/everyfans.png`,
+          `${SEO_BASE_URL}/images/projects/everyfans/dashboard.png`,
+          `${SEO_BASE_URL}/images/projects/everyfans/auto‑edicao.png`,
+          `${SEO_BASE_URL}/images/projects/everyfans/publicação‑automatica.png`
         ],
         url: 'https://www.everyfans.com.br/',
         author: {
           '@type': 'Person',
           name: 'Ivan Reis',
-          url: this.baseUrl
+          url: SEO_BASE_URL
         },
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
@@ -499,11 +417,8 @@ export class SEOTemplates {
           availability: 'https://schema.org/InStock'
         }
       }
-    };
-  }
-
-  get404Template(): SEOTemplate {
-    return {
+    },
+  get404Template: {
       title: 'Página Não Encontrada | Ivan Reis | Portfólio',
       description: 'A página que você procura não foi encontrada. Navegue pelo portfólio de Ivan Reis para conhecer projetos de desenvolvimento web.',
       keywords: [
@@ -516,7 +431,7 @@ export class SEOTemplates {
       og: {
         title: 'Página Não Encontrada',
         description: 'A página solicitada não foi encontrada. Volte ao portfólio principal.',
-        image: `${this.baseUrl}/images/og-404.jpg`,
+        image: `${SEO_BASE_URL}/images/og-404.jpg`,
         type: 'website',
         locale: 'pt_BR'
       },
@@ -524,7 +439,7 @@ export class SEOTemplates {
         card: 'summary',
         title: 'Página Não Encontrada',
         description: 'Ops! A página que você procura não existe.',
-        image: `${this.baseUrl}/images/og-404.jpg`,
+        image: `${SEO_BASE_URL}/images/og-404.jpg`,
         creator: '@ivanreis',
         site: '@ivanreis'
       },
@@ -533,8 +448,72 @@ export class SEOTemplates {
         '@type': 'WebPage',
         name: 'Página Não Encontrada',
         description: 'Página de erro 404 para Ivan Reis Portfólio',
-        url: `${this.baseUrl}/404`
+        url: `${SEO_BASE_URL}/404`
       }
+    }
+} satisfies Record<string, SEOTemplate>;
+
+export class SEOTemplates {
+  private readonly baseUrl = 'https://ivanreis.com.br';
+
+  getHomeTemplate(): SEOTemplate {
+    return SEO_TEMPLATES.getHomeTemplate;
+  }
+  getProjectTemplate(project: Project): SEOTemplate {
+    const description = this.truncateDescription(project.description);
+    return this.createProjectTemplate(project, description);
+  }
+
+  private truncateDescription(description: string): string {
+    return description.length > 160 ? `${description.substring(0, 157)}...` : description;
+  }
+
+  private createProjectTemplate(project: Project, description: string): SEOTemplate {
+    const image = `${this.baseUrl}${project.images[0]}`;
+    return {
+      title: `${project.title} - Ivan Reis | Portfólio de Desenvolvimento`,
+      description,
+      keywords: [...project.technologies, project.title.toLowerCase(), 'ivan reis', 'portfólio desenvolvedor', 'desenvolvimento web', 'full-stack', 'angular', 'nodejs', 'typescript', 'projeto web', 'aplicação web'],
+      og: { title: `${project.title} - Ivan Reis`, description, image, type: 'article', locale: 'pt_BR' },
+      twitter: { card: 'summary_large_image', title: project.title, description, image, creator: '@ivanreis', site: '@ivanreis' },
+      jsonLd: this.createProjectJsonLd(project)
     };
   }
+
+  private createProjectJsonLd(project: Project): object {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: project.title,
+      description: project.description,
+      image: project.images.map((img) => `${this.baseUrl}${img}`),
+      url: project.demoUrl || `${this.baseUrl}/projeto/${project.id}`,
+      author: { '@type': 'Person', name: 'Ivan Reis', url: this.baseUrl },
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Web',
+      programmingLanguage: project.technologies.filter((tech) => ['JavaScript', 'TypeScript', 'Python', 'PHP', 'Java'].includes(tech)),
+      offers: project.demoUrl ? { '@type': 'Offer', price: '0', priceCurrency: 'BRL' } : undefined,
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', ratingCount: '12' }
+    };
+  }
+
+  getAboutTemplate(): SEOTemplate {
+    return SEO_TEMPLATES.getAboutTemplate;
+  }
+  getContactTemplate(): SEOTemplate {
+    return SEO_TEMPLATES.getContactTemplate;
+  }
+  getProveiAiTemplate(): SEOTemplate {
+    return SEO_TEMPLATES.getProveiAiTemplate;
+  }
+  getConstrutivaTemplate(): SEOTemplate {
+    return SEO_TEMPLATES.getConstrutivaTemplate;
+  }
+  getEveryFansTemplate(): SEOTemplate {
+    return SEO_TEMPLATES.getEveryFansTemplate;
+  }
+  get404Template(): SEOTemplate {
+    return SEO_TEMPLATES.get404Template;
+  }
+
 }

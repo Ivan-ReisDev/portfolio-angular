@@ -94,46 +94,39 @@ export interface ArticleStructuredData {
   inLanguage: string;
 }
 
+const PERSON_SCHEMA: PersonStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Ivan Reis',
+  jobTitle: 'Desenvolvedor Full-Stack',
+  description: 'Desenvolvedor Full-Stack especializado em Angular, Node.js, TypeScript. Criação de aplicações web modernas, APIs RESTful e plataformas escaláveis.',
+  url: 'https://ivanreis.com.br',
+  image: 'https://ivanreis.com.br/images/profile-photo.jpg',
+  email: 'contato@ivanreis.com.br',
+  address: { '@type': 'PostalAddress', addressCountry: 'BR', addressRegion: 'São Paulo' },
+  knowsAbout: ['Desenvolvimento Web', 'Angular', 'Node.js', 'TypeScript', 'APIs RESTful', 'Bancos de Dados', 'Cloud Computing', 'DevOps', 'React', 'Next.js', 'NestJS', 'MongoDB', 'PostgreSQL', 'Docker'],
+  sameAs: ['https://linkedin.com/in/ivanreis', 'https://github.com/deeivan', 'https://twitter.com/ivanreis']
+};
+
+const LOCAL_BUSINESS_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Ivan Reis - Desenvolvedor Full-Stack',
+  url: 'https://ivanreis.com.br',
+  telephone: '+55-11-99999-9999',
+  email: 'contato@ivanreis.com.br',
+  address: { '@type': 'PostalAddress', addressCountry: 'BR', addressRegion: 'SP' },
+  geo: { '@type': 'GeoCoordinates', latitude: '-23.5505', longitude: '-46.6333' },
+  openingHours: 'Mo-Fr 09:00-18:00',
+  serviceType: ['Desenvolvimento Web', 'APIs RESTful', 'Aplicações Angular', 'Sistemas Node.js', 'Consultoria Técnica'],
+  areaServed: { '@type': 'Country', name: 'Brasil' }
+};
+
 export class StructuredDataService {
   private readonly baseUrl = 'https://ivanreis.com.br';
 
   getPersonSchema(): PersonStructuredData {
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Ivan Reis',
-      jobTitle: 'Desenvolvedor Full-Stack',
-      description: 'Desenvolvedor Full-Stack especializado em Angular, Node.js, TypeScript. Criação de aplicações web modernas, APIs RESTful e plataformas escaláveis.',
-      url: this.baseUrl,
-      image: `${this.baseUrl}/images/profile-photo.jpg`,
-      email: 'contato@ivanreis.com.br',
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'BR',
-        addressRegion: 'São Paulo'
-      },
-      knowsAbout: [
-        'Desenvolvimento Web',
-        'Angular',
-        'Node.js',
-        'TypeScript',
-        'APIs RESTful',
-        'Bancos de Dados',
-        'Cloud Computing',
-        'DevOps',
-        'React',
-        'Next.js',
-        'NestJS',
-        'MongoDB',
-        'PostgreSQL',
-        'Docker'
-      ],
-      sameAs: [
-        'https://linkedin.com/in/ivanreis',
-        'https://github.com/deeivan',
-        'https://twitter.com/ivanreis'
-      ]
-    };
+    return { ...PERSON_SCHEMA };
   }
 
   getWebsiteSchema(): WebsiteStructuredData {
@@ -249,37 +242,8 @@ export class StructuredDataService {
     };
   }
 
-  getLocalBusinessSchema() {
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'ProfessionalService',
-      name: 'Ivan Reis - Desenvolvedor Full-Stack',
-      url: this.baseUrl,
-      telephone: '+55-11-99999-9999',
-      email: 'contato@ivanreis.com.br',
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'BR',
-        addressRegion: 'SP'
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: '-23.5505',
-        longitude: '-46.6333'
-      },
-      openingHours: 'Mo-Fr 09:00-18:00',
-      serviceType: [
-        'Desenvolvimento Web',
-        'APIs RESTful',
-        'Aplicações Angular',
-        'Sistemas Node.js',
-        'Consultoria Técnica'
-      ],
-      areaServed: {
-        '@type': 'Country',
-        name: 'Brasil'
-      }
-    };
+  getLocalBusinessSchema(): typeof LOCAL_BUSINESS_SCHEMA {
+    return { ...LOCAL_BUSINESS_SCHEMA };
   }
 
   getProjectGallerySchema(project: Project) {

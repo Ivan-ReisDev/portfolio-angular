@@ -22,26 +22,18 @@ export class Navbar {
     const currentUrl = this.router.url.split('#')[0];
     const isHome = currentUrl === '/' || currentUrl === '';
 
-    if (isHome) {
-      const container = document.querySelector('.scroll-container') as HTMLElement;
-      if (!container) return;
+    isHome ? this.scrollToSection(sectionId) : void this.router.navigate(['/'], { fragment: sectionId });
+  }
 
-      const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
-      const targetIndex = sections.indexOf(sectionId);
-      if (targetIndex === -1) return;
-
-      let scrollTarget = 0;
-      for (let i = 0; i < targetIndex; i++) {
-        const el = document.getElementById(sections[i]);
-        if (el) {
-          scrollTarget += el.getBoundingClientRect().height;
-        }
-      }
-
-      container.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-    } else {
-      this.router.navigate(['/'], { fragment: sectionId });
-    }
+  private scrollToSection(sectionId: string): void {
+    const container = document.querySelector('.scroll-container') as HTMLElement | null;
+    const sections = ['inicio', 'sobre', 'projetos', 'progresso', 'blog', 'contato'];
+    const targetIndex = sections.indexOf(sectionId);
+    if (!container || targetIndex < 0) return;
+    const scrollTarget = sections.slice(0, targetIndex).reduce(
+      (total, id) => total + (document.getElementById(id)?.getBoundingClientRect().height ?? 0), 0
+    );
+    container.scrollTo({ top: scrollTarget, behavior: 'smooth' });
   }
 
   toggleMenu() {
@@ -56,10 +48,9 @@ export class Navbar {
 
   private toggleBodyScroll() {
     if (!isPlatformBrowser(this.platformId)) return;
-    document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
-    const scrollContainer = document.querySelector('.scroll-container') as HTMLElement;
-    if (scrollContainer) {
-      scrollContainer.style.overflow = this.isMenuOpen ? 'hidden' : '';
-    }
+    const overflow = this.isMenuOpen ? 'hidden' : '';
+    document.body.style.overflow = overflow;
+    const scrollContainer = document.querySelector('.scroll-container') as HTMLElement | null;
+    scrollContainer?.style.setProperty('overflow', overflow);
   }
 }

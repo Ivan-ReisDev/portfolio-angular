@@ -5,6 +5,11 @@ import { adminGuard } from './core/guards/admin.guard';
 import { guestGuard } from './core/guards/guest.guard';
 import { permissionGuard } from './core/guards/permission.guard';
 
+function reportRouteLoadError(error: unknown): never {
+  console.error('Falha ao carregar um módulo de rota.', error);
+  throw error;
+}
+
 export const routes: Routes = [
   {
     path: '',
@@ -14,45 +19,52 @@ export const routes: Routes = [
   {
     path: 'projeto/:slug',
     loadComponent: () => import('./pages/project-detail/project-detail')
-      .then(m => m.ProjectDetail),
+      .then(m => m.ProjectDetail)
+      .catch(reportRouteLoadError),
     title: 'Projeto'
   },
   {
     path: 'blog',
     loadComponent: () => import('./pages/blog/blog-list')
-      .then(m => m.BlogList),
+      .then(m => m.BlogList)
+      .catch(reportRouteLoadError),
     title: 'Blog'
   },
   {
     path: 'blog/:slug',
     loadComponent: () => import('./pages/blog/blog-post')
-      .then(m => m.BlogPost),
+      .then(m => m.BlogPost)
+      .catch(reportRouteLoadError),
     title: 'Blog Post'
   },
   {
     path: 'login',
     loadComponent: () => import('./pages/login/login')
-      .then(m => m.Login),
+      .then(m => m.Login)
+      .catch(reportRouteLoadError),
     title: 'Login',
     canActivate: [guestGuard]
   },
   {
     path: 'dashboard',
     loadComponent: () => import('./pages/dashboard/layout/dashboard-layout')
-      .then(m => m.DashboardLayout),
+      .then(m => m.DashboardLayout)
+      .catch(reportRouteLoadError),
     canActivate: [authGuard],
     children: [
       {
         path: '',
         loadComponent: () => import('./pages/dashboard/home/dashboard-home')
-          .then(m => m.DashboardHome),
+          .then(m => m.DashboardHome)
+          .catch(reportRouteLoadError),
         title: 'Dashboard',
         canActivate: [adminGuard]
       },
       {
         path: 'contacts',
         loadComponent: () => import('./pages/dashboard/contacts/contacts-list')
-          .then(m => m.ContactsList),
+          .then(m => m.ContactsList)
+          .catch(reportRouteLoadError),
         title: 'Contatos',
         canActivate: [permissionGuard],
         data: { resource: 'contacts', action: 'read' }
@@ -60,7 +72,8 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () => import('./pages/dashboard/users/users-list')
-          .then(m => m.UsersList),
+          .then(m => m.UsersList)
+          .catch(reportRouteLoadError),
         title: 'Usuários',
         canActivate: [permissionGuard],
         data: { resource: 'users', action: 'read' }
@@ -68,7 +81,8 @@ export const routes: Routes = [
       {
         path: 'roles',
         loadComponent: () => import('./pages/dashboard/roles/roles-list')
-          .then(m => m.RolesList),
+          .then(m => m.RolesList)
+          .catch(reportRouteLoadError),
         title: 'Roles',
         canActivate: [permissionGuard],
         data: { resource: 'roles', action: 'read' }
@@ -76,7 +90,8 @@ export const routes: Routes = [
       {
         path: 'permissions',
         loadComponent: () => import('./pages/dashboard/permissions/permissions-list')
-          .then(m => m.PermissionsList),
+          .then(m => m.PermissionsList)
+          .catch(reportRouteLoadError),
         title: 'Permissões',
         canActivate: [permissionGuard],
         data: { resource: 'permissions', action: 'read' }
@@ -84,7 +99,8 @@ export const routes: Routes = [
       {
         path: 'tickets',
         loadComponent: () => import('./pages/dashboard/tickets/tickets-page')
-          .then(m => m.TicketsPage),
+          .then(m => m.TicketsPage)
+          .catch(reportRouteLoadError),
         title: 'Tickets',
         canActivate: [permissionGuard],
         data: { resource: 'tickets', action: 'read' }
@@ -92,7 +108,8 @@ export const routes: Routes = [
       {
         path: 'invoices',
         loadComponent: () => import('./pages/dashboard/invoices/invoices-page')
-          .then(m => m.InvoicesPage),
+          .then(m => m.InvoicesPage)
+          .catch(reportRouteLoadError),
         title: 'Faturas',
         canActivate: [permissionGuard],
         data: { resource: 'invoices', action: 'read' }
@@ -100,7 +117,8 @@ export const routes: Routes = [
       {
         path: 'emails',
         loadComponent: () => import('./pages/dashboard/emails/emails-page')
-          .then(m => m.EmailsPage),
+          .then(m => m.EmailsPage)
+          .catch(reportRouteLoadError),
         title: 'E-mails',
         canActivate: [adminGuard]
       }

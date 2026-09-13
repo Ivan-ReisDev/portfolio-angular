@@ -1,4 +1,4 @@
-const TECH_ICON_MAP: Record<string, string> = {
+const TECH_ICON_MAP = new Map(Object.entries({
   'CSS': 'devicon-css3-plain',
   'HTML': 'devicon-html5-plain',
   'PHP': 'devicon-php-plain',
@@ -39,12 +39,11 @@ const TECH_ICON_MAP: Record<string, string> = {
   'OpenAI': 'fa-solid fa-brain',
   'OpenAI API': 'fa-solid fa-brain',
   'Vercel': 'devicon-vercel-original',
-};
+}));
 
 export function getTechIconClass(tech: string): string {
-  if (TECH_ICON_MAP[tech]) {
-    return TECH_ICON_MAP[tech];
-  }
+  const mappedIcon = TECH_ICON_MAP.get(tech);
+  if (mappedIcon) return mappedIcon;
   const normalized = tech.toLowerCase().replace(/\./g, '').replace(/\s/g, '');
   return `devicon-${normalized}-plain`;
 }

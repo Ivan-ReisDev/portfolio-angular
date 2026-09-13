@@ -11,14 +11,8 @@ export const permissionGuard: CanActivateFn = (route: ActivatedRouteSnapshot) =>
   const resource = route.data['resource'] as Resource;
   const action = route.data['action'] as Action;
 
-  if (!resource || !action) {
-    return true;
-  }
-
-  if (authService.hasPermission(resource, action)) {
-    return true;
-  }
-
   const fallback = authService.isAdmin() ? '/dashboard' : '/dashboard/tickets';
-  return router.createUrlTree([fallback]);
+  return !resource || !action || authService.hasPermission(resource, action)
+    ? true
+    : router.createUrlTree([fallback]);
 };
